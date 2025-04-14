@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://e7r6odb2v2rp"]
+
+[ext_resource type="Texture2D" uid="uid://e4iu07yxpiyx" path="res://assets/map/map_1.png" id="1_rw8m1"]
+
+[sub_resource type="Curve2D" id="Curve2D_1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 100, 300, 0, 0, 0, 0, 300, 300, 0, 0, 0, 0, 300, 500, 0, 0, 0, 0, 500, 500, 0, 0, 0, 0, 500, 300, 0, 0, 0, 0, 700, 300, 0, 0, 0, 0, 700, 100, 0, 0, 0, 0, 900, 100)
+}
+point_count = 8
+
+[node name="Level1" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("1_rw8m1")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_1")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(100, 300)
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(100, 300)
