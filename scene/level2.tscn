@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjtic5ejsbh3i"]
+[gd_scene load_steps=6 format=3 uid="uid://cjtic5ejsbh3i"]
 
+[ext_resource type="Script" path="res://scene/level2.gd" id="1_dx2n0"]
 [ext_resource type="Texture2D" uid="uid://jv2rqd1gdsns" path="res://assets/map/map_2.png" id="1_rw8m2"]
 [ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
 [ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
@@ -11,6 +12,7 @@ _data = {
 point_count = 8
 
 [node name="Level2" type="Node2D"]
+script = ExtResource("1_dx2n0")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(576, 324)

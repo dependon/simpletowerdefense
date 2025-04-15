@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://e7r6odb2v2rp"]
+[gd_scene load_steps=8 format=4 uid="uid://e7r6odb2v2rp"]
 
+[ext_resource type="Script" path="res://scene/level1.gd" id="1_qdukk"]
 [ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
 [ext_resource type="Texture2D" uid="uid://dxydgvs3a5jnt" path="res://assets/map/map_7.png" id="2_yeu0p"]
 [ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
@@ -4241,6 +4242,7 @@ texture = ExtResource("2_yeu0p")
 sources/0 = SubResource("TileSetAtlasSource_7uouo")
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_qdukk")
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_1")

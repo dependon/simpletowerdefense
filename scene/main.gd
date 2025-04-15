@@ -51,13 +51,22 @@ func load_level(level_number: int):
 	
 	var level_scene = level1_scene if level_number == 1 else level2_scene
 	current_level = level_scene.instantiate()
+	
 	add_child(current_level)
 	current_level_path = current_level.get_node("Path2D")
+
+	# 从关卡脚本获取敌人生成参数
+	max_enemies = current_level.max_enemies
+	enemy_spawn_interval = current_level.spawn_interval
+	min_spawn_interval = current_level.min_spawn_interval
+	spawn_interval_decrease = current_level.spawn_interval_decrease
 
 	# 设置敌人生成点位置
 	var spawn_point = current_level.get_node("SpawnPoint")
 	if spawn_point:
 		current_level_path.curve.add_point(spawn_point.position)
+		
+
 
 func _physics_process(delta):
 	enemy_spawn_timer += delta

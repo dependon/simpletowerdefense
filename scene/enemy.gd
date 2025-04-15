@@ -5,7 +5,7 @@ var path: Path2D
 #移动速度
 @export var speed = 100
 #生命值 
-@export var hp = 100
+@export var hp : float = 100
 #生命条
 var health_bar: ProgressBar
 
