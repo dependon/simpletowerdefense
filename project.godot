@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="SimpleTowerDefense"
-run/main_scene="res://scene/Main.tscn"
+run/main_scene="res://scene/start_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scene/game_manager.gd"
 
 [rendering]
 
