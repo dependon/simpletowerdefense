@@ -16,3 +16,15 @@ script = ExtResource("1_s8k2i")
 position = Vector2(-4, 1)
 rotation = -1.21831
 shape = SubResource("CircleShape2D_0sler")
+
+[node name="upgrade_button" type="Button" parent="."]
+offset_left = -148.0
+offset_top = -20.0
+offset_right = -52.0
+offset_bottom = 35.0
+
+[node name="destroy_button" type="Button" parent="."]
+offset_left = 37.0
+offset_top = -17.0
+offset_right = 134.0
+offset_bottom = 31.0

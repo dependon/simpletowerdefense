@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjtic5ejsbh3i"]
+[gd_scene load_steps=5 format=3 uid="uid://cjtic5ejsbh3i"]
 
 [ext_resource type="Texture2D" uid="uid://jv2rqd1gdsns" path="res://assets/map/map_2.png" id="1_rw8m2"]
+[ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
+[ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
 
 [sub_resource type="Curve2D" id="Curve2D_2"]
 _data = {
@@ -22,3 +24,20 @@ position = Vector2(50, 100)
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(50, 100)
+
+[node name="BuildPoints" type="Node2D" parent="."]
+
+[node name="BuildPoint1" parent="BuildPoints" instance=ExtResource("2_build")]
+position = Vector2(300, 200)
+
+[node name="BuildPoint2" parent="BuildPoints" instance=ExtResource("2_build")]
+position = Vector2(500, 400)
+
+[node name="BuildPoint3" parent="BuildPoints" instance=ExtResource("2_build")]
+position = Vector2(700, 400)
+
+[node name="BuildPoint4" parent="BuildPoints" instance=ExtResource("2_build")]
+position = Vector2(700, 200)
+
+[node name="Base" parent="." instance=ExtResource("3_base")]
+position = Vector2(800, 300)

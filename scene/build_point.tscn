@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqjxvvxmxvxvx"]
+
+[ext_resource type="Texture2D" uid="uid://ds2q1go88hph8" path="res://assets/icon/testPisition.png" id="1_7ol48"]
+[ext_resource type="Script" path="res://scene/build_point.gd" id="1_bx6ep"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 48.0937
+
+[node name="BuildPoint" type="Area2D" groups=["build_points"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_bx6ep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-7.15256e-07, -2)
+scale = Vector2(0.484234, 0.495495)
+texture = ExtResource("1_7ol48")

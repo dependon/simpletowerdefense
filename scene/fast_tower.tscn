@@ -1,19 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6f0fwl3ymg1c"]
+[gd_scene load_steps=3 format=3 uid="uid://cb5v0se2mim76"]
 
-[ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="1_q4c73"]
-[ext_resource type="Script" path="res://scene/tower.gd" id="1_s8k2i"]
+[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower.tscn" id="1_a7nfw"]
+[ext_resource type="Texture2D" uid="uid://nl38ss2pvqvt" path="res://assets/tower/tower_10.png" id="2_ckyka"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]
-radius = 271.516
-
-[node name="FastTower" type="Sprite2D"]
-texture = ExtResource("1_q4c73")
-script = ExtResource("1_s8k2i")
+[node name="FastTower" instance=ExtResource("1_a7nfw")]
+texture = ExtResource("2_ckyka")
 fire_rate = 1.5
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-4, 1)
-rotation = -1.21831
-shape = SubResource("CircleShape2D_0sler")
+base_cost = 120
