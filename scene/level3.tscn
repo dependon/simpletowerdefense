@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://crpaldqstih8g"]
+[gd_scene load_steps=3 format=3 uid="uid://crpaldqstih8g"]
 
 [ext_resource type="PackedScene" uid="uid://e7r6odb2v2rp" path="res://scene/level1.tscn" id="1_6lmyx"]
+[ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_d6awb"]
 
 [node name="Level3" instance=ExtResource("1_6lmyx")]
 total_enemies = 50
 min_spawn_interval = 0.1
+
+[node name="BuildPoint5" parent="BuildPoints" index="4" instance=ExtResource("2_d6awb")]
+position = Vector2(238, 222)
