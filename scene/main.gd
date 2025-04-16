@@ -11,15 +11,7 @@ var current_tower_type = "normal"  # 可以是 "normal"、"fast" 或 "area"
 var current_level: Node2D = null
 var current_level_path: Path2D = null
 
-var enemy_spawn_timer = 0
-@export var enemy_spawn_interval = 2
-@export var min_spawn_interval = 0.3  # 最小生成间隔
-@export var spawn_interval_decrease = 0.05  # 每生成一个敌人减少的间隔时间
-var enemies_spawned = 0  # 已生成的敌人数量
-var max_enemies = 10  # 每关的最大敌人数量
-@export var enemy_health : float = 1.00  # 怪物的初始血量倍率
 
-var isvictory = false
 
 # 金币系统
 var coins = 100  # 初始金币
@@ -33,7 +25,6 @@ func update_coins_display():
 	$UI/Coins.text = "金币: " + str(coins)
 
 func _ready():
-	enemy_spawn_interval = 2
 	
 	# 设置金币显示
 	update_coins_display()
@@ -44,7 +35,6 @@ func _ready():
 	load_level(GameManager.current_level)
 
 func load_level(level_number: int):
-	isvictory = false;
 	if current_level:
 		current_level.queue_free()
 	
@@ -58,32 +48,9 @@ func load_level(level_number: int):
 	add_child(current_level)
 	current_level_path = current_level.get_node("Path2D")
 
-	# 设置敌人生成点位置
-	var spawn_point = current_level.get_node("SpawnPoint")
-	if spawn_point:
-		current_level_path.curve.add_point(spawn_point.position)
-		
-
 
 func _physics_process(delta):
-	enemy_spawn_timer += delta
-	if current_level_path and enemy_spawn_timer >= enemy_spawn_interval and enemies_spawned < max_enemies:
-		var enemy = enemy_scene.instantiate()
-		enemy.set_path(current_level_path.curve)
-		add_child(enemy)
-		enemy.add_to_group("enemies")
-		enemy_spawn_timer = 0
-		enemies_spawned += 1
-		# 减少生成间隔，但不低于最小间隔
-		enemy_spawn_interval = max(min_spawn_interval, enemy_spawn_interval - spawn_interval_decrease)
-	
-	# 检查胜利条件
-	if current_level:
-		var base = current_level.get_node("Base")
-		if !isvictory and base and base.check_victory(enemies_spawned, max_enemies):
-			var victory = preload("res://scene/victory_screen.tscn").instantiate()
-			get_tree().root.add_child(victory)
-			isvictory = true;
+	pass
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
