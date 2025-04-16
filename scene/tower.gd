@@ -4,8 +4,10 @@ extends Sprite2D
 @export var range = 200 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var base_cost = 50  # 基础建造成本
+@export var base_damage = 50  # 基础伤害值
 var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
+var current_damage = base_damage # 当前伤害值
 
 @onready var upgrade_button = $upgrade_button
 @onready var destroy_button = $destroy_button
@@ -19,13 +21,11 @@ func _ready():
 	upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
 	upgrade_button.hide()
-	add_child(upgrade_button)
 	
 	# 创建销毁按钮
 	destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
 	destroy_button.pressed.connect(_on_destroy_pressed)
 	destroy_button.hide()
-	add_child(destroy_button)
 	
 	# 添加鼠标进入和离开事件
 	tower_area.mouse_entered.connect(_on_tower_mouse_entered)
@@ -40,6 +40,7 @@ func _physics_process(delta):
 				var bullet_scene = preload("res://scene/bullet.tscn")
 				var bullet = bullet_scene.instantiate()
 				bullet.direction = (enemy.global_position - position).normalized()
+				bullet.damage = current_damage
 				get_parent().add_child(bullet)
 				bullet.position = position
 				time_since_last_fire = 0
@@ -65,6 +66,7 @@ func _on_upgrade_pressed():
 		level += 1
 		fire_rate *= 1.5  # 提升攻击速度
 		range *= 1.2     # 提升攻击范围
+		current_damage *= 1.3  # 提升伤害值
 		tower_area.get_node("CollisionShape2D").shape.radius = range
 		main.update_coins_display()
 		# 更新按钮文本

@@ -1,45 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjtic5ejsbh3i"]
+[gd_scene load_steps=5 format=3 uid="uid://cjtic5ejsbh3i"]
 
 [ext_resource type="Script" path="res://scene/level2.gd" id="1_dx2n0"]
-[ext_resource type="Texture2D" uid="uid://jv2rqd1gdsns" path="res://assets/map/map_2.png" id="1_rw8m2"]
 [ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
 [ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
 
 [sub_resource type="Curve2D" id="Curve2D_2"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 50, 100, 0, 0, 0, 0, 200, 100, 0, 0, 0, 0, 200, 300, 0, 0, 0, 0, 400, 300, 0, 0, 0, 0, 400, 500, 0, 0, 0, 0, 600, 500, 0, 0, 0, 0, 600, 300, 0, 0, 0, 0, 800, 300)
+"points": PackedVector2Array(0, 0, 0, 0, 50, 100, 0, 0, 0, 0, 54, 312, 0, 0, 0, 0, 55, 550, 0, 0, 0, 0, 220, 545, 0, 0, 0, 0, 216, 258, 0, 0, 0, 0, 396, 262, 0, 0, 0, 0, 398, 552, 0, 0, 0, 0, 556, 552, 0, 0, 0, 0, 559, 501, 0, 0, 0, 0, 555, 255, 0, 0, 0, 0, 769, 253, 0, 0, 0, 0, 769, 553, 0, 0, 0, 0, 969, 553, 0, 0, 0, 0, 962, 253, 0, 0, 0, 0, 1124, 255, 0, 0, 0, 0, 1126, 598)
 }
-point_count = 8
+point_count = 16
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_dx2n0")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(576, 324)
-texture = ExtResource("1_rw8m2")
-
 [node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-28, -89)
 curve = SubResource("Curve2D_2")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(50, 100)
+rotation = 1.55193
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
-position = Vector2(50, 100)
+position = Vector2(22, 17)
 
 [node name="BuildPoints" type="Node2D" parent="."]
 
 [node name="BuildPoint1" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(300, 200)
+position = Vector2(289, 257)
 
 [node name="BuildPoint2" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(500, 400)
+position = Vector2(451, 401)
 
 [node name="BuildPoint3" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(700, 400)
+position = Vector2(841, 370)
 
 [node name="BuildPoint4" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(700, 200)
+position = Vector2(628, 253)
 
 [node name="Base" parent="." instance=ExtResource("3_base")]
-position = Vector2(800, 300)
+position = Vector2(1096, 464)

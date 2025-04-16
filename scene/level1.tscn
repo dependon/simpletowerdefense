@@ -11,7 +11,7 @@ _data = {
 }
 point_count = 8
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7uouo"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jybge"]
 texture = ExtResource("2_yeu0p")
 0:0/0 = 0
 1:0/0 = 0
@@ -4239,7 +4239,7 @@ texture = ExtResource("2_yeu0p")
 87:47/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fuauu"]
-sources/0 = SubResource("TileSetAtlasSource_7uouo")
+sources/0 = SubResource("TileSetAtlasSource_jybge")
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_qdukk")

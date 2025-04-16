@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bw4q5xqy8n8yd"]
 
 [ext_resource type="Script" path="res://scene/base.gd" id="1_base"]
-[ext_resource type="Texture2D" uid="uid://ds2q1go88hph8" path="res://assets/icon/testPisition.png" id="2_test"]
+[ext_resource type="Texture2D" uid="uid://diymbvbqo56le" path="res://assets/jidi/jidi_4.png" id="2_bihah"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 32.0
@@ -15,7 +15,7 @@ shape = SubResource("CircleShape2D_1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_test")
+texture = ExtResource("2_bihah")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -50.0

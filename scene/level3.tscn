@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://crpaldqstih8g"]
+
+[ext_resource type="PackedScene" uid="uid://e7r6odb2v2rp" path="res://scene/level1.tscn" id="1_6lmyx"]
+
+[node name="Level3" instance=ExtResource("1_6lmyx")]
+total_enemies = 50
+min_spawn_interval = 0.1

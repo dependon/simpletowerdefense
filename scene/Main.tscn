@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwkiu5duhv6vr"]
+[gd_scene load_steps=5 format=3 uid="uid://dwkiu5duhv6vr"]
 
 [ext_resource type="Script" path="res://scene/main.gd" id="1_hvi1q"]
+[ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="4_lgix8"]
 [ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="5_xkpvw"]
 [ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="6_yvr8q"]
 
@@ -10,31 +11,41 @@ script = ExtResource("1_hvi1q")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="NormalTowerButton" type="Button" parent="UI"]
-offset_left = 2.0
-offset_top = 555.0
-offset_right = 82.0
-offset_bottom = 635.0
+offset_left = 16.0
+offset_top = 552.0
+offset_right = 96.0
+offset_bottom = 632.0
 icon = ExtResource("5_xkpvw")
 icon_alignment = 1
 expand_icon = true
 
 [node name="FastTowerButton" type="Button" parent="UI"]
-offset_left = 92.0
-offset_top = 557.0
-offset_right = 172.0
-offset_bottom = 637.0
+offset_left = 109.0
+offset_top = 551.0
+offset_right = 189.0
+offset_bottom = 631.0
 icon = ExtResource("6_yvr8q")
 icon_alignment = 1
 expand_icon = true
 
 [node name="Coins" type="Label" parent="UI"]
-offset_left = 184.0
-offset_top = 573.0
-offset_right = 259.0
-offset_bottom = 624.0
+offset_left = 30.0
+offset_top = 15.0
+offset_right = 105.0
+offset_bottom = 66.0
 text = "Coins:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AreaTowerButton" type="Button" parent="UI"]
+offset_left = 205.0
+offset_top = 552.0
+offset_right = 285.0
+offset_bottom = 632.0
+icon = ExtResource("4_lgix8")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="UI/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
+[connection signal="pressed" from="UI/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]

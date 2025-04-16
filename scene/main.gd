@@ -3,10 +3,11 @@ extends Node2D
 @onready var enemy_scene: PackedScene = preload("res://scene/enemy.tscn")
 @onready var tower_scene: PackedScene = preload("res://scene/tower.tscn")
 @onready var fast_tower_scene: PackedScene = preload("res://scene/fast_tower.tscn")
+@onready var area_tower_scene: PackedScene = preload("res://scene/area_tower.tscn")
 @onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
 
-var current_tower_type = "normal"  # 可以是 "normal" 或 "fast"
+var current_tower_type = "normal"  # 可以是 "normal"、"fast" 或 "area"
 var current_level: Node2D = null
 var current_level_path: Path2D = null
 
@@ -24,6 +25,7 @@ var isvictory = false
 var coins = 100  # 初始金币
 const NORMAL_TOWER_COST = 50  # 普通塔消耗
 const FAST_TOWER_COST = 100   # 快速塔消耗
+const AREA_TOWER_COST = 150   # 群体塔消耗
 
 # 金币UI
 
@@ -93,13 +95,22 @@ func _input(event):
 				if point.is_point_occupied():
 					break
 				
-				var cost = NORMAL_TOWER_COST if current_tower_type == "normal" else FAST_TOWER_COST
+				var cost
+				if current_tower_type == "normal":
+					cost = NORMAL_TOWER_COST
+				elif current_tower_type == "fast":
+					cost = FAST_TOWER_COST
+				else:
+					cost = AREA_TOWER_COST
+				
 				if coins >= cost:
 					var tower
 					if current_tower_type == "normal":
 						tower = tower_scene.instantiate()
-					else:
+					elif current_tower_type == "fast":
 						tower = fast_tower_scene.instantiate()
+					else:
+						tower = area_tower_scene.instantiate()
 					tower.position = point.position
 					add_child(tower)
 					point.set_occupied(true)
@@ -112,6 +123,9 @@ func _on_normal_tower_button_pressed():
 
 func _on_fast_tower_button_pressed():
 	current_tower_type = "fast"
+
+func _on_area_tower_button_pressed():
+	current_tower_type = "area"
 
 func switch_to_level(level_number: int):
 	load_level(level_number)
