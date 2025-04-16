@@ -16,6 +16,7 @@ var enemy_spawn_timer = 0
 @export var spawn_interval_decrease = 0.05  # 每生成一个敌人减少的间隔时间
 var enemies_spawned = 0  # 已生成的敌人数量
 var max_enemies = 10  # 每关的最大敌人数量
+@export var enemy_health : float = 1.00  # 怪物的初始血量倍率
 
 var isvictory = false
 
@@ -54,12 +55,6 @@ func load_level(level_number: int):
 	
 	add_child(current_level)
 	current_level_path = current_level.get_node("Path2D")
-
-	# 从关卡脚本获取敌人生成参数
-	max_enemies = current_level.max_enemies
-	enemy_spawn_interval = current_level.spawn_interval
-	min_spawn_interval = current_level.min_spawn_interval
-	spawn_interval_decrease = current_level.spawn_interval_decrease
 
 	# 设置敌人生成点位置
 	var spawn_point = current_level.get_node("SpawnPoint")
