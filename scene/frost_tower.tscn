@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxqvmkqxg4yvr"]
+
+[ext_resource type="PackedScene" path="res://scene/tower.tscn" id="1_yvh8q"]
+[ext_resource type="Texture2D" uid="uid://c8j6u8kk4q4vx" path="res://assets/tower/tower_4.png" id="2_4k3xt"]
+[ext_resource type="Script" path="res://scene/frost_tower.gd" id="2_yvh8q"]
+
+[node name="FrostTower" instance=ExtResource("1_yvh8q")]
+texture = ExtResource("2_4k3xt")
+script = ExtResource("2_yvh8q")

@@ -4,6 +4,7 @@ var path_follow: PathFollow2D
 var path: Path2D
 #移动速度
 @export var speed = 100
+var speed_multiplier = 1.0  # 速度修改器
 #生命值 
 @export var hp : float = 100
 #生命条
@@ -36,10 +37,16 @@ func set_path(curve: Curve2D) -> void:
 	
 func _physics_process(delta):
 	if path_follow and path:
-		path_follow.progress += speed * delta
+		path_follow.progress += speed * speed_multiplier * delta
 		position = path_follow.position
 		if path_follow.progress >= path.curve.get_baked_length():
 			queue_free()
+	# 每帧逐渐恢复速度
+	if speed_multiplier < 1.0:
+		speed_multiplier = min(speed_multiplier + delta * 0.1, 1.0)
+
+func set_speed_multiplier(multiplier: float) -> void:
+	speed_multiplier = multiplier
 
 func take_damage(damage: int) -> void:
 	hp -= damage

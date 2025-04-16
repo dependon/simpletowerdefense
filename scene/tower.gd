@@ -63,9 +63,9 @@ func _on_upgrade_pressed():
 	var main = get_tree().get_root().get_node("Main")
 	if main and main.coins >= get_upgrade_cost():
 		main.coins -= get_upgrade_cost()
-		level += 1
-		fire_rate *= 1.5  # 提升攻击速度
-		range *= 1.2     # 提升攻击范围
+		level += 1 # 升级防御塔
+		fire_rate *= 1.3  # 提升攻击速度
+		range *= 1.1     # 提升攻击范围
 		current_damage *= 1.3  # 提升伤害值
 		tower_area.get_node("CollisionShape2D").shape.radius = range
 		main.update_coins_display()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwkiu5duhv6vr"]
+[gd_scene load_steps=6 format=3 uid="uid://dwkiu5duhv6vr"]
 
 [ext_resource type="Script" path="res://scene/main.gd" id="1_hvi1q"]
 [ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="4_lgix8"]
+[ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="5_h4xrc"]
 [ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="5_xkpvw"]
 [ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="6_yvr8q"]
 
@@ -46,6 +47,16 @@ icon = ExtResource("4_lgix8")
 icon_alignment = 1
 expand_icon = true
 
+[node name="FrostTowerButton2" type="Button" parent="UI"]
+offset_left = 299.0
+offset_top = 553.0
+offset_right = 379.0
+offset_bottom = 633.0
+icon = ExtResource("5_h4xrc")
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="UI/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
 [connection signal="pressed" from="UI/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]
+[connection signal="pressed" from="UI/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]

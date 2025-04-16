@@ -20,4 +20,7 @@ func _on_body_entered(body):
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		area.take_damage(damage)
+		# 如果是冰霜子弹，则减速敌人
+		if has_meta("type") and get_meta("type") == "frost":
+			area.set_speed_multiplier(0.5)
 		queue_free()
