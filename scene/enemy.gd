@@ -18,6 +18,8 @@ func _ready() -> void:
 	health_bar.show_percentage = false
 	health_bar.custom_minimum_size = Vector2(40, 8)
 	health_bar.position = Vector2(-20, 30)
+	# 设置血条颜色为淡红色
+	health_bar.modulate = Color(1, 0.5, 0.5, 0.8)
 	add_child(health_bar)
 
 # 设置敌人移动路径

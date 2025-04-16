@@ -7,6 +7,8 @@ var victory_screen = preload("res://scene/victory_screen.tscn")
 func _ready():
 	$HealthBar.max_value = max_health
 	$HealthBar.value = current_health
+	# 设置血条颜色为淡红色
+	$HealthBar.modulate = Color(1, 0.5, 0.5, 0.8)
 	area_entered.connect(_on_area_entered)
 
 func _on_area_entered(area):
