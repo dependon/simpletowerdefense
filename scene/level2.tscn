@@ -4245,6 +4245,7 @@ sources/0 = SubResource("TileSetAtlasSource_x1yon")
 script = ExtResource("1_dx2n0")
 
 [node name="Path2D" type="Path2D" parent="."]
+top_level = true
 position = Vector2(-28, -89)
 curve = SubResource("Curve2D_2")
 
@@ -4258,6 +4259,7 @@ position = Vector2(22, 17)
 [node name="BuildPoints" type="Node2D" parent="."]
 
 [node name="BuildPoint1" parent="BuildPoints" instance=ExtResource("2_build")]
+top_level = true
 position = Vector2(289, 257)
 
 [node name="BuildPoint2" parent="BuildPoints" instance=ExtResource("2_build")]

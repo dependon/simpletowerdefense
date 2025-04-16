@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scene/build_point.gd" id="1_bx6ep"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
-radius = 48.0937
+radius = 27.1662
 
 [node name="BuildPoint" type="Area2D" groups=["build_points"]]
 collision_layer = 2
@@ -15,6 +15,6 @@ script = ExtResource("1_bx6ep")
 shape = SubResource("CircleShape2D_1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-7.15256e-07, -2)
-scale = Vector2(0.484234, 0.495495)
+position = Vector2(-1, 0)
+scale = Vector2(0.26464, 0.27027)
 texture = ExtResource("1_7ol48")

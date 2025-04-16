@@ -87,6 +87,8 @@ func _input(event):
 							tower = area_tower_scene.instantiate()
 					
 					tower.position = point.position
+					tower.set_z_index(3)
+
 					add_child(tower)
 					point.set_occupied(true)
 					coins -= cost

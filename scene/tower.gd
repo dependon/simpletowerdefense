@@ -17,6 +17,7 @@ func get_upgrade_cost() -> int:
 	return base_cost * (level + 1)
 
 func _ready():
+	z_index = 3
 	# 创建升级按钮
 	upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
