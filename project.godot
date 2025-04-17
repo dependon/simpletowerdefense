@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scene/game_manager.gd"
 
+[importer_defaults]
+
+animation_library={
+"animation/fps": 60.0
+}
+
 [rendering]
 
 renderer/rendering_method="mobile"
