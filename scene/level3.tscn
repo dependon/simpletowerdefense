@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_d6awb"]
 
 [node name="Level3" instance=ExtResource("1_6lmyx")]
-total_enemies = 50
-min_spawn_interval = 0.1
 
-[node name="BuildPoint5" parent="BuildPoints" index="4" instance=ExtResource("2_d6awb")]
+[node name="BuildPoint8" parent="BuildPoints" index="4" instance=ExtResource("2_d6awb")]
 position = Vector2(238, 222)

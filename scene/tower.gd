@@ -32,8 +32,8 @@ func _ready():
 	destroy_button.hide()
 	
 	# 添加鼠标进入和离开事件
-	tower_area.mouse_entered.connect(_on_tower_mouse_entered)
-	tower_area.mouse_exited.connect(_on_tower_mouse_exited)
+	mouse_detection_area.mouse_entered.connect(_on_tower_mouse_entered)
+	mouse_detection_area.mouse_exited.connect(_on_tower_mouse_exited)
 	
 	# 初始化等级标签
 	level_label.text = "Lv. " + str(level)
