@@ -45,5 +45,3 @@ vertical_alignment = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouseDetectionArea"]
 polygon = PackedVector2Array(52, 44.6247, 158, 42.5963, 162, -36.5112, 48, -40.568, 44, -93.3063, -52, -89.2495, -60, -40.568, -166, -38.5396, -168, 48.6815, -56, 46.6531, -56, 75.0507, 48, 77.0791)
-
-[connection signal="area_exited" from="MouseDetectionArea" to="." method="_on_mouse_detection_area_area_exited"]

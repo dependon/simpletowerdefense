@@ -10,6 +10,8 @@ var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
 var max_level = 3 # 防御塔最大等级
 var current_damage = base_damage # 当前伤害值
+var isMouseOverTower = false # 鼠标是否在塔上
+var isMouseOverButtons = false # 鼠标是否在按钮上
 
 @onready var upgrade_button = $upgrade_button
 @onready var destroy_button = $destroy_button
@@ -31,9 +33,14 @@ func _ready():
 	destroy_button.pressed.connect(_on_destroy_pressed)
 	destroy_button.hide()
 	
-	# 添加鼠标进入和离开事件
-	mouse_detection_area.mouse_entered.connect(_on_tower_mouse_entered)
-	mouse_detection_area.mouse_exited.connect(_on_tower_mouse_exited)
+	# 添加按钮的鼠标进入和离开事件
+	upgrade_button.mouse_entered.connect(_on_buttons_mouse_entered)
+	upgrade_button.mouse_exited.connect(_on_buttons_mouse_exited)
+	destroy_button.mouse_entered.connect(_on_buttons_mouse_entered)
+	destroy_button.mouse_exited.connect(_on_buttons_mouse_exited)
+	
+	# 设置MouseDetectionArea的输入检测
+	mouse_detection_area.input_event.connect(_on_mouse_detection_area_input_event)
 	
 	# 初始化等级标签
 	level_label.text = "Lv. " + str(level)
@@ -53,23 +60,52 @@ func _physics_process(delta):
 				time_since_last_fire = 0
 				break
 
-func _on_tower_mouse_entered():
+func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseMotion:
+		if not isMouseOverTower:
+			isMouseOverTower = true
+			_update_buttons_visibility()
+	
+func _input(event):
+	# 检测鼠标是否在塔区域内
+	if event is InputEventMouseMotion:
+		var mouse_pos = get_global_mouse_position()
+		var tower_rect = Rect2(global_position - Vector2(75, 75), Vector2(150, 150))
+		
+		if not tower_rect.has_point(mouse_pos) and not isMouseOverButtons:
+			if isMouseOverTower:
+				isMouseOverTower = false
+				_update_buttons_visibility()
+
+func _on_buttons_mouse_entered():
+	isMouseOverButtons = true
+
+func _on_buttons_mouse_exited():
+	isMouseOverButtons = false
+	_update_buttons_visibility()
+
+func _update_buttons_visibility():
+	if isMouseOverTower or isMouseOverButtons:
+		_show_buttons()
+	else:
+		_hide_buttons()
+
+func _show_buttons():
 	# 更新按钮文本和状态
 	if level < max_level:
 		upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
 		upgrade_button.disabled = false
-		upgrade_button.show()
 	else:
 		upgrade_button.text = "已满级"
 		upgrade_button.disabled = true
-		upgrade_button.show()
 	
 	destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
+	
 	# 显示按钮
-	# upgrade_button.show() # 已在上面处理
+	upgrade_button.show()
 	destroy_button.show()
 
-func _on_tower_mouse_exited():
+func _hide_buttons():
 	# 隐藏按钮
 	upgrade_button.hide()
 	destroy_button.hide()
