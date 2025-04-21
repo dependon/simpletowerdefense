@@ -7,6 +7,7 @@ extends Node2D
 @onready var frost_tower_scene: PackedScene = preload("res://scene/frost_tower.tscn")
 @onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
+@onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")
 
 var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 或 "frost"
 var current_level: Node2D = null
@@ -44,7 +45,13 @@ func load_level(level_number: int):
 	coins = 100
 	update_coins_display()
 	
-	var level_scene = level1_scene if level_number == 1 else level2_scene
+	var level_scene
+	if level_number == 1:
+		level_scene = level1_scene
+	elif level_number == 2:
+		level_scene = level2_scene
+	elif level_number == 3:
+		level_scene = level3_scene
 	current_level = level_scene.instantiate()
 	
 	add_child(current_level)

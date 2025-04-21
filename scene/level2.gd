@@ -20,9 +20,9 @@ var wave_config = {
 	7: {"count": 22, "health_multiplier": 2.0, "speed_multiplier": 1.15},
 	8: {"count": 25, "health_multiplier": 2.2, "speed_multiplier": 1.2},
 	9: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.2},
-	10: {"count": 32, "health_multiplier": 2.6, "speed_multiplier": 1.25},
-	11: {"count": 35, "health_multiplier": 2.8, "speed_multiplier": 1.25},
-	12: {"count": 40, "health_multiplier": 3.0, "speed_multiplier": 1.3}
+	10: {"count": 32, "health_multiplier": 5.6, "speed_multiplier": 1.4},
+	11: {"count": 35, "health_multiplier": 7.8, "speed_multiplier": 1.6},
+	12: {"count": 40, "health_multiplier": 10.0, "speed_multiplier": 1.8}
 }
 
 # 状态变量

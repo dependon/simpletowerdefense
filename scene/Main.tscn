@@ -20,6 +20,20 @@ icon = ExtResource("5_xkpvw")
 icon_alignment = 1
 expand_icon = true
 
+[node name="Label" type="Label" parent="UI/NormalTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "50"
+
 [node name="FastTowerButton" type="Button" parent="UI"]
 offset_left = 109.0
 offset_top = 551.0
@@ -28,6 +42,20 @@ offset_bottom = 631.0
 icon = ExtResource("6_yvr8q")
 icon_alignment = 1
 expand_icon = true
+
+[node name="Label" type="Label" parent="UI/FastTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "100"
 
 [node name="Coins" type="Label" parent="UI"]
 offset_left = 30.0
@@ -47,6 +75,20 @@ icon = ExtResource("4_lgix8")
 icon_alignment = 1
 expand_icon = true
 
+[node name="Label" type="Label" parent="UI/AreaTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "200"
+
 [node name="FrostTowerButton2" type="Button" parent="UI"]
 offset_left = 299.0
 offset_top = 553.0
@@ -55,6 +97,20 @@ offset_bottom = 633.0
 icon = ExtResource("5_h4xrc")
 icon_alignment = 1
 expand_icon = true
+
+[node name="Label" type="Label" parent="UI/FrostTowerButton2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "100"
 
 [connection signal="pressed" from="UI/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]

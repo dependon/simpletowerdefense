@@ -1,3 +1,4 @@
+class_name LevelBase
 extends Node2D
 
 @onready var base = $Base # 基地仍然需要，用于扣血
@@ -6,22 +7,22 @@ extends Node2D
 
 # 波次设置
 @export var total_waves = 10  # 总波次数
-@export var wave_interval = 8.0 # 波次之间的间隔时间 (秒)
-@export var enemy_spawn_interval = 0.4 # 波次内敌人生成间隔 (秒)
+@export var wave_interval = 5.0 # 波次之间的间隔时间 (秒)
+@export var enemy_spawn_interval = 0.5 # 波次内敌人生成间隔 (秒)
 
 # 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier}}
 # 怪物数量从少到多，血量和速度倍率逐渐增加
 var wave_config = {
 	1: {"count": 5, "health_multiplier": 1.0, "speed_multiplier": 1.0},
-	2: {"count": 8, "health_multiplier": 1.2, "speed_multiplier": 1.0},
-	3: {"count": 10, "health_multiplier": 1.4, "speed_multiplier": 1.1},
-	4: {"count": 12, "health_multiplier": 1.6, "speed_multiplier": 1.1},
-	5: {"count": 15, "health_multiplier": 1.8, "speed_multiplier": 1.2},
-	6: {"count": 18, "health_multiplier": 2.2, "speed_multiplier": 1.2},
-	7: {"count": 20, "health_multiplier": 2.6, "speed_multiplier": 1.35},
-	8: {"count": 22, "health_multiplier": 3.4, "speed_multiplier": 1.35},
-	9: {"count": 25, "health_multiplier": 4, "speed_multiplier": 1.5},
-	10: {"count": 40, "health_multiplier": 6, "speed_multiplier": 1.5}
+	2: {"count": 8, "health_multiplier": 1.1, "speed_multiplier": 1.0},
+	3: {"count": 10, "health_multiplier": 1.2, "speed_multiplier": 1.05},
+	4: {"count": 12, "health_multiplier": 1.3, "speed_multiplier": 1.05},
+	5: {"count": 15, "health_multiplier": 1.5, "speed_multiplier": 1.1},
+	6: {"count": 18, "health_multiplier": 1.7, "speed_multiplier": 1.1},
+	7: {"count": 20, "health_multiplier": 1.9, "speed_multiplier": 1.15},
+	8: {"count": 22, "health_multiplier": 2.1, "speed_multiplier": 1.15},
+	9: {"count": 25, "health_multiplier": 2.3, "speed_multiplier": 1.2},
+	10: {"count": 30, "health_multiplier": 2.5, "speed_multiplier": 1.2}
 }
 
 # 状态变量
@@ -33,7 +34,7 @@ var is_spawning_wave = false # 是否正在生成当前波次的敌人
 var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
 var is_victory = false
 
-func _ready():
+func _ready() -> void:
 	# 设置敌人生成点位置
 	var spawn_point = $SpawnPoint
 	if spawn_point:
@@ -43,7 +44,7 @@ func _ready():
 	start_next_wave() # 调用函数开始第一波
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if is_victory:
 		return
 
@@ -91,7 +92,7 @@ func _physics_process(delta):
 
 # --- Helper Functions ---
 
-func start_next_wave():
+func start_next_wave() -> void:
 	# 增加波次计数器，确保在 total_waves 内
 	if current_wave < total_waves:
 		current_wave += 1
@@ -111,7 +112,7 @@ func start_next_wave():
 		print("Attempted to start wave beyond total waves.")
 
 
-func spawn_enemy(health_multiplier: float, speed_multiplier: float):
+func spawn_enemy(health_multiplier: float, speed_multiplier: float) -> void:
 	var enemy = enemy_scene.instantiate()
 	enemy.set_path(path.curve)
 	# 假设 enemy.gd 中的 hp 是基础血量
@@ -120,7 +121,7 @@ func spawn_enemy(health_multiplier: float, speed_multiplier: float):
 	add_child(enemy)
 	enemy.add_to_group("enemies")
 
-func trigger_victory():
+func trigger_victory() -> void:
 	if is_victory: # 防止重复触发
 		return
 	print("Victory!")

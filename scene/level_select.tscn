@@ -36,5 +36,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "关卡2"
 
+[node name="Level3Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡3"
+
 [connection signal="pressed" from="VBoxContainer/Level1Button" to="." method="_on_level1_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Level2Button" to="." method="_on_level2_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Level3Button" to="." method="_on_level_3_button_pressed"]

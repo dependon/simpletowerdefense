@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cb5v0se2mim76"]
 
 [ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower.tscn" id="1_a7nfw"]
-[ext_resource type="Texture2D" uid="uid://nl38ss2pvqvt" path="res://assets/tower/tower_10.png" id="2_ckyka"]
+[ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="2_h56ts"]
 
 [node name="FastTower" instance=ExtResource("1_a7nfw")]
-texture = ExtResource("2_ckyka")
+texture = ExtResource("2_h56ts")
 fire_rate = 1.5
 base_cost = 120
