@@ -41,3 +41,6 @@ func _on_level2_button_pressed():
 
 func _on_level_3_button_pressed() -> void:
 	GameManager.select_level(3)
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
