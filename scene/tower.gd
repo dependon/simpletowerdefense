@@ -111,16 +111,16 @@ func _hide_buttons():
 	destroy_button.hide()
 
 func _on_upgrade_pressed():
-	var main = get_tree().get_root().get_node("Main")
+	var BattleScene = get_tree().get_root().get_node("BattleScene")
 	# 检查等级和金币
-	if level < max_level and main and main.coins >= get_upgrade_cost():
-		main.coins -= get_upgrade_cost()
+	if level < max_level and BattleScene and BattleScene.coins >= get_upgrade_cost():
+		BattleScene.coins -= get_upgrade_cost()
 		level += 1 # 升级防御塔
 		fire_rate *= 1.3  # 提升攻击速度
 		range *= 1.1     # 提升攻击范围
 		current_damage *= 1.3  # 提升伤害值
 		tower_area.get_node("CollisionShape2D").shape.radius = range
-		main.update_coins_display()
+		BattleScene.update_coins_display()
 		# 更新按钮文本和状态
 		if level < max_level:
 			upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
@@ -132,10 +132,10 @@ func _on_upgrade_pressed():
 		level_label.text = "Lv. " + str(level)
 
 func _on_destroy_pressed():
-	var main = get_tree().get_root().get_node("Main")
-	if main:
-		main.coins += int(base_cost * level * 0.7)  # 返还70%建造成本
-		main.update_coins_display()
+	var BattleScene = get_tree().get_root().get_node("BattleScene")
+	if BattleScene:
+		BattleScene.coins += int(base_cost * level * 0.7)  # 返还70%建造成本
+		BattleScene.update_coins_display()
 		# 将建造点标记为未占用
 		var build_points = get_tree().get_nodes_in_group("build_points")
 		for point in build_points:

@@ -19,7 +19,7 @@ func select_level(level: int) -> void:
 	if level in unlocked_levels:
 		current_level = level
 		level_selected.emit(level)
-		get_tree().change_scene_to_file("res://scene/Main.tscn")
+		get_tree().change_scene_to_file("res://scene/battle_scene.tscn")
 
 # 解锁下一关卡
 func unlock_next_level() -> void:

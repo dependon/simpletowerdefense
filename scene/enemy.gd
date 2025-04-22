@@ -54,10 +54,10 @@ func take_damage(damage: int) -> void:
 	health_bar.value = hp
 	if hp <= 0:
 		# 击杀奖励
-		var main = get_tree().get_root().get_node("Main")
-		if main:
-			main.coins += 20  # 每击杀一个敌人奖励20金币
-			main.update_coins_display()
+		var BattleScene = get_tree().get_root().get_node("BattleScene")
+		if BattleScene:
+			BattleScene.coins += 20  # 每击杀一个敌人奖励20金币
+			BattleScene.update_coins_display()
 			# 随机获得1-3个钻石
 			var diamond_reward = randi() % 3 + 1
 			var game_manager = get_node("/root/GameManager")

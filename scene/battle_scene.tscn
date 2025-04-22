@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwkiu5duhv6vr"]
 
-[ext_resource type="Script" path="res://scene/main.gd" id="1_hvi1q"]
-[ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="4_lgix8"]
-[ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="5_h4xrc"]
-[ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="5_xkpvw"]
-[ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="6_yvr8q"]
+[ext_resource type="Script" path="res://scene/battle_scene.gd" id="1_662de"]
+[ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="2_lg38h"]
+[ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="3_jcbig"]
+[ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="4_41uvu"]
+[ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="5_q6kis"]
 
-[node name="Main" type="Node2D"]
-script = ExtResource("1_hvi1q")
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_662de")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -16,7 +16,7 @@ offset_left = 16.0
 offset_top = 552.0
 offset_right = 96.0
 offset_bottom = 632.0
-icon = ExtResource("5_xkpvw")
+icon = ExtResource("2_lg38h")
 icon_alignment = 1
 expand_icon = true
 
@@ -39,7 +39,7 @@ offset_left = 109.0
 offset_top = 551.0
 offset_right = 189.0
 offset_bottom = 631.0
-icon = ExtResource("6_yvr8q")
+icon = ExtResource("3_jcbig")
 icon_alignment = 1
 expand_icon = true
 
@@ -71,7 +71,7 @@ offset_left = 205.0
 offset_top = 552.0
 offset_right = 285.0
 offset_bottom = 632.0
-icon = ExtResource("4_lgix8")
+icon = ExtResource("4_41uvu")
 icon_alignment = 1
 expand_icon = true
 
@@ -94,7 +94,7 @@ offset_left = 299.0
 offset_top = 553.0
 offset_right = 379.0
 offset_bottom = 633.0
-icon = ExtResource("5_h4xrc")
+icon = ExtResource("5_q6kis")
 icon_alignment = 1
 expand_icon = true
 
@@ -119,15 +119,7 @@ offset_right = 1126.0
 offset_bottom = 62.0
 text = "Diamonds : 0"
 
-[node name="SkillTreeButton" type="Button" parent="UI"]
-offset_left = 400.0
-offset_top = 553.0
-offset_right = 480.0
-offset_bottom = 633.0
-text = "技能树"
-
 [connection signal="pressed" from="UI/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
 [connection signal="pressed" from="UI/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]
 [connection signal="pressed" from="UI/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]
-[connection signal="pressed" from="UI/SkillTreeButton" to="." method="_on_skill_tree_button_pressed"]
