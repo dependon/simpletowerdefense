@@ -1,85 +1,23 @@
 {
-  "tower_1": {
-    "name": "基础防御塔",
-    "skills": {
-      "attack_power": {
-        "name": "攻击力强化",
-        "levels": [
-          {
-            "level": 1,
-            "stars_required": 1,
-            "description": "增加10%攻击力",
-            "effect": {"attack_boost": 0.1}
-          },
-          {
-            "level": 2,
-            "stars_required": 2,
-            "description": "增加20%攻击力",
-            "effect": {"attack_boost": 0.2}
-          },
-          {
-            "level": 3,
-            "stars_required": 3,
-            "description": "增加35%攻击力",
-            "effect": {"attack_boost": 0.35}
-          },
-          {
-            "level": 4,
-            "stars_required": 4,
-            "branches": [
-              {
-                "name": "暴击强化",
-                "description": "获得15%暴击率和50%暴击伤害",
-                "effect": {"crit_rate": 0.15, "crit_damage": 0.5}
-              },
-              {
-                "name": "穿透强化",
-                "description": "攻击无视目标20%防御",
-                "effect": {"armor_penetration": 0.2}
-              }
-            ]
-          }
-        ]
-      },
-      "attack_speed": {
-        "name": "攻击速度",
-        "levels": [
-          {
-            "level": 1,
-            "stars_required": 1,
-            "description": "增加15%攻击速度",
-            "effect": {"attack_speed_boost": 0.15}
-          },
-          {
-            "level": 2,
-            "stars_required": 2,
-            "description": "增加25%攻击速度",
-            "effect": {"attack_speed_boost": 0.25}
-          },
-          {
-            "level": 3,
-            "stars_required": 3,
-            "description": "增加40%攻击速度",
-            "effect": {"attack_speed_boost": 0.4}
-          },
-          {
-            "level": 4,
-            "stars_required": 4,
-            "branches": [
-              {
-                "name": "连锁攻击",
-                "description": "有30%几率攻击弹射到第二个目标",
-                "effect": {"chain_attack_chance": 0.3}
-              },
-              {
-                "name": "狂暴",
-                "description": "攻击速度提升100%，但攻击力降低30%",
-                "effect": {"attack_speed_boost": 1.0, "attack_power_reduction": 0.3}
-              }
-            ]
-          }
-        ]
-      }
-    }
+  "frost": {
+    "skill1": {"name": "冰冻强化", "desc": "增加冰冻时间", "level": 0, "cost": 1},
+    "skill2": {"name": "范围扩大", "desc": "增加冰冻范围", "level": 0, "cost": 2},
+    "skill3": {"name": "减速强化", "desc": "增加减速效果", "level": 0, "cost": 3},
+    "skill4": {"name": "冰霜新星", "desc": "发射冰霜新星", "level": 0, "cost": 4}
+  },
+  "area": {
+    "skill1": {"name": "范围强化", "desc": "增加范围", "level": 0, "cost": 1},
+    "skill2": {"name": "伤害强化", "desc": "增加伤害", "level": 0, "cost": 2},
+    "skill3": {"name": "攻速强化", "desc": "增加攻速", "level": 0, "cost": 3},
+    "skill4": {"name": "燃烧", "desc": "攻击附带燃烧效果", "level": 0, "cost": 4}
+  },
+  "fast": {
+    "skill1": {"name": "攻速强化", "desc": "增加攻速", "level": 0, "cost": 1},
+    "skill2": {"name": "射程强化", "desc": "增加射程", "level": 0, "cost": 2},
+    "skill3": {"name": "穿透", "desc": "攻击可以穿透敌人", "level": 0, "cost": 3},
+    "skill4": {"name": "多重射击", "desc": "一次发射多个子弹", "level": 0, "cost": 4,
+			"branch1": {"name": "快速射击", "desc": "大幅增加攻速", "cost": 5},
+			"branch2": {"name": "精准射击", "desc": "大幅增加伤害", "cost": 5}
+			}
   }
 }

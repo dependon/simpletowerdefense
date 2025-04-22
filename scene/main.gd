@@ -119,4 +119,11 @@ func switch_to_level(level_number: int):
 
 func _on_frost_tower_button_2_pressed() -> void:
 	current_tower_type = "frost"
-	pass # Replace with function body.
+
+func _on_skill_tree_button_pressed():
+	# 创建技能树界面实例
+	var skill_tree_screen = load("res://scene/skill_tree_screen.tscn").instantiate()
+	# 设置技能树界面的塔类型
+	skill_tree_screen.set_tower_type(current_tower_type)
+	# 将技能树界面添加到场景中
+	add_child(skill_tree_screen)

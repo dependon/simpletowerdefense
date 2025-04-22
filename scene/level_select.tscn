@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://randomuid"]
+[gd_scene load_steps=3 format=3 uid="uid://randomuid"]
 
 [ext_resource type="Script" path="res://scene/level_select.gd" id="1_levelselect"]
 [ext_resource type="Texture2D" uid="uid://dqknp3pp23f8n" path="res://assets/icon/star.png" id="2_star"]

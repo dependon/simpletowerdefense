@@ -1,5 +1,12 @@
 extends Node
 
+var stars : int = 0 # 玩家星星数量
+
+func add_stars(amount : int):
+	stars += amount
+	print("获得星星！当前星星数量：" + str(stars))
+	
+
 signal level_selected(level_number: int)
 
 var current_level: int = 0
@@ -37,6 +44,7 @@ func set_level_stars(level: int, base_health: int) -> void:
 	# 只有新的星级更高时才更新
 	if level_stars[level] < stars:
 		level_stars[level] = stars
+		add_stars(stars) # 增加星星数量
 
 # 获取关卡星级
 func get_level_stars(level: int) -> int:
