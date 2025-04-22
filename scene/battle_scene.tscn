@@ -1,15 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwkiu5duhv6vr"]
+[gd_scene load_steps=7 format=3 uid="uid://dwkiu5duhv6vr"]
 
 [ext_resource type="Script" path="res://scene/battle_scene.gd" id="1_662de"]
 [ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="2_lg38h"]
 [ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="3_jcbig"]
 [ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="4_41uvu"]
 [ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="5_q6kis"]
+[ext_resource type="PackedScene" uid="uid://ckkdkqr08oy5x" path="res://scene/setting_menu.tscn" id="6_0l81w"]
 
 [node name="BattleScene" type="Node2D"]
+position = Vector2(-1, 1)
 script = ExtResource("1_662de")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SettingButton" type="Button" parent="UI"]
+top_level = true
+offset_left = 1045.0
+offset_top = 32.0
+offset_right = 1133.0
+offset_bottom = 63.0
+text = "设置"
 
 [node name="NormalTowerButton" type="Button" parent="UI"]
 offset_left = 16.0
@@ -113,12 +123,20 @@ grow_vertical = 0
 text = "100"
 
 [node name="Diamonds" type="Label" parent="UI"]
-offset_left = 1007.0
-offset_top = 24.0
-offset_right = 1126.0
-offset_bottom = 62.0
+offset_left = 139.0
+offset_top = 29.0
+offset_right = 258.0
+offset_bottom = 67.0
 text = "Diamonds : 0"
 
+[node name="SettingMenu" parent="UI" instance=ExtResource("6_0l81w")]
+visible = false
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 3.0
+
+[connection signal="pressed" from="UI/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="UI/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
 [connection signal="pressed" from="UI/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]

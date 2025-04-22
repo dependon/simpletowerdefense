@@ -1,5 +1,29 @@
 extends Node2D
 
+@onready var setting_menu = $UI/SettingMenu
+
+func _on_setting_button_pressed():
+	get_tree().paused = true
+	setting_menu.show()
+	
+	setting_menu.resume_game.connect(resume_game)
+	setting_menu.return_to_level_select.connect(return_to_level_select)
+	setting_menu.return_to_start_menu.connect(return_to_start_menu)
+
+func resume_game():
+	get_tree().paused = false
+	setting_menu.hide()
+
+func return_to_level_select():
+	setting_menu.hide()
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scene/level_select.tscn")
+
+func return_to_start_menu():
+	setting_menu.hide()
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
+
 @onready var enemy_scene: PackedScene = preload("res://scene/enemy.tscn")
 @onready var tower_scene: PackedScene = preload("res://scene/tower.tscn")
 @onready var fast_tower_scene: PackedScene = preload("res://scene/fast_tower.tscn")
