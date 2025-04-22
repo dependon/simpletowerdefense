@@ -126,3 +126,6 @@ func upgrade_branch(tower_type, skill_name, branch_name):
 		update_skill_tree()
 	else:
 		print("星星数量不足")
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
