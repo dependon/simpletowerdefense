@@ -11,6 +11,9 @@ func _ready():
 	# 设置血条颜色为淡红色
 	$HealthBar.modulate = Color(1, 0.5, 0.5, 0.8)
 	area_entered.connect(_on_area_entered)
+	
+	# 将基地添加到'base'组中，以便在其他脚本中能够获取
+	add_to_group("base")
 
 func _on_area_entered(area):
 	if area.is_in_group("enemies"):

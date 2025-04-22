@@ -22,15 +22,17 @@ const FAST_TOWER_COST = 100   # 快速塔消耗
 const AREA_TOWER_COST = 150   # 群体塔消耗
 const FROST_TOWER_COST = 100  # 冰霜塔消耗
 
-# 金币UI
-
+# 金币UI和钻石UI
 func update_coins_display():
 	$UI/Coins.text = "金币: " + str(coins)
 
+func update_diamonds_display():
+	$UI/Diamonds.text = "钻石: " + str(GameManager.get_diamonds())
+
 func _ready():
-	
-	# 设置金币显示
+	# 设置金币和钻石显示
 	update_coins_display()
+	update_diamonds_display()
 	
 	# 连接GameManager的level_selected信号
 	GameManager.level_selected.connect(load_level)

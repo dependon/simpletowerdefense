@@ -58,4 +58,9 @@ func take_damage(damage: int) -> void:
 		if main:
 			main.coins += 20  # 每击杀一个敌人奖励20金币
 			main.update_coins_display()
+			# 随机获得1-3个钻石
+			var diamond_reward = randi() % 3 + 1
+			var game_manager = get_node("/root/GameManager")
+			if game_manager:
+				game_manager.add_diamonds(diamond_reward)
 		queue_free()
