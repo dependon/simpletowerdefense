@@ -31,6 +31,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "开始游戏"
 
+[node name="SkillTreeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "技能树"
+
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
