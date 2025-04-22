@@ -1,0 +1,85 @@
+{
+  "tower_1": {
+    "name": "基础防御塔",
+    "skills": {
+      "attack_power": {
+        "name": "攻击力强化",
+        "levels": [
+          {
+            "level": 1,
+            "stars_required": 1,
+            "description": "增加10%攻击力",
+            "effect": {"attack_boost": 0.1}
+          },
+          {
+            "level": 2,
+            "stars_required": 2,
+            "description": "增加20%攻击力",
+            "effect": {"attack_boost": 0.2}
+          },
+          {
+            "level": 3,
+            "stars_required": 3,
+            "description": "增加35%攻击力",
+            "effect": {"attack_boost": 0.35}
+          },
+          {
+            "level": 4,
+            "stars_required": 4,
+            "branches": [
+              {
+                "name": "暴击强化",
+                "description": "获得15%暴击率和50%暴击伤害",
+                "effect": {"crit_rate": 0.15, "crit_damage": 0.5}
+              },
+              {
+                "name": "穿透强化",
+                "description": "攻击无视目标20%防御",
+                "effect": {"armor_penetration": 0.2}
+              }
+            ]
+          }
+        ]
+      },
+      "attack_speed": {
+        "name": "攻击速度",
+        "levels": [
+          {
+            "level": 1,
+            "stars_required": 1,
+            "description": "增加15%攻击速度",
+            "effect": {"attack_speed_boost": 0.15}
+          },
+          {
+            "level": 2,
+            "stars_required": 2,
+            "description": "增加25%攻击速度",
+            "effect": {"attack_speed_boost": 0.25}
+          },
+          {
+            "level": 3,
+            "stars_required": 3,
+            "description": "增加40%攻击速度",
+            "effect": {"attack_speed_boost": 0.4}
+          },
+          {
+            "level": 4,
+            "stars_required": 4,
+            "branches": [
+              {
+                "name": "连锁攻击",
+                "description": "有30%几率攻击弹射到第二个目标",
+                "effect": {"chain_attack_chance": 0.3}
+              },
+              {
+                "name": "狂暴",
+                "description": "攻击速度提升100%，但攻击力降低30%",
+                "effect": {"attack_speed_boost": 1.0, "attack_power_reduction": 0.3}
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
