@@ -15,57 +15,13 @@ script = ExtResource("1_662de")
 
 [node name="SettingButton" type="Button" parent="UI"]
 top_level = true
-offset_left = 1045.0
-offset_top = 32.0
-offset_right = 1133.0
-offset_bottom = 63.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_bottom = 31.0
+grow_horizontal = 0
 text = "设置"
-
-[node name="NormalTowerButton" type="Button" parent="UI"]
-offset_left = 16.0
-offset_top = 552.0
-offset_right = 96.0
-offset_bottom = 632.0
-icon = ExtResource("2_lg38h")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="UI/NormalTowerButton"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "50"
-
-[node name="FastTowerButton" type="Button" parent="UI"]
-offset_left = 109.0
-offset_top = 551.0
-offset_right = 189.0
-offset_bottom = 631.0
-icon = ExtResource("3_jcbig")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="UI/FastTowerButton"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "100"
 
 [node name="Coins" type="Label" parent="UI"]
 offset_left = 30.0
@@ -75,52 +31,6 @@ offset_bottom = 66.0
 text = "Coins:0"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AreaTowerButton" type="Button" parent="UI"]
-offset_left = 205.0
-offset_top = 552.0
-offset_right = 285.0
-offset_bottom = 632.0
-icon = ExtResource("4_41uvu")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="UI/AreaTowerButton"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "200"
-
-[node name="FrostTowerButton2" type="Button" parent="UI"]
-offset_left = 299.0
-offset_top = 553.0
-offset_right = 379.0
-offset_bottom = 633.0
-icon = ExtResource("5_q6kis")
-icon_alignment = 1
-expand_icon = true
-
-[node name="Label" type="Label" parent="UI/FrostTowerButton2"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "100"
 
 [node name="Diamonds" type="Label" parent="UI"]
 offset_left = 139.0
@@ -136,8 +46,100 @@ offset_top = 3.0
 offset_right = 1.0
 offset_bottom = 3.0
 
+[node name="BoxContainer" type="BoxContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -162.0
+offset_right = 423.0
+grow_vertical = 0
+
+[node name="NormalTowerButton" type="Button" parent="UI/BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+icon = ExtResource("2_lg38h")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/BoxContainer/NormalTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "50"
+
+[node name="FastTowerButton" type="Button" parent="UI/BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+icon = ExtResource("3_jcbig")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/BoxContainer/FastTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "100"
+
+[node name="AreaTowerButton" type="Button" parent="UI/BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+icon = ExtResource("4_41uvu")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/BoxContainer/AreaTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "200"
+
+[node name="FrostTowerButton2" type="Button" parent="UI/BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+icon = ExtResource("5_q6kis")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/BoxContainer/FrostTowerButton2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "100"
+
 [connection signal="pressed" from="UI/SettingButton" to="." method="_on_setting_button_pressed"]
-[connection signal="pressed" from="UI/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
-[connection signal="pressed" from="UI/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
-[connection signal="pressed" from="UI/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]
-[connection signal="pressed" from="UI/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]
+[connection signal="pressed" from="UI/BoxContainer/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
+[connection signal="pressed" from="UI/BoxContainer/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
+[connection signal="pressed" from="UI/BoxContainer/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]
+[connection signal="pressed" from="UI/BoxContainer/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]
