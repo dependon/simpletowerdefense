@@ -129,3 +129,18 @@ func upgrade_branch(tower_type, skill_name, branch_name):
 
 func _on_main_menu_button_pressed():
 	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
+
+func reset_skill_tree():
+	# 重置技能树
+	for tower_type in all_towers_data:
+		var tower_data = all_towers_data[tower_type]
+		for skill_name in tower_data:
+			var skill = tower_data[skill_name]
+			GameManager.stars += skill["level"]
+			skill["level"] = 0
+			tower_data[skill_name] = skill
+	update_skill_tree()
+	print("技能树已重置")
+
+func _on_reset_skill_button_pressed():
+	reset_skill_tree()
