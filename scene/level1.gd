@@ -8,6 +8,7 @@ extends Node2D
 @export var total_waves = 10  # 总波次数
 @export var wave_interval = 8.0 # 波次之间的间隔时间 (秒)
 @export var enemy_spawn_interval = 0.4 # 波次内敌人生成间隔 (秒)
+@export var wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
 
 # 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier}}
 # 怪物数量从少到多，血量和速度倍率逐渐增加
@@ -31,6 +32,7 @@ var wave_timer = 0.0 # 波次间隔计时器
 var enemy_spawn_timer = 0.0 # 波次内生成计时器
 var is_spawning_wave = false # 是否正在生成当前波次的敌人
 var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
+var wave_duration_timer = 0.0 # 波次持续时间计时器
 var is_victory = false
 
 func _ready():
@@ -82,11 +84,22 @@ func _physics_process(delta):
 
 	# 检查是否可以开始下一波的间隔计时
 	# 条件：当前波次敌人已生成完毕(!is_spawning_wave), 不在间隔中(!is_between_waves), 场上没有敌人了, 且不是最后一波之后
-	if not is_spawning_wave and not is_between_waves and get_tree().get_nodes_in_group("enemies").size() == 0:
-		if current_wave < total_waves:
-			print("Wave ", current_wave, " cleared. Starting interval for Wave ", current_wave + 1)
-			is_between_waves = true
-			wave_timer = 0 # 重置波次间隔计时器
+	if not is_spawning_wave and not is_between_waves:
+		# 如果场上没有敌人，则正常进入下一波
+		if get_tree().get_nodes_in_group("enemies").size() == 0:
+			if current_wave < total_waves:
+				print("Wave ", current_wave, " cleared. Starting interval for Wave ", current_wave + 1)
+				is_between_waves = true
+				wave_timer = 0 # 重置波次间隔计时器
+			# 如果已经是最后一波清空，则等待上面的胜利条件判断
+		else:
+			# 否则，开始计时
+			wave_duration_timer += delta
+			# 如果超过时间限制，则强制开始下一波
+			if wave_duration_timer >= wave_duration_limit and current_wave < total_waves:
+				print("Wave ", current_wave, " timed out. Starting next wave.")
+				start_next_wave()
+
 		# 如果已经是最后一波清空，则等待上面的胜利条件判断
 
 # --- Helper Functions ---
@@ -102,6 +115,7 @@ func start_next_wave():
 			is_spawning_wave = true
 			is_between_waves = false # 结束间隔，开始生成
 			wave_timer = 0 # 重置间隔计时器以备后用
+			wave_duration_timer = 0 # 重置波次持续时间计时器
 		else:
 			# 配置中缺少当前波次信息
 			print("Error: Wave config not found for wave ", current_wave)
@@ -109,6 +123,7 @@ func start_next_wave():
 	else:
 		# 尝试在所有波次完成后开始新波次，这不应该发生，由胜利逻辑处理
 		print("Attempted to start wave beyond total waves.")
+		wave_duration_timer = 0 # 重置波次持续时间计时器
 
 
 func spawn_enemy(health_multiplier: float, speed_multiplier: float):
