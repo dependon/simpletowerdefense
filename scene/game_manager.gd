@@ -1,5 +1,8 @@
 extends Node
 
+# 存档文件名
+const SAVE_GAME_FILENAME = "user://savegame.dat"
+
 var stars : int = 0 # 玩家星星数量
 
 func add_stars(amount : int):
@@ -13,6 +16,39 @@ var current_level: int = 0
 var diamonds: int = 0  # 玩家拥有的钻石数量
 var unlocked_levels: Array = [1]  # 默认只解锁第一关
 var level_stars: Dictionary = {1: 0, 2: 0, 3: 0}  # 每个关卡的星级评分，默认为0星
+
+func _ready():
+	load_game()
+
+# 加载游戏存档
+func load_game():
+	var file = FileAccess.open(SAVE_GAME_FILENAME, FileAccess.READ)
+	if file != null and !file.eof_reached():
+		var data = file.get_var()
+		stars = data.stars
+		current_level = data.current_level
+		diamonds = data.diamonds
+		unlocked_levels = data.unlocked_levels
+		level_stars = data.level_stars
+		print("游戏存档加载成功！")
+	else:
+		print("没有找到游戏存档，使用默认设置。")
+
+# 保存游戏存档
+func save_game():
+	var data = {
+		"stars": stars,
+		"current_level": current_level,
+		"diamonds": diamonds,
+		"unlocked_levels": unlocked_levels,
+		"level_stars": level_stars
+	}
+	var file = FileAccess.open(SAVE_GAME_FILENAME, FileAccess.WRITE)
+	if file != null:
+		file.store_var(data)
+		print("游戏存档保存成功！")
+	else:
+		print("无法保存游戏存档！")
 
 func select_level(level: int) -> void:
 	# 检查关卡是否已解锁

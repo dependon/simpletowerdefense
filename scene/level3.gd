@@ -4,25 +4,28 @@ extends Node2D
 @onready var enemy_scene = preload("res://scene/enemy.tscn")
 @onready var path = $Path2D
 
-# 波次设置 (Level 2)
-@export var total_waves = 12  # 总波次数
-@export var wave_interval = 4.0 # 波次之间的间隔时间 (秒) - 稍短
-@export var enemy_spawn_interval = 0.4 # 波次内敌人生成间隔 (秒) - 稍快
+# 波次设置 (Level 3)
+@export var total_waves = 15  # 总波次数
+@export var wave_interval = 3.0 # 波次之间的间隔时间 (秒) - 更短
+@export var enemy_spawn_interval = 0.3 # 波次内敌人生成间隔 (秒) - 更快
 
-# 波次配置字典 (Level 2)
+# 波次配置字典 (Level 3)
 var wave_config = {
-	1: {"count": 8, "health_multiplier": 1.1, "speed_multiplier": 1.0},
-	2: {"count": 10, "health_multiplier": 1.2, "speed_multiplier": 1.05},
-	3: {"count": 12, "health_multiplier": 1.3, "speed_multiplier": 1.05},
-	4: {"count": 15, "health_multiplier": 1.4, "speed_multiplier": 1.1},
-	5: {"count": 18, "health_multiplier": 1.6, "speed_multiplier": 1.1},
-	6: {"count": 20, "health_multiplier": 1.8, "speed_multiplier": 1.15},
-	7: {"count": 22, "health_multiplier": 2.0, "speed_multiplier": 1.15},
-	8: {"count": 25, "health_multiplier": 2.2, "speed_multiplier": 1.2},
-	9: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.2},
-	10: {"count": 32, "health_multiplier": 5.6, "speed_multiplier": 1.4},
-	11: {"count": 35, "health_multiplier": 7.8, "speed_multiplier": 1.6},
-	12: {"count": 40, "health_multiplier": 10.0, "speed_multiplier": 1.8}
+	1: {"count": 10, "health_multiplier": 1.2, "speed_multiplier": 1.05},
+	2: {"count": 12, "health_multiplier": 1.3, "speed_multiplier": 1.1},
+	3: {"count": 15, "health_multiplier": 1.4, "speed_multiplier": 1.15},
+	4: {"count": 18, "health_multiplier": 1.6, "speed_multiplier": 1.2},
+	5: {"count": 20, "health_multiplier": 1.8, "speed_multiplier": 1.25},
+	6: {"count": 22, "health_multiplier": 2.0, "speed_multiplier": 1.3},
+	7: {"count": 25, "health_multiplier": 2.2, "speed_multiplier": 1.35},
+	8: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.4},
+	9: {"count": 32, "health_multiplier": 2.6, "speed_multiplier": 1.45},
+	10: {"count": 35, "health_multiplier": 2.8, "speed_multiplier": 1.5},
+	11: {"count": 38, "health_multiplier": 3.0, "speed_multiplier": 1.55},
+	12: {"count": 40, "health_multiplier": 3.2, "speed_multiplier": 1.6},
+	13: {"count": 42, "health_multiplier": 3.4, "speed_multiplier": 1.65},
+	14: {"count": 45, "health_multiplier": 3.6, "speed_multiplier": 1.7},
+	15: {"count": 50, "health_multiplier": 4.0, "speed_multiplier": 1.8}
 }
 
 # 状态变量
@@ -46,13 +49,13 @@ func _ready():
 				# 注意：如果路径设计为闭合或有其他点，此逻辑可能需要调整
 				# 简单起见，这里假设路径初始为空或只需要设置起点
 				# 如果路径已有其他点，可能需要插入或替换第一个点
-				# 为了安全，我们先清空再添加（如果确定路径只由生成点开始）
+				# 为了安全，我们先清空再添加（如果确定要清空）
 				# path.curve.clear_points() # 如果确定要清空
 				path.curve.add_point(spawn_point.position, Vector2.ZERO, Vector2.ZERO, 0) # 添加点，索引为0
 		else:
-			print("Error: Path or Path.curve not found in Level 2 _ready.")
+			print("Error: Path or Path.curve not found in Level 3 _ready.")
 	else:
-		print("Error: SpawnPoint node not found in Level 2.")
+		print("Error: SpawnPoint node not found in Level 3.")
 	
 	# 游戏开始时，立即开始第一波
 	is_between_waves = false # 不处于间隔状态
@@ -82,7 +85,7 @@ func _physics_process(delta):
 	if is_spawning_wave:
 		# 检查是否还有未生成的敌人
 		if not wave_config.has(current_wave):
-			print("Error: Wave config missing for wave ", current_wave, " in Level 2.")
+			print("Error: Wave config missing for wave ", current_wave, " in Level 3.")
 			get_tree().paused = true
 			return
 
@@ -98,14 +101,14 @@ func _physics_process(delta):
 		else:
 			# 当前波次敌人已全部生成
 			is_spawning_wave = false
-			print("Level 2 - Wave ", current_wave, " spawning complete.")
+			print("Level 3 - Wave ", current_wave, " spawning complete.")
 			# 注意：此时不立即开始下一波间隔，需要等待场上敌人清空
 
 	# 检查是否可以开始下一波的间隔计时
 	# 条件：当前波次敌人已生成完毕(!is_spawning_wave), 不在间隔中(!is_between_waves), 场上没有敌人了, 且不是最后一波之后
 	if not is_spawning_wave and not is_between_waves and get_tree().get_nodes_in_group("enemies").size() == 0:
 		if current_wave < total_waves:
-			print("Level 2 - Wave ", current_wave, " cleared. Starting interval for Wave ", current_wave + 1)
+			print("Level 3 - Wave ", current_wave, " cleared. Starting interval for Wave ", current_wave + 1)
 			is_between_waves = true
 			wave_timer = 0 # 重置波次间隔计时器
 		# 如果已经是最后一波清空，则等待上面的胜利条件判断
@@ -116,7 +119,7 @@ func start_next_wave():
 	# 增加波次计数器，确保在 total_waves 内
 	if current_wave < total_waves:
 		current_wave += 1
-		print("Level 2 - Starting Wave: ", current_wave)
+		print("Level 3 - Starting Wave: ", current_wave)
 		if wave_config.has(current_wave):
 			enemies_spawned_in_wave = 0
 			enemy_spawn_timer = 0 # 重置波内生成计时器
@@ -125,21 +128,21 @@ func start_next_wave():
 			wave_timer = 0 # 重置间隔计时器以备后用
 		else:
 			# 配置中缺少当前波次信息
-			print("Error: Wave config not found for wave ", current_wave, " in Level 2.")
+			print("Error: Wave config not found for wave ", current_wave, " in Level 3.")
 			get_tree().paused = true # 暂停游戏以示错误
 	else:
 		# 尝试在所有波次完成后开始新波次，这不应该发生，由胜利逻辑处理
-		print("Level 2 - Attempted to start wave beyond total waves.")
+		print("Level 3 - Attempted to start wave beyond total waves.")
 
 
 func spawn_enemy(health_multiplier: float, speed_multiplier: float):
 	var enemy = enemy_scene.instantiate()
 	if not enemy:
-		print("Error: Failed to instantiate enemy scene in Level 2.")
+		print("Error: Failed to instantiate enemy scene in Level 3.")
 		return
 	
 	if not path or not path.curve:
-		print("Error: Path or curve is invalid in Level 2 spawn_enemy.")
+		print("Error: Path or curve is invalid in Level 3 spawn_enemy.")
 		return
 		
 	enemy.set_path(path.curve)
@@ -167,10 +170,9 @@ func spawn_enemy(health_multiplier: float, speed_multiplier: float):
 func trigger_victory():
 	if is_victory: # 防止重复触发
 		return
-	print("Level 2 Victory!")
+	print("Level 3 Victory!")
 	var victory_screen = preload("res://scene/victory_screen.tscn").instantiate()
 	get_tree().root.add_child(victory_screen)
 	is_victory = true
-	# 可以选择暂停游戏或进行其他胜利处理
-	# get_tree().paused = true
+	# 保存游戏
 	get_node("/root/GameManager").save_game()
