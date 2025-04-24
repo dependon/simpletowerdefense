@@ -6,6 +6,7 @@
 
 [node name="Level3" instance=ExtResource("1_6lmyx")]
 script = ExtResource("3_a1b2c")
+wave_duration_limit = 60.0
 
 [node name="BuildPoint1" parent="BuildPoints" index="0"]
 position = Vector2(369, 447)

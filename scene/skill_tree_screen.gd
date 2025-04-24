@@ -1,6 +1,8 @@
 extends Control
 
 @onready var skill_tree_container = $Panel/MarginContainer/VBoxContainer/SkillTreeContainer
+@onready var unused_stars_label = $Panel/MarginContainer/VBoxContainer/StarInfoContainer/UnusedStarsLabel
+@onready var used_stars_label = $Panel/MarginContainer/VBoxContainer/StarInfoContainer/UsedStarsLabel
 var tower_data = {}
 var tower_type = ""
 var all_towers_data = {}
@@ -20,6 +22,17 @@ func load_tower_data():
 		return {}
 
 func update_skill_tree():
+	# 更新星星数量显示
+	var used_stars = 0
+	for tower_type in all_towers_data:
+		var tower_data = all_towers_data[tower_type]
+		for skill_name in tower_data:
+			var skill = tower_data[skill_name]
+			used_stars += skill["level"]
+	var unused_stars = GameManager.stars
+	unused_stars_label.text = "未使用星星: " + str(unused_stars)
+	used_stars_label.text = "已使用星星: " + str(used_stars)
+
 	# 清空 SkillTreeContainer
 	for child in skill_tree_container.get_children():
 		child.queue_free()
