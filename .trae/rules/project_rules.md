@@ -25,4 +25,5 @@ UPPERCASE（全大写）：常量和全局变量（例如：'MAX_PLAYERS' 最大
 提出代码或解决方案时：
 首先，分析现有代码结构和性能影响。
 提供实现更改或新功能的分步计划。
-请遵循官方文档https://docs.godotengine.org/en/stable/里的功能内容编写代码，了解有关渲染、资源管理和性能优化的最新最佳实践。
+请遵循官方文档 https://docs.godotengine.org/en/stable/   进行编码
+注释不要使用//,而是使用#

@@ -39,7 +39,7 @@ layout_mode = 2
 text = "技能树"
 horizontal_alignment = 1
 
-[node name="SkillTreeContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="SkillTreeContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 

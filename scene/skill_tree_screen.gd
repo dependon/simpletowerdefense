@@ -27,20 +27,35 @@ func update_skill_tree():
 	# 动态创建所有塔的技能按钮
 	for tower_type in all_towers_data:
 		var tower_data = all_towers_data[tower_type]
+
+		# 创建塔的 VBoxContainer
+		var tower_vbox = VBoxContainer.new()
+		tower_vbox.name = tower_type
+		tower_vbox.add_theme_constant_override("separation", 5)
+
+		# 创建包含塔的名字和技能按钮的 VBoxContainer
+		var tower_container = VBoxContainer.new()
+		tower_container.name = tower_type + "_container"
+		tower_container.add_theme_constant_override("separation", 5)
+
 		var tower_label = Label.new()
 		tower_label.text = tower_type
-		skill_tree_container.add_child(tower_label)
+		tower_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		tower_container.add_child(tower_label)
+
 		for skill_name in tower_data:
 			var skill = tower_data[skill_name]
 			var button = Button.new()
 			button.text = skill["name"] + " Lv." + str(skill["level"])
+			button.size = Vector2(50, 50)
+			button.custom_minimum_size = Vector2(50, 50)
 			var can_upgrade = can_upgrade_skill(tower_type, skill_name)
 			button.disabled = not can_upgrade
 			if not can_upgrade:
 				button.modulate = Color(0.5, 0.5, 0.5)  # 设置为灰色
 			button.connect("pressed", func(): upgrade_skill(tower_type, skill_name))
-			skill_tree_container.add_child(button)
-			
+			tower_container.add_child(button)
+
 			if skill["level"] == 4 and skill.has("branch1") and skill.has("branch2"):
 				var branch1_button = Button.new()
 				branch1_button.text = skill["branch1"]["name"]
@@ -49,8 +64,8 @@ func update_skill_tree():
 				if not can_upgrade_branch1:
 					branch1_button.modulate = Color(0.5, 0.5, 0.5)  # 设置为灰色
 				branch1_button.connect("pressed", func(): upgrade_branch(tower_type, skill_name, "branch1"))
-				skill_tree_container.add_child(branch1_button)
-				
+				tower_container.add_child(branch1_button)
+
 				var branch2_button = Button.new()
 				branch2_button.text = skill["branch2"]["name"]
 				var can_upgrade_branch2 = can_upgrade_branch(tower_type, skill_name, "branch2")
@@ -58,7 +73,9 @@ func update_skill_tree():
 				if not can_upgrade_branch2:
 					branch2_button.modulate = Color(0.5, 0.5, 0.5)  # 设置为灰色
 				branch2_button.connect("pressed", func(): upgrade_branch(tower_type, skill_name, "branch2"))
-				skill_tree_container.add_child(branch2_button)
+				tower_container.add_child(branch2_button)
+
+		skill_tree_container.add_child(tower_container)
 
 func can_upgrade_skill(tower_type, skill_name):
 	var tower_data = all_towers_data[tower_type]
