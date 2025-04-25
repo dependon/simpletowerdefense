@@ -32,6 +32,8 @@ func return_to_start_menu():
 @onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
 @onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")
+@onready var level4_scene: PackedScene = preload("res://scene/level4.tscn")
+
 
 var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 或 "frost"
 var current_level: Node2D = null
@@ -79,6 +81,8 @@ func load_level(level_number: int):
 		level_scene = level2_scene
 	elif level_number == 3:
 		level_scene = level3_scene
+	elif level_number == 4:
+		level_scene = level4_scene
 	current_level = level_scene.instantiate()
 	
 	add_child(current_level)
