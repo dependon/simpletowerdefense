@@ -27,3 +27,4 @@ UPPERCASE（全大写）：常量和全局变量（例如：'MAX_PLAYERS' 最大
 提供实现更改或新功能的分步计划。
 请遵循官方文档 https://docs.godotengine.org/en/stable/   进行编码
 注释不要使用//,而是使用#
+生成代码的时候一定注意需要遵循godot4的规则，而不是godot3版本

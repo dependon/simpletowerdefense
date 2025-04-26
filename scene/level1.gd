@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var base = $Base # 基地仍然需要，用于扣血
 @onready var enemy_scene = preload("res://scene/enemy.tscn")
+@onready var thief_scene = preload("res://scene/enemy_thief.tscn")
 @onready var path = $Path2D
 
 # 波次设置
@@ -126,8 +127,12 @@ func start_next_wave():
 		wave_duration_timer = 0 # 重置波次持续时间计时器
 
 
-func spawn_enemy(health_multiplier: float, speed_multiplier: float):
-	var enemy = enemy_scene.instantiate()
+func spawn_enemy(health_multiplier: float, speed_multiplier: float, is_thief = false):
+	var enemy
+	if enemies_spawned_in_wave  == 5 :
+		enemy = thief_scene.instantiate()
+	else:
+		enemy = enemy_scene.instantiate()
 	enemy.set_path(path.curve)
 	# 假设 enemy.gd 中的 hp 是基础血量
 	enemy.hp = enemy.hp * health_multiplier # 应用当前波次的血量倍率
