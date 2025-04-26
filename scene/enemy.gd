@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name Enemy
 var path_follow: PathFollow2D
 var path: Path2D
 #移动速度

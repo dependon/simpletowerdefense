@@ -1,0 +1,111 @@
+[gd_scene load_steps=25 format=3 uid="uid://dvbqfejoufgrf"]
+
+[ext_resource type="Script" path="res://scene/enemy_werewolf.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bfhwl85rjjw8x" path="res://assets/player/werewolf/frame_000000.png" id="2_uv6rw"]
+[ext_resource type="Texture2D" uid="uid://bni1ekfkd8m8f" path="res://assets/player/werewolf/frame_000001.png" id="3_upm8g"]
+[ext_resource type="Texture2D" uid="uid://c8us5hs4hrc6w" path="res://assets/player/werewolf/frame_000002.png" id="4_i6xue"]
+[ext_resource type="Texture2D" uid="uid://dyh1cdbc8nymk" path="res://assets/player/werewolf/frame_000003.png" id="5_pnpaf"]
+[ext_resource type="Texture2D" uid="uid://c258ebo427d5b" path="res://assets/player/werewolf/frame_000004.png" id="6_7ds46"]
+[ext_resource type="Texture2D" uid="uid://80wuo2e3fm0i" path="res://assets/player/werewolf/frame_000005.png" id="7_1ocod"]
+[ext_resource type="Texture2D" uid="uid://dlp52hutwepda" path="res://assets/player/werewolf/frame_000006.png" id="8_nkh6g"]
+[ext_resource type="Texture2D" uid="uid://dgkcrct28rwop" path="res://assets/player/werewolf/frame_000007.png" id="9_q1w7q"]
+[ext_resource type="Texture2D" uid="uid://basavqbbvl1tq" path="res://assets/player/werewolf/frame_000008.png" id="10_ati1i"]
+[ext_resource type="Texture2D" uid="uid://bn7ybw0485e28" path="res://assets/player/werewolf/frame_000009.png" id="11_dsaoh"]
+[ext_resource type="Texture2D" uid="uid://c63ds0skyhayv" path="res://assets/player/werewolf/frame_000010.png" id="12_ff8dm"]
+[ext_resource type="Texture2D" uid="uid://jlokcb1h3n0h" path="res://assets/player/werewolf/frame_000011.png" id="13_w0svx"]
+[ext_resource type="Texture2D" uid="uid://dxbbqh4clerej" path="res://assets/player/werewolf/frame_000012.png" id="14_yqa36"]
+[ext_resource type="Texture2D" uid="uid://bhok032fov2cu" path="res://assets/player/werewolf/frame_000013.png" id="15_27mji"]
+[ext_resource type="Texture2D" uid="uid://bctylv1q52rs6" path="res://assets/player/werewolf/frame_000014.png" id="16_ullvb"]
+[ext_resource type="Texture2D" uid="uid://cqrmv2f2kfhx4" path="res://assets/player/werewolf/frame_000015.png" id="17_d0t86"]
+[ext_resource type="Texture2D" uid="uid://xhhyjeyeem23" path="res://assets/player/werewolf/frame_000016.png" id="18_sullw"]
+[ext_resource type="Texture2D" uid="uid://1qu1kuh7cejy" path="res://assets/player/werewolf/frame_000017.png" id="19_brapk"]
+[ext_resource type="Texture2D" uid="uid://0ryl77rbqwru" path="res://assets/player/werewolf/frame_000018.png" id="20_rdcvq"]
+[ext_resource type="Texture2D" uid="uid://csjmkj0pdono0" path="res://assets/player/werewolf/frame_000019.png" id="21_31xtj"]
+[ext_resource type="Texture2D" uid="uid://by2hxcyh6drhn" path="res://assets/player/werewolf/frame_000020.png" id="22_02cqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6d4n"]
+size = Vector2(64, 57)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_42n0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uv6rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_upm8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i6xue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pnpaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7ds46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1ocod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nkh6g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_q1w7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ati1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_dsaoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ff8dm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w0svx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_yqa36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_27mji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ullvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_d0t86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_sullw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_brapk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_rdcvq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_31xtj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_02cqy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="EnemyWerewolf" type="CharacterBody2D"]
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 1.5)
+shape = SubResource("RectangleShape2D_c6d4n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.90735e-06, 2)
+scale = Vector2(0.574074, 0.722222)
+sprite_frames = SubResource("SpriteFrames_42n0r")
+autoplay = "default"

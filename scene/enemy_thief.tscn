@@ -109,4 +109,4 @@ position = Vector2(1.90735e-06, 2)
 scale = Vector2(0.574074, 0.722222)
 sprite_frames = SubResource("SpriteFrames_m520d")
 autoplay = "default"
-frame_progress = 0.563508
+frame_progress = 0.824901

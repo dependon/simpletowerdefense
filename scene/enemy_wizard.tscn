@@ -1,0 +1,112 @@
+[gd_scene load_steps=25 format=3 uid="uid://bgecwtgyj67lc"]
+
+[ext_resource type="Script" path="res://scene/enemy_wizard.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://4i24nt7goere" path="res://assets/player/wizard/wizard_1.png" id="2_yliqg"]
+[ext_resource type="Texture2D" uid="uid://cb6h8pfqnkxm5" path="res://assets/player/wizard/wizard_2.png" id="3_6o20q"]
+[ext_resource type="Texture2D" uid="uid://1t60ls7ffx4" path="res://assets/player/wizard/wizard_3.png" id="4_u1iq0"]
+[ext_resource type="Texture2D" uid="uid://c2ui3gtq47quo" path="res://assets/player/wizard/wizard_4.png" id="5_h8dpg"]
+[ext_resource type="Texture2D" uid="uid://cq6cr7ri6oq5u" path="res://assets/player/wizard/wizard_5.png" id="6_d6v54"]
+[ext_resource type="Texture2D" uid="uid://cq1q6ao0wmv60" path="res://assets/player/wizard/wizard_6.png" id="7_g7c4i"]
+[ext_resource type="Texture2D" uid="uid://brt1c2oxolxsi" path="res://assets/player/wizard/wizard_7.png" id="8_3bkkg"]
+[ext_resource type="Texture2D" uid="uid://dku1cwra24iie" path="res://assets/player/wizard/wizard_8.png" id="9_g0fc7"]
+[ext_resource type="Texture2D" uid="uid://dw7vent7legvg" path="res://assets/player/wizard/wizard_9.png" id="10_o8q0u"]
+[ext_resource type="Texture2D" uid="uid://dthlh0t5vduxy" path="res://assets/player/wizard/wizard_10.png" id="11_mnht5"]
+[ext_resource type="Texture2D" uid="uid://clrs3j7q4qmye" path="res://assets/player/wizard/wizard_11.png" id="12_r80ep"]
+[ext_resource type="Texture2D" uid="uid://ccs3j3s1eyscf" path="res://assets/player/wizard/wizard_12.png" id="13_fggvp"]
+[ext_resource type="Texture2D" uid="uid://cpuxc8b8eo1i0" path="res://assets/player/wizard/wizard_13.png" id="14_850ic"]
+[ext_resource type="Texture2D" uid="uid://bik0kdp32ub1p" path="res://assets/player/wizard/wizard_14.png" id="15_000mq"]
+[ext_resource type="Texture2D" uid="uid://bw07wuo1l3kc8" path="res://assets/player/wizard/wizard_15.png" id="16_1orqm"]
+[ext_resource type="Texture2D" uid="uid://c57aa3iqqhltj" path="res://assets/player/wizard/wizard_16.png" id="17_oe1wv"]
+[ext_resource type="Texture2D" uid="uid://dq8iy27eettae" path="res://assets/player/wizard/wizard_17.png" id="18_cpw7i"]
+[ext_resource type="Texture2D" uid="uid://bxbs6dx2mlq3s" path="res://assets/player/wizard/wizard_18.png" id="19_w6smp"]
+[ext_resource type="Texture2D" uid="uid://dbjvjk58y44e6" path="res://assets/player/wizard/wizard_19.png" id="20_24tph"]
+[ext_resource type="Texture2D" uid="uid://dks7wbpmyca3u" path="res://assets/player/wizard/wizard_20.png" id="21_3bo7j"]
+[ext_resource type="Texture2D" uid="uid://dpakn65lyc182" path="res://assets/player/wizard/wizard_21.png" id="22_cgceq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5x08o"]
+size = Vector2(56, 53)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mgfio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yliqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6o20q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u1iq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h8dpg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d6v54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g7c4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3bkkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_g0fc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_o8q0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_mnht5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r80ep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fggvp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_850ic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_000mq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1orqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_oe1wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_cpw7i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_w6smp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_24tph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_3bo7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_cgceq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="EnemyWizard" type="CharacterBody2D"]
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 4.5)
+shape = SubResource("RectangleShape2D_5x08o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.90735e-06, 2)
+scale = Vector2(0.574074, 0.722222)
+sprite_frames = SubResource("SpriteFrames_mgfio")
+autoplay = "default"
+frame_progress = 0.720823
