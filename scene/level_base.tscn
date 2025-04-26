@@ -7,9 +7,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_1"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 70, 505, 0, 0, 0, 0, 75, 139, 0, 0, 0, 0, 607, 143, 0, 0, 0, 0, 601, 254, 0, 0, 0, 0, 313, 266, 0, 0, 0, 0, 311, 503, 0, 0, 0, 0, 600, 507, 0, 0, 0, 0, 960, 492, 0, 0, 0, 0, 965, 126)
+"points": PackedVector2Array(0, 0, 0, 0, 66, 954, 0, 0, 0, 0, 75, 139, 0, 0, 0, 0, 607, 143, 0, 0, 0, 0, 601, 254, 0, 0, 0, 0, 313, 266, 0, 0, 0, 0, 311, 503, 0, 0, 0, 0, 600, 507, 0, 0, 0, 0, 960, 492, 0, 0, 0, 0, 965, 132, 0, 0, 0, 0, 1740, 144, 0, 0, 0, 0, 1751, 911)
 }
-point_count = 9
+point_count = 11
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jybge"]
 texture = ExtResource("2_yeu0p")

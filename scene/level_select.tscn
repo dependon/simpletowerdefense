@@ -33,9 +33,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
+offset_left = -550.0
 offset_top = -100.0
-offset_right = 350.0
+offset_right = 550.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -150,6 +150,258 @@ texture = ExtResource("2_star")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Level4Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level4Button" type="Button" parent="HBoxContainer/Level4Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡4"
+
+[node name="Level4Stars" type="HBoxContainer" parent="HBoxContainer/Level4Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level4Container/Level4Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level4Container/Level4Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level4Container/Level4Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Level5Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level5Button" type="Button" parent="HBoxContainer/Level5Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡5"
+
+[node name="Level5Stars" type="HBoxContainer" parent="HBoxContainer/Level5Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level5Container/Level5Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level5Container/Level5Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level5Container/Level5Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Level6Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level6Button" type="Button" parent="HBoxContainer/Level6Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡6"
+
+[node name="Level6Stars" type="HBoxContainer" parent="HBoxContainer/Level6Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level6Container/Level6Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level6Container/Level6Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level6Container/Level6Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Level7Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level7Button" type="Button" parent="HBoxContainer/Level7Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡7"
+
+[node name="Level7Stars" type="HBoxContainer" parent="HBoxContainer/Level7Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level7Container/Level7Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level7Container/Level7Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level7Container/Level7Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Level8Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level8Button" type="Button" parent="HBoxContainer/Level8Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡8"
+
+[node name="Level8Stars" type="HBoxContainer" parent="HBoxContainer/Level8Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level8Container/Level8Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level8Container/Level8Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level8Container/Level8Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Level9Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level9Button" type="Button" parent="HBoxContainer/Level9Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡9"
+
+[node name="Level9Stars" type="HBoxContainer" parent="HBoxContainer/Level9Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level9Container/Level9Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level9Container/Level9Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level9Container/Level9Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Level10Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level10Button" type="Button" parent="HBoxContainer/Level10Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡10"
+
+[node name="Level10Stars" type="HBoxContainer" parent="HBoxContainer/Level10Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level10Container/Level10Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level10Container/Level10Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level10Container/Level10Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -169,4 +421,11 @@ text = "返回主菜单"
 [connection signal="pressed" from="HBoxContainer/Level1Container/Level1Button" to="." method="_on_level1_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Level2Container/Level2Button" to="." method="_on_level2_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Level3Container/Level3Button" to="." method="_on_level_3_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level4Container/Level4Button" to="." method="_on_level4_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level5Container/Level5Button" to="." method="_on_level5_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level6Container/Level6Button" to="." method="_on_level6_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level7Container/Level7Button" to="." method="_on_level7_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level8Container/Level8Button" to="." method="_on_level8_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level9Container/Level9Button" to="." method="_on_level9_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level10Container/Level10Button" to="." method="_on_level10_button_pressed"]
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]

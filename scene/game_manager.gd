@@ -30,6 +30,7 @@ func load_game():
 		diamonds = data.diamonds
 		unlocked_levels = data.unlocked_levels
 		level_stars = data.level_stars
+		unlock_next_level()
 		print("游戏存档加载成功！")
 	else:
 		print("没有找到游戏存档，使用默认设置。")
@@ -60,7 +61,7 @@ func select_level(level: int) -> void:
 # 解锁下一关卡
 func unlock_next_level() -> void:
 	var next_level = current_level + 1
-	if next_level <= 3 and not next_level in unlocked_levels:  # 假设总共有3个关卡
+	if next_level <= 10 and not next_level in unlocked_levels:  # 假设总共有10个关卡
 		unlocked_levels.append(next_level)
 
 # 检查关卡是否已解锁
