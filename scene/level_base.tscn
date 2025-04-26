@@ -4249,8 +4249,8 @@ z_index = 8
 curve = SubResource("Curve2D_1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(70, 505)
-rotation = -1.55714
+position = Vector2(66, 954)
+rotation = -1.55975
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(100, 300)

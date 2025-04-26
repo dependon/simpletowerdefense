@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8q4g4qxm3p8k"]
+[gd_scene load_steps=25 format=3 uid="uid://c8q4g4qxm3p8k"]
 
 [ext_resource type="Script" path="res://scene/enemy_thief.gd" id="1_hn4vg"]
 [ext_resource type="Texture2D" uid="uid://3xgam5cwuyeq" path="res://assets/player/thief/frame_000000.png" id="2_583vy"]
@@ -14,6 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://buq55831mmfk0" path="res://assets/player/thief/frame_000010.png" id="12_lku7w"]
 [ext_resource type="Texture2D" uid="uid://ubusmlv6ogmj" path="res://assets/player/thief/frame_000011.png" id="13_c7wll"]
 [ext_resource type="Texture2D" uid="uid://ci1mhb7fdvqu0" path="res://assets/player/thief/frame_000012.png" id="14_r1scj"]
+[ext_resource type="Texture2D" uid="uid://vi12rbmcihlc" path="res://assets/player/thief/frame_000013.png" id="15_infyx"]
+[ext_resource type="Texture2D" uid="uid://k121edokxmhl" path="res://assets/player/thief/frame_000014.png" id="16_xigkt"]
+[ext_resource type="Texture2D" uid="uid://deu4ahd03lldi" path="res://assets/player/thief/frame_000015.png" id="17_k1jtg"]
+[ext_resource type="Texture2D" uid="uid://b5xtv0skvrqwk" path="res://assets/player/thief/frame_000016.png" id="18_okyg2"]
+[ext_resource type="Texture2D" uid="uid://41dktenoowqm" path="res://assets/player/thief/frame_000017.png" id="19_bt74m"]
+[ext_resource type="Texture2D" uid="uid://bbaihxfc0soam" path="res://assets/player/thief/frame_000018.png" id="20_2o86f"]
+[ext_resource type="Texture2D" uid="uid://xy3l7725v8qf" path="res://assets/player/thief/frame_000019.png" id="21_jqna2"]
+[ext_resource type="Texture2D" uid="uid://b8h1x8wyk354t" path="res://assets/player/thief/frame_000020.png" id="22_ughs0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y15rk"]
 size = Vector2(60, 80)
@@ -59,10 +67,34 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("14_r1scj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_infyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xigkt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k1jtg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_okyg2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_bt74m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2o86f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jqna2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ughs0")
 }],
 "loop": true,
 "name": &"default",
-"speed": 13.0
+"speed": 6.0
 }]
 
 [node name="Thief" type="Area2D"]
@@ -73,6 +105,8 @@ script = ExtResource("1_hn4vg")
 shape = SubResource("RectangleShape2D_y15rk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.90735e-06, 2)
+scale = Vector2(0.574074, 0.722222)
 sprite_frames = SubResource("SpriteFrames_m520d")
 autoplay = "default"
-frame_progress = 0.812127
+frame_progress = 0.563508

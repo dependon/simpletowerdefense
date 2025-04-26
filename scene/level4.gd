@@ -13,9 +13,9 @@ extends Node2D
 
 # 波次路径类型枚举
 enum PathType {
-    PATH_1,      # 路径1
-    PATH_2,      # 路径2
-    BOTH_PATHS   # 两条路径同时
+	PATH_1,      # 路径1
+	PATH_2,      # 路径2
+	BOTH_PATHS   # 两条路径同时
 }
 
 # 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier, "path_type": PathType}}
