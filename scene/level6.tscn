@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://df351776afu3j"]
 
-[ext_resource type="Script" path="res://scene/level5.gd" id="1_bcxen"]
+[ext_resource type="Script" path="res://scene/level6.gd" id="1_56mfg"]
 [ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
 [ext_resource type="Texture2D" uid="uid://dxydgvs3a5jnt" path="res://assets/map/map_7.png" id="2_yeu0p"]
 [ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
@@ -4247,8 +4247,10 @@ texture = ExtResource("2_yeu0p")
 [sub_resource type="TileSet" id="TileSet_t7juu"]
 sources/0 = SubResource("TileSetAtlasSource_i7p07")
 
-[node name="Level5" type="Node2D"]
-script = ExtResource("1_bcxen")
+[node name="Level6" type="Node2D"]
+script = ExtResource("1_56mfg")
+total_waves = 25
+wave_interval = 4.5
 
 [node name="Path2D" type="Path2D" parent="."]
 z_index = 2

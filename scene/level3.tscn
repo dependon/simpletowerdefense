@@ -8,10 +8,6 @@
 script = ExtResource("3_a1b2c")
 wave_duration_limit = 60.0
 
-[node name="PathFollow2D" parent="Path2D" index="0"]
-position = Vector2(66, 954)
-rotation = -1.55975
-
 [node name="SpawnPoint" parent="." index="1"]
 position = Vector2(68, 973)
 

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scene/tower.gd" id="1_s8k2i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]
-radius = 271.516
+radius = 521.358
 
 [node name="Tower" type="Sprite2D"]
 top_level = true
@@ -44,4 +44,4 @@ vertical_alignment = 1
 [node name="MouseDetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouseDetectionArea"]
-polygon = PackedVector2Array(52, 44.6247, 158, 42.5963, 162, -36.5112, 48, -40.568, 44, -93.3063, -52, -89.2495, -60, -40.568, -166, -38.5396, -168, 48.6815, -56, 46.6531, -56, 75.0507, 48, 77.0791)
+polygon = PackedVector2Array(52, 44.6247, 148, 38.5396, 146, -36.5112, 48, -40.568, 44, -93.3063, -52, -89.2495, -60, -40.568, -156, -34.4828, -152, 44.6247, -56, 46.6531, -56, 75.0507, 48, 77.0791)

@@ -15,10 +15,16 @@ signal level_selected(level_number: int)
 var current_level: int = 0
 var diamonds: int = 0  # 玩家拥有的钻石数量
 var unlocked_levels: Array = [1]  # 默认只解锁第一关
-var level_stars: Dictionary = {1: 0, 2: 0, 3: 0}  # 每个关卡的星级评分，默认为0星
+var level_stars: Dictionary = {}  # 每个关卡的星级评分，默认为0星
 
 func _ready():
 	load_game()
+
+# 初始化关卡星级
+func initialize_level_stars() -> void:
+	for level in unlocked_levels:
+		if not level in level_stars:
+			level_stars[level] = 0
 
 # 加载游戏存档
 func load_game():
@@ -34,6 +40,7 @@ func load_game():
 		print("游戏存档加载成功！")
 	else:
 		print("没有找到游戏存档，使用默认设置。")
+		initialize_level_stars()
 
 # 保存游戏存档
 func save_game():
@@ -63,6 +70,8 @@ func unlock_next_level() -> void:
 	var next_level = current_level + 1
 	if next_level <= 10 and not next_level in unlocked_levels:  # 假设总共有10个关卡
 		unlocked_levels.append(next_level)
+		# 初始化新解锁关卡的星级
+		level_stars[next_level] = 0
 
 # 检查关卡是否已解锁
 func is_level_unlocked(level: int) -> bool:

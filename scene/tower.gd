@@ -2,7 +2,7 @@ extends Sprite2D
 
 @onready var tower_area: Area2D = $Area2D #攻击范围
 @onready var mouse_detection_area: Area2D = $MouseDetectionArea # 新增：获取鼠标检测区域节点
-@export var range = 200 # 攻击范围
+@export var range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var base_cost = 50  # 基础建造成本
 @export var base_damage = 50  # 基础伤害值
@@ -57,6 +57,8 @@ func _physics_process(delta):
 				bullet.damage = current_damage
 				get_parent().add_child(bullet)
 				bullet.position = position
+				print(bullet.direction)
+				print(bullet.position)
 				time_since_last_fire = 0
 				break
 
