@@ -47,7 +47,10 @@ func _physics_process(delta):
 
 func set_speed_multiplier(multiplier: float) -> void:
 	speed_multiplier = multiplier
-
+	
+func set_health_multiplier(health_multiplier: float) -> void:
+	hp = hp * health_multiplier
+	
 func take_damage(damage: int) -> void:
 	hp -= damage
 	# 更新血条显示

@@ -35,7 +35,7 @@ enum EnemyType {
 # 波次配置字典 (Level 5): {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier, "path_type": PathType, "enemy_mix": {EnemyType: percentage}}}
 # 包含敌人类型混合比例
 var wave_config = {
-	1:  {"count": 10, "health_multiplier": 2.0, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
+	1:  {"count": 15, "health_multiplier": 1.0, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
 	2:  {"count": 12, "health_multiplier": 2.2, "speed_multiplier": 1.15, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 1.0}},
 	3:  {"count": 15, "health_multiplier": 2.4, "speed_multiplier": 1.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}}, # 开始出现盗贼
 	4:  {"count": 18, "health_multiplier": 2.6, "speed_multiplier": 1.25, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
@@ -217,7 +217,7 @@ func spawn_enemy(health_multiplier, speed_multiplier, target_path, enemy_type: E
 	# 设置敌人属性
 	enemy_instance.set_health_multiplier(health_multiplier)
 	enemy_instance.set_speed_multiplier(speed_multiplier)
-	enemy_instance.set_path(target_path) # 设置路径
+	enemy_instance.set_path(target_path.curve) # 设置路径
 	
 	# 获取生成点位置 (PathFollow2D)
 	var spawn_location = target_path.get_node("PathFollow2D")

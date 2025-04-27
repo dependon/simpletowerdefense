@@ -33,6 +33,13 @@ func return_to_start_menu():
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
 @onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")
 @onready var level4_scene: PackedScene = preload("res://scene/level4.tscn")
+@onready var level5_scene: PackedScene = preload("res://scene/level5.tscn")
+@onready var level6_scene: PackedScene = preload("res://scene/level6.tscn")
+@onready var level7_scene: PackedScene = preload("res://scene/level7.tscn")
+@onready var level8_scene: PackedScene = preload("res://scene/level8.tscn")
+@onready var level9_scene: PackedScene = preload("res://scene/level9.tscn")
+@onready var level10_scene: PackedScene = preload("res://scene/level10.tscn")
+
 
 
 var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 或 "frost"
@@ -83,6 +90,18 @@ func load_level(level_number: int):
 		level_scene = level3_scene
 	elif level_number == 4:
 		level_scene = level4_scene
+	elif level_number == 5:
+		level_scene = level5_scene
+	elif level_number == 6:
+		level_scene = level6_scene
+	elif level_number == 7:
+		level_scene = level7_scene
+	elif level_number == 8:
+		level_scene = level8_scene
+	elif level_number == 9:
+		level_scene = level9_scene
+	elif level_number == 10:
+		level_scene = level10_scene
 	current_level = level_scene.instantiate()
 	
 	add_child(current_level)
