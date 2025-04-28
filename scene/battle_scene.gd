@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var setting_menu = $UI/SettingMenu
+@onready var wave_label = $UI/WaveLabel # 新增：对波次标签的引用
 
 func _on_setting_button_pressed():
 	get_tree().paused = true
@@ -45,6 +46,7 @@ func return_to_start_menu():
 var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 或 "frost"
 var current_level: Node2D = null
 var current_level_path: Path2D = null
+var wave_update_connection = null # 新增：用于存储信号连接
 
 
 
@@ -62,6 +64,23 @@ func update_coins_display():
 func update_diamonds_display():
 	$UI/Diamonds.text = "钻石: " + str(GameManager.get_diamonds())
 
+# 新增：更新波次显示
+func update_wave_display(current_w = -1, total_w = -1):
+	# 优先使用信号传递过来的值
+	if current_w > 0 and total_w > 0: # 确保值有效
+		wave_label.text = "波次: %d / %d" % [current_w, total_w]
+	# 否则，尝试从当前关卡获取
+	elif current_level and current_level.has_method("get_wave_info"):
+		var wave_info = current_level.get_wave_info()
+		if wave_info and wave_info.has("current") and wave_info.has("total"):
+			wave_label.text = "波次: %d / %d" % [wave_info.current, wave_info.total]
+		else:
+			# 如果 get_wave_info 返回无效，显示默认值
+			wave_label.text = "波次: 0 / -"
+	else:
+		# 如果无法获取信息，显示默认值
+		wave_label.text = "波次: 0 / -"
+
 func _ready():
 	# 设置金币和钻石显示
 	update_coins_display()
@@ -71,10 +90,14 @@ func _ready():
 	GameManager.level_selected.connect(load_level)
 	
 	load_level(GameManager.current_level)
+	update_wave_display() # 新增：初始更新波次显示
 	
 
 func load_level(level_number: int):
 	if current_level:
+		# 新增：断开旧关卡的信号连接
+		if wave_update_connection and wave_update_connection.is_valid() and current_level.has_signal("wave_updated"):
+			current_level.wave_updated.disconnect(update_wave_display)
 		current_level.queue_free()
 	
 	# 重置金币
@@ -102,10 +125,30 @@ func load_level(level_number: int):
 		level_scene = level9_scene
 	elif level_number == 10:
 		level_scene = level10_scene
+	else: # 新增：处理无效关卡编号
+		printerr("无效的关卡编号: ", level_number)
+		level_scene = level1_scene # 默认加载第一关或进行其他错误处理
+		# return # 如果关卡号无效，则不继续加载
 	current_level = level_scene.instantiate()
 	
 	add_child(current_level)
-	current_level_path = current_level.get_node("Path2D")
+	# current_level_path = current_level.get_node("Path2D") # 这行可能需要根据实际关卡结构调整或移除
+
+	# 新增：连接新关卡的信号
+	if current_level and current_level.has_signal("wave_updated"):
+		wave_update_connection = current_level.wave_updated.connect(update_wave_display)
+		# 尝试立即更新一次波次显示（如果关卡已准备好）
+		if current_level.has_method("get_wave_info"):
+			update_wave_display()
+		else:
+			# 如果关卡还没有 get_wave_info 方法，可能需要在关卡 _ready 后更新
+			# 可以稍后通过信号更新，所以这里暂时留空
+			pass
+	else:
+		printerr("当前关卡实例无效或缺少 wave_updated 信号: ", current_level)
+	
+	# 无论如何都尝试更新一次，即使可能显示默认值
+	update_wave_display()
 
 
 func _physics_process(delta):

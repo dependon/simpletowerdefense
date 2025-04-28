@@ -39,6 +39,18 @@ offset_right = 258.0
 offset_bottom = 67.0
 text = "Diamonds : 0"
 
+[node name="WaveLabel" type="Label" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+grow_horizontal = 2
+text = "波次: 0 / 0"
+horizontal_alignment = 1
+
 [node name="SettingMenu" parent="UI" instance=ExtResource("6_0l81w")]
 visible = false
 offset_left = 1.0

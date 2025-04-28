@@ -1,6 +1,9 @@
 class_name LevelBase
 extends Node2D
 
+# 新增：定义波次更新信号
+signal wave_updated(current_wave, total_waves)
+
 @onready var base = $Base # 基地仍然需要，用于扣血
 @onready var enemy_scene = preload("res://scene/enemy.tscn")
 @onready var path = $Path2D
@@ -33,6 +36,10 @@ var enemy_spawn_timer = 0.0 # 波次内生成计时器
 var is_spawning_wave = false # 是否正在生成当前波次的敌人
 var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
 var is_victory = false
+
+# 新增：获取当前波次信息的方法
+func get_wave_info() -> Dictionary:
+	return {"current": current_wave, "total": total_waves}
 
 func _ready() -> void:
 	# 设置敌人生成点位置
@@ -97,6 +104,8 @@ func start_next_wave() -> void:
 	if current_wave < total_waves:
 		current_wave += 1
 		print("Starting Wave: ", current_wave)
+		# 新增：发射波次更新信号
+		wave_updated.emit(current_wave, total_waves)
 		if wave_config.has(current_wave):
 			enemies_spawned_in_wave = 0
 			enemy_spawn_timer = 0 # 重置波内生成计时器
