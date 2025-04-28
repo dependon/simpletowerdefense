@@ -1,42 +1,28 @@
-extends Node2D
+extends LevelBase
 
-@onready var base = $Base # 基地仍然需要，用于扣血
-@onready var enemy_scene = preload("res://scene/enemy.tscn")
-@onready var path = $Path2D
-
-# 波次设置 (Level 2)
-@export var total_waves = 12  # 总波次数
-@export var wave_interval = 4.0 # 波次之间的间隔时间 (秒) - 稍短
-@export var enemy_spawn_interval = 0.4 # 波次内敌人生成间隔 (秒) - 稍快
-@export var wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
-
-# 波次配置字典 (Level 2)
-var wave_config = {
-	1: {"count": 8, "health_multiplier": 1.1, "speed_multiplier": 1.0},
-	2: {"count": 10, "health_multiplier": 1.2, "speed_multiplier": 1.05},
-	3: {"count": 12, "health_multiplier": 1.3, "speed_multiplier": 1.05},
-	4: {"count": 15, "health_multiplier": 1.4, "speed_multiplier": 1.1},
-	5: {"count": 18, "health_multiplier": 1.6, "speed_multiplier": 1.1},
-	6: {"count": 20, "health_multiplier": 1.8, "speed_multiplier": 1.15},
-	7: {"count": 22, "health_multiplier": 2.0, "speed_multiplier": 1.15},
-	8: {"count": 25, "health_multiplier": 2.2, "speed_multiplier": 1.2},
-	9: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.2},
-	10: {"count": 32, "health_multiplier": 5.6, "speed_multiplier": 1.4},
-	11: {"count": 35, "health_multiplier": 7.8, "speed_multiplier": 1.6},
-	12: {"count": 40, "health_multiplier": 10.0, "speed_multiplier": 1.8}
-}
-
-# 状态变量
-var current_wave = 0
-var enemies_spawned_in_wave = 0
-var wave_timer = 0.0 # 波次间隔计时器
-var enemy_spawn_timer = 0.0 # 波次内生成计时器
-var is_spawning_wave = false # 是否正在生成当前波次的敌人
-var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
-var wave_duration_timer = 0.0 # 波次持续时间计时器
-var is_victory = false
 
 func _ready():
+
+	# 波次设置 (Level 2)
+	total_waves = 12  # 总波次数
+	wave_interval = 4.0 # 波次之间的间隔时间 (秒) - 稍短
+	enemy_spawn_interval = 0.4 # 波次内敌人生成间隔 (秒) - 稍快
+	wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
+	# 波次配置字典 (Level 2)
+	wave_config = {
+		1: {"count": 8, "health_multiplier": 1.1, "speed_multiplier": 1.0},
+		2: {"count": 10, "health_multiplier": 1.2, "speed_multiplier": 1.05},
+		3: {"count": 12, "health_multiplier": 1.3, "speed_multiplier": 1.05},
+		4: {"count": 15, "health_multiplier": 1.4, "speed_multiplier": 1.1},
+		5: {"count": 18, "health_multiplier": 1.6, "speed_multiplier": 1.1},
+		6: {"count": 20, "health_multiplier": 1.8, "speed_multiplier": 1.15},
+		7: {"count": 22, "health_multiplier": 2.0, "speed_multiplier": 1.15},
+		8: {"count": 25, "health_multiplier": 2.2, "speed_multiplier": 1.2},
+		9: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.2},
+		10: {"count": 32, "health_multiplier": 5.6, "speed_multiplier": 1.4},
+		11: {"count": 35, "health_multiplier": 7.8, "speed_multiplier": 1.6},
+		12: {"count": 40, "health_multiplier": 10.0, "speed_multiplier": 1.8}
+	}
 	# 设置敌人生成点位置
 	var spawn_point = $SpawnPoint
 	if spawn_point:
@@ -178,14 +164,3 @@ func spawn_enemy(health_multiplier: float, speed_multiplier: float):
 	enemy.set_speed_multiplier(speed_multiplier) # 应用当前波次的速度倍率
 	add_child(enemy)
 	enemy.add_to_group("enemies")
-
-func trigger_victory():
-	if is_victory: # 防止重复触发
-		return
-	print("Level 2 Victory!")
-	var victory_screen = preload("res://scene/victory_screen.tscn").instantiate()
-	get_tree().root.add_child(victory_screen)
-	is_victory = true
-	# 可以选择暂停游戏或进行其他胜利处理
-	# get_tree().paused = true
-	get_node("/root/GameManager").save_game()

@@ -4243,9 +4243,6 @@ sources/0 = SubResource("TileSetAtlasSource_jybge")
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_4c5bu")
-total_waves = 10
-wave_interval = 5.0
-enemy_spawn_interval = 0.5
 
 [node name="Path2D" type="Path2D" parent="."]
 z_index = 8
