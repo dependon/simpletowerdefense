@@ -140,7 +140,7 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="EnemyWizard" type="CharacterBody2D"]
+[node name="EnemyWizard" type="Area2D"]
 script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -152,4 +152,4 @@ position = Vector2(1.90735e-06, 2)
 scale = Vector2(0.574074, 0.722222)
 sprite_frames = SubResource("SpriteFrames_mgfio")
 autoplay = "default"
-frame_progress = 0.330362
+frame_progress = 0.946424

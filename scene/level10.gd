@@ -2,7 +2,7 @@ extends Level6Base
 
 func _ready():
 
-	total_waves = 35  # 最终关卡波数
+	total_waves = 30  # 最终关卡波数
 	wave_interval = 3.0 # 波次间隔缩短
 	enemy_spawn_interval = 0.18 # 生成间隔更短
 	wave_duration_limit = 90.0 # 持续时间限制更长
@@ -21,7 +21,16 @@ func _ready():
 		8:  {"count": 39, "health_multiplier": 7.6, "speed_multiplier": 1.85, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.2, EnemyType.WEREWOLF: 0.6}},
 		9:  {"count": 42, "health_multiplier": 7.9, "speed_multiplier": 1.9, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.7}},
 		10: {"count": 45, "health_multiplier": 8.2, "speed_multiplier": 1.95, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WARRIOR: 0.2, EnemyType.WEREWOLF: 0.8}},
-		# ... (为简洁起见，省略11-20波，请根据需要填充，逐步增加难度和狼人比例)
+		11: {"count": 48, "health_multiplier": 8.5, "speed_multiplier": 2.0, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.WARRIOR: 0.1, EnemyType.WEREWOLF: 0.9}},
+		12: {"count": 51, "health_multiplier": 8.8, "speed_multiplier": 2.05, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.WIZARD: 0.1, EnemyType.WEREWOLF: 0.9}},
+		13: {"count": 54, "health_multiplier": 9.1, "speed_multiplier": 2.1, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WEREWOLF: 1.0}}, # 纯狼人波
+		14: {"count": 57, "health_multiplier": 9.4, "speed_multiplier": 2.15, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.WARRIOR: 0.2, EnemyType.WEREWOLF: 0.8}},
+		15: {"count": 60, "health_multiplier": 9.7, "speed_multiplier": 2.2, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.WIZARD: 0.2, EnemyType.WEREWOLF: 0.8}},
+		16: {"count": 63, "health_multiplier": 10.0, "speed_multiplier": 2.25, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WARRIOR: 0.1, EnemyType.WIZARD: 0.1, EnemyType.WEREWOLF: 0.8}},
+		17: {"count": 66, "health_multiplier": 10.5, "speed_multiplier": 2.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.WEREWOLF: 1.0}}, # 纯狼人波
+		18: {"count": 68, "health_multiplier": 11.0, "speed_multiplier": 2.45, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.WARRIOR: 0.4, EnemyType.WEREWOLF: 0.6}},
+		19: {"count": 69, "health_multiplier": 11.5, "speed_multiplier": 2.55, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WIZARD: 0.4, EnemyType.WEREWOLF: 0.6}},
+		20: {"count": 70, "health_multiplier": 12.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.4}},
 		21: {"count": 70, "health_multiplier": 12.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.4}},
 		22: {"count": 75, "health_multiplier": 12.5, "speed_multiplier": 2.7, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.2, EnemyType.WEREWOLF: 0.6}},
 		23: {"count": 80, "health_multiplier": 13.0, "speed_multiplier": 2.8, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.7}},

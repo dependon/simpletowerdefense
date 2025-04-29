@@ -8,7 +8,7 @@ extends Sprite2D
 @export var base_damage = 50  # 基础伤害值
 var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
-var max_level = 3 # 防御塔最大等级
+var max_level = 4 # 防御塔最大等级
 var current_damage = base_damage # 当前伤害值
 var isMouseOverTower = false # 鼠标是否在塔上
 var isMouseOverButtons = false # 鼠标是否在按钮上

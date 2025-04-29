@@ -11,8 +11,8 @@ func _ready():
 	wave_config = {
 		1:  {"count": 15, "health_multiplier": 1.0, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
 		2:  {"count": 12, "health_multiplier": 2.2, "speed_multiplier": 1.15, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-		3:  {"count": 15, "health_multiplier": 2.4, "speed_multiplier": 1.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}}, # 开始出现盗贼
-		4:  {"count": 18, "health_multiplier": 2.6, "speed_multiplier": 1.25, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
+		3:  {"count": 15, "health_multiplier": 2.4, "speed_multiplier": 1.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.WIZARD: 0.2}}, # 开始出现盗贼
+		4:  {"count": 18, "health_multiplier": 2.6, "speed_multiplier": 1.25, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.15, EnemyType.WIZARD: 0.15}},
 		5:  {"count": 20, "health_multiplier": 2.8, "speed_multiplier": 1.3, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.4}},
 		6:  {"count": 24, "health_multiplier": 3.0, "speed_multiplier": 1.35, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}}, # 盗贼比例增加
 		7:  {"count": 26, "health_multiplier": 3.3, "speed_multiplier": 1.4, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
@@ -167,10 +167,16 @@ func start_next_wave():
 func spawn_enemy(health_multiplier, speed_multiplier, target_path, enemy_type: EnemyType):
 	var enemy_instance
 	# 根据类型选择场景
-	if enemy_type == EnemyType.THIEF:
-		enemy_instance = thief_scene.instantiate()
-	else: # 默认为普通敌人
+	if enemy_type == EnemyType.NORMAL:
 		enemy_instance = enemy_scene.instantiate()
+	elif enemy_type == EnemyType.THIEF:
+		enemy_instance = thief_scene.instantiate()
+	elif enemy_type == EnemyType.WIZARD:
+		enemy_instance = enemy_wizard.instantiate()
+	elif enemy_type == EnemyType.WARRIOR:
+		enemy_instance = enemy_warrior.instantiate()
+	elif enemy_type == EnemyType.WEREWOLF:
+		enemy_instance = enemy_werewolf.instantiate()
 	
 	# 设置敌人属性
 	enemy_instance.set_health_multiplier(health_multiplier)
