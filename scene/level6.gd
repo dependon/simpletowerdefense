@@ -115,6 +115,7 @@ func start_next_wave():
 		return
 	
 	print("Starting Wave ", current_wave)
+	get_wave_info();
 	
 	# 重置波次状态
 	enemies_spawned_in_wave = 0

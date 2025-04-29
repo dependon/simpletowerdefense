@@ -138,6 +138,7 @@ func start_next_wave():
 			# 配置中缺少当前波次信息
 			print("错误: 未找到波次 ", current_wave, " 的配置")
 			get_tree().paused = true # 暂停游戏以示错误
+		get_wave_info();
 	else:
 		# 尝试在所有波次完成后开始新波次，这不应该发生，由胜利逻辑处理
 		print("尝试在总波次之外开始新波次。")

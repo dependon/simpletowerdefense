@@ -68,6 +68,7 @@ var path2_spawned = 0
 
 # 新增：获取当前波次信息的方法
 func get_wave_info() -> Dictionary:
+	emit_signal("wave_updated", current_wave , total_waves)
 	return {"current": current_wave, "total": total_waves}
 
 func _ready() -> void:
