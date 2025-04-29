@@ -28,8 +28,8 @@ signal wave_updated(current_wave, total_waves)
 @onready var enemy_werewolf = preload("res://scene/enemy_werewolf.tscn")
 
 @onready var path = $Path2D
-
-
+@onready var path1 = $Path2D
+@onready var path2 = $Path2D_2
 
 # 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier}}
 # 怪物数量从少到多，血量和速度倍率逐渐增加
@@ -59,7 +59,12 @@ var wave_timer = 0.0 # 波次间隔计时器
 var enemy_spawn_timer = 0.0 # 波次内生成计时器
 var is_spawning_wave = false # 是否正在生成当前波次的敌人
 var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
-var is_victory = false
+var is_victory = false #是否胜利
+var current_path_type #当前路径
+
+# 记录同时生成时两条路径分别生成的敌人数量
+var path1_spawned = 0
+var path2_spawned = 0
 
 # 新增：获取当前波次信息的方法
 func get_wave_info() -> Dictionary:

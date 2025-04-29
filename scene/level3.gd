@@ -168,4 +168,3 @@ func spawn_enemy(health_multiplier: float, speed_multiplier: float):
 	enemy.set_speed_multiplier(speed_multiplier) # 应用当前波次的速度倍率
 	add_child(enemy)
 	enemy.add_to_group("enemies")
-

@@ -1,15 +1,5 @@
 extends LevelBase
 
-@onready var path1 = $Path2D
-@onready var path2 = $Path2D_2
-
-
-# 当前波次路径类型
-var current_path_type = PathType.PATH_1
-# 记录同时生成时两条路径分别生成的敌人数量
-var path1_spawned = 0
-var path2_spawned = 0
-
 func _ready():
 
 	# 波次设置
@@ -162,4 +152,3 @@ func spawn_enemy(health_multiplier: float, speed_multiplier: float, target_path)
 	enemy.set_speed_multiplier(speed_multiplier) # 应用当前波次的速度倍率
 	add_child(enemy)
 	enemy.add_to_group("enemies")
-

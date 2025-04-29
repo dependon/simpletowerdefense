@@ -1,14 +1,5 @@
 extends LevelBase
-
-@onready var path1 = $Path2D
-@onready var path2 = $Path2D_2
-
-
-# 当前波次路径类型
-var current_path_type = PathType.PATH_1
-# 记录同时生成时两条路径分别生成的敌人数量
-var path1_spawned = 0
-var path2_spawned = 0
+class_name Level6Base
 
 func _ready():
 	# 波次设置 (Level 6)
@@ -61,7 +52,7 @@ func _physics_process(delta):
 	# 检查胜利条件：所有波次完成且场上无敌人
 	if current_wave >= total_waves and not is_spawning_wave and get_tree().get_nodes_in_group("enemies").size() == 0:
 		is_victory = true
-		print("Victory!")
+		trigger_victory();
 		return
 
 	# 波次间隔处理
