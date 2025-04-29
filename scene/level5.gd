@@ -1,76 +1,8 @@
-extends Node2D
+extends LevelBase
 
-@onready var base = $Base # 基地仍然需要，用于扣血
-@onready var enemy_scene = preload("res://scene/enemy.tscn")
-@onready var thief_scene = preload("res://scene/enemy_thief.tscn") 
-@onready var enemy_wizard = preload("res://scene/enemy_wizard.tscn") 
-@onready var enemy_warrior = preload("res://scene/enemy_warrior.tscn") 
-@onready var enemy_werewolf  = preload("res://scene/enemy_werewolf.tscn")
 
 @onready var path1 = $Path2D
 @onready var path2 = $Path2D_2
-
-# 波次设置 (Level 5)
-@export var total_waves = 25  # 总波次数增加
-@export var wave_interval = 4.5 # 波次之间的间隔时间 (秒)
-@export var enemy_spawn_interval = 0.3 # 波次内敌人生成间隔 (秒)
-@export var wave_duration_limit = 70.0 # 每波持续时间限制 (秒)
-
-# 波次路径类型枚举
-enum PathType {
-	PATH_1,      # 路径1
-	PATH_2,      # 路径2
-	BOTH_PATHS   # 两条路径同时
-}
-
-# 敌人类型枚举 (新增)
-enum EnemyType {
-	NORMAL,
-	THIEF,
-	WIZARD,
-	WARRIOR,
-	WEREWOLF
-}
-
-# 波次配置字典 (Level 5): {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier, "path_type": PathType, "enemy_mix": {EnemyType: percentage}}}
-# 包含敌人类型混合比例
-var wave_config = {
-	1:  {"count": 15, "health_multiplier": 1.0, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	2:  {"count": 12, "health_multiplier": 2.2, "speed_multiplier": 1.15, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	3:  {"count": 15, "health_multiplier": 2.4, "speed_multiplier": 1.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}}, # 开始出现盗贼
-	4:  {"count": 18, "health_multiplier": 2.6, "speed_multiplier": 1.25, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
-	5:  {"count": 20, "health_multiplier": 2.8, "speed_multiplier": 1.3, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.4}},
-	6:  {"count": 24, "health_multiplier": 3.0, "speed_multiplier": 1.35, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}}, # 盗贼比例增加
-	7:  {"count": 26, "health_multiplier": 3.3, "speed_multiplier": 1.4, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
-	8:  {"count": 28, "health_multiplier": 3.6, "speed_multiplier": 1.45, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.7}},
-	9:  {"count": 30, "health_multiplier": 3.9, "speed_multiplier": 1.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.8}},
-	10: {"count": 35, "health_multiplier": 4.2, "speed_multiplier": 1.55, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.THIEF: 1.0}}, # 全是盗贼
-	11: {"count": 38, "health_multiplier": 4.5, "speed_multiplier": 1.6, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}},
-	12: {"count": 40, "health_multiplier": 4.8, "speed_multiplier": 1.65, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
-	13: {"count": 42, "health_multiplier": 5.1, "speed_multiplier": 1.7, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.4}},
-	14: {"count": 45, "health_multiplier": 5.4, "speed_multiplier": 1.75, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}},
-	15: {"count": 48, "health_multiplier": 5.7, "speed_multiplier": 1.8, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
-	16: {"count": 50, "health_multiplier": 6.0, "speed_multiplier": 1.85, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.7}},
-	17: {"count": 52, "health_multiplier": 6.5, "speed_multiplier": 1.9, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.8}},
-	18: {"count": 55, "health_multiplier": 7.0, "speed_multiplier": 1.95, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.9}},
-	19: {"count": 60, "health_multiplier": 7.5, "speed_multiplier": 2.0, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.THIEF: 1.0}}, # 更多盗贼
-	20: {"count": 65, "health_multiplier": 8.0, "speed_multiplier": 2.1, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}},
-	21: {"count": 70, "health_multiplier": 8.5, "speed_multiplier": 2.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
-	22: {"count": 75, "health_multiplier": 9.0, "speed_multiplier": 2.3, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.7}},
-	23: {"count": 80, "health_multiplier": 9.5, "speed_multiplier": 2.4, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.8}},
-	24: {"count": 85, "health_multiplier": 10.0, "speed_multiplier": 2.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.9}},
-	25: {"count": 100, "health_multiplier": 12.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}} # 最终混合波
-}
-
-# 状态变量
-var current_wave = 0
-var enemies_spawned_in_wave = 0
-var wave_timer = 0.0 # 波次间隔计时器
-var enemy_spawn_timer = 0.0 # 波次内生成计时器
-var is_spawning_wave = false # 是否正在生成当前波次的敌人
-var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
-var wave_duration_timer = 0.0 # 波次持续时间计时器
-var is_victory = false
 
 # 当前波次路径类型
 var current_path_type = PathType.PATH_1
@@ -79,6 +11,41 @@ var path1_spawned = 0
 var path2_spawned = 0
 
 func _ready():
+
+	# 波次设置 (Level 5)
+	total_waves = 25  # 总波次数增加
+	wave_interval = 4.5 # 波次之间的间隔时间 (秒)
+	enemy_spawn_interval = 0.3 # 波次内敌人生成间隔 (秒)
+	wave_duration_limit = 70.0 # 每波持续时间限制 (秒)
+
+	wave_config = {
+		1:  {"count": 15, "health_multiplier": 1.0, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
+		2:  {"count": 12, "health_multiplier": 2.2, "speed_multiplier": 1.15, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 1.0}},
+		3:  {"count": 15, "health_multiplier": 2.4, "speed_multiplier": 1.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}}, # 开始出现盗贼
+		4:  {"count": 18, "health_multiplier": 2.6, "speed_multiplier": 1.25, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
+		5:  {"count": 20, "health_multiplier": 2.8, "speed_multiplier": 1.3, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.4}},
+		6:  {"count": 24, "health_multiplier": 3.0, "speed_multiplier": 1.35, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}}, # 盗贼比例增加
+		7:  {"count": 26, "health_multiplier": 3.3, "speed_multiplier": 1.4, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
+		8:  {"count": 28, "health_multiplier": 3.6, "speed_multiplier": 1.45, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.7}},
+		9:  {"count": 30, "health_multiplier": 3.9, "speed_multiplier": 1.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.8}},
+		10: {"count": 35, "health_multiplier": 4.2, "speed_multiplier": 1.55, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.THIEF: 1.0}}, # 全是盗贼
+		11: {"count": 38, "health_multiplier": 4.5, "speed_multiplier": 1.6, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}},
+		12: {"count": 40, "health_multiplier": 4.8, "speed_multiplier": 1.65, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
+		13: {"count": 42, "health_multiplier": 5.1, "speed_multiplier": 1.7, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.4}},
+		14: {"count": 45, "health_multiplier": 5.4, "speed_multiplier": 1.75, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}},
+		15: {"count": 48, "health_multiplier": 5.7, "speed_multiplier": 1.8, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
+		16: {"count": 50, "health_multiplier": 6.0, "speed_multiplier": 1.85, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.7}},
+		17: {"count": 52, "health_multiplier": 6.5, "speed_multiplier": 1.9, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.8}},
+		18: {"count": 55, "health_multiplier": 7.0, "speed_multiplier": 1.95, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.9}},
+		19: {"count": 60, "health_multiplier": 7.5, "speed_multiplier": 2.0, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.THIEF: 1.0}}, # 更多盗贼
+		20: {"count": 65, "health_multiplier": 8.0, "speed_multiplier": 2.1, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}},
+		21: {"count": 70, "health_multiplier": 8.5, "speed_multiplier": 2.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.6}},
+		22: {"count": 75, "health_multiplier": 9.0, "speed_multiplier": 2.3, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.7}},
+		23: {"count": 80, "health_multiplier": 9.5, "speed_multiplier": 2.4, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.8}},
+		24: {"count": 85, "health_multiplier": 10.0, "speed_multiplier": 2.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.9}},
+		25: {"count": 100, "health_multiplier": 12.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.5}} # 最终混合波
+	}
+
 	# 设置敌人生成点位置
 	var spawn_point1 = $SpawnPoint
 	var spawn_point2 = $SpawnPoint2
@@ -233,16 +200,6 @@ func spawn_enemy(health_multiplier, speed_multiplier, target_path, enemy_type: E
 	# 将敌人添加到场景树和分组
 	add_child(enemy_instance)
 	enemy_instance.add_to_group("enemies")
-
-func trigger_victory():
-	if not is_victory:
-		is_victory = true
-		print("胜利！所有波次已完成！")
-		# 这里可以添加胜利后的逻辑，例如显示胜利界面、返回主菜单等
-		# 示例：简单地暂停游戏
-		# get_tree().paused = true
-		# 或者加载胜利场景
-		# get_tree().change_scene_to_file("res://scene/victory_screen.tscn")
 
 # 当敌人到达基地时由敌人脚本调用
 func enemy_reached_base(enemy):

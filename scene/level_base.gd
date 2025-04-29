@@ -1,6 +1,22 @@
 class_name LevelBase
 extends Node2D
 
+# 波次路径类型枚举
+enum PathType {
+	PATH_1,
+	PATH_2,
+	BOTH_PATHS
+}
+
+# 敌人类型枚举
+enum EnemyType {
+	NORMAL,
+	THIEF,
+	WIZARD,
+	WARRIOR,
+	WEREWOLF
+}
+
 # 新增：定义波次更新信号
 signal wave_updated(current_wave, total_waves)
 
@@ -13,12 +29,7 @@ signal wave_updated(current_wave, total_waves)
 
 @onready var path = $Path2D
 
-# 波次设置
-@export var total_waves = 10  # 总波次数
-@export var wave_interval = 5.0 # 波次之间的间隔时间 (秒)
-@export var enemy_spawn_interval = 0.5 # 波次内敌人生成间隔 (秒)
-@onready var wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
-@onready var wave_duration_timer = 0.0 # 波次持续时间计时器
+
 
 # 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier}}
 # 怪物数量从少到多，血量和速度倍率逐渐增加
@@ -35,6 +46,12 @@ var wave_config = {
 	10: {"count": 30, "health_multiplier": 2.5, "speed_multiplier": 1.2}
 }
 
+# 波次设置
+@export var total_waves = 10  # 总波次数
+@export var wave_interval = 5.0 # 波次之间的间隔时间 (秒)
+@export var enemy_spawn_interval = 0.5 # 波次内敌人生成间隔 (秒)
+@onready var wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
+@onready var wave_duration_timer = 0.0 # 波次持续时间计时器
 # 状态变量
 var current_wave = 0
 var enemies_spawned_in_wave = 0

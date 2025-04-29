@@ -1,57 +1,8 @@
-extends Node2D
+extends LevelBase
 
-@onready var base = $Base # 基地仍然需要，用于扣血
-@onready var enemy_scene = preload("res://scene/enemy.tscn")
 @onready var path1 = $Path2D
 @onready var path2 = $Path2D_2
 
-# 波次设置
-@export var total_waves = 20  # 总波次数
-@export var wave_interval = 5.0 # 波次之间的间隔时间 (秒)
-@export var enemy_spawn_interval = 0.35 # 波次内敌人生成间隔 (秒)
-@export var wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
-
-# 波次路径类型枚举
-enum PathType {
-	PATH_1,      # 路径1
-	PATH_2,      # 路径2
-	BOTH_PATHS   # 两条路径同时
-}
-
-# 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier, "path_type": PathType}}
-# 怪物数量从少到多，血量和速度倍率逐渐增加，并且有不同的路径配置
-var wave_config = {
-	1: {"count": 8, "health_multiplier": 1.5, "speed_multiplier": 1.0, "path_type": PathType.PATH_1},
-	2: {"count": 10, "health_multiplier": 1.7, "speed_multiplier": 1.1, "path_type": PathType.PATH_2},
-	3: {"count": 12, "health_multiplier": 1.9, "speed_multiplier": 1.15, "path_type": PathType.BOTH_PATHS},
-	4: {"count": 15, "health_multiplier": 2.1, "speed_multiplier": 1.2, "path_type": PathType.PATH_1},
-	5: {"count": 18, "health_multiplier": 2.3, "speed_multiplier": 1.25, "path_type": PathType.PATH_2},
-	6: {"count": 20, "health_multiplier": 2.5, "speed_multiplier": 1.3, "path_type": PathType.BOTH_PATHS},
-	7: {"count": 22, "health_multiplier": 2.8, "speed_multiplier": 1.35, "path_type": PathType.PATH_1},
-	8: {"count": 25, "health_multiplier": 3.0, "speed_multiplier": 1.4, "path_type": PathType.PATH_2},
-	9: {"count": 28, "health_multiplier": 3.3, "speed_multiplier": 1.45, "path_type": PathType.BOTH_PATHS},
-	10: {"count": 30, "health_multiplier": 3.5, "speed_multiplier": 1.5, "path_type": PathType.BOTH_PATHS},
-	11: {"count": 32, "health_multiplier": 3.8, "speed_multiplier": 1.55, "path_type": PathType.PATH_1},
-	12: {"count": 34, "health_multiplier": 4.0, "speed_multiplier": 1.6, "path_type": PathType.PATH_2},
-	13: {"count": 36, "health_multiplier": 4.3, "speed_multiplier": 1.65, "path_type": PathType.BOTH_PATHS},
-	14: {"count": 38, "health_multiplier": 4.5, "speed_multiplier": 1.7, "path_type": PathType.PATH_1},
-	15: {"count": 40, "health_multiplier": 4.8, "speed_multiplier": 1.75, "path_type": PathType.PATH_2},
-	16: {"count": 42, "health_multiplier": 5.0, "speed_multiplier": 1.8, "path_type": PathType.BOTH_PATHS},
-	17: {"count": 45, "health_multiplier": 5.5, "speed_multiplier": 1.85, "path_type": PathType.BOTH_PATHS},
-	18: {"count": 48, "health_multiplier": 6.0, "speed_multiplier": 1.9, "path_type": PathType.BOTH_PATHS},
-	19: {"count": 50, "health_multiplier": 6.5, "speed_multiplier": 1.95, "path_type": PathType.BOTH_PATHS},
-	20: {"count": 60, "health_multiplier": 7.0, "speed_multiplier": 2.0, "path_type": PathType.BOTH_PATHS},
-}
-
-# 状态变量
-var current_wave = 0
-var enemies_spawned_in_wave = 0
-var wave_timer = 0.0 # 波次间隔计时器
-var enemy_spawn_timer = 0.0 # 波次内生成计时器
-var is_spawning_wave = false # 是否正在生成当前波次的敌人
-var is_between_waves = true # 是否处于波次间隔 (初始为true，等待第一个间隔)
-var wave_duration_timer = 0.0 # 波次持续时间计时器
-var is_victory = false
 
 # 当前波次路径类型
 var current_path_type = PathType.PATH_1
@@ -60,6 +11,36 @@ var path1_spawned = 0
 var path2_spawned = 0
 
 func _ready():
+
+	# 波次设置
+	total_waves = 20  # 总波次数
+	wave_interval = 5.0 # 波次之间的间隔时间 (秒)
+	enemy_spawn_interval = 0.35 # 波次内敌人生成间隔 (秒)
+	wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
+
+	wave_config = {
+		1: {"count": 8, "health_multiplier": 1.5, "speed_multiplier": 1.0, "path_type": PathType.PATH_1},
+		2: {"count": 10, "health_multiplier": 1.7, "speed_multiplier": 1.1, "path_type": PathType.PATH_2},
+		3: {"count": 12, "health_multiplier": 1.9, "speed_multiplier": 1.15, "path_type": PathType.BOTH_PATHS},
+		4: {"count": 15, "health_multiplier": 2.1, "speed_multiplier": 1.2, "path_type": PathType.PATH_1},
+		5: {"count": 18, "health_multiplier": 2.3, "speed_multiplier": 1.25, "path_type": PathType.PATH_2},
+		6: {"count": 20, "health_multiplier": 2.5, "speed_multiplier": 1.3, "path_type": PathType.BOTH_PATHS},
+		7: {"count": 22, "health_multiplier": 2.8, "speed_multiplier": 1.35, "path_type": PathType.PATH_1},
+		8: {"count": 25, "health_multiplier": 3.0, "speed_multiplier": 1.4, "path_type": PathType.PATH_2},
+		9: {"count": 28, "health_multiplier": 3.3, "speed_multiplier": 1.45, "path_type": PathType.BOTH_PATHS},
+		10: {"count": 30, "health_multiplier": 3.5, "speed_multiplier": 1.5, "path_type": PathType.BOTH_PATHS},
+		11: {"count": 32, "health_multiplier": 3.8, "speed_multiplier": 1.55, "path_type": PathType.PATH_1},
+		12: {"count": 34, "health_multiplier": 4.0, "speed_multiplier": 1.6, "path_type": PathType.PATH_2},
+		13: {"count": 36, "health_multiplier": 4.3, "speed_multiplier": 1.65, "path_type": PathType.BOTH_PATHS},
+		14: {"count": 38, "health_multiplier": 4.5, "speed_multiplier": 1.7, "path_type": PathType.PATH_1},
+		15: {"count": 40, "health_multiplier": 4.8, "speed_multiplier": 1.75, "path_type": PathType.PATH_2},
+		16: {"count": 42, "health_multiplier": 5.0, "speed_multiplier": 1.8, "path_type": PathType.BOTH_PATHS},
+		17: {"count": 45, "health_multiplier": 5.5, "speed_multiplier": 1.85, "path_type": PathType.BOTH_PATHS},
+		18: {"count": 48, "health_multiplier": 6.0, "speed_multiplier": 1.9, "path_type": PathType.BOTH_PATHS},
+		19: {"count": 50, "health_multiplier": 6.5, "speed_multiplier": 1.95, "path_type": PathType.BOTH_PATHS},
+		20: {"count": 60, "health_multiplier": 7.0, "speed_multiplier": 2.0, "path_type": PathType.BOTH_PATHS},
+	}
+
 	# 设置敌人生成点位置
 	var spawn_point1 = $SpawnPoint
 	var spawn_point2 = $SpawnPoint2
@@ -182,14 +163,3 @@ func spawn_enemy(health_multiplier: float, speed_multiplier: float, target_path)
 	add_child(enemy)
 	enemy.add_to_group("enemies")
 
-func trigger_victory():
-	if is_victory: # 防止重复触发
-		return
-	print("胜利!")
-	var victory_screen = preload("res://scene/victory_screen.tscn").instantiate()
-	get_tree().root.add_child(victory_screen)
-	is_victory = true
-	# 保存游戏
-	get_node("/root/GameManager").save_game()
-	# 可以选择暂停游戏或进行其他胜利处理
-	# get_tree().paused = true 
