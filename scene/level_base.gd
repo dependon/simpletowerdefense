@@ -86,5 +86,6 @@ func trigger_victory() -> void:
 	var victory_screen = preload("res://scene/victory_screen.tscn").instantiate()
 	get_tree().root.add_child(victory_screen)
 	is_victory = true
+
 	# 可以选择暂停游戏或进行其他胜利处理
 	# get_tree().paused = true

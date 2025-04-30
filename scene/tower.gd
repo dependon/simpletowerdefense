@@ -25,7 +25,7 @@ func get_upgrade_cost() -> int:
 # 更新范围显示的辅助函数
 func _update_range_display():
 	# 假设 circle.png 的基础半径是 64 像素
-	var base_radius = 64.0 
+	var base_radius = 64.0
 	# 因为塔本身有缩放，范围显示节点作为子节点也会继承缩放
 	# 需要反向应用塔的缩放来获得正确的视觉范围
 	# 同时，范围显示节点自身的缩放也需要考虑
@@ -69,7 +69,7 @@ func _ready():
 	# 初始化范围显示
 	_update_range_display()
 	# 确保范围显示在塔的下方
-	range_display.z_index = 2 
+	range_display.z_index = z_index-1 
 
 
 func _physics_process(delta):
@@ -84,8 +84,8 @@ func _physics_process(delta):
 				bullet.damage = current_damage
 				get_parent().add_child(bullet)
 				bullet.position = position
-				print(bullet.direction)
-				print(bullet.position)
+				#print(bullet.direction)
+				#print(bullet.position)
 				time_since_last_fire = 0
 				break
 
