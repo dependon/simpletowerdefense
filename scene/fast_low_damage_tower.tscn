@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://10ktsv5vkc50"]
+
+[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower.tscn" id="1_base_tower"]
+[ext_resource type="Script" path="res://scene/fast_low_damage_tower.gd" id="2_new_script"]
+[ext_resource type="Texture2D" uid="uid://rku5sbwvp8q7" path="res://assets/tower/tower_5.png" id="2_r0mjo"]
+
+[node name="FastLowDamageTower" instance=ExtResource("1_base_tower")]
+texture = ExtResource("2_r0mjo")
+script = ExtResource("2_new_script")

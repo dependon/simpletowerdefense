@@ -30,6 +30,7 @@ func return_to_start_menu():
 @onready var fast_tower_scene: PackedScene = preload("res://scene/fast_tower.tscn")
 @onready var area_tower_scene: PackedScene = preload("res://scene/area_tower.tscn")
 @onready var frost_tower_scene: PackedScene = preload("res://scene/frost_tower.tscn")
+@onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/fast_low_damage_tower.tscn") # 新增：预加载快速低伤塔场景
 @onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
 @onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")
@@ -43,7 +44,7 @@ func return_to_start_menu():
 
 
 
-var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 或 "frost"
+var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 、 "frost" 或 "fast_low_damage"
 var current_level: Node2D = null
 var current_level_path: Path2D = null
 var wave_update_connection = null # 新增：用于存储信号连接
@@ -56,6 +57,7 @@ const NORMAL_TOWER_COST = 50  # 普通塔消耗
 const FAST_TOWER_COST = 100   # 快速塔消耗
 const AREA_TOWER_COST = 150   # 群体塔消耗
 const FROST_TOWER_COST = 100  # 冰霜塔消耗
+const FAST_LOW_DAMAGE_TOWER_COST = 400 # 新增：快速低伤塔消耗 (示例成本)
 
 # 金币UI和钻石UI
 func update_coins_display():
@@ -171,6 +173,8 @@ func _input(event):
 						cost = FAST_TOWER_COST
 					"frost": 
 						cost = FROST_TOWER_COST
+					"fast_low_damage": # 新增：处理快速低伤塔成本
+						cost = FAST_LOW_DAMAGE_TOWER_COST
 					_: 
 						cost = AREA_TOWER_COST
 
@@ -183,6 +187,8 @@ func _input(event):
 							tower = fast_tower_scene.instantiate()
 						"frost": 
 							tower = frost_tower_scene.instantiate()
+						"fast_low_damage": # 新增：实例化快速低伤塔
+							tower = fast_low_damage_tower_scene.instantiate()
 						_: 
 							tower = area_tower_scene.instantiate()
 					
@@ -210,3 +216,8 @@ func switch_to_level(level_number: int):
 
 func _on_frost_tower_button_2_pressed() -> void:
 	current_tower_type = "frost"
+
+# 新增：快速低伤塔按钮处理函数
+func _on_fast_low_tower_button_pressed() -> void:
+	current_tower_type = "fast_low_damage"
+	pass # Replace with function body.
