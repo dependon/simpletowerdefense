@@ -10,7 +10,7 @@ func _ready():
 	current_damage = base_damage # 更新当前伤害值
 
 	# 可以选择性地修改建造成本
-	# base_cost = 75 # 例如，设置一个不同的建造成本
+	base_cost = 500 # 例如，设置一个不同的建造成本
 
 	# 更新按钮文本以反映新的成本（如果修改了成本）
 	# upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
