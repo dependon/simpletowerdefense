@@ -2,6 +2,7 @@ extends Sprite2D
 
 @onready var tower_area: Area2D = $Area2D #攻击范围
 @onready var mouse_detection_area: Area2D = $MouseDetectionArea # 新增：获取鼠标检测区域节点
+@onready var range_display = $RangeDisplay # 新增：获取范围显示节点
 @export var range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var base_cost = 50  # 基础建造成本
@@ -21,6 +22,26 @@ var isMouseOverButtons = false # 鼠标是否在按钮上
 func get_upgrade_cost() -> int:
 	return base_cost * (level + 1)
 
+# 更新范围显示的辅助函数
+func _update_range_display():
+	# 假设 circle.png 的基础半径是 64 像素
+	var base_radius = 64.0 
+	# 因为塔本身有缩放，范围显示节点作为子节点也会继承缩放
+	# 需要反向应用塔的缩放来获得正确的视觉范围
+	# 同时，范围显示节点自身的缩放也需要考虑
+	# range 是世界单位，需要转换到 range_display 的本地缩放
+	# range_display 的最终世界半径 = range_display.scale.x * base_radius * self.scale.x
+	# 我们希望 最终世界半径 = range
+	# 所以 range_display.scale.x = range / (base_radius * self.scale.x)
+	# 同样适用于 y 轴
+	if self.scale.x != 0 and self.scale.y != 0 and base_radius != 0:
+		var scale_factor_x = range / (base_radius * self.scale.x)
+		var scale_factor_y = range / (base_radius * self.scale.y)
+		range_display.scale = Vector2(scale_factor_x, scale_factor_y)
+	else:
+		# 防止除零错误
+		range_display.scale = Vector2.ONE
+
 func _ready():
 	z_index = 3
 	# 创建升级按钮
@@ -39,11 +60,17 @@ func _ready():
 	destroy_button.mouse_entered.connect(_on_buttons_mouse_entered)
 	destroy_button.mouse_exited.connect(_on_buttons_mouse_exited)
 	
-	# 设置MouseDetectionArea的输入检测
-	mouse_detection_area.input_event.connect(_on_mouse_detection_area_input_event)
+	# 连接鼠标检测区域的信号
+	mouse_detection_area.mouse_entered.connect(_on_mouse_entered_tower)
+	mouse_detection_area.mouse_exited.connect(_on_mouse_exited_tower)
 	
 	# 初始化等级标签
 	level_label.text = "Lv. " + str(level)
+	# 初始化范围显示
+	_update_range_display()
+	# 确保范围显示在塔的下方
+	range_display.z_index = 2 
+
 
 func _physics_process(delta):
 	time_since_last_fire += delta
@@ -62,22 +89,36 @@ func _physics_process(delta):
 				time_since_last_fire = 0
 				break
 
-func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseMotion:
-		if not isMouseOverTower:
-			isMouseOverTower = true
-			_update_buttons_visibility()
+# 移除旧的 input_event 处理
+#func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
+#	if event is InputEventMouseMotion:
+#		if not isMouseOverTower:
+#			isMouseOverTower = true
+#			_update_buttons_visibility()
 	
-func _input(event):
-	# 检测鼠标是否在塔区域内
-	if event is InputEventMouseMotion:
-		var mouse_pos = get_global_mouse_position()
-		var tower_rect = Rect2(global_position - Vector2(75, 75), Vector2(150, 150))
-		
-		if not tower_rect.has_point(mouse_pos) and not isMouseOverButtons:
-			if isMouseOverTower:
-				isMouseOverTower = false
-				_update_buttons_visibility()
+# 移除旧的 _input 处理鼠标移出逻辑
+#func _input(event):
+#	# 检测鼠标是否在塔区域内
+#	if event is InputEventMouseMotion:
+#		var mouse_pos = get_global_mouse_position()
+#		var tower_rect = Rect2(global_position - Vector2(75, 75), Vector2(150, 150))
+#		
+#		if not tower_rect.has_point(mouse_pos) and not isMouseOverButtons:
+#			if isMouseOverTower:
+#				isMouseOverTower = false
+#				_update_buttons_visibility()
+
+func _on_mouse_entered_tower():
+	isMouseOverTower = true
+	range_display.show()
+	_update_buttons_visibility()
+
+func _on_mouse_exited_tower():
+	isMouseOverTower = false
+	range_display.hide()
+	# 延迟检查，确保鼠标不是移到了按钮上
+	await get_tree().create_timer(0.01).timeout 
+	_update_buttons_visibility()
 
 func _on_buttons_mouse_entered():
 	isMouseOverButtons = true
@@ -123,6 +164,8 @@ func _on_upgrade_pressed():
 		current_damage *= 1.3  # 提升伤害值
 		tower_area.get_node("CollisionShape2D").shape.radius = range
 		BattleScene.update_coins_display()
+		# 更新范围显示
+		_update_range_display()
 		# 更新按钮文本和状态
 		if level < max_level:
 			upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"

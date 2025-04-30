@@ -1,16 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://drjcxodyo6bx5"]
+[gd_scene load_steps=7 format=3 uid="uid://drjcxodyo6bx5"]
 
-[ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="1_6xvvv"]
 [ext_resource type="Script" path="res://scene/tower.gd" id="1_s8k2i"]
+[ext_resource type="Shader" path="res://scene/tower.gdshader" id="3_tk3ho"]
+[ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="uid://c6q8w7x5y4f3g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]
 radius = 521.358
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_52br4"]
+shader = ExtResource("3_tk3ho")
+shader_parameter/circle_radius = 0.5
+shader_parameter/fade_smoothness = 0.05
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_giio4"]
 
 [node name="Tower" type="Sprite2D"]
 top_level = true
 position = Vector2(1, -1)
 scale = Vector2(0.5, 0.493)
-texture = ExtResource("1_6xvvv")
+texture = ExtResource("uid://c6q8w7x5y4f3g")
 script = ExtResource("1_s8k2i")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -40,6 +48,13 @@ offset_bottom = -77.0
 text = "Lv. 1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RangeDisplay" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+material = SubResource("ShaderMaterial_52br4")
+position = Vector2(-1.00003, -10.5241)
+scale = Vector2(386, 392.745)
+texture = SubResource("CanvasTexture_giio4")
 
 [node name="MouseDetectionArea" type="Area2D" parent="."]
 
