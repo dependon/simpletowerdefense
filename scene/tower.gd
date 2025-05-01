@@ -11,7 +11,6 @@ var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
 var max_level = 4 # 防御塔最大等级
 var current_damage = base_damage # 当前伤害值
-var isMouseOverTower = false # 鼠标是否在塔上
 var isMouseOverButtons = false # 鼠标是否在按钮上
 
 @onready var upgrade_button = $upgrade_button
@@ -61,7 +60,7 @@ func _ready():
 	destroy_button.mouse_exited.connect(_on_buttons_mouse_exited)
 	
 	# 连接鼠标检测区域的信号
-	mouse_detection_area.mouse_entered.connect(_on_mouse_entered_tower)
+	mouse_detection_area.input_event.connect(_on_mouse_detection_area_input_event)
 	mouse_detection_area.mouse_exited.connect(_on_mouse_exited_tower)
 	
 	# 初始化等级标签
@@ -70,6 +69,8 @@ func _ready():
 	_update_range_display()
 	# 确保范围显示在塔的下方
 	range_display.z_index = z_index-1 
+	# 初始隐藏范围显示
+	range_display.hide()
 
 
 func _physics_process(delta):
@@ -89,35 +90,21 @@ func _physics_process(delta):
 				time_since_last_fire = 0
 				break
 
-# 移除旧的 input_event 处理
-#func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
-#	if event is InputEventMouseMotion:
-#		if not isMouseOverTower:
-#			isMouseOverTower = true
-#			_update_buttons_visibility()
-	
-# 移除旧的 _input 处理鼠标移出逻辑
-#func _input(event):
-#	# 检测鼠标是否在塔区域内
-#	if event is InputEventMouseMotion:
-#		var mouse_pos = get_global_mouse_position()
-#		var tower_rect = Rect2(global_position - Vector2(75, 75), Vector2(150, 150))
-#		
-#		if not tower_rect.has_point(mouse_pos) and not isMouseOverButtons:
-#			if isMouseOverTower:
-#				isMouseOverTower = false
-#				_update_buttons_visibility()
-
-func _on_mouse_entered_tower():
-	isMouseOverTower = true
-	range_display.show()
-	_update_buttons_visibility()
+func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
+	if event.is_pressed() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		# 切换范围显示和按钮的可见性
+		if range_display.visible:
+			range_display.hide()
+			_hide_buttons()
+		else:
+			range_display.show()
+			_show_buttons()
 
 func _on_mouse_exited_tower():
-	isMouseOverTower = false
+	# 鼠标移出时隐藏范围显示
 	range_display.hide()
 	# 延迟检查，确保鼠标不是移到了按钮上
-	await get_tree().create_timer(0.01).timeout 
+	await get_tree().create_timer(0.01).timeout
 	_update_buttons_visibility()
 
 func _on_buttons_mouse_entered():
@@ -128,7 +115,7 @@ func _on_buttons_mouse_exited():
 	_update_buttons_visibility()
 
 func _update_buttons_visibility():
-	if isMouseOverTower or isMouseOverButtons:
+	if isMouseOverButtons:
 		_show_buttons()
 	else:
 		_hide_buttons()
