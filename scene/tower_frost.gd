@@ -1,4 +1,4 @@
-extends "res://scene/tower.gd"
+extends "res://scene/tower_base.gd"
 
 # 重写基础属性
 func _ready():

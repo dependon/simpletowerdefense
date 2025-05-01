@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://pi1df6o0ggrx"]
 
-[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower.tscn" id="1_yvh8q"]
+[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower_base.tscn" id="1_yvh8q"]
 [ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="2_4k3xt"]
-[ext_resource type="Script" path="res://scene/frost_tower.gd" id="2_yvh8q"]
+[ext_resource type="Script" path="res://scene/tower_frost.gd" id="2_yvh8q"]
 
 [node name="FrostTower" instance=ExtResource("1_yvh8q")]
 texture = ExtResource("2_4k3xt")

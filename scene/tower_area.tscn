@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cibv8fwh6i6u6"]
 
-[ext_resource type="Script" path="res://scene/area_tower.gd" id="1_8yvxe"]
-[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower.tscn" id="1_sm7py"]
+[ext_resource type="Script" path="res://scene/tower_area.gd" id="1_8yvxe"]
+[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower_base.tscn" id="1_sm7py"]
 [ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="2_yvxe8"]
 
 [node name="AreaTower" instance=ExtResource("1_sm7py")]

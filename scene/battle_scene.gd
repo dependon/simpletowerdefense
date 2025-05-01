@@ -26,11 +26,11 @@ func return_to_start_menu():
 	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
 
 @onready var enemy_scene: PackedScene = preload("res://scene/enemy.tscn")
-@onready var tower_scene: PackedScene = preload("res://scene/tower.tscn")
-@onready var fast_tower_scene: PackedScene = preload("res://scene/fast_tower.tscn")
-@onready var area_tower_scene: PackedScene = preload("res://scene/area_tower.tscn")
-@onready var frost_tower_scene: PackedScene = preload("res://scene/frost_tower.tscn")
-@onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/fast_low_damage_tower.tscn") # 新增：预加载快速低伤塔场景
+@onready var tower_scene: PackedScene = preload("res://scene/tower_base.tscn")
+@onready var fast_tower_scene: PackedScene = preload("res://scene/tower_fast.tscn")
+@onready var area_tower_scene: PackedScene = preload("res://scene/tower_area.tscn")
+@onready var frost_tower_scene: PackedScene = preload("res://scene/tower_frost.tscn")
+@onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/tower_fast_low_damage.tscn") # 新增：预加载快速低伤塔场景
 @onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
 @onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")

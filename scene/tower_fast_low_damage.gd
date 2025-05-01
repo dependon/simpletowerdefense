@@ -1,4 +1,4 @@
-extends "res://scene/tower.gd"
+extends "res://scene/tower_base.gd"
 
 # 新防御塔：快速攻击，低伤害
 
@@ -19,4 +19,4 @@ func _ready():
 	# 更新等级标签
 	level_label.text = "Lv. " + str(level)
 
-# 其他逻辑继承自 tower.gd，无需重复编写
+# 其他逻辑继承自 tower_base.gd，无需重复编写
