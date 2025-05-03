@@ -8,8 +8,8 @@ func _ready():
 	enemy_spawn_interval = 0.22 # 波次内敌人生成间隔 (秒)
 	wave_duration_limit = 80.0 # 每波持续时间限制 (秒)
 
-    # 波次配置字典 (Level 8): {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier, "path_type": PathType, "enemy_mix": {EnemyType: percentage}}}
-    # 包含敌人类型混合比例，更复杂的敌人组合
+	# 波次配置字典 (Level 8): {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier, "path_type": PathType, "enemy_mix": {EnemyType: percentage}}}
+	# 包含敌人类型混合比例，更复杂的敌人组合
 	wave_config = {
 		1:  {"count": 18, "health_multiplier": 5.0, "speed_multiplier": 1.4, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.2}},
 		2:  {"count": 20, "health_multiplier": 5.2, "speed_multiplier": 1.45, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2}},
