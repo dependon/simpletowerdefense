@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bqjxvvxmxvxvx"]
 
 [ext_resource type="Texture2D" uid="uid://ds2q1go88hph8" path="res://assets/icon/testPisition.png" id="1_7ol48"]
-[ext_resource type="Script" path="res://scene/build_point.gd" id="1_bx6ep"]
+[ext_resource type="Script" uid="uid://c88xspde0e0kk" path="res://scene/build_point.gd" id="1_bx6ep"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 27.1662

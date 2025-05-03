@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bw4q5xqy8n8yd"]
 
-[ext_resource type="Script" path="res://scene/base.gd" id="1_base"]
+[ext_resource type="Script" uid="uid://bpjfmg3lqbej4" path="res://scene/base.gd" id="1_base"]
 [ext_resource type="Texture2D" uid="uid://diymbvbqo56le" path="res://assets/jidi/jidi_4.png" id="2_bihah"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]

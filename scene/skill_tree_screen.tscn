@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgxeu0mldsdq5"]
 
-[ext_resource type="Script" path="res://scene/skill_tree_screen.gd" id="1_pq6j6"]
+[ext_resource type="Script" uid="uid://bpbkqf6pmfdcc" path="res://scene/skill_tree_screen.gd" id="1_pq6j6"]
 [ext_resource type="Texture2D" uid="uid://dqknp3pp23f8n" path="res://assets/icon/star.png" id="2_startree"]
 
 [node name="SkillTreeScreen" type="Control"]
