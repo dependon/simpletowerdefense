@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="uid://c6q8w7x5y4f3g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]
-radius = 521.358
+radius = 526.623
 
 [node name="Tower" type="Sprite2D"]
 top_level = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwkiu5duhv6vr"]
+[gd_scene load_steps=9 format=3 uid="uid://dwkiu5duhv6vr"]
 
 [ext_resource type="Script" uid="uid://dp3o0lto78g8n" path="res://scene/battle_scene.gd" id="1_662de"]
 [ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_1.png" id="2_lg38h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="5_q6kis"]
 [ext_resource type="PackedScene" uid="uid://ckkdkqr08oy5x" path="res://scene/setting_menu.tscn" id="6_0l81w"]
 [ext_resource type="Texture2D" uid="uid://rku5sbwvp8q7" path="res://assets/tower/tower_5.png" id="7_tyddw"]
+[ext_resource type="Texture2D" uid="uid://cyuxcr6nss5yo" path="res://assets/tower/tower_6.png" id="8_5pnl2"]
 
 [node name="BattleScene" type="Node2D"]
 position = Vector2(-1, 1)
@@ -170,6 +171,26 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "500"
 
+[node name="BigAreaTowerButton" type="Button" parent="UI/BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+icon = ExtResource("8_5pnl2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/BoxContainer/BigAreaTowerButton"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "200"
+
 [node name="UI_BoxContainer_FastLowDamageTowerButton#Label" type="Label" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
@@ -189,3 +210,4 @@ text = "75"
 [connection signal="pressed" from="UI/BoxContainer/AreaTowerButton" to="." method="_on_area_tower_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/FastLowTowerButton" to="." method="_on_fast_low_tower_button_pressed"]
+[connection signal="pressed" from="UI/BoxContainer/BigAreaTowerButton" to="." method="_on_big_area_tower_button_pressed"]

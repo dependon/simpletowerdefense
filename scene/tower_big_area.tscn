@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc4am12qd8db6"]
+
+[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower_base.tscn" id="1_pkj6k"]
+[ext_resource type="Texture2D" uid="uid://cyuxcr6nss5yo" path="res://assets/tower/tower_6.png" id="2_uydcd"]
+[ext_resource type="Script" uid="uid://f6r1cw0brp0p" path="res://scene/tower_big_area.gd" id="3_uydcd"]
+
+[node name="TowerBigArea" instance=ExtResource("1_pkj6k")]
+texture = ExtResource("2_uydcd")
+script = ExtResource("3_uydcd")
+range = 800

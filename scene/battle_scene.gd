@@ -30,7 +30,9 @@ func return_to_start_menu():
 @onready var fast_tower_scene: PackedScene = preload("res://scene/tower_fast.tscn")
 @onready var area_tower_scene: PackedScene = preload("res://scene/tower_area.tscn")
 @onready var frost_tower_scene: PackedScene = preload("res://scene/tower_frost.tscn")
-@onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/tower_fast_low_damage.tscn") # 新增：预加载快速低伤塔场景
+@onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/tower_fast_low_damage.tscn") 
+@onready var big_area_tower_scene: PackedScene = preload("res://scene/tower_big_area.tscn") 
+
 @onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
 @onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")
@@ -58,6 +60,7 @@ const FAST_TOWER_COST = 100   # 快速塔消耗
 const AREA_TOWER_COST = 150   # 群体塔消耗
 const FROST_TOWER_COST = 100  # 冰霜塔消耗
 const FAST_LOW_DAMAGE_TOWER_COST = 400 # 新增：快速低伤塔消耗 (示例成本)
+const BIG_AREA_TOWER_COST = 200 # 新增：快速低伤塔消耗 (示例成本)
 
 # 金币UI和钻石UI
 func update_coins_display():
@@ -175,6 +178,8 @@ func _input(event):
 						cost = FROST_TOWER_COST
 					"fast_low_damage": # 新增：处理快速低伤塔成本
 						cost = FAST_LOW_DAMAGE_TOWER_COST
+					"big_area_damage":
+						cost = BIG_AREA_TOWER_COST
 					_: 
 						cost = AREA_TOWER_COST
 
@@ -189,6 +194,8 @@ func _input(event):
 							tower = frost_tower_scene.instantiate()
 						"fast_low_damage": # 新增：实例化快速低伤塔
 							tower = fast_low_damage_tower_scene.instantiate()
+						"big_area_damage":
+							tower = big_area_tower_scene.instantiate()
 						_: 
 							tower = area_tower_scene.instantiate()
 					
@@ -220,4 +227,9 @@ func _on_frost_tower_button_2_pressed() -> void:
 # 新增：快速低伤塔按钮处理函数
 func _on_fast_low_tower_button_pressed() -> void:
 	current_tower_type = "fast_low_damage"
+	pass # Replace with function body.
+
+
+func _on_big_area_tower_button_pressed() -> void:
+	current_tower_type = "big_area_damage"
 	pass # Replace with function body.

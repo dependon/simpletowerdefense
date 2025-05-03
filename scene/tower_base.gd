@@ -1,6 +1,7 @@
 extends Sprite2D
 
 @onready var tower_area: Area2D = $Area2D #攻击范围
+@onready var tower_area_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var mouse_detection_area: Area2D = $MouseDetectionArea # 新增：获取鼠标检测区域节点
 @onready var range_display = $RangeDisplay # 新增：获取范围显示节点
 @export var range = 300 # 攻击范围
@@ -71,6 +72,8 @@ func _ready():
 	range_display.z_index = z_index-1 
 	# 初始隐藏范围显示
 	range_display.hide()
+	
+	tower_area_shape.shape.radius = range
 
 
 func _physics_process(delta):
@@ -149,7 +152,7 @@ func _on_upgrade_pressed():
 		fire_rate *= 1.3  # 提升攻击速度
 		range *= 1.1     # 提升攻击范围
 		current_damage *= 1.3  # 提升伤害值
-		tower_area.get_node("CollisionShape2D").shape.radius = range
+		tower_area_shape.shape.radius = range
 		BattleScene.update_coins_display()
 		# 更新范围显示
 		_update_range_display()
