@@ -10,9 +10,9 @@ func _ready():
 
 # 包含敌人类型混合比例，引入巫师敌人
 	wave_config = {
-		1:  {"count": 12, "health_multiplier": 3.0, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}},
-		2:  {"count": 15, "health_multiplier": 3.2, "speed_multiplier": 1.25, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
-		3:  {"count": 18, "health_multiplier": 3.4, "speed_multiplier": 1.3, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.1}}, # 开始出现巫师
+		1:  {"count": 12, "health_multiplier": 1.0, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.8, EnemyType.THIEF: 0.2}},
+		2:  {"count": 15, "health_multiplier": 1.2, "speed_multiplier": 1.25, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.3}},
+		3:  {"count": 18, "health_multiplier": 2.4, "speed_multiplier": 1.3, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.1}}, # 开始出现巫师
 		4:  {"count": 20, "health_multiplier": 3.6, "speed_multiplier": 1.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2}},
 		5:  {"count": 22, "health_multiplier": 3.8, "speed_multiplier": 1.4, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.4, EnemyType.WIZARD: 0.2}},
 		6:  {"count": 25, "health_multiplier": 4.0, "speed_multiplier": 1.45, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.4, EnemyType.WIZARD: 0.3}}, # 巫师比例增加
@@ -51,7 +51,6 @@ func _physics_process(delta):
 
 	# 检查胜利条件：所有波次完成且场上无敌人
 	if current_wave >= total_waves and not is_spawning_wave and get_tree().get_nodes_in_group("enemies").size() == 0:
-		is_victory = true
 		trigger_victory();
 		return
 

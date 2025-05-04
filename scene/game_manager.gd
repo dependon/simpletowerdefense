@@ -59,6 +59,7 @@ func save_game():
 		print("无法保存游戏存档！")
 
 func select_level(level: int) -> void:
+	get_tree().paused = false
 	# 检查关卡是否已解锁
 	if level in unlocked_levels:
 		current_level = level

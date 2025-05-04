@@ -7,4 +7,3 @@
 [node name="TowerBigArea" instance=ExtResource("1_pkj6k")]
 texture = ExtResource("2_uydcd")
 script = ExtResource("3_uydcd")
-range = 800

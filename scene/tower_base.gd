@@ -24,8 +24,9 @@ func get_upgrade_cost() -> int:
 
 # 更新范围显示的辅助函数
 func _update_range_display():
+	tower_area_shape.shape.radius = range
 	# 假设 circle.png 的基础半径是 64 像素
-	var base_radius = 64.0
+	var base_radius = 128.0
 	# 因为塔本身有缩放，范围显示节点作为子节点也会继承缩放
 	# 需要反向应用塔的缩放来获得正确的视觉范围
 	# 同时，范围显示节点自身的缩放也需要考虑
@@ -73,7 +74,7 @@ func _ready():
 	# 初始隐藏范围显示
 	range_display.hide()
 	
-	tower_area_shape.shape.radius = range
+	
 
 
 func _physics_process(delta):
@@ -153,6 +154,12 @@ func _on_upgrade_pressed():
 		range *= 1.1     # 提升攻击范围
 		current_damage *= 1.3  # 提升伤害值
 		tower_area_shape.shape.radius = range
+		
+		print("range: %d",range)
+		print("level: %d",level)
+		print("fire_rate: %f",fire_rate)
+		print("current_damage: %f",current_damage)
+		
 		BattleScene.update_coins_display()
 		# 更新范围显示
 		_update_range_display()
