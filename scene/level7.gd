@@ -5,17 +5,17 @@ func _ready():
 
 	# 波次设置 (Level 7)
 	total_waves = 22  # 总波次数
-	wave_interval = 3.8 # 波次之间的间隔时间 (秒)
+	wave_interval = 10.8 # 波次之间的间隔时间 (秒)
 	enemy_spawn_interval = 0.25 # 波次内敌人生成间隔 (秒)
 	wave_duration_limit = 75.0 # 每波持续时间限制 (秒)
 
 	wave_config = {
-		1:  {"count": 15, "health_multiplier": 4.0, "speed_multiplier": 1.3, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.1}},
-		2:  {"count": 18, "health_multiplier": 4.2, "speed_multiplier": 1.35, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.1}},
-		3:  {"count": 20, "health_multiplier": 4.4, "speed_multiplier": 1.4, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2}},
-		4:  {"count": 22, "health_multiplier": 4.6, "speed_multiplier": 1.45, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.1}},
-		5:  {"count": 25, "health_multiplier": 4.8, "speed_multiplier": 1.5, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.2}},
-		6:  {"count": 28, "health_multiplier": 5.0, "speed_multiplier": 1.55, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.2}},
+		1:  {"count": 15, "health_multiplier": 1.0, "speed_multiplier": 0.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.7, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.1}},
+		2:  {"count": 18, "health_multiplier": 1.2, "speed_multiplier": 0.6, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.6, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.1}},
+		3:  {"count": 20, "health_multiplier": 1.4, "speed_multiplier": 0.7, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.5, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2}},
+		4:  {"count": 22, "health_multiplier": 1.6, "speed_multiplier": 0.8, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.4, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.1}},
+		5:  {"count": 25, "health_multiplier": 2.8, "speed_multiplier": 1.5, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.3, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.2}},
+		6:  {"count": 28, "health_multiplier": 4.0, "speed_multiplier": 1.55, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.3, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.2}},
 		7:  {"count": 30, "health_multiplier": 5.3, "speed_multiplier": 1.6, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 0.2, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.3}},
 		8:  {"count": 32, "health_multiplier": 5.6, "speed_multiplier": 1.65, "path_type": PathType.PATH_2, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.4}},
 		9:  {"count": 35, "health_multiplier": 5.9, "speed_multiplier": 1.7, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.5}},
