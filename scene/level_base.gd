@@ -51,7 +51,7 @@ var wave_config = {
 @export var wave_interval = 5.0 # 波次之间的间隔时间 (秒)
 @export var enemy_spawn_interval = 0.5 # 波次内敌人生成间隔 (秒)
 @onready var wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
-@onready var wave_duration_timer = 0.0 # 波次持续时间计时器
+@onready var wave_duration_timer = 60.0 # 波次持续时间计时器
 # 状态变量
 var current_wave = 0
 var enemies_spawned_in_wave = 0
