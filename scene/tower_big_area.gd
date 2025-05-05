@@ -6,5 +6,5 @@ func _ready():
 	base_cost = 200  
 	base_damage = 45  
 	fire_rate = 1.0  # 正常攻击速度
-	# 更新等级标签
-	level_label.text = "Lv. " + str(level)
+	_update_range_display();#刷新范围
+	

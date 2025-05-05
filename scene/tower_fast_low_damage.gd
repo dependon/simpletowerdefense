@@ -18,5 +18,6 @@ func _ready():
 	
 	# 更新等级标签
 	level_label.text = "Lv. " + str(level)
+	_update_range_display();#刷新范围
 
 # 其他逻辑继承自 tower_base.gd，无需重复编写

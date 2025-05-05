@@ -1,9 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc4am12qd8db6"]
+[gd_scene load_steps=5 format=3 uid="uid://bc4am12qd8db6"]
 
-[ext_resource type="PackedScene" uid="uid://drjcxodyo6bx5" path="res://scene/tower_base.tscn" id="1_pkj6k"]
 [ext_resource type="Texture2D" uid="uid://cyuxcr6nss5yo" path="res://assets/tower/tower_6.png" id="2_uydcd"]
+[ext_resource type="Texture2D" uid="uid://crvej47h0lccb" path="res://assets/yuan.svg" id="3_r6n6d"]
 [ext_resource type="Script" uid="uid://f6r1cw0brp0p" path="res://scene/tower_big_area.gd" id="3_uydcd"]
 
-[node name="TowerBigArea" instance=ExtResource("1_pkj6k")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]
+radius = 526.623
+
+[node name="TowerBigArea" type="Sprite2D"]
+top_level = true
+position = Vector2(1, -1)
+scale = Vector2(0.5, 0.493)
 texture = ExtResource("2_uydcd")
 script = ExtResource("3_uydcd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.70264, 4.57764e-05)
+rotation = -1.21831
+shape = SubResource("CircleShape2D_0sler")
+
+[node name="upgrade_button" type="Button" parent="."]
+offset_left = -148.0
+offset_top = -20.0
+offset_right = -52.0
+offset_bottom = 35.0
+
+[node name="destroy_button" type="Button" parent="."]
+offset_left = 37.0
+offset_top = -17.0
+offset_right = 134.0
+offset_bottom = 31.0
+
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -100.0
+offset_right = 20.0
+offset_bottom = -77.0
+text = "Lv. 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RangeDisplay" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+position = Vector2(-1.00003, -10.5241)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_r6n6d")
+
+[node name="MouseDetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouseDetectionArea"]
+polygon = PackedVector2Array(52, 44.6247, 148, 38.5396, 146, -36.5112, 48, -40.568, 44, -93.3063, -52, -89.2495, -60, -40.568, -156, -34.4828, -152, 44.6247, -56, 46.6531, -56, 75.0507, 48, 77.0791)

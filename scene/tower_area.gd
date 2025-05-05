@@ -7,6 +7,7 @@ func _ready():
 	base_damage = 15  # 基础伤害值较低，因为是群体攻击
 	current_damage = base_damage
 	fire_rate = 0.8  # 攻击速度较慢
+	_update_range_display();#刷新范围
 
 # 重写攻击逻辑，对范围内所有敌人造成伤害
 func _physics_process(delta):

@@ -7,6 +7,7 @@ func _ready():
 	base_damage = 20  # 基础伤害值较低
 	current_damage = base_damage
 	fire_rate = 1.0  # 正常攻击速度
+	_update_range_display();#刷新范围
 
 # 重写攻击逻辑，添加减速效果
 func _physics_process(delta):
