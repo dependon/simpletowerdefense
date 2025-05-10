@@ -9,7 +9,7 @@ func add_stars(amount : int):
 	stars += amount
 	print("获得星星！当前星星数量：" + str(stars))
 	
-
+signal next_wave_requested #开启下一波
 signal level_selected(level_number: int)
 
 var current_level: int = 0
@@ -101,6 +101,10 @@ func get_level_stars(level: int) -> int:
 
 func add_diamonds(amount: int) -> void:
 	diamonds += amount
+
+# 请求下一波
+func request_next_wave() -> void:
+	next_wave_requested.emit()
 
 # 获取当前钻石数量
 func get_diamonds() -> int:

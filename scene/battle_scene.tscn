@@ -198,6 +198,13 @@ offset_right = 489.0
 offset_bottom = 64.0
 text = "Wait Time:30"
 
+[node name="NextWave" type="Button" parent="UI"]
+offset_left = 596.0
+offset_top = 23.0
+offset_right = 684.0
+offset_bottom = 55.0
+text = "立即开启下一波"
+
 [connection signal="pressed" from="UI/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
@@ -205,3 +212,4 @@ text = "Wait Time:30"
 [connection signal="pressed" from="UI/BoxContainer/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/FastLowTowerButton" to="." method="_on_fast_low_tower_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/BigAreaTowerButton" to="." method="_on_big_area_tower_button_pressed"]
+[connection signal="pressed" from="UI/NextWave" to="." method="_on_next_wave_pressed"]

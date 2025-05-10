@@ -77,7 +77,9 @@ func _ready() -> void:
 	pass
 
 func startCurrentGame() -> void:
-			# 设置敌人生成点位置
+	# 连接 GameManager 的下一波请求信号
+	GameManager.next_wave_requested.connect(_on_next_wave_requested)
+	# 设置敌人生成点位置
 	var spawn_point1 = $SpawnPoint
 	var spawn_point2 = $SpawnPoint2
 	
@@ -210,6 +212,12 @@ func spawn_enemy(path_node, config):
 	# 将敌人添加到场景
 	add_child(enemy)
 
+
+# 处理下一波请求
+func _on_next_wave_requested() -> void:
+	if is_between_waves:
+		wave_timer = wave_interval # 设置计时器等于间隔，立即触发下一波
+		print("下一波请求已处理")
 
 # 根据概率分布随机选择敌人类型
 func select_random_enemy_type(enemy_mix):

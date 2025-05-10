@@ -238,9 +238,14 @@ func _on_frost_tower_button_2_pressed() -> void:
 # 新增：快速低伤塔按钮处理函数
 func _on_fast_low_tower_button_pressed() -> void:
 	current_tower_type = "fast_low_damage"
-	pass # Replace with function body.
+	pass 
 
 
 func _on_big_area_tower_button_pressed() -> void:
 	current_tower_type = "big_area_damage"
-	pass # Replace with function body.
+	pass 
+
+
+func _on_next_wave_pressed() -> void:
+	GameManager.request_next_wave()
+	pass 
