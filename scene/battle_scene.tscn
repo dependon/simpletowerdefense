@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwkiu5duhv6vr"]
 
 [ext_resource type="Script" uid="uid://dp3o0lto78g8n" path="res://scene/battle_scene.gd" id="1_662de"]
-[ext_resource type="Texture2D" uid="uid://wjvtq14ljmld" path="res://assets/tower/tower_base_1.png" id="2_lg38h"]
-[ext_resource type="Texture2D" uid="uid://dmlc8ckeugl81" path="res://assets/tower/tower_2.png" id="3_jcbig"]
+[ext_resource type="Texture2D" uid="uid://cph0j6kycb8p2" path="res://assets/tower/tower_base_1.png" id="3_5pnl2"]
+[ext_resource type="Texture2D" uid="uid://r86tsckq4ktt" path="res://assets/tower/tower_fast_1.png" id="4_8oj1d"]
 [ext_resource type="Texture2D" uid="uid://b7f4ekldi8so7" path="res://assets/tower/tower_3.png" id="4_41uvu"]
 [ext_resource type="Texture2D" uid="uid://l7fya12vltod" path="res://assets/tower/tower_4.png" id="5_q6kis"]
 [ext_resource type="PackedScene" uid="uid://ckkdkqr08oy5x" path="res://scene/setting_menu.tscn" id="6_0l81w"]
@@ -71,7 +71,7 @@ grow_vertical = 0
 [node name="NormalTowerButton" type="Button" parent="UI/BoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-icon = ExtResource("2_lg38h")
+icon = ExtResource("3_5pnl2")
 icon_alignment = 1
 expand_icon = true
 
@@ -92,7 +92,7 @@ text = "50"
 [node name="FastTowerButton" type="Button" parent="UI/BoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-icon = ExtResource("3_jcbig")
+icon = ExtResource("4_8oj1d")
 icon_alignment = 1
 expand_icon = true
 

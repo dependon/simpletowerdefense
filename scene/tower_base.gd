@@ -1,5 +1,7 @@
 extends Sprite2D
 
+signal upgraded(level) # 升级信号，传递当前等级
+
 @onready var tower_area: Area2D = $Area2D #攻击范围
 @onready var tower_area_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var mouse_detection_area: Area2D = $MouseDetectionArea # 新增：获取鼠标检测区域节点
@@ -172,6 +174,9 @@ func _on_upgrade_pressed():
 		destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
 		# 更新等级标签
 		level_label.text = "Lv. " + str(level)
+		
+		# 触发升级信号
+		emit_signal("upgraded", level)
 
 func _on_destroy_pressed():
 	var BattleScene = get_tree().get_root().get_node("BattleScene")
