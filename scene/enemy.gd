@@ -5,10 +5,14 @@ var path: Path2D
 #移动速度
 @export var speed = 100
 var speed_multiplier = 1.0  # 速度修改器
+var is_slowed = false # 是否被减速
+var slow_duration = 5.0 # 减速持续时间
+var original_speed_multiplier = 1.0 # 减速前的速度
 #生命值 
 @export var hp : float = 100
 #生命条
 var health_bar: ProgressBar
+var slow_timer: Timer # 减速计时器
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -22,6 +26,12 @@ func _ready() -> void:
 	# 设置血条颜色为淡红色
 	health_bar.modulate = Color(1, 0.5, 0.5, 0.8)
 	add_child(health_bar)
+	
+	# 创建减速计时器
+	slow_timer = Timer.new()
+	slow_timer.one_shot = true # 只运行一次
+	slow_timer.connect("timeout", Callable(self, "_on_slow_timer_timeout"))
+	add_child(slow_timer)
 
 # 设置敌人移动路径
 func set_path(curve: Curve2D) -> void:
@@ -41,12 +51,19 @@ func _physics_process(delta):
 		position = path_follow.position
 		if path_follow.progress >= path.curve.get_baked_length():
 			queue_free()
-	# 每帧逐渐恢复速度
-	if speed_multiplier < 1.0:
+	# 每帧逐渐恢复速度，只在没有被减速时恢复
+	if speed_multiplier < 1.0 and not is_slowed:
 		speed_multiplier = min(speed_multiplier + delta * 0.1, 1.0)
 
-func set_speed_multiplier(multiplier: float) -> void:
+func set_speed_multiplier(multiplier: float, duration: float = 5.0) -> void:
+	if !is_slowed:
+		original_speed_multiplier = speed_multiplier # 记录减速前的速度
 	speed_multiplier = multiplier
+	is_slowed = true # 设置减速状态
+	
+	# 复用计时器，更新时间并启动
+	slow_timer.wait_time = max(slow_timer.time_left, duration) # 取剩余时间和新持续时间的最大值
+	slow_timer.start()
 	
 func set_health_multiplier(health_multiplier: float) -> void:
 	hp = hp * health_multiplier
@@ -67,3 +84,7 @@ func take_damage(damage: int) -> void:
 			if game_manager:
 				game_manager.add_diamonds(diamond_reward)
 		queue_free()
+
+func _on_slow_timer_timeout():
+	speed_multiplier = original_speed_multiplier # 恢复速度
+	is_slowed = false # 移除减速状态

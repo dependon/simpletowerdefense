@@ -24,7 +24,7 @@ func _on_area_entered(area: Area2D) -> void:
 		area.take_damage(damage)
 		# 如果是冰霜子弹，则减速敌人
 		if has_meta("type") and get_meta("type") == "frost":
-			area.set_speed_multiplier(0.5)
+			area.set_speed_multiplier(0.5,5)
 		queue_free()
 
 func _on_timer_timeout():
