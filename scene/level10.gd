@@ -1,4 +1,4 @@
-extends Level6Base
+extends LevelBase
 
 func _ready():
 
@@ -43,14 +43,4 @@ func _ready():
 		30: {"count": 130, "health_multiplier": 17.0, "speed_multiplier": 3.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.1, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.3}} # 最终大混合
 	}
 
-	# 设置生成点位置 (与Level 8类似)
-	var spawn_point1 = $SpawnPoint
-	var spawn_point2 = $SpawnPoint2
-	if spawn_point1 and spawn_point2 and path1 and path2:
-		spawn_point1.position = path1.curve.get_point_position(0)
-		spawn_point2.position = path2.curve.get_point_position(0)
-	else:
-		print("错误: 关卡9缺少生成点或路径节点！")
-
-	is_between_waves = false
-	start_next_wave()
+	startCurrentGame();

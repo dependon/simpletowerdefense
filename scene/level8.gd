@@ -1,4 +1,4 @@
-extends Level6Base
+extends LevelBase
 
 func _ready():
 
@@ -38,15 +38,4 @@ func _ready():
 		25: {"count": 120, "health_multiplier": 14.0, "speed_multiplier": 3.0, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.2, EnemyType.WEREWOLF: 0.3}} # 最终混合波
 	}
 
-	# 设置敌人生成点位置
-	var spawn_point1 = $SpawnPoint
-	var spawn_point2 = $SpawnPoint2
-	
-	if spawn_point1 and spawn_point2:
-		# 确保生成点在路径开始位置
-		spawn_point1.position = path1.curve.get_point_position(0)
-		spawn_point2.position = path2.curve.get_point_position(0)
-	
-	# 游戏开始时，立即开始第一波
-	is_between_waves = false # 不处于间隔状态
-	start_next_wave() # 调用函数开始第一波
+	startCurrentGame();
