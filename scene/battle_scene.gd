@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var setting_menu = $UI/SettingMenu
 @onready var wave_label = $UI/WaveLabel # 新增：对波次标签的引用
+@onready var wait_time_label = $UI/WaitTime # 新增：对等待时间标签的引用
 
 func _on_setting_button_pressed():
 	get_tree().paused = true
@@ -152,8 +153,18 @@ func load_level(level_number: int):
 	else:
 		printerr("当前关卡实例无效或缺少 wave_updated 信号: ", current_level)
 	
+	# 新增：连接等待时间更新信号
+	if current_level and current_level.has_signal("wait_time_updated"):
+		current_level.wait_time_updated.connect(update_wait_time_display)
+	else:
+		printerr("当前关卡实例无效或缺少 wait_time_updated 信号: ", current_level)
+	
 	# 无论如何都尝试更新一次，即使可能显示默认值
 	update_wave_display()
+
+
+func update_wait_time_display(remaining_time: float):
+	wait_time_label.text = "下一波: %d" % ceil(remaining_time)
 
 
 func _physics_process(delta):

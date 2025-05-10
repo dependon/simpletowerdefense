@@ -3,7 +3,7 @@ extends LevelBase
 func _ready():
 
 	total_waves = 30  # 最终关卡波数
-	wave_interval = 3.0 # 波次间隔缩短
+	wave_interval = 20 # 波次间隔缩短
 	enemy_spawn_interval = 0.18 # 生成间隔更短
 	wave_duration_limit = 90.0 # 持续时间限制更长
 

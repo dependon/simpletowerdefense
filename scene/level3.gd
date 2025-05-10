@@ -4,7 +4,7 @@ func _ready():
 
 	# 波次设置 (Level 3)
 	total_waves = 15  # 总波次数
-	wave_interval = 3.0 # 波次之间的间隔时间 (秒) - 更短
+	wave_interval = 15.0 # 波次之间的间隔时间 (秒) - 更短
 	enemy_spawn_interval = 0.3 # 波次内敌人生成间隔 (秒) - 更快
 	wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
 

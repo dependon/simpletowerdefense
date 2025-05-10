@@ -3,7 +3,7 @@ extends LevelBase
 func _ready():
 	# 波次设置 (Level 9) - 难度提升
 	total_waves = 30  # 总波次数增加
-	wave_interval = 3.2 # 波次间隔缩短
+	wave_interval = 20 # 波次间隔缩短
 	enemy_spawn_interval = 0.2 # 生成间隔缩短
 	wave_duration_limit = 85.0 # 持续时间限制略微增加以容纳更多敌人
 

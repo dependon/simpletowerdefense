@@ -4,8 +4,9 @@ extends LevelBase
 func _ready():
 
 	# 波次设置
+	wave_timer = 5
 	total_waves = 10  # 总波次数
-	wave_interval = 8.0 # 波次之间的间隔时间 (秒)
+	wave_interval = 10.0 # 波次之间的间隔时间 (秒)
 	enemy_spawn_interval = 0.4 # 波次内敌人生成间隔 (秒)
 	wave_duration_limit = 60.0 # 每波持续时间限制 (秒)
 
