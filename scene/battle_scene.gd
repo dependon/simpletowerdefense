@@ -8,7 +8,9 @@ var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 @onready var wave_label = $UI/WaveLabel # 新增：对波次标签的引用
 @onready var wait_time_label = $UI/WaitTime # 新增：对等待时间标签的引用
 @onready var next_wave_button = $UI/NextWave # 新增：对下一波按钮的引用
-
+@onready var current_enemy_num_label = $UI/CurrentEnemyNum # 新增：对当前剩余怪物数量标签的引用
+@onready var enemy_count_timer = $EnemyCountTimer # 新增：怪物数量更新计时器
+@onready var last_enemy_count
 func _on_setting_button_pressed():
 	get_tree().paused = true
 	setting_menu.show()
@@ -103,6 +105,8 @@ func _ready():
 	load_level(GameManager.current_level)
 	update_wave_display() # 新增：初始更新波次显示
 	
+	update_enemy_count_display() # 初始更新一次
+	
 
 func load_level(level_number: int):
 	if current_level:
@@ -169,10 +173,11 @@ func load_level(level_number: int):
 
 
 func update_wait_time_display(remaining_time: float):
-	wait_time_label.text = "下一波: %d" % ceil(remaining_time)
+	wait_time_label.text = "下一波倒计时: %d" % ceil(remaining_time)
 
 
 func _physics_process(delta):
+	update_enemy_count_display()
 	pass
 
 func _input(event):
@@ -263,3 +268,11 @@ func _on_next_wave_pressed() -> void:
 func _on_next_wave_timer_timeout() -> void:
 	is_next_wave_button_disabled = false
 	next_wave_button.disabled = false # 启用按钮
+
+# 新增：更新当前剩余怪物数量显示
+func update_enemy_count_display():
+	var enemy_count = get_tree().get_nodes_in_group("enemies").size()
+	if last_enemy_count != enemy_count :
+		last_enemy_count = enemy_count
+		current_enemy_num_label.text = "剩余怪物: " + str(enemy_count)
+	

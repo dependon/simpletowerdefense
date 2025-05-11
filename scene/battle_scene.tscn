@@ -45,10 +45,10 @@ text = "Diamonds : 0"
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -57.0
-offset_top = 26.0
-offset_right = 43.0
-offset_bottom = 49.0
+offset_left = -18.0
+offset_top = 30.0
+offset_right = 82.0
+offset_bottom = 53.0
 grow_horizontal = 2
 text = "波次: 0 / 0"
 horizontal_alignment = 1
@@ -196,14 +196,23 @@ offset_left = 370.0
 offset_top = 26.0
 offset_right = 489.0
 offset_bottom = 64.0
-text = "Wait Time:30"
+text = "下一波倒计时:30"
 
 [node name="NextWave" type="Button" parent="UI"]
-offset_left = 596.0
-offset_top = 23.0
-offset_right = 684.0
-offset_bottom = 55.0
+offset_left = 759.0
+offset_top = 24.0
+offset_right = 879.0
+offset_bottom = 56.0
 text = "立即开启下一波"
+
+[node name="CurrentEnemyNum" type="Label" parent="UI"]
+anchors_preset = -1
+anchor_bottom = 0.011
+offset_left = 543.0
+offset_top = 27.0
+offset_right = 685.0
+offset_bottom = 38.12
+text = "当前存在怪物数量:0"
 
 [node name="NextWaveTimer" type="Timer" parent="."]
 wait_time = 5.0
