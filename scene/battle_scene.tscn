@@ -205,6 +205,10 @@ offset_right = 684.0
 offset_bottom = 55.0
 text = "立即开启下一波"
 
+[node name="NextWaveTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="pressed" from="UI/SettingButton" to="." method="_on_setting_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/NormalTowerButton" to="." method="_on_normal_tower_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/FastTowerButton" to="." method="_on_fast_tower_button_pressed"]
@@ -213,3 +217,4 @@ text = "立即开启下一波"
 [connection signal="pressed" from="UI/BoxContainer/FastLowTowerButton" to="." method="_on_fast_low_tower_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/BigAreaTowerButton" to="." method="_on_big_area_tower_button_pressed"]
 [connection signal="pressed" from="UI/NextWave" to="." method="_on_next_wave_pressed"]
+[connection signal="timeout" from="NextWaveTimer" to="." method="_on_next_wave_timer_timeout"]

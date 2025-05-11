@@ -1,8 +1,13 @@
 extends Node2D
 
 @onready var setting_menu = $UI/SettingMenu
+@onready var next_wave_timer = $NextWaveTimer # 新增：下一波按钮冷却计时器
+
+var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
+
 @onready var wave_label = $UI/WaveLabel # 新增：对波次标签的引用
 @onready var wait_time_label = $UI/WaitTime # 新增：对等待时间标签的引用
+@onready var next_wave_button = $UI/NextWave # 新增：对下一波按钮的引用
 
 func _on_setting_button_pressed():
 	get_tree().paused = true
@@ -247,5 +252,14 @@ func _on_big_area_tower_button_pressed() -> void:
 
 
 func _on_next_wave_pressed() -> void:
-	GameManager.request_next_wave()
-	pass 
+	if not is_next_wave_button_disabled:
+		is_next_wave_button_disabled = true
+		next_wave_button.disabled = true # 禁用按钮
+		next_wave_timer.start()
+		GameManager.request_next_wave()
+	pass
+
+# 新增：下一波按钮冷却计时器超时处理函数
+func _on_next_wave_timer_timeout() -> void:
+	is_next_wave_button_disabled = false
+	next_wave_button.disabled = false # 启用按钮
