@@ -22,5 +22,3 @@ func _ready():
 		11: {"count": 35, "health_multiplier": 7.8, "speed_multiplier": 1.6, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
 		12: {"count": 40, "health_multiplier": 10.0, "speed_multiplier": 1.8, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}}
 	}
-	
-	startCurrentGame();

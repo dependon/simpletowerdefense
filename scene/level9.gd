@@ -41,5 +41,3 @@ func _ready():
 		29: {"count": 110, "health_multiplier": 16.0, "speed_multiplier": 3.4, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.5}},
 		30: {"count": 130, "health_multiplier": 17.0, "speed_multiplier": 3.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.1, EnemyType.WIZARD: 0.2, EnemyType.WARRIOR: 0.3, EnemyType.WEREWOLF: 0.3}} # 最终大混合
 	}
-
-	startCurrentGame();

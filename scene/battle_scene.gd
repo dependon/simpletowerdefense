@@ -166,7 +166,13 @@ func load_level(level_number: int):
 	if current_level and current_level.has_signal("wait_time_updated"):
 		current_level.wait_time_updated.connect(update_wait_time_display)
 	else:
-		printerr("当前关卡实例无效或缺少 wait_time_updated 信号: ", current_level)
+		printerr("当前关卡实例无效或缺少 wave_updated 信号: ", current_level) # 修正错误信息
+	
+	# 新增：连接初始等待时间更新信号
+	if current_level and current_level.has_signal("initial_wait_time_updated"):
+		current_level.initial_wait_time_updated.connect(update_initial_wait_time_display)
+	else:
+		printerr("当前关卡实例无效或缺少 initial_wait_time_updated 信号: ", current_level)
 	
 	# 无论如何都尝试更新一次，即使可能显示默认值
 	update_wave_display()
@@ -174,6 +180,10 @@ func load_level(level_number: int):
 
 func update_wait_time_display(remaining_time: float):
 	wait_time_label.text = "下一波倒计时: %d" % ceil(remaining_time)
+
+# 新增：更新初始等待时间显示
+func update_initial_wait_time_display(remaining_time: float):
+	wait_time_label.text = "初始等待: %d" % ceil(remaining_time)
 
 
 func _physics_process(delta):
@@ -275,4 +285,3 @@ func update_enemy_count_display():
 	if last_enemy_count != enemy_count :
 		last_enemy_count = enemy_count
 		current_enemy_num_label.text = "剩余怪物: " + str(enemy_count)
-	

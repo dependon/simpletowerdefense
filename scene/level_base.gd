@@ -21,8 +21,11 @@ enum EnemyType {
 signal wave_updated(current_wave, total_waves)
 # 新增：定义等待时间更新信号
 signal wait_time_updated(remaining_time)
+# 新增：定义初始等待时间更新信号
+signal initial_wait_time_updated(remaining_time)
 
 @onready var base = $Base # 基地仍然需要，用于扣血
+@onready var initial_wait_timer = $InitialWaitTimer # 新增：初始等待计时器
 @onready var enemy_scene = preload("res://scene/enemy.tscn")
 @onready var thief_scene = preload("res://scene/enemy_thief.tscn") 
 @onready var enemy_wizard = preload("res://scene/enemy_wizard.tscn") 
@@ -75,9 +78,12 @@ func get_wave_info() -> Dictionary:
 
 func _ready() -> void:
 	pass
+	
+	
+	# startCurrentGame() # 移除：不再在 _ready 中直接开始游戏
 
 func startCurrentGame() -> void:
-	# 连接 GameManager 的下一波请求信号
+		# 连接 GameManager 的下一波请求信号
 	GameManager.next_wave_requested.connect(_on_next_wave_requested)
 	# 设置敌人生成点位置
 	var spawn_point1 = $SpawnPoint
@@ -102,6 +108,11 @@ func trigger_victory() -> void:
 
 func _physics_process(delta):
 	if is_victory:
+		return
+	
+	# 新增：如果在初始等待期间，更新初始等待时间显示并返回
+	if initial_wait_timer and initial_wait_timer.is_running():
+		emit_signal("initial_wait_time_updated", initial_wait_timer.time_left)
 		return
 
 	# 检查胜利条件：所有波次完成且场上无敌人

@@ -35,5 +35,3 @@ func _ready():
 		24: {"count": 85, "health_multiplier": 10.0, "speed_multiplier": 2.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 1.0}},
 		25: {"count": 100, "health_multiplier": 12.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 1.0}}
 	}
-
-	startCurrentGame();

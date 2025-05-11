@@ -30,4 +30,3 @@ func _ready():
 		19: {"count": 65, "health_multiplier": 8.5, "speed_multiplier": 2.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.THIEF: 0.1, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.6}},
 		20: {"count": 70, "health_multiplier": 9.0, "speed_multiplier": 2.3, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyType.NORMAL: 0.1, EnemyType.THIEF: 0.2, EnemyType.WIZARD: 0.3, EnemyType.WARRIOR: 0.4}} # 最终混合波
 	}
-	startCurrentGame();
