@@ -80,7 +80,7 @@ func update_diamonds_display():
 # 新增：更新波次显示
 func update_wave_display(current_w = -1, total_w = -1):
 	# 优先使用信号传递过来的值
-	if current_w > 0 and total_w > 0: # 确保值有效
+	if current_w >= 0 and total_w > 0: # 确保值有效
 		wave_label.text = "波次: %d / %d" % [current_w, total_w]
 	# 否则，尝试从当前关卡获取
 	elif current_level and current_level.has_method("get_wave_info"):

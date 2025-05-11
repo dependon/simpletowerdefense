@@ -77,26 +77,22 @@ func get_wave_info() -> Dictionary:
 	return {"current": current_wave, "total": total_waves}
 
 func _ready() -> void:
-	pass
-	
-	
-	# startCurrentGame() # 移除：不再在 _ready 中直接开始游戏
+	print("关卡加载成功")
 
 func startCurrentGame() -> void:
-		# 连接 GameManager 的下一波请求信号
-	GameManager.next_wave_requested.connect(_on_next_wave_requested)
 	# 设置敌人生成点位置
 	var spawn_point1 = $SpawnPoint
 	var spawn_point2 = $SpawnPoint2
-	
+		
 	if spawn_point1 and spawn_point2:
-		# 确保生成点在路径开始位置
+			# 确保生成点在路径开始位置
 		spawn_point1.position = path1.curve.get_point_position(0)
 		spawn_point2.position = path2.curve.get_point_position(0)
-	
-	# 游戏开始时，立即开始第一波
+		
+		# 游戏开始时，立即开始第一波
 	is_between_waves = false # 不处于间隔状态
-	start_next_wave() # 调用函数开始第一波
+		# 连接 GameManager 的下一波请求信号
+	GameManager.next_wave_requested.connect(_on_next_wave_requested)
 
 func trigger_victory() -> void:
 	if is_victory: # 防止重复触发
@@ -177,6 +173,8 @@ func _physics_process(delta):
 
 
 func start_next_wave():
+	if current_wave <=0 :
+		startCurrentGame()
 	current_wave += 1
 	if current_wave > total_waves:
 		return
