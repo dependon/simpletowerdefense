@@ -1,4 +1,4 @@
-extends "res://scene/enemy.gd"
+extends Enemy
 
 # 盗贼特有属性
 @export var base_speed = 150  # 基础移动速度比普通敌人快50%

@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvbqfejoufgrf"]
+[gd_scene load_steps=22 format=3 uid="uid://3fsoqvaa62ke"]
 
-[ext_resource type="Script" uid="uid://cor6fnabq8kr0" path="res://scene/enemy_werewolf.gd" id="1"]
+[ext_resource type="Script" path="res://enemy/enemy_werewolf.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://5y6j3e3cpres" path="res://assets/player/werewolf_p.png" id="2_n04qo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c6d4n"]

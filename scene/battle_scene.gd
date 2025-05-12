@@ -26,14 +26,14 @@ func resume_game():
 func return_to_level_select():
 	setting_menu.hide()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scene/level_select.tscn")
+	get_tree().change_scene_to_file("res://level/level_select.tscn")
 
 func return_to_start_menu():
 	setting_menu.hide()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
 
-@onready var enemy_scene: PackedScene = preload("res://scene/enemy.tscn")
+@onready var enemy_scene: PackedScene = preload("res://enemy/enemy.tscn")
 @onready var tower_scene: PackedScene = preload("res://scene/tower_base.tscn")
 @onready var fast_tower_scene: PackedScene = preload("res://scene/tower_fast.tscn")
 @onready var area_tower_scene: PackedScene = preload("res://scene/tower_area.tscn")
@@ -41,16 +41,16 @@ func return_to_start_menu():
 @onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/tower_fast_low_damage.tscn") 
 @onready var big_area_tower_scene: PackedScene = preload("res://scene/tower_big_area.tscn") 
 
-@onready var level1_scene: PackedScene = preload("res://scene/level1.tscn")
-@onready var level2_scene: PackedScene = preload("res://scene/level2.tscn")
-@onready var level3_scene: PackedScene = preload("res://scene/level3.tscn")
-@onready var level4_scene: PackedScene = preload("res://scene/level4.tscn")
-@onready var level5_scene: PackedScene = preload("res://scene/level5.tscn")
-@onready var level6_scene: PackedScene = preload("res://scene/level6.tscn")
-@onready var level7_scene: PackedScene = preload("res://scene/level7.tscn")
-@onready var level8_scene: PackedScene = preload("res://scene/level8.tscn")
-@onready var level9_scene: PackedScene = preload("res://scene/level9.tscn")
-@onready var level10_scene: PackedScene = preload("res://scene/level10.tscn")
+@onready var level1_scene: PackedScene = preload("res://level/level1.tscn")
+@onready var level2_scene: PackedScene = preload("res://level/level2.tscn")
+@onready var level3_scene: PackedScene = preload("res://level/level3.tscn")
+@onready var level4_scene: PackedScene = preload("res://level/level4.tscn")
+@onready var level5_scene: PackedScene = preload("res://level/level5.tscn")
+@onready var level6_scene: PackedScene = preload("res://level/level6.tscn")
+@onready var level7_scene: PackedScene = preload("res://level/level7.tscn")
+@onready var level8_scene: PackedScene = preload("res://level/level8.tscn")
+@onready var level9_scene: PackedScene = preload("res://level/level9.tscn")
+@onready var level10_scene: PackedScene = preload("res://level/level10.tscn")
 
 
 

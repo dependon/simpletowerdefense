@@ -14,7 +14,7 @@ func _on_confirm_button_pressed():
 	GameManager.unlock_next_level()
 	
 	# 返回关卡选择界面
-	get_tree().change_scene_to_file("res://scene/level_select.tscn")
+	get_tree().change_scene_to_file("res://level/level_select.tscn")
 	
 	#保存游戏进度到本地
 	GameManager.save_game()

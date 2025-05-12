@@ -9,7 +9,7 @@ func _ready() -> void:
 	add_child(skill_tree_screen)
 
 func _on_start_button_pressed():
-	get_tree().change_scene_to_file("res://scene/level_select.tscn")
+	get_tree().change_scene_to_file("res://level/level_select.tscn")
 	
 func _on_settings_button_pressed():
 	# TODO: 实现设置面板

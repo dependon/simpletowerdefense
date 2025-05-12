@@ -26,11 +26,11 @@ signal initial_wait_time_updated(remaining_time)
 
 @onready var base = $Base # 基地仍然需要，用于扣血
 @onready var initial_wait_timer = $InitialWaitTimer # 新增：初始等待计时器
-@onready var enemy_scene = preload("res://scene/enemy.tscn")
-@onready var thief_scene = preload("res://scene/enemy_thief.tscn") 
-@onready var enemy_wizard = preload("res://scene/enemy_wizard.tscn") 
-@onready var enemy_warrior = preload("res://scene/enemy_warrior.tscn") 
-@onready var enemy_werewolf = preload("res://scene/enemy_werewolf.tscn")
+@onready var enemy_scene = preload("res://enemy/enemy.tscn")
+@onready var thief_scene = preload("res://enemy/enemy_thief.tscn") 
+@onready var enemy_wizard = preload("res://enemy/enemy_wizard.tscn") 
+@onready var enemy_warrior = preload("res://enemy/enemy_warrior.tscn") 
+@onready var enemy_werewolf = preload("res://enemy/enemy_werewolf.tscn")
 
 @onready var path = $Path2D
 @onready var path1 = $Path2D

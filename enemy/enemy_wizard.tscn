@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://bgecwtgyj67lc"]
+[gd_scene load_steps=23 format=3 uid="uid://cb7r2uvuv1a0g"]
 
-[ext_resource type="Script" uid="uid://bj564crlggwwb" path="res://scene/enemy_wizard.gd" id="1"]
+[ext_resource type="Script" path="res://enemy/enemy_wizard.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://buc13imk8t471" path="res://assets/player/wizard_p.png" id="2_kviqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x08o"]

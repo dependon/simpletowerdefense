@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://37og3nwd2oqi"]
+[gd_scene load_steps=19 format=3 uid="uid://do6djxowh1ahf"]
 
-[ext_resource type="Script" uid="uid://bwaffbgiqlyff" path="res://scene/enemy_warrior.gd" id="1"]
+[ext_resource type="Script" path="res://enemy/enemy_warrior.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://cp7ocumjhrtn1" path="res://assets/player/warrior_p.png" id="2_2ypfe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnc30"]

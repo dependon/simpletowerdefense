@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://c8q4g4qxm3p8k"]
+[gd_scene load_steps=22 format=3 uid="uid://c0v6senlsfi8j"]
 
-[ext_resource type="Script" uid="uid://5kfwt86x45aw" path="res://scene/enemy_thief.gd" id="1_hn4vg"]
+[ext_resource type="Script" uid="uid://5kfwt86x45aw" path="res://enemy/enemy_thief.gd" id="1_hn4vg"]
 [ext_resource type="Texture2D" uid="uid://c4p0cnyibt1a" path="res://assets/player/thief_p.png" id="2_80okl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y15rk"]
