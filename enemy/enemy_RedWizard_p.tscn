@@ -1,0 +1,112 @@
+[gd_scene load_steps=17 format=3 uid="uid://cyxv8aylbfd12"]
+
+[ext_resource type="Texture2D" uid="uid://djawa6oe7p4mi" path="res://assets/player/RedWizard_p.png" id="2_5jlyp"]
+[ext_resource type="Script" uid="uid://dko564kjo2ll1" path="res://enemy/enemy_RedWizard_p.gd" id="gdscript_id"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y15rk"]
+size = Vector2(61, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb8k5"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(96, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp82c"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(192, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57vr1"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(288, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8uow"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(384, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08llk"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(0, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx355"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(96, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg3v8"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(192, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldn31"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(288, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32tgm"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(384, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoaen"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(0, 256, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgg5g"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(96, 256, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gs3u"]
+atlas = ExtResource("2_5jlyp")
+region = Rect2(192, 256, 96, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m520d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vb8k5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xp82c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57vr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8uow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08llk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx355")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg3v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldn31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32tgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoaen")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgg5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gs3u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="EnemyRedWizardP" type="Area2D"]
+position = Vector2(-1, 1)
+script = ExtResource("gdscript_id")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 5.5)
+shape = SubResource("RectangleShape2D_y15rk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m520d")
+autoplay = "default"
+frame_progress = 0.929824
