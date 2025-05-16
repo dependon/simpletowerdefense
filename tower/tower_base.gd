@@ -85,7 +85,7 @@ func _physics_process(delta):
 		var enemies = tower_area.get_overlapping_areas()
 		for enemy in enemies:
 			if enemy.is_in_group("enemies"):
-				var bullet_scene = preload("res://scene/bullet.tscn")
+				var bullet_scene = preload("res://bullet/bullet.tscn")
 				var bullet = bullet_scene.instantiate()
 				bullet.direction = (enemy.global_position - position).normalized()
 				bullet.damage = current_damage
