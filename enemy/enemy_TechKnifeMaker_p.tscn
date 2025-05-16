@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://xoj2qekxyrc8"]
+
+[ext_resource type="Script" uid="uid://cndw10mub4jq4" path="res://enemy/enemy_TechKnifeMaker_p.gd" id="1_abcdef"]
+[ext_resource type="Texture2D" uid="uid://dwdpbglda03vh" path="res://assets/player/TechKnifeMaker_p.png" id="2_6xh0i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w463g"]
+size = Vector2(80, 114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppesv"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(0, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71lnn"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(96, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cuf8"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(192, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvqj1"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(288, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnb53"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(384, 0, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0omv"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(0, 128, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vngpk"]
+atlas = ExtResource("2_6xh0i")
+region = Rect2(96, 128, 96, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yp87e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppesv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71lnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cuf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvqj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnb53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0omv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vngpk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyTechKnifeMakerP" type="Area2D"]
+script = ExtResource("1_abcdef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 2)
+shape = SubResource("RectangleShape2D_w463g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yp87e")
+autoplay = "default"
+frame_progress = 0.988509
