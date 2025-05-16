@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c3dgut5jqp7es" path="res://assets/player/BlackWizard_p.png" id="2_abcdef"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w463g"]
-size = Vector2(26.5, 28)
+size = Vector2(80, 114)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w463g"]
 atlas = ExtResource("2_abcdef")
@@ -207,10 +207,10 @@ animations = [{
 script = ExtResource("1_abcdef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.75, 2)
+position = Vector2(4, 2)
 shape = SubResource("RectangleShape2D_w463g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0nf4u")
 autoplay = "default"
-frame_progress = 0.669108
+frame_progress = 0.872451
