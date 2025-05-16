@@ -1,17 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk1kf62fny7uk"]
+[gd_scene load_steps=10 format=3 uid="uid://dk1kf62fny7uk"]
 
 [ext_resource type="Script" uid="uid://u56esdt3g01r" path="res://bullet/bullet.gd" id="1_bullet"]
-[ext_resource type="Texture2D" uid="uid://duij5eyiowp5i" path="res://icon.svg" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://cmxa4x2053re5" path="res://assets/bullet/bullet_t1.png" id="2_6wip1"]
 
 [sub_resource type="CircleShape2D" id="circle_shape"]
 radius = 8.06226
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qjqd"]
+atlas = ExtResource("2_6wip1")
+region = Rect2(12, 0, 53, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvnxm"]
+atlas = ExtResource("2_6wip1")
+region = Rect2(65, 0, 53, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynyjt"]
+atlas = ExtResource("2_6wip1")
+region = Rect2(118, 0, 53, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3udht"]
+atlas = ExtResource("2_6wip1")
+region = Rect2(171, 0, 53, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86agt"]
+atlas = ExtResource("2_6wip1")
+region = Rect2(224, 0, 53, 53)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k2aps"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qjqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvnxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynyjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3udht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86agt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_bullet")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_icon")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("circle_shape")
@@ -20,6 +59,11 @@ shape = SubResource("circle_shape")
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k2aps")
+autoplay = "default"
+frame_progress = 0.418141
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
