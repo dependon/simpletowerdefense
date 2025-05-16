@@ -3,7 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://yceqw8gtohjs" path="res://assets/player/GreenMage_p.png" id="1_o23vm"]
 
 [sub_resource type="GDScript" id="GDScript_o23vm"]
-script/source = "extends CharacterBody2D
+script/source = "extends Enemy
+
+# 蓝眼巫师特有属性
+@export var base_speed: float = 120.0  # 基础移动速度
+@export var base_hp: int = 200       # 基础生命值
+
+func _ready() -> void:
+	speed = base_speed
+	hp = base_hp
+
+	super._ready()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1e5mv"]
