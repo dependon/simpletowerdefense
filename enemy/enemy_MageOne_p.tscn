@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://pb72ttm3hu5t"]
+
+[ext_resource type="Script" uid="uid://ixxq8cdfxoxf" path="res://enemy/enemy_MageOne_p.gd" id="1_abcdef"]
+[ext_resource type="Texture2D" uid="uid://bfesxvm31o8wi" path="res://assets/player/MageOne_p.png" id="2_mrwhb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11yyc"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(384, 384, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn2g3"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(0, 512, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqrtm"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(96, 512, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yph8r"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(192, 512, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ixf"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(288, 512, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euan4"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(384, 512, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jg6be"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(0, 640, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i60ix"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(96, 640, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h3ik"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(192, 640, 96, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3of7"]
+atlas = ExtResource("2_mrwhb")
+region = Rect2(288, 640, 96, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1yss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11yyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn2g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqrtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yph8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ixf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euan4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jg6be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i60ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h3ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3of7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uy5q6"]
+size = Vector2(73, 131)
+
+[node name="MageOne_p" type="Area2D"]
+script = ExtResource("1_abcdef")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e1yss")
+frame_progress = 0.838031
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 3.5)
+shape = SubResource("RectangleShape2D_uy5q6")
