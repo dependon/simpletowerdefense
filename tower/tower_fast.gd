@@ -1,4 +1,4 @@
-extends "res://scene/tower_base.gd"
+extends "res://tower/tower_base.gd"
 
 # 定义不同等级对应的素材路径
 const UPGRADE_SPRITES = {

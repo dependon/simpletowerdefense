@@ -34,12 +34,12 @@ func return_to_start_menu():
 	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
 
 @onready var enemy_scene: PackedScene = preload("res://enemy/enemy.tscn")
-@onready var tower_scene: PackedScene = preload("res://scene/tower_base.tscn")
-@onready var fast_tower_scene: PackedScene = preload("res://scene/tower_fast.tscn")
-@onready var area_tower_scene: PackedScene = preload("res://scene/tower_area.tscn")
-@onready var frost_tower_scene: PackedScene = preload("res://scene/tower_frost.tscn")
-@onready var fast_low_damage_tower_scene: PackedScene = preload("res://scene/tower_fast_low_damage.tscn") 
-@onready var big_area_tower_scene: PackedScene = preload("res://scene/tower_big_area.tscn") 
+@onready var tower_scene: PackedScene = preload("res://tower/tower_base.tscn")
+@onready var fast_tower_scene: PackedScene = preload("res://tower/tower_fast.tscn")
+@onready var area_tower_scene: PackedScene = preload("res://tower/tower_area.tscn")
+@onready var frost_tower_scene: PackedScene = preload("res://tower/tower_frost.tscn")
+@onready var fast_low_damage_tower_scene: PackedScene = preload("res://tower/tower_fast_low_damage.tscn") 
+@onready var big_area_tower_scene: PackedScene = preload("res://tower/tower_big_area.tscn") 
 
 @onready var level1_scene: PackedScene = preload("res://level/level1.tscn")
 @onready var level2_scene: PackedScene = preload("res://level/level2.tscn")

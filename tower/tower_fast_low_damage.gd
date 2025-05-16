@@ -1,4 +1,4 @@
-extends "res://scene/tower_base.gd"
+extends "res://tower/tower_base.gd"
 
 # 新防御塔：快速攻击，低伤害
 

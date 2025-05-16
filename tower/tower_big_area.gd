@@ -1,4 +1,4 @@
-extends "res://scene/tower_base.gd"
+extends "res://tower/tower_base.gd"
 
 func _ready():
 	super()
