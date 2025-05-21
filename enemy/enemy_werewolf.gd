@@ -1,7 +1,7 @@
 extends Enemy
 
 # 狼人特有属性
-@export var base_speed = 300  # 基础移动速度快
+@export var base_speed = 180  # 基础移动速度快
 @export var base_hp = 120  # 基础生命值一般
 
 func _ready() -> void:

@@ -215,9 +215,16 @@ const PATH_DETECTION_THRESHOLD = 60
 # 防御塔最小放置距离（像素）
 const TOWER_MIN_DISTANCE = 60
 
+@onready var ui_box_container = $UI/BoxContainer # 新增：对 BoxContainer 的引用
+
 func _input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
 		var mouse_pos = get_global_mouse_position() # 使用全局鼠标位置
+
+		# 检查是否在 BoxContainer 范围内
+		if ui_box_container and ui_box_container.get_global_rect().has_point(mouse_pos):
+			print("Cannot place tower within the UI area.")
+			return # 在UI范围内，不允许放置
 
 		# 1. 检查是否在敌人路径附近
 		if not current_level_paths.is_empty():
