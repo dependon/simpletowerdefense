@@ -56,7 +56,7 @@ func return_to_start_menu():
 
 var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 、 "frost" 或 "fast_low_damage"
 var current_level: Node2D = null
-var current_level_path: Path2D = null
+var current_level_paths: Array[Path2D] = [] # 修改：存储多个 Path2D 节点
 var wave_update_connection = null # 新增：用于存储信号连接
 
 
@@ -147,7 +147,18 @@ func load_level(level_number: int):
 	current_level = level_scene.instantiate()
 	
 	add_child(current_level)
-	# current_level_path = current_level.get_node("Path2D") # 这行可能需要根据实际关卡结构调整或移除
+	# 查找当前关卡下的所有 Path2D 节点并存储
+	current_level_paths.clear() # 清空之前的路径
+	var found_nodes = current_level.find_children("*", "Path2D")
+	if found_nodes.is_empty():
+		printerr("当前关卡未找到任何 Path2D 节点!")
+	else:
+		for node in found_nodes:
+			if node is Path2D:
+				current_level_paths.append(node)
+			else:
+				printerr("找到一个非 Path2D 类型的节点，名称: ", node.name)
+
 
 	# 新增：连接新关卡的信号
 	if current_level and current_level.has_signal("wave_updated"):
@@ -190,54 +201,76 @@ func _physics_process(delta):
 	update_enemy_count_display()
 	pass
 
+# 路径检测阈值（像素）
+const PATH_DETECTION_THRESHOLD = 60
+# 防御塔最小放置距离（像素）
+const TOWER_MIN_DISTANCE = 60
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var mouse_pos = get_local_mouse_position()
-		var build_points = get_tree().get_nodes_in_group("build_points")
-		for point in build_points:
-			if point.position.distance_to(mouse_pos) < 32:
-				# 检查建造点是否已被占用
-				if point.is_point_occupied():
-					break
-				var cost
-				match current_tower_type:
-					"normal": 
-						cost = NORMAL_TOWER_COST
-					"fast": 
-						cost = FAST_TOWER_COST
-					"frost": 
-						cost = FROST_TOWER_COST
-					"fast_low_damage": # 新增：处理快速低伤塔成本
-						cost = FAST_LOW_DAMAGE_TOWER_COST
-					"big_area_damage":
-						cost = BIG_AREA_TOWER_COST
-					_: 
-						cost = AREA_TOWER_COST
+		var mouse_pos = get_global_mouse_position() # 使用全局鼠标位置
 
-				if coins >= cost:
-					var tower
-					match current_tower_type:
-						"normal": 
-							tower = tower_scene.instantiate()
-						"fast": 
-							tower = fast_tower_scene.instantiate()
-						"frost": 
-							tower = frost_tower_scene.instantiate()
-						"fast_low_damage": # 新增：实例化快速低伤塔
-							tower = fast_low_damage_tower_scene.instantiate()
-						"big_area_damage":
-							tower = big_area_tower_scene.instantiate()
-						_: 
-							tower = area_tower_scene.instantiate()
-					
-					tower.position = point.position
-					tower.set_z_index(3)
+		# 1. 检查是否在敌人路径附近
+		if not current_level_paths.is_empty():
+			for path_node in current_level_paths:
+				var baked_points = path_node.curve.get_baked_points()
+				for point in baked_points:
+					# 将路径点从局部坐标转换为全局坐标
+					var global_path_point = path_node.to_global(point)
+					if global_path_point.distance_to(mouse_pos) < PATH_DETECTION_THRESHOLD:
+						# 在路径附近，不允许放置
+						print("Cannot place tower near enemy path.")
+						return # 退出函数，不进行后续放置逻辑
 
-					add_child(tower)
-					point.set_occupied(true)
-					coins -= cost
-					update_coins_display()
-				break
+		# 2. 检查是否与其他防御塔位置过近
+		var towers = get_tree().get_nodes_in_group("towers")
+		for tower in towers:
+			if tower.global_position.distance_to(mouse_pos) < TOWER_MIN_DISTANCE:
+				# 与现有防御塔过近，不允许放置
+				print("Cannot place tower too close to another tower.")
+				return # 退出函数
+
+		# 3. 如果通过了路径和距离检查，则进行放置逻辑
+		var cost
+		var tower_scene_to_instantiate: PackedScene = null
+
+		match current_tower_type:
+			"normal":
+				cost = NORMAL_TOWER_COST
+				tower_scene_to_instantiate = tower_scene
+			"fast":
+				cost = FAST_TOWER_COST
+				tower_scene_to_instantiate = fast_tower_scene
+			"frost":
+				cost = FROST_TOWER_COST
+				tower_scene_to_instantiate = frost_tower_scene
+			"fast_low_damage":
+				cost = FAST_LOW_DAMAGE_TOWER_COST
+				tower_scene_to_instantiate = fast_low_damage_tower_scene
+			"big_area_damage":
+				cost = BIG_AREA_TOWER_COST
+				tower_scene_to_instantiate = big_area_tower_scene
+			"area": # 确保 area 类型也在匹配中
+				cost = AREA_TOWER_COST
+				tower_scene_to_instantiate = area_tower_scene
+			_:
+				print("Unknown tower type: ", current_tower_type)
+				return # 未知类型，退出
+
+		if coins >= cost and tower_scene_to_instantiate:
+			var tower = tower_scene_to_instantiate.instantiate()
+
+			# 将防御塔位置设置为鼠标点击的全局位置
+			tower.global_position = mouse_pos
+			tower.set_z_index(3) # 确保防御塔在敌人上方显示
+
+			add_child(tower)
+			tower.add_to_group("towers") # 将新放置的防御塔添加到 "towers" 组
+
+			coins -= cost
+			update_coins_display()
+		elif coins < cost:
+			print("Not enough coins to place tower.")
 
 func _on_normal_tower_button_pressed():
 	current_tower_type = "normal"
