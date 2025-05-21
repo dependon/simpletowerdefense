@@ -8,15 +8,6 @@ enum PathType {
 	BOTH_PATHS
 }
 
-# 敌人类型枚举
-enum EnemyType {
-	NORMAL,
-	THIEF,
-	WIZARD,
-	WARRIOR,
-	WEREWOLF
-}
-
 # 新增：定义波次更新信号
 signal wave_updated(current_wave, total_waves)
 # 新增：定义等待时间更新信号
@@ -26,11 +17,6 @@ signal initial_wait_time_updated(remaining_time)
 
 @onready var base = $Base # 基地仍然需要，用于扣血
 @onready var initial_wait_timer = $InitialWaitTimer # 新增：初始等待计时器
-@onready var enemy_scene = preload("res://enemy/enemy.tscn")
-@onready var thief_scene = preload("res://enemy/enemy_thief.tscn") 
-@onready var enemy_wizard = preload("res://enemy/enemy_wizard.tscn") 
-@onready var enemy_warrior = preload("res://enemy/enemy_warrior.tscn") 
-@onready var enemy_werewolf = preload("res://enemy/enemy_werewolf.tscn")
 
 @onready var path = $Path2D
 @onready var path1 = $Path2D
@@ -39,16 +25,16 @@ signal initial_wait_time_updated(remaining_time)
 # 波次配置字典: {wave_number: {"count": enemy_count, "health_multiplier": multiplier, "speed_multiplier": multiplier}}
 # 怪物数量从少到多，血量和速度倍率逐渐增加
 var wave_config = {
-	1: {"count": 5, "health_multiplier": 1.0, "speed_multiplier": 1.0, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	2: {"count": 8, "health_multiplier": 1.2, "speed_multiplier": 1.0, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	3: {"count": 10, "health_multiplier": 1.4, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	4: {"count": 12, "health_multiplier": 1.6, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	5: {"count": 15, "health_multiplier": 1.8, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	6: {"count": 18, "health_multiplier": 2.2, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	7: {"count": 20, "health_multiplier": 2.6, "speed_multiplier": 1.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	8: {"count": 22, "health_multiplier": 3.4, "speed_multiplier": 1.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	9: {"count": 25, "health_multiplier": 4, "speed_multiplier": 1.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}},
-	10: {"count": 40, "health_multiplier": 6, "speed_multiplier": 1.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyType.NORMAL: 1.0}}
+	1: {"count": 5, "health_multiplier": 1.0, "speed_multiplier": 1.0, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	2: {"count": 8, "health_multiplier": 1.2, "speed_multiplier": 1.0, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	3: {"count": 10, "health_multiplier": 1.4, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	4: {"count": 12, "health_multiplier": 1.6, "speed_multiplier": 1.1, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	5: {"count": 15, "health_multiplier": 1.8, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	6: {"count": 18, "health_multiplier": 2.2, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	7: {"count": 20, "health_multiplier": 2.6, "speed_multiplier": 1.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	8: {"count": 22, "health_multiplier": 3.4, "speed_multiplier": 1.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	9: {"count": 25, "health_multiplier": 4, "speed_multiplier": 1.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
+	10: {"count": 40, "health_multiplier": 6, "speed_multiplier": 1.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}}
 }
 
 # 波次设置
@@ -199,17 +185,11 @@ func spawn_enemy(path_node, config):
 	var enemy_type = select_random_enemy_type(config["enemy_mix"])
 	
 	# 根据敌人类型创建相应的敌人实例
-	var enemy
-	if enemy_type == EnemyType.NORMAL:
-		enemy = enemy_scene.instantiate()
-	elif enemy_type == EnemyType.THIEF:
-		enemy = thief_scene.instantiate()
-	elif enemy_type == EnemyType.WIZARD:
-		enemy = enemy_wizard.instantiate()
-	elif enemy_type == EnemyType.WARRIOR:
-		enemy = enemy_warrior.instantiate()
-	elif enemy_type == EnemyType.WEREWOLF:
-		enemy = enemy_werewolf.instantiate()
+	var enemy_node = EnemyManager.get_enemy_scene(enemy_type)
+	if not enemy_node:
+		printerr("Failed to get enemy scene for type: ", enemy_type)
+		return
+	var enemy = enemy_node.instantiate()
 	
 	# 设置敌人属性
 	enemy.hp *= config["health_multiplier"]
@@ -239,4 +219,4 @@ func select_random_enemy_type(enemy_mix):
 			return enemy_type
 	
 	# 默认返回普通敌人
-	return EnemyType.NORMAL
+	return EnemyManager.EnemyType.NORMAL
