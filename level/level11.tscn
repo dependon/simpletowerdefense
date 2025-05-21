@@ -4261,7 +4261,7 @@ curve = SubResource("Curve2D_1")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(118, 92)
-rotation = -0.00224268
+rotation = -0.00224271
 
 [node name="Path2D_2" type="Path2D" parent="."]
 z_index = 2
@@ -4286,6 +4286,7 @@ position = Vector2(238, 702)
 gizmo_extents = 32.0
 
 [node name="BuildPoints" type="Node2D" parent="."]
+visible = false
 z_index = 3
 
 [node name="BuildPoint1" parent="BuildPoints" instance=ExtResource("3_y6e6c")]

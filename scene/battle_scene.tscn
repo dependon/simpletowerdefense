@@ -194,7 +194,7 @@ text = "200"
 [node name="ClearTowerButton" type="Button" parent="UI/BoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-icon = ExtResource("3_5pnl2")
+text = "Clear"
 icon_alignment = 1
 expand_icon = true
 
@@ -210,7 +210,7 @@ offset_top = -23.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "50"
+text = "0"
 
 [node name="WaitTime" type="Label" parent="UI"]
 offset_left = 370.0

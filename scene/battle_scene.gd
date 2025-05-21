@@ -124,8 +124,8 @@ func load_level(level_number: int):
 			current_level.wave_updated.disconnect(update_wave_display)
 		current_level.queue_free()
 	
-	# 重置金币
-	coins = 100
+	# 根据关卡编号设置初始金币
+	coins = 100 + (level_number - 1) * 50
 	update_coins_display()
 	
 	var level_scene
