@@ -11,6 +11,15 @@ var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 @onready var current_enemy_num_label = $UI/CurrentEnemyNum # 新增：对当前剩余怪物数量标签的引用
 @onready var enemy_count_timer = $EnemyCountTimer # 新增：怪物数量更新计时器
 @onready var last_enemy_count
+
+# 新增：防御塔选择按钮引用
+@onready var normal_tower_button = $UI/BoxContainer/NormalTowerButton
+@onready var fast_tower_button = $UI/BoxContainer/FastTowerButton
+@onready var area_tower_button = $UI/BoxContainer/AreaTowerButton
+@onready var frost_tower_button = $UI/BoxContainer/FrostTowerButton_2 # 注意这里的名称可能需要根据场景文件确认
+@onready var fast_low_tower_button = $UI/BoxContainer/FastLowTowerButton # 注意这里的名称可能需要根据场景文件确认
+@onready var big_area_tower_button = $UI/BoxContainer/BigAreaTowerButton # 注意这里的名称可能需要根据场景文件确认
+
 func _on_setting_button_pressed():
 	get_tree().paused = true
 	setting_menu.show()
@@ -54,7 +63,7 @@ func return_to_start_menu():
 
 
 
-var current_tower_type = "normal"  # 可以是 "normal"、"fast"、"area" 、 "frost" 或 "fast_low_damage"
+var current_tower_type = ""  # 可以是 "normal"、"fast"、"area" 、 "frost" 或 "fast_low_damage"，初始为空
 var current_level: Node2D = null
 var current_level_paths: Array[Path2D] = [] # 修改：存储多个 Path2D 节点
 var wave_update_connection = null # 新增：用于存储信号连接
@@ -106,7 +115,7 @@ func _ready():
 	update_wave_display() # 新增：初始更新波次显示
 	
 	update_enemy_count_display() # 初始更新一次
-	
+	_update_tower_button_selection_visuals() # 新增：初始更新按钮视觉状态
 
 func load_level(level_number: int):
 	if current_level:
@@ -269,17 +278,45 @@ func _input(event):
 
 			coins -= cost
 			update_coins_display()
+			
+			# 新增：放置防御塔后清空选中状态
+			current_tower_type = ""
+			_update_tower_button_selection_visuals() # 更新按钮视觉状态
+			
 		elif coins < cost:
 			print("Not enough coins to place tower.")
 
+# 新增：更新防御塔选择按钮的视觉状态
+func _update_tower_button_selection_visuals():
+	var buttons = [
+		{ "type": "normal", "button": normal_tower_button },
+		{ "type": "fast", "button": fast_tower_button },
+		{ "type": "area", "button": area_tower_button },
+		{ "type": "frost", "button": frost_tower_button },
+		{ "type": "fast_low_damage", "button": fast_low_tower_button },
+		{ "type": "big_area_damage", "button": big_area_tower_button },
+	]
+	
+	for item in buttons:
+		if item.button: # 确保按钮节点存在
+			if item.type == current_tower_type:
+				# 高亮选中的按钮 (例如，改变颜色)
+				item.button.modulate = Color("ffff00") # 浅黄色
+			else:
+				# 恢复其他按钮的颜色
+				item.button.modulate = Color("ffffff") # 白色 (正常颜色)
+
 func _on_normal_tower_button_pressed():
 	current_tower_type = "normal"
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 
 func _on_fast_tower_button_pressed():
 	current_tower_type = "fast"
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 
 func _on_area_tower_button_pressed():
 	current_tower_type = "area"
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 
 func switch_to_level(level_number: int):
 	load_level(level_number)
@@ -287,15 +324,18 @@ func switch_to_level(level_number: int):
 
 func _on_frost_tower_button_2_pressed() -> void:
 	current_tower_type = "frost"
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 
 # 新增：快速低伤塔按钮处理函数
 func _on_fast_low_tower_button_pressed() -> void:
 	current_tower_type = "fast_low_damage"
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 	pass 
 
 
 func _on_big_area_tower_button_pressed() -> void:
 	current_tower_type = "big_area_damage"
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 	pass 
 
 

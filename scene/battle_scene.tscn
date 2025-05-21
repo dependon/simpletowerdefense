@@ -65,7 +65,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -162.0
-offset_right = 423.0
+offset_right = 620.0
 grow_vertical = 0
 
 [node name="NormalTowerButton" type="Button" parent="UI/BoxContainer"]
