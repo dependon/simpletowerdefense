@@ -1,5 +1,5 @@
 extends Area2D
-
+class_name Bullet
 @export var speed = 300
 @export var max_range = 800  # 子弹最大射程
 var direction := Vector2.ZERO
@@ -8,6 +8,10 @@ var initial_position := Vector2.ZERO  # 记录初始位置
 @onready var timer: Timer = $Timer # 获取timer节点
 
 func _ready():
+	#连接槽函数
+	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+	timer.start(5.0)
+	area_entered.connect(_on_area_entered)
 	initial_position = position  # 记录发射时的位置
 
 func _physics_process(delta):

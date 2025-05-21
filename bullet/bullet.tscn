@@ -21,12 +21,8 @@ shape = SubResource("circle_shape")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
-autostart = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 texture = ExtResource("3_0qjqd")
 fixed_fps = 120
 process_material = SubResource("ParticleProcessMaterial_xvnxm")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
