@@ -1,16 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://dk1kf62fny7uk"]
 
 [ext_resource type="Script" uid="uid://u56esdt3g01r" path="res://bullet/bullet.gd" id="1_bullet"]
-[ext_resource type="Texture2D" uid="uid://bi16uaycpwkjv" path="res://assets/bullet/bullet_blue_1.png" id="3_0qjqd"]
+[ext_resource type="Texture2D" uid="uid://cpo74gf87ds22" path="res://assets/bullet/bullet_red_1.png" id="2_6wip1"]
 
 [sub_resource type="CircleShape2D" id="circle_shape"]
 radius = 8.06226
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xvnxm"]
-particle_flag_disable_z = true
-angular_velocity_min = -720.0
-angular_velocity_max = 720.0
-gravity = Vector3(0, 0, 0)
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qjqd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6wip1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_bullet")
@@ -22,7 +27,5 @@ shape = SubResource("circle_shape")
 wait_time = 5.0
 one_shot = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-texture = ExtResource("3_0qjqd")
-fixed_fps = 120
-process_material = SubResource("ParticleProcessMaterial_xvnxm")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0qjqd")

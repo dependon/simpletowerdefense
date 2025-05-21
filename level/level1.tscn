@@ -4256,6 +4256,7 @@ rotation = -0.029548
 position = Vector2(100, 300)
 
 [node name="BuildPoints" type="Node2D" parent="."]
+visible = false
 visibility_layer = 7
 z_index = 1
 

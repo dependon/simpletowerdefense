@@ -191,6 +191,27 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "200"
 
+[node name="ClearTowerButton" type="Button" parent="UI/BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+icon = ExtResource("3_5pnl2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="UI/BoxContainer/ClearTowerButton"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "50"
+
 [node name="WaitTime" type="Label" parent="UI"]
 offset_left = 370.0
 offset_top = 26.0
@@ -225,5 +246,6 @@ one_shot = true
 [connection signal="pressed" from="UI/BoxContainer/FrostTowerButton2" to="." method="_on_frost_tower_button_2_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/FastLowTowerButton" to="." method="_on_fast_low_tower_button_pressed"]
 [connection signal="pressed" from="UI/BoxContainer/BigAreaTowerButton" to="." method="_on_big_area_tower_button_pressed"]
+[connection signal="pressed" from="UI/BoxContainer/ClearTowerButton" to="." method="_on_clear_tower_button_pressed"]
 [connection signal="pressed" from="UI/NextWave" to="." method="_on_next_wave_pressed"]
 [connection signal="timeout" from="NextWaveTimer" to="." method="_on_next_wave_timer_timeout"]

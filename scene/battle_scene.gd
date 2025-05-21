@@ -279,10 +279,6 @@ func _input(event):
 			coins -= cost
 			update_coins_display()
 			
-			# 新增：放置防御塔后清空选中状态
-			current_tower_type = ""
-			_update_tower_button_selection_visuals() # 更新按钮视觉状态
-			
 		elif coins < cost:
 			print("Not enough coins to place tower.")
 
@@ -358,3 +354,9 @@ func update_enemy_count_display():
 	if last_enemy_count != enemy_count :
 		last_enemy_count = enemy_count
 		current_enemy_num_label.text = "剩余怪物: " + str(enemy_count)
+
+
+func _on_clear_tower_button_pressed() -> void:
+	# 新增：放置防御塔后清空选中状态
+	current_tower_type = ""
+	_update_tower_button_selection_visuals() # 更新按钮视觉状态
