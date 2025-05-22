@@ -16,7 +16,7 @@ var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 @onready var normal_tower_button = $UI/BoxContainer/NormalTowerButton
 @onready var fast_tower_button = $UI/BoxContainer/FastTowerButton
 @onready var area_tower_button = $UI/BoxContainer/AreaTowerButton
-@onready var frost_tower_button = $UI/BoxContainer/FrostTowerButton_2 # 注意这里的名称可能需要根据场景文件确认
+@onready var frost_tower_button = $UI/BoxContainer/FrostTowerButton # 注意这里的名称可能需要根据场景文件确认
 @onready var fast_low_tower_button = $UI/BoxContainer/FastLowTowerButton # 注意这里的名称可能需要根据场景文件确认
 @onready var big_area_tower_button = $UI/BoxContainer/BigAreaTowerButton # 注意这里的名称可能需要根据场景文件确认
 
@@ -403,7 +403,7 @@ func switch_to_level(level_number: int):
 	load_level(level_number)
 
 
-func _on_frost_tower_button_2_pressed() -> void:
+func _on_frost_tower_button_pressed() -> void:
 	current_tower_type = "frost"
 	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 
