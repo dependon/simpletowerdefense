@@ -36,6 +36,9 @@ func update_level_buttons():
 	
 	# 检查关卡10是否解锁
 	$HBoxContainer/Level10Container/Level10Button.disabled = !GameManager.is_level_unlocked(10)
+	
+	# 检查关卡11是否解锁
+	$HBoxContainer/Level11Container/Level11Button.disabled = !GameManager.is_level_unlocked(11)
 
 # 更新星级显示
 func update_stars_display():
@@ -89,6 +92,11 @@ func update_stars_display():
 	for i in range(1, 4):
 		$HBoxContainer/Level10Container/Level10Stars.get_node("Star" + str(i)).modulate = Color(1, 1, 1, 1) if i <= stars10 else Color(0.5, 0.5, 0.5, 0.5)
 
+	# 更新关卡11的星级
+	var stars11 = GameManager.get_level_stars(11)
+	for i in range(1, 4):
+		$HBoxContainer/Level11Container/Level11Stars.get_node("Star" + str(i)).modulate = Color(1, 1, 1, 1) if i <= stars11 else Color(0.5, 0.5, 0.5, 0.5)
+
 func _on_level1_button_pressed():
 	GameManager.select_level(1)
 
@@ -118,6 +126,9 @@ func _on_level9_button_pressed():
 
 func _on_level10_button_pressed():
 	GameManager.select_level(10)
+
+func _on_level11_button_pressed():
+	GameManager.select_level(11)
 
 func _on_main_menu_button_pressed():
 	get_tree().change_scene_to_file("res://scene/start_menu.tscn")

@@ -402,6 +402,42 @@ texture = ExtResource("2_star")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Level11Container" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Level11Button" type="Button" parent="HBoxContainer/Level11Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "关卡11"
+
+[node name="Level11Stars" type="HBoxContainer" parent="HBoxContainer/Level11Container"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="HBoxContainer/Level11Container/Level11Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="HBoxContainer/Level11Container/Level11Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="HBoxContainer/Level11Container/Level11Stars"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("2_star")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="MainMenuButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -428,4 +464,5 @@ text = "返回主菜单"
 [connection signal="pressed" from="HBoxContainer/Level8Container/Level8Button" to="." method="_on_level8_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Level9Container/Level9Button" to="." method="_on_level9_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Level10Container/Level10Button" to="." method="_on_level10_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Level11Container/Level11Button" to="." method="_on_level11_button_pressed"]
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
