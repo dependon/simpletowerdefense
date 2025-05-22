@@ -19,6 +19,8 @@ var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 @onready var fast_low_tower_button = $UI/BoxContainer/FastLowTowerButton # 注意这里的名称可能需要根据场景文件确认
 @onready var big_area_tower_button = $UI/BoxContainer/BigAreaTowerButton # 注意这里的名称可能需要根据场景文件确认
 
+var selected_tower: Node = null # 新增：当前选中的防御塔实例
+
 func _on_setting_button_pressed():
 	get_tree().paused = true
 	setting_menu.show()
@@ -275,8 +277,18 @@ func _input(event):
 
 	# 检测左键按下事件
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		# 检查是否点击了UI元素 (例如防御塔选择按钮)
+		var clicked_ui = false
+		for child in $UI.get_children():
+			if child is Control and child.visible and child.get_global_rect().has_point(mouse_pos):
+				clicked_ui = true
+				break
+		
+		if clicked_ui:
+			# 如果点击了UI，则不执行其他逻辑，直接返回
+			return
 
-		# 只有在选中了防御塔类型并且当前位置可以放置时，才进行放置逻辑
+		# 放置防御塔的逻辑
 		if current_tower_type != "" and can_place_tower:
 			var cost
 			var tower_scene_to_instantiate: PackedScene = null
@@ -312,21 +324,69 @@ func _input(event):
 				tower.set_z_index(3) # 确保防御塔在敌人上方显示
 
 				add_child(tower)
-				tower.add_to_group("towers") # 将新放置的防御塔添加到 "towers" 组
-
+				# 连接新放置防御塔的点击信号
+				if tower.has_signal("tower_clicked"):
+					tower.tower_clicked.connect(_on_tower_clicked)
+				
 				coins -= cost
 				update_coins_display()
 				
-				# 新增：成功放置后清空选中状态并移除虚影
+				# 成功放置后清空选中状态并移除虚影
 				current_tower_type = ""
 				_update_tower_button_selection_visuals()
 				remove_tower_ghost()
 				
+				# 放置成功后，自动选中新放置的防御塔
+				_on_tower_clicked(tower)
+				
 			elif coins < cost:
 				print("Not enough coins to place tower.")
 		elif current_tower_type != "" and not can_place_tower:
-			# 新增：如果选中了防御塔但不能放置，打印提示
+			# 如果选中了防御塔但不能放置，打印提示
 			print("Cannot place tower at this location.")
+		else:
+			# 如果没有选中防御塔类型，则处理已放置防御塔的选中逻辑
+			var towers_under_mouse = []
+			var all_towers = get_tree().get_nodes_in_group("towers")
+			
+			# 找到所有鼠标点击位置下的防御塔
+			for tower in all_towers:
+				# 假设 tower_base.gd 中的 MouseDetectionArea 是一个 Area2D
+				# 并且其碰撞形状覆盖了塔的点击区域
+				if tower.has_node("MouseDetectionArea"):
+					var mouse_detection_area = tower.get_node("MouseDetectionArea")
+					# 使用 PhysicsPointQueryParameters2D 来检测鼠标位置下的碰撞体
+					var query = PhysicsPointQueryParameters2D.new()
+					query.position = mouse_pos
+					query.collide_with_areas = true
+					query.collide_with_bodies = false
+					
+					var result = get_world_2d().direct_space_state.intersect_point(query)
+					for r in result:
+						if r.collider == mouse_detection_area:
+							towers_under_mouse.append(tower)
+							break # 找到一个就够了，避免重复添加
+
+			if not towers_under_mouse.is_empty():
+				# 找到离鼠标最近的防御塔
+				var closest_tower = null
+				var min_distance = INF
+				
+				for tower in towers_under_mouse:
+					var distance = tower.global_position.distance_to(mouse_pos)
+					if distance < min_distance:
+						min_distance = distance
+						closest_tower = tower
+				
+				# 选中最近的防御塔
+				if closest_tower:
+					_on_tower_clicked(closest_tower)
+			else:
+				# 如果没有点击到任何防御塔，则取消所有防御塔的选中状态
+				if selected_tower:
+					if selected_tower.has_method("set_selected"):
+						selected_tower.set_selected(false)
+					selected_tower = null
 
 
 # 新增：创建防御塔虚影
@@ -445,3 +505,23 @@ func _on_clear_tower_button_pressed() -> void:
 	current_tower_type = ""
 	_update_tower_button_selection_visuals() # 更新按钮视觉状态
 	remove_tower_ghost() # 移除虚影
+
+# 新增：处理防御塔点击事件
+func _on_tower_clicked(tower_instance: Node):
+	# 如果当前有选中的防御塔，并且不是本次点击的防御塔，则取消其选中状态
+	if selected_tower and selected_tower != tower_instance:
+		if selected_tower.has_method("set_selected"):
+			selected_tower.set_selected(false)
+	
+	# 设置新的选中防御塔
+	selected_tower = tower_instance
+	if selected_tower and selected_tower.has_method("set_selected"):
+		selected_tower.set_selected(true)
+
+# 新增：获取当前选中的防御塔
+func get_selected_tower() -> Node:
+	return selected_tower
+
+# 新增：设置当前选中的防御塔（用于销毁时清除）
+func set_selected_tower(tower: Node):
+	selected_tower = tower

@@ -1,11 +1,12 @@
 extends Sprite2D
 
 signal upgraded(level) # 升级信号，传递当前等级
+signal tower_clicked(tower_instance) # 新增：防御塔被点击信号，传递自身实例
 
 @onready var tower_area: Area2D = $Area2D #攻击范围
 @onready var tower_area_shape: CollisionShape2D = $Area2D/CollisionShape2D
-@onready var mouse_detection_area: Area2D = $MouseDetectionArea # 新增：获取鼠标检测区域节点
-@onready var range_display = $RangeDisplay # 新增：获取范围显示节点
+@onready var mouse_detection_area: Area2D = $MouseDetectionArea # 获取鼠标检测区域节点
+@onready var range_display = $RangeDisplay # 获取范围显示节点
 @export var range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var base_cost = 50  # 基础建造成本
@@ -18,7 +19,7 @@ var isMouseOverButtons = false # 鼠标是否在按钮上
 
 @onready var upgrade_button = $upgrade_button
 @onready var destroy_button = $destroy_button
-@onready var level_label = $LevelLabel # 新增：获取等级标签节点
+@onready var level_label = $LevelLabel # 获取等级标签节点
 
 # 升级所需金币
 func get_upgrade_cost() -> int:
@@ -65,7 +66,8 @@ func _ready():
 	
 	# 连接鼠标检测区域的信号
 	mouse_detection_area.input_event.connect(_on_mouse_detection_area_input_event)
-	mouse_detection_area.mouse_exited.connect(_on_mouse_exited_tower)
+	# 移除 mouse_exited_tower 信号连接，因为现在由 BattleScene 统一管理显示/隐藏
+	# mouse_detection_area.mouse_exited.connect(_on_mouse_exited_tower) 
 	
 	# 初始化等级标签
 	level_label.text = "Lv. " + str(level)
@@ -76,7 +78,8 @@ func _ready():
 	# 初始隐藏范围显示
 	range_display.hide()
 	
-	
+	# 新增：将自身添加到 "towers" 组，确保在 BattleScene 中可以获取到
+	add_to_group("towers")
 
 
 func _physics_process(delta):
@@ -97,39 +100,39 @@ func _physics_process(delta):
 				break
 
 func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
-	# 获取 BattleScene 节点
-	var BattleScene = get_tree().get_root().get_node("BattleScene")
-	
 	# 只有在 BattleScene 中没有选中防御塔类型时，才允许选中场上已有的防御塔
+	var BattleScene = get_tree().get_root().get_node("BattleScene")
 	if BattleScene and BattleScene.current_tower_type == "":
 		if event.is_pressed() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-			# 切换范围显示和按钮的可见性
-			if range_display.visible:
-				range_display.hide()
-				_hide_buttons()
-			else:
-				range_display.show()
-				_show_buttons()
-		# TODO: Add logic to deselect this tower if another part of the screen is clicked
+			# 鼠标左键点击时，发出信号通知 BattleScene
+			emit_signal("tower_clicked", self)
 
-func _on_mouse_exited_tower():
-	# 鼠标移出时隐藏范围显示
-	range_display.hide()
-	# 延迟检查，确保鼠标不是移到了按钮上
-	await get_tree().create_timer(0.01).timeout
-	_update_buttons_visibility()
+# 移除 _on_mouse_exited_tower 函数，因为现在由 BattleScene 统一管理显示/隐藏
+# func _on_mouse_exited_tower():
+# 	# 鼠标移出时隐藏范围显示
+# 	range_display.hide()
+# 	# 延迟检查，确保鼠标不是移到了按钮上
+# 	await get_tree().create_timer(0.01).timeout
+# 	_update_buttons_visibility()
 
 func _on_buttons_mouse_entered():
 	isMouseOverButtons = true
 
 func _on_buttons_mouse_exited():
 	isMouseOverButtons = false
-	_update_buttons_visibility()
+	# 鼠标离开按钮时，如果防御塔未被选中，则隐藏按钮和范围显示
+	# 这里不再调用 _update_buttons_visibility，而是依赖 set_selected 来统一管理
+	var BattleScene = get_tree().get_root().get_node("BattleScene")
+	if BattleScene and BattleScene.get_selected_tower() != self:
+		set_selected(false)
 
-func _update_buttons_visibility():
-	if isMouseOverButtons:
+# 新增：设置防御塔选中状态的公共函数
+func set_selected(is_selected: bool):
+	if is_selected:
+		range_display.show()
 		_show_buttons()
 	else:
+		range_display.hide()
 		_hide_buttons()
 
 func _show_buttons():
@@ -196,3 +199,6 @@ func _on_destroy_pressed():
 				point.set_occupied(false)
 				break
 		queue_free()  # 销毁防御塔
+		# 新增：销毁后通知 BattleScene 清除选中状态
+		if BattleScene.get_selected_tower() == self:
+			BattleScene.set_selected_tower(null)
