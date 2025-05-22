@@ -68,7 +68,10 @@ var current_level: Node2D = null
 var current_level_paths: Array[Path2D] = [] # 修改：存储多个 Path2D 节点
 var wave_update_connection = null # 新增：用于存储信号连接
 
-
+# 新增：防御塔虚影相关变量
+var tower_ghost: Sprite2D = null # 用于显示防御塔虚影的节点
+var selected_tower_scene_for_ghost: PackedScene = null # 用于实例化虚影的场景
+var can_place_tower = false # 标记当前位置是否可以放置防御塔
 
 # 金币系统
 var coins = 100  # 初始金币
@@ -122,6 +125,13 @@ func load_level(level_number: int):
 		# 新增：断开旧关卡的信号连接
 		if wave_update_connection and wave_update_connection.is_valid() and current_level.has_signal("wave_updated"):
 			current_level.wave_updated.disconnect(update_wave_display)
+		# 新增：断开等待时间更新信号
+		if current_level and current_level.has_signal("wait_time_updated"):
+			current_level.wait_time_updated.disconnect(update_wait_time_display)
+		# 新增：断开初始等待时间更新信号
+		if current_level and current_level.has_signal("initial_wait_time_updated"):
+			current_level.initial_wait_time_updated.disconnect(update_initial_wait_time_display)
+			
 		current_level.queue_free()
 	
 	# 根据关卡编号设置初始金币
@@ -208,7 +218,16 @@ func update_initial_wait_time_display(remaining_time: float):
 
 func _physics_process(delta):
 	update_enemy_count_display()
-	pass
+	# 新增：更新虚影位置和颜色
+	if tower_ghost:
+		var mouse_pos = get_global_mouse_position()
+		tower_ghost.global_position = mouse_pos
+		can_place_tower = check_can_place_tower(mouse_pos)
+		if can_place_tower:
+			tower_ghost.modulate = Color(0.56, 0.93, 0.56, 0.7) # 微绿色，带透明度
+		else:
+			tower_ghost.modulate = Color(1.0, 0.0, 0.0, 0.7) # 红色，带透明度
+
 
 # 路径检测阈值（像素）
 const PATH_DETECTION_THRESHOLD = 60
@@ -217,87 +236,128 @@ const TOWER_MIN_DISTANCE = 60
 
 @onready var ui_box_container = $UI/BoxContainer # 新增：对 BoxContainer 的引用
 
+# 新增：检查是否可以放置防御塔的函数
+func check_can_place_tower(position: Vector2) -> bool:
+	# 1. 检查是否在 BoxContainer 范围内
+	if ui_box_container and ui_box_container.get_global_rect().has_point(position):
+		return false # 在UI范围内，不允许放置
+
+	# 2. 检查是否在敌人路径附近
+	if not current_level_paths.is_empty():
+		for path_node in current_level_paths:
+			var baked_points = path_node.curve.get_baked_points()
+			for point in baked_points:
+				# 将路径点从局部坐标转换为全局坐标
+				var global_path_point = path_node.to_global(point)
+				if global_path_point.distance_to(position) < PATH_DETECTION_THRESHOLD:
+					return false # 在路径附近，不允许放置
+
+	# 3. 检查是否与其他防御塔位置过近
+	var towers = get_tree().get_nodes_in_group("towers")
+	for tower in towers:
+		if tower.global_position.distance_to(position) < TOWER_MIN_DISTANCE:
+			return false # 与现有防御塔过近，不允许放置
+
+	# 如果通过了所有检查，则可以放置
+	return true
+
+
 func _input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+	# 修改：检测左键按下事件
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var mouse_pos = get_global_mouse_position() # 使用全局鼠标位置
 
-		# 检查是否在 BoxContainer 范围内
-		if ui_box_container and ui_box_container.get_global_rect().has_point(mouse_pos):
-			print("Cannot place tower within the UI area.")
-			return # 在UI范围内，不允许放置
+		# 只有在选中了防御塔类型并且当前位置可以放置时，才进行放置逻辑
+		if current_tower_type != "" and can_place_tower:
+			var cost
+			var tower_scene_to_instantiate: PackedScene = null
 
-		# 1. 检查是否在敌人路径附近
-		if not current_level_paths.is_empty():
-			for path_node in current_level_paths:
-				var baked_points = path_node.curve.get_baked_points()
-				for point in baked_points:
-					# 将路径点从局部坐标转换为全局坐标
-					var global_path_point = path_node.to_global(point)
-					if global_path_point.distance_to(mouse_pos) < PATH_DETECTION_THRESHOLD:
-						# 在路径附近，不允许放置
-						print("Cannot place tower near enemy path.")
-						return # 退出函数，不进行后续放置逻辑
+			match current_tower_type:
+				"normal":
+					cost = NORMAL_TOWER_COST
+					tower_scene_to_instantiate = tower_scene
+				"fast":
+					cost = FAST_TOWER_COST
+					tower_scene_to_instantiate = fast_tower_scene
+				"frost":
+					cost = FROST_TOWER_COST
+					tower_scene_to_instantiate = frost_tower_scene
+				"fast_low_damage":
+					cost = FAST_LOW_DAMAGE_TOWER_COST
+					tower_scene_to_instantiate = fast_low_damage_tower_scene
+				"big_area_damage":
+					cost = BIG_AREA_TOWER_COST
+					tower_scene_to_instantiate = big_area_tower_scene
+				"area": # 确保 area 类型也在匹配中
+					cost = AREA_TOWER_COST
+					tower_scene_to_instantiate = area_tower_scene
+				_:
+					print("Unknown tower type: ", current_tower_type)
+					return # 未知类型，退出
 
-		# 2. 检查是否与其他防御塔位置过近
-		var towers = get_tree().get_nodes_in_group("towers")
-		for tower in towers:
-			if tower.global_position.distance_to(mouse_pos) < TOWER_MIN_DISTANCE:
-				# 与现有防御塔过近，不允许放置
-				print("Cannot place tower too close to another tower.")
-				return # 退出函数
+			if coins >= cost and tower_scene_to_instantiate:
+				var tower = tower_scene_to_instantiate.instantiate()
 
-		# 3. 如果通过了路径和距离检查，则进行放置逻辑
-		var cost
-		var tower_scene_to_instantiate: PackedScene = null
+				# 将防御塔位置设置为鼠标点击的全局位置
+				tower.global_position = mouse_pos
+				tower.set_z_index(3) # 确保防御塔在敌人上方显示
 
-		match current_tower_type:
-			"normal":
-				cost = NORMAL_TOWER_COST
-				tower_scene_to_instantiate = tower_scene
-			"fast":
-				cost = FAST_TOWER_COST
-				tower_scene_to_instantiate = fast_tower_scene
-			"frost":
-				cost = FROST_TOWER_COST
-				tower_scene_to_instantiate = frost_tower_scene
-			"fast_low_damage":
-				cost = FAST_LOW_DAMAGE_TOWER_COST
-				tower_scene_to_instantiate = fast_low_damage_tower_scene
-			"big_area_damage":
-				cost = BIG_AREA_TOWER_COST
-				tower_scene_to_instantiate = big_area_tower_scene
-			"area": # 确保 area 类型也在匹配中
-				cost = AREA_TOWER_COST
-				tower_scene_to_instantiate = area_tower_scene
-			_:
-				print("Unknown tower type: ", current_tower_type)
-				return # 未知类型，退出
+				add_child(tower)
+				tower.add_to_group("towers") # 将新放置的防御塔添加到 "towers" 组
 
-		if coins >= cost and tower_scene_to_instantiate:
-			var tower = tower_scene_to_instantiate.instantiate()
+				coins -= cost
+				update_coins_display()
+				
+				# 新增：成功放置后清空选中状态并移除虚影
+				current_tower_type = ""
+				_update_tower_button_selection_visuals()
+				remove_tower_ghost()
+				
+			elif coins < cost:
+				print("Not enough coins to place tower.")
+		elif current_tower_type != "" and not can_place_tower:
+			# 新增：如果选中了防御塔但不能放置，打印提示
+			print("Cannot place tower at this location.")
 
-			# 将防御塔位置设置为鼠标点击的全局位置
-			tower.global_position = mouse_pos
-			tower.set_z_index(3) # 确保防御塔在敌人上方显示
 
-			add_child(tower)
-			tower.add_to_group("towers") # 将新放置的防御塔添加到 "towers" 组
-
-			coins -= cost
-			update_coins_display()
+# 新增：创建防御塔虚影
+func create_tower_ghost(tower_scene: PackedScene):
+	remove_tower_ghost() # 先移除旧的虚影
+	if tower_scene:
+		var tower_instance = tower_scene.instantiate()
+		# 使用实例化场景的根节点作为虚影，并确保它是 Sprite2D
+		if tower_instance is Sprite2D:
+			tower_ghost = tower_instance
+			# 移除虚影节点的所有子节点和脚本，只保留 Sprite2D 的外观
+			for child in tower_ghost.get_children():
+				child.queue_free()
+			tower_ghost.set_script(null)
 			
-		elif coins < cost:
-			print("Not enough coins to place tower.")
+			# 将虚影添加到场景中
+			add_child(tower_ghost)
+			tower_ghost.set_z_index(4) # 确保虚影在所有东西上面显示
+			tower_ghost.modulate = Color(1.0, 1.0, 1.0, 0.7) # 初始半透明白色
+		else:
+			printerr("Selected tower scene root node is not a Sprite2D: ", tower_instance.get_class())
+			tower_instance.queue_free() # 释放实例化的节点
+			tower_ghost = null # 确保 tower_ghost 为 null
+
+# 新增：移除防御塔虚影
+func remove_tower_ghost():
+	if tower_ghost and is_instance_valid(tower_ghost):
+		tower_ghost.queue_free()
+		tower_ghost = null
+	selected_tower_scene_for_ghost = null # 清空选中的虚影场景
 
 # 新增：更新防御塔选择按钮的视觉状态
 func _update_tower_button_selection_visuals():
 	var buttons = [
-		{ "type": "normal", "button": normal_tower_button },
-		{ "type": "fast", "button": fast_tower_button },
-		{ "type": "area", "button": area_tower_button },
-		{ "type": "frost", "button": frost_tower_button },
-		{ "type": "fast_low_damage", "button": fast_low_tower_button },
-		{ "type": "big_area_damage", "button": big_area_tower_button },
+		{ "type": "normal", "button": normal_tower_button, "scene": tower_scene },
+		{ "type": "fast", "button": fast_tower_button, "scene": fast_tower_scene },
+		{ "type": "area", "button": area_tower_button, "scene": area_tower_scene },
+		{ "type": "frost", "button": frost_tower_button, "scene": frost_tower_scene },
+		{ "type": "fast_low_damage", "button": fast_low_tower_button, "scene": fast_low_damage_tower_scene },
+		{ "type": "big_area_damage", "button": big_area_tower_button, "scene": big_area_tower_scene },
 	]
 	
 	for item in buttons:
@@ -305,9 +365,17 @@ func _update_tower_button_selection_visuals():
 			if item.type == current_tower_type:
 				# 高亮选中的按钮 (例如，改变颜色)
 				item.button.modulate = Color("ffff00") # 浅黄色
+				# 新增：设置虚影场景并创建虚影
+				selected_tower_scene_for_ghost = item.scene
+				create_tower_ghost(selected_tower_scene_for_ghost)
 			else:
 				# 恢复其他按钮的颜色
 				item.button.modulate = Color("ffffff") # 白色 (正常颜色)
+	
+	# 如果没有选中任何防御塔类型，移除虚影
+	if current_tower_type == "":
+		remove_tower_ghost()
+
 
 func _on_normal_tower_button_pressed():
 	current_tower_type = "normal"
@@ -364,6 +432,7 @@ func update_enemy_count_display():
 
 
 func _on_clear_tower_button_pressed() -> void:
-	# 新增：放置防御塔后清空选中状态
+	# 新增：清空选中状态并移除虚影
 	current_tower_type = ""
 	_update_tower_button_selection_visuals() # 更新按钮视觉状态
+	remove_tower_ghost() # 移除虚影
