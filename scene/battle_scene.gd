@@ -9,7 +9,6 @@ var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 @onready var wait_time_label = $UI/WaitTime # 新增：对等待时间标签的引用
 @onready var next_wave_button = $UI/NextWave # 新增：对下一波按钮的引用
 @onready var current_enemy_num_label = $UI/CurrentEnemyNum # 新增：对当前剩余怪物数量标签的引用
-@onready var enemy_count_timer = $EnemyCountTimer # 新增：怪物数量更新计时器
 @onready var last_enemy_count
 
 # 新增：防御塔选择按钮引用

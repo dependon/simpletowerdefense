@@ -63,7 +63,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okm3p"]
 size = Vector2(58, 123)
 
-[node name="EnemyOrcP" type="CharacterBody2D"]
+[node name="EnemyOrcP" type="Area2D"]
 script = ExtResource("1_replace_with_actual_id")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

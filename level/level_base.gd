@@ -16,7 +16,6 @@ signal wait_time_updated(remaining_time)
 signal initial_wait_time_updated(remaining_time)
 
 @onready var base = $Base # 基地仍然需要，用于扣血
-@onready var initial_wait_timer = $InitialWaitTimer # 新增：初始等待计时器
 
 @onready var path = $Path2D
 @onready var path1 = $Path2D
@@ -92,11 +91,6 @@ func _physics_process(delta):
 	if is_victory:
 		return
 	
-	# 新增：如果在初始等待期间，更新初始等待时间显示并返回
-	if initial_wait_timer and initial_wait_timer.is_running():
-		emit_signal("initial_wait_time_updated", initial_wait_timer.time_left)
-		return
-
 	# 检查胜利条件：所有波次完成且场上无敌人
 	if current_wave >= total_waves and not is_spawning_wave and get_tree().get_nodes_in_group("enemies").size() == 0:
 		trigger_victory();

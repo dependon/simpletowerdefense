@@ -41,6 +41,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "设置"
 
+[node name="UnlockLevelsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "解锁全部关卡"
+
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -49,4 +54,5 @@ text = "退出"
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SkillTreeButton" to="." method="_on_skill_tree_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/UnlockLevelsButton" to="." method="_on_unlock_levels_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
