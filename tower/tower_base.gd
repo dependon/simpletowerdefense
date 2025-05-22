@@ -97,14 +97,20 @@ func _physics_process(delta):
 				break
 
 func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
-	if event.is_pressed() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		# 切换范围显示和按钮的可见性
-		if range_display.visible:
-			range_display.hide()
-			_hide_buttons()
-		else:
-			range_display.show()
-			_show_buttons()
+	# 获取 BattleScene 节点
+	var BattleScene = get_tree().get_root().get_node("BattleScene")
+	
+	# 只有在 BattleScene 中没有选中防御塔类型时，才允许选中场上已有的防御塔
+	if BattleScene and BattleScene.current_tower_type == "":
+		if event.is_pressed() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+			# 切换范围显示和按钮的可见性
+			if range_display.visible:
+				range_display.hide()
+				_hide_buttons()
+			else:
+				range_display.show()
+				_show_buttons()
+		# TODO: Add logic to deselect this tower if another part of the screen is clicked
 
 func _on_mouse_exited_tower():
 	# 鼠标移出时隐藏范围显示

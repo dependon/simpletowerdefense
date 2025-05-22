@@ -263,9 +263,19 @@ func check_can_place_tower(position: Vector2) -> bool:
 
 
 func _input(event):
-	# 修改：检测左键按下事件
+	var mouse_pos = get_global_mouse_position() # 使用全局鼠标位置
+
+	# 检测右键按下事件，用于取消选中防御塔类型
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+		if current_tower_type != "":
+			current_tower_type = ""
+			_update_tower_button_selection_visuals() # 更新按钮视觉状态
+			remove_tower_ghost() # 移除虚影
+			print("Tower selection cleared by right-click.")
+		# TODO: Add logic to deselect an existing tower if one is selected
+
+	# 检测左键按下事件
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var mouse_pos = get_global_mouse_position() # 使用全局鼠标位置
 
 		# 只有在选中了防御塔类型并且当前位置可以放置时，才进行放置逻辑
 		if current_tower_type != "" and can_place_tower:
