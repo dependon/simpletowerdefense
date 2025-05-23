@@ -15,6 +15,9 @@ signal wait_time_updated(remaining_time)
 # 新增：定义初始等待时间更新信号
 signal initial_wait_time_updated(remaining_time)
 
+#超过最大数量怪物失败
+var MAX_ENEMIES_ON_FIELD = 1000
+
 @onready var base = $Base # 基地仍然需要，用于扣血
 
 @onready var path = $Path2D
@@ -94,6 +97,12 @@ func _physics_process(delta):
 	# 检查胜利条件：所有波次完成且场上无敌人
 	if current_wave >= total_waves and not is_spawning_wave and get_tree().get_nodes_in_group("enemies").size() == 0:
 		trigger_victory();
+		return
+	# 新增失败条件：场上怪物数量超过上限
+	if get_tree().get_nodes_in_group("enemies").size() > MAX_ENEMIES_ON_FIELD:
+		print("Game Over: Too many enemies on field!")
+		if base :
+			base.take_damage(100)
 		return
 
 	# 波次间隔处理

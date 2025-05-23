@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=4 uid="uid://crpaldqstih8g"]
+[gd_scene load_steps=7 format=4 uid="uid://crpaldqstih8g"]
 
 [ext_resource type="Script" uid="uid://jygruy1cii34" path="res://level/level2.gd" id="1_4c5bu"]
-[ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
 [ext_resource type="Texture2D" uid="uid://dxydgvs3a5jnt" path="res://assets/map/map_7.png" id="2_yeu0p"]
 [ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
 
@@ -4254,54 +4253,6 @@ rotation = -0.0163251
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(58, 516)
-
-[node name="BuildPoints" type="Node2D" parent="."]
-visible = false
-visibility_layer = 7
-z_index = 1
-
-[node name="BuildPoint1" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(399, 342)
-
-[node name="BuildPoint2" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(90, 441)
-
-[node name="BuildPoint3" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(398, 166)
-
-[node name="BuildPoint4" parent="BuildPoints" instance=ExtResource("2_build")]
-z_index = 1
-position = Vector2(591, 399)
-
-[node name="BuildPoint5" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(397, 436)
-
-[node name="BuildPoint6" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(243, 447)
-
-[node name="BuildPoint7" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(760, 179)
-
-[node name="BuildPoint8" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(317, 771)
-
-[node name="BuildPoint9" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(616, 776)
-
-[node name="BuildPoint10" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(1013, 769)
-
-[node name="BuildPoint11" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(1605, 757)
-
-[node name="BuildPoint12" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(1615, 213)
-
-[node name="BuildPoint13" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(1607, 462)
-
-[node name="BuildPoint14" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(1234, 196)
 
 [node name="Base" parent="." instance=ExtResource("3_base")]
 position = Vector2(161, 879)

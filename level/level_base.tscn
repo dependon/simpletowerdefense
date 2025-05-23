@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=4 uid="uid://e7r6odb2v2rp"]
+[gd_scene load_steps=7 format=4 uid="uid://e7r6odb2v2rp"]
 
 [ext_resource type="Script" uid="uid://b2b3tjgpn4sgy" path="res://level/level_base.gd" id="1_qdukk"]
-[ext_resource type="PackedScene" uid="uid://bqjxvvxmxvxvx" path="res://scene/build_point.tscn" id="2_build"]
 [ext_resource type="Texture2D" uid="uid://dxydgvs3a5jnt" path="res://assets/map/map_7.png" id="2_yeu0p"]
 [ext_resource type="PackedScene" uid="uid://bw4q5xqy8n8yd" path="res://scene/base.tscn" id="3_base"]
 
@@ -4254,32 +4253,6 @@ rotation = -1.55975
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(100, 300)
-
-[node name="BuildPoints" type="Node2D" parent="."]
-visibility_layer = 7
-z_index = 1
-
-[node name="BuildPoint1" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(369, 449)
-
-[node name="BuildPoint2" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(110, 236)
-
-[node name="BuildPoint3" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(370, 365)
-
-[node name="BuildPoint4" parent="BuildPoints" instance=ExtResource("2_build")]
-z_index = 1
-position = Vector2(562, 352)
-
-[node name="BuildPoint5" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(430, 450)
-
-[node name="BuildPoint6" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(249, 240)
-
-[node name="BuildPoint7" parent="BuildPoints" instance=ExtResource("2_build")]
-position = Vector2(751, 159)
 
 [node name="Base" parent="." instance=ExtResource("3_base")]
 position = Vector2(900, 100)

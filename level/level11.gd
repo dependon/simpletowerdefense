@@ -1,5 +1,6 @@
 extends LevelBase
 
+
 func _ready():
 
 	total_waves = 30  # 最终关卡波数
@@ -7,6 +8,8 @@ func _ready():
 	enemy_spawn_interval = 0.18 # 生成间隔更短
 	wave_duration_limit = 90.0 # 持续时间限制更长
 
+	# 失败条件：场上怪物数量上100
+	MAX_ENEMIES_ON_FIELD = 100
 	#level 10极高难度
 	wave_config = {
 	# 前期: 混合多种类型，战士和狼人比例逐渐增加
