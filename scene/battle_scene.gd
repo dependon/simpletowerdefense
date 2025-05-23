@@ -335,9 +335,7 @@ func _input(event):
 				current_tower_type = ""
 				_update_tower_button_selection_visuals()
 				remove_tower_ghost()
-				
-				# 放置成功后，自动选中新放置的防御塔
-				_on_tower_clicked(tower)
+				get_viewport().set_input_as_handled() # 阻止事件继续传播
 				
 			elif coins < cost:
 				print("Not enough coins to place tower.")
