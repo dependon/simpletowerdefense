@@ -66,8 +66,8 @@ func _ready():
 	
 	# 连接鼠标检测区域的信号
 	mouse_detection_area.input_event.connect(_on_mouse_detection_area_input_event)
-	# 移除 mouse_exited_tower 信号连接，因为现在由 BattleScene 统一管理显示/隐藏
-	# mouse_detection_area.mouse_exited.connect(_on_mouse_exited_tower) 
+	# 连接鼠标离开检测区域的信号
+	mouse_detection_area.mouse_exited.connect(_on_mouse_exited_detection_area) 
 	
 	# 初始化等级标签
 	level_label.text = "Lv. " + str(level)
@@ -107,13 +107,14 @@ func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
 			# 鼠标左键点击时，发出信号通知 BattleScene
 			emit_signal("tower_clicked", self)
 
-# 移除 _on_mouse_exited_tower 函数，因为现在由 BattleScene 统一管理显示/隐藏
-# func _on_mouse_exited_tower():
-# 	# 鼠标移出时隐藏范围显示
-# 	range_display.hide()
-# 	# 延迟检查，确保鼠标不是移到了按钮上
-# 	await get_tree().create_timer(0.01).timeout
-# 	_update_buttons_visibility()
+func _on_mouse_exited_detection_area():
+	# 鼠标离开防御塔检测区域时，如果鼠标不在按钮上，则隐藏范围显示和按钮
+	# 延迟检查，确保鼠标不是移到了按钮上
+	await get_tree().create_timer(0.01).timeout
+	if not isMouseOverButtons:
+		var BattleScene = get_tree().get_root().get_node("BattleScene")
+		if BattleScene and BattleScene.get_selected_tower() == self:
+			set_selected(false)
 
 func _on_buttons_mouse_entered():
 	isMouseOverButtons = true
