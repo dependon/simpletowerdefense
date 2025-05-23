@@ -20,7 +20,7 @@ func _on_unlock_levels_button_pressed():
 	var game_manager = get_node("/root/GameManager") # Assuming GameManager is an autoloaded singleton
 	if game_manager != null:
 		game_manager.unlocked_levels.clear()
-		for i in range(1, 11): # Assuming levels are 1 to 10
+		for i in range(1, 12): # Assuming levels are 1 to 10
 			game_manager.unlocked_levels.append(i)
 			if not i in game_manager.level_stars:
 				game_manager.level_stars[i] = 0

@@ -61,6 +61,7 @@ func return_to_start_menu():
 @onready var level8_scene: PackedScene = preload("res://level/level8.tscn")
 @onready var level9_scene: PackedScene = preload("res://level/level9.tscn")
 @onready var level10_scene: PackedScene = preload("res://level/level10.tscn")
+@onready var level11_scene: PackedScene = preload("res://level/level11.tscn")
 
 
 
@@ -160,6 +161,8 @@ func load_level(level_number: int):
 		level_scene = level9_scene
 	elif level_number == 10:
 		level_scene = level10_scene
+	elif level_number == 11:
+		level_scene = level11_scene
 	else: # 新增：处理无效关卡编号
 		printerr("无效的关卡编号: ", level_number)
 		level_scene = level1_scene # 默认加载第一关或进行其他错误处理
