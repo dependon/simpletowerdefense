@@ -13,6 +13,7 @@ var original_speed_multiplier = 1.0 # 减速前的速度
 #生命条
 var health_bar: ProgressBar
 var slow_timer: Timer # 减速计时器
+var _previous_position: Vector2 # 用于存储上一帧的位置
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -32,6 +33,8 @@ func _ready() -> void:
 	slow_timer.one_shot = true # 只运行一次
 	slow_timer.connect("timeout", Callable(self, "_on_slow_timer_timeout"))
 	add_child(slow_timer)
+	
+	_previous_position = position # 初始化上一帧位置
 
 # 设置敌人移动路径
 func set_path(curve: Curve2D) -> void:
@@ -44,11 +47,31 @@ func set_path(curve: Curve2D) -> void:
 	
 	# 设置初始位置为路径起点
 	position = curve.get_point_position(0)
-	
+	_previous_position = position # 初始化上一帧位置
+
 func _physics_process(delta):
 	if path_follow and path:
+		var current_position = path_follow.position
 		path_follow.progress += speed * speed_multiplier * delta
 		position = path_follow.position
+		
+		print("benci:")
+		print(position)
+		print("shangci:")
+		print(_previous_position)
+		# 获取精灵节点
+		var sprite = get_node("AnimatedSprite2D") as AnimatedSprite2D # 假设精灵节点名为Sprite2D
+		if sprite:
+			# 判断移动方向并水平翻转精灵
+			if position.x >= _previous_position.x:
+				# 向左移动，不翻转
+				sprite.flip_h = false
+			elif position.x < _previous_position.x:
+				# 向右移动，水平翻转
+				sprite.flip_h = true
+		
+		_previous_position = position # 更新上一帧位置
+		
 		if path_follow.progress >= path.curve.get_baked_length():
 			queue_free()
 	# 每帧逐渐恢复速度，只在没有被减速时恢复
