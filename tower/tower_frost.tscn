@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://pi1df6o0ggrx"]
 
-[ext_resource type="Texture2D" uid="uid://c33qyel838kcc" path="res://assets/tower/tower_ice_1.png" id="1_2icmm"]
+[ext_resource type="Texture2D" uid="uid://c33qyel838kcc" path="res://assets/tower/tower_ice/tower_ice_1.png" id="1_2icmm"]
 [ext_resource type="Script" uid="uid://qonp3awc5d6v" path="res://tower/tower_frost.gd" id="2_yvh8q"]
 [ext_resource type="Texture2D" uid="uid://crvej47h0lccb" path="res://assets/yuan.svg" id="3_ruus7"]
 
