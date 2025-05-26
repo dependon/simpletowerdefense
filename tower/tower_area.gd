@@ -41,15 +41,3 @@ func _physics_process(delta):
 				target_count += 1  # 增加目标计数
 		if has_enemy:
 			time_since_last_fire = 0
-
-# 处理升级信号的函数
-func _on_upgraded(new_level):
-	print("快速低伤害防御塔已升级到等级: ", new_level)
-	_update_sprite(new_level)
-
-# 更新素材的辅助函数
-func _update_sprite(current_level):
-	if UPGRADE_SPRITES.has(current_level):
-		texture = load(UPGRADE_SPRITES[current_level])
-	else:
-		print("警告: 未找到等级 ", current_level, " 的素材")

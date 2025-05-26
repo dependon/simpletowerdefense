@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cph0j6kycb8p2"
-path="res://.godot/imported/tower_base_1.png-ba9e91d5113b4bd0afbd4ca056ae504f.ctex"
+uid="uid://bshg0rwtoxmre"
+path="res://.godot/imported/tower_base_1.png-e544b2188ece5d0636ef1981504b285f.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/tower/tower_base/tower_base_1.png"
-dest_files=["res://.godot/imported/tower_base_1.png-ba9e91d5113b4bd0afbd4ca056ae504f.ctex"]
+dest_files=["res://.godot/imported/tower_base_1.png-e544b2188ece5d0636ef1981504b285f.ctex"]
 
 [params]
 

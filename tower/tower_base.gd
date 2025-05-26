@@ -21,6 +21,14 @@ var isMouseOverButtons = false # 鼠标是否在按钮上
 @onready var destroy_button = $destroy_button
 @onready var level_label = $LevelLabel # 获取等级标签节点
 
+# 定义不同等级对应的素材路径
+var UPGRADE_SPRITES = {
+	1: "res://assets/tower/tower_area/tower_base_1.png", # 假设等级1的素材
+	2: "res://assets/tower/tower_area/tower_base_2.png", # 请替换为实际的等级2素材路径
+	3: "res://assets/tower/tower_area/tower_base_3.png", # 请替换为实际的等级3素材路径
+	4: "res://assets/tower/tower_area/tower_base_4.png", # 请替换为实际的等级4素材路径
+}
+
 # 升级所需金币
 func get_upgrade_cost() -> int:
 	return base_cost * (level + 1)
@@ -80,6 +88,9 @@ func _ready():
 	
 	# 新增：将自身添加到 "towers" 组，确保在 BattleScene 中可以获取到
 	add_to_group("towers")
+	
+			# 连接 upgraded 信号
+	upgraded.connect(_on_upgraded)
 
 
 func _physics_process(delta):
@@ -203,3 +214,15 @@ func _on_destroy_pressed():
 		# 新增：销毁后通知 BattleScene 清除选中状态
 		if BattleScene.get_selected_tower() == self:
 			BattleScene.set_selected_tower(null)
+
+# 处理升级信号的函数
+func _on_upgraded(new_level):
+	print("快速低伤害防御塔已升级到等级: ", new_level)
+	_update_sprite(new_level)
+
+# 更新素材的辅助函数
+func _update_sprite(current_level):
+	if UPGRADE_SPRITES.has(current_level):
+		texture = load(UPGRADE_SPRITES[current_level])
+	else:
+		print("警告: 未找到等级 ", current_level, " 的素材")

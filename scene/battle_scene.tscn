@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dwkiu5duhv6vr"]
 
 [ext_resource type="Script" uid="uid://dp3o0lto78g8n" path="res://scene/battle_scene.gd" id="1_662de"]
-[ext_resource type="Texture2D" uid="uid://cph0j6kycb8p2" path="res://assets/tower/tower_base_1.png" id="3_5pnl2"]
+[ext_resource type="Texture2D" uid="uid://cph0j6kycb8p2" path="res://assets/tower/tower_base/tower_base_1.png" id="3_5pnl2"]
 [ext_resource type="Texture2D" uid="uid://r86tsckq4ktt" path="res://assets/tower/tower_fast/tower_fast_1.png" id="4_8oj1d"]
 [ext_resource type="Texture2D" uid="uid://bkcdbuju5cmj1" path="res://assets/tower/tower_area/tower_area_1.png" id="5_5pnl2"]
 [ext_resource type="PackedScene" uid="uid://ckkdkqr08oy5x" path="res://scene/setting_menu.tscn" id="6_0l81w"]

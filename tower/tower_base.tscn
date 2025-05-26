@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://drjcxodyo6bx5"]
 
-[ext_resource type="Texture2D" uid="uid://cph0j6kycb8p2" path="res://assets/tower/tower_base_1.png" id="1_qhmju"]
+[ext_resource type="Texture2D" uid="uid://cph0j6kycb8p2" path="res://assets/tower/tower_base/tower_base_1.png" id="1_qhmju"]
 [ext_resource type="Script" uid="uid://c321ca40yp0g1" path="res://tower/tower_base.gd" id="1_s8k2i"]
 [ext_resource type="Texture2D" uid="uid://crvej47h0lccb" path="res://assets/yuan.svg" id="3_pwkib"]
 
