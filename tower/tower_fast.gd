@@ -2,10 +2,10 @@ extends "res://tower/tower_base.gd"
 
 # 定义不同等级对应的素材路径
 const UPGRADE_SPRITES = {
-	1: "res://assets/tower/tower_fast_1.png", # 假设等级1的素材
-	2: "res://assets/tower/tower_fast_2.png", # 请替换为实际的等级2素材路径
-	3: "res://assets/tower/tower_fast_3.png", # 请替换为实际的等级3素材路径
-	4: "res://assets/tower/tower_fast_4.png", # 请替换为实际的等级4素材路径
+	1: "res://assets/tower/tower_fast/tower_fast_1.png", # 假设等级1的素材
+	2: "res://assets/tower/tower_fast/tower_fast_2.png", # 请替换为实际的等级2素材路径
+	3: "res://assets/tower/tower_fast/tower_fast_3.png", # 请替换为实际的等级3素材路径
+	4: "res://assets/tower/tower_fast/tower_fast_4.png", # 请替换为实际的等级4素材路径
 }
 
 func _ready():
