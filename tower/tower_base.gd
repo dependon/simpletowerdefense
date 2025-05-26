@@ -23,10 +23,10 @@ var isMouseOverButtons = false # 鼠标是否在按钮上
 
 # 定义不同等级对应的素材路径
 var UPGRADE_SPRITES = {
-	1: "res://assets/tower/tower_area/tower_base_1.png", # 假设等级1的素材
-	2: "res://assets/tower/tower_area/tower_base_2.png", # 请替换为实际的等级2素材路径
-	3: "res://assets/tower/tower_area/tower_base_3.png", # 请替换为实际的等级3素材路径
-	4: "res://assets/tower/tower_area/tower_base_4.png", # 请替换为实际的等级4素材路径
+	1: "res://assets/tower/tower_base/tower_base_1.png", # 假设等级1的素材
+	2: "res://assets/tower/tower_base/tower_base_2.png", # 请替换为实际的等级2素材路径
+	3: "res://assets/tower/tower_base/tower_base_3.png", # 请替换为实际的等级3素材路径
+	4: "res://assets/tower/tower_base/tower_base_4.png", # 请替换为实际的等级4素材路径
 }
 
 # 升级所需金币
