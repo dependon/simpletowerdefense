@@ -12,12 +12,13 @@ func _ready():
 	# 可以选择性地修改建造成本
 	base_cost = 500 # 例如，设置一个不同的建造成本
 
-	# 更新按钮文本以反映新的成本（如果修改了成本）
-	# upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
-	# destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
-	
 	# 更新等级标签
 	level_label.text = "Lv. " + str(level)
 	_update_range_display();#刷新范围
-
-# 其他逻辑继承自 tower_base.gd，无需重复编写
+	
+	UPGRADE_SPRITES = {
+		1: "res://assets/tower/tower_lei/tower_lei_1.png", # 假设等级1的素材
+		2: "res://assets/tower/tower_lei/tower_lei_2.png", # 请替换为实际的等级2素材路径
+		3: "res://assets/tower/tower_lei/tower_lei_3.png", # 请替换为实际的等级3素材路径
+		4: "res://assets/tower/tower_lei/tower_lei_4.png", # 请替换为实际的等级4素材路径
+	}

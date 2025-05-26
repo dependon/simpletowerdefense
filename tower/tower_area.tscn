@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cibv8fwh6i6u6"]
 
 [ext_resource type="Script" uid="uid://dxp3mepdg7v7o" path="res://tower/tower_area.gd" id="1_8yvxe"]
-[ext_resource type="Texture2D" uid="uid://bkcdbuju5cmj1" path="res://assets/tower/tower_area/tower_area_1.png" id="1_c6aea"]
+[ext_resource type="Texture2D" uid="uid://dkidfbhmqmj0v" path="res://assets/tower/tower_area/tower_area_1.png" id="1_c6aea"]
 [ext_resource type="Texture2D" uid="uid://crvej47h0lccb" path="res://assets/yuan.svg" id="3_g0wuw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]

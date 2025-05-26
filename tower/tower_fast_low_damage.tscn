@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://10ktsv5vkc50"]
 
+[ext_resource type="Texture2D" uid="uid://5gpxlqpfvafq" path="res://assets/tower/tower_lei/tower_lei_1.png" id="1_bqdyb"]
 [ext_resource type="Script" uid="uid://dq3iackp72isb" path="res://tower/tower_fast_low_damage.gd" id="2_new_script"]
-[ext_resource type="Texture2D" uid="uid://rku5sbwvp8q7" path="res://assets/tower/tower_5.png" id="2_r0mjo"]
 [ext_resource type="Texture2D" uid="uid://crvej47h0lccb" path="res://assets/yuan.svg" id="3_mnu4m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0sler"]
@@ -11,7 +11,7 @@ radius = 526.623
 top_level = true
 position = Vector2(1, -1)
 scale = Vector2(0.5, 0.493)
-texture = ExtResource("2_r0mjo")
+texture = ExtResource("1_bqdyb")
 script = ExtResource("2_new_script")
 
 [node name="Area2D" type="Area2D" parent="."]

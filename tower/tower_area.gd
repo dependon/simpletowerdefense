@@ -1,13 +1,5 @@
 extends "res://tower/tower_base.gd"
 
-# 定义不同等级对应的素材路径
-const UPGRADE_SPRITES = {
-	1: "res://assets/tower/tower_area/tower_area_1.png", # 假设等级1的素材
-	2: "res://assets/tower/tower_area/tower_area_2.png", # 请替换为实际的等级2素材路径
-	3: "res://assets/tower/tower_area/tower_area_3.png", # 请替换为实际的等级3素材路径
-	4: "res://assets/tower/tower_area/tower_area_4.png", # 请替换为实际的等级4素材路径
-}
-
 # 重写基础属性
 func _ready():
 	super()
@@ -17,8 +9,12 @@ func _ready():
 	fire_rate = 0.8  # 攻击速度较慢
 	_update_range_display();#刷新范围
 	
-			# 连接 upgraded 信号
-	upgraded.connect(_on_upgraded)
+	UPGRADE_SPRITES = {
+		1: "res://assets/tower/tower_area/tower_area_1.png", # 假设等级1的素材
+		2: "res://assets/tower/tower_area/tower_area_2.png", # 请替换为实际的等级2素材路径
+		3: "res://assets/tower/tower_area/tower_area_3.png", # 请替换为实际的等级3素材路径
+		4: "res://assets/tower/tower_area/tower_area_4.png", # 请替换为实际的等级4素材路径
+	}
 
 # 重写攻击逻辑，对范围内所有敌人造成伤害
 func _physics_process(delta):
