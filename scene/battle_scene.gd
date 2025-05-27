@@ -227,7 +227,10 @@ func _physics_process(delta):
 		var mouse_pos = get_global_mouse_position()
 		tower_ghost.global_position = mouse_pos
 		can_place_tower = check_can_place_tower(mouse_pos)
-		if can_place_tower:
+		var current_tower_cost = get_tower_cost(current_tower_type)
+		var has_enough_coins = coins >= current_tower_cost
+
+		if can_place_tower and has_enough_coins:
 			tower_ghost.modulate = Color(0.56, 0.93, 0.56, 0.7) # 微绿色，带透明度
 		else:
 			tower_ghost.modulate = Color(1.0, 0.0, 0.0, 0.7) # 红色，带透明度
@@ -341,10 +344,10 @@ func _input(event):
 				get_viewport().set_input_as_handled() # 阻止事件继续传播
 				
 			elif coins < cost:
-				print("Not enough coins to place tower.")
+				print("金币不足，无法放置防御塔。")
 		elif current_tower_type != "" and not can_place_tower:
 			# 如果选中了防御塔但不能放置，打印提示
-			print("Cannot place tower at this location.")
+			print("当前位置无法放置防御塔。")
 		else:
 			# 如果没有选中防御塔类型，则处理已放置防御塔的选中逻辑
 			var towers_under_mouse = []
@@ -408,9 +411,27 @@ func create_tower_ghost(tower_scene: PackedScene):
 			tower_ghost.set_z_index(4) # 确保虚影在所有东西上面显示
 			tower_ghost.modulate = Color(1.0, 1.0, 1.0, 0.7) # 初始半透明白色
 		else:
-			printerr("Selected tower scene root node is not a Sprite2D: ", tower_instance.get_class())
+			printerr("选中的防御塔场景根节点不是 Sprite2D: ", tower_instance.get_class())
 			tower_instance.queue_free() # 释放实例化的节点
 			tower_ghost = null # 确保 tower_ghost 为 null
+
+# 新增：获取防御塔成本的函数
+func get_tower_cost(tower_type: String) -> int:
+	match tower_type:
+		"normal":
+			return NORMAL_TOWER_COST
+		"fast":
+			return FAST_TOWER_COST
+		"frost":
+			return FROST_TOWER_COST
+		"fast_low_damage":
+			return FAST_LOW_DAMAGE_TOWER_COST
+		"big_area_damage":
+			return BIG_AREA_TOWER_COST
+		"area":
+			return AREA_TOWER_COST
+		_:
+			return 0 # 未知类型，返回0
 
 # 新增：移除防御塔虚影
 func remove_tower_ghost():
