@@ -89,18 +89,18 @@ func is_level_unlocked(level: int) -> bool:
 
 # 根据基地剩余血量设置关卡星级
 func set_level_stars(level: int, base_health: int) -> void:
-	var stars = 0
+	var earned_stars = 0
 	if base_health == 10:  # 满血通关
-		stars = 3
+		earned_stars = 3
 	elif base_health > 5:  # 大于50%血量
-		stars = 2
+		earned_stars = 2
 	else:  # 其他情况
-		stars = 1
+		earned_stars = 1
 	
 	# 只有新的星级更高时才更新
-	if level_stars[level] < stars:
-		level_stars[level] = stars
-		add_stars(stars) # 增加星星数量
+	if level_stars[level] < earned_stars:
+		level_stars[level] = earned_stars
+		add_stars(earned_stars) # 增加星星数量
 
 # 获取关卡星级
 func get_level_stars(level: int) -> int:

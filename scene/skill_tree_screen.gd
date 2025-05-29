@@ -92,6 +92,13 @@ func setup_skill_tree():
 	skill_buttons.clear()
 	
 	if current_tower_type not in all_towers_data:
+		# 显示无技能数据的提示
+		var no_data_label = Label.new()
+		no_data_label.text = "该塔类型暂无技能数据"
+		no_data_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		no_data_label.add_theme_font_size_override("font_size", 18)
+		no_data_label.add_theme_color_override("font_color", Color.YELLOW)
+		skill_tree_container.add_child(no_data_label)
 		return
 	
 	var tower_data = all_towers_data[current_tower_type]
@@ -99,8 +106,8 @@ func setup_skill_tree():
 	# 创建技能网格容器
 	var grid_container = GridContainer.new()
 	grid_container.columns = 2
-	grid_container.add_theme_constant_override("h_separation", 20)
-	grid_container.add_theme_constant_override("v_separation", 15)
+	grid_container.add_theme_constant_override("h_separation", 50)
+	grid_container.add_theme_constant_override("v_separation", 35)
 	skill_tree_container.add_child(grid_container)
 	
 	# 为每个技能创建UI
@@ -111,12 +118,25 @@ func setup_skill_tree():
 func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary):
 	# 创建技能节点容器
 	var skill_container = VBoxContainer.new()
-	skill_container.custom_minimum_size = Vector2(200, 150)
-	skill_container.add_theme_constant_override("separation", 5)
+	skill_container.custom_minimum_size = Vector2(250, 230)
+	skill_container.add_theme_constant_override("separation", 10)
 	
 	# 创建技能面板
 	var skill_panel = Panel.new()
-	skill_panel.custom_minimum_size = Vector2(200, 150)
+	skill_panel.custom_minimum_size = Vector2(250, 230)
+	# 添加面板样式
+	var style_box = StyleBoxFlat.new()
+	style_box.bg_color = Color(0.2, 0.3, 0.4, 0.8)
+	style_box.border_width_left = 2
+	style_box.border_width_right = 2
+	style_box.border_width_top = 2
+	style_box.border_width_bottom = 2
+	style_box.border_color = Color(0.5, 0.7, 0.9, 0.6)
+	style_box.corner_radius_top_left = 8
+	style_box.corner_radius_top_right = 8
+	style_box.corner_radius_bottom_left = 8
+	style_box.corner_radius_bottom_right = 8
+	skill_panel.add_theme_stylebox_override("panel", style_box)
 	skill_container.add_child(skill_panel)
 	
 	# 创建技能内容容器
@@ -144,13 +164,17 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 	
 	# 技能图标
 	var icon_texture = TextureRect.new()
-	icon_texture.custom_minimum_size = Vector2(32, 32)
+	icon_texture.custom_minimum_size = Vector2(40, 40)
 	icon_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	icon_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	
 	# 加载技能图标
 	if skill_data.has("icon") and ResourceLoader.exists(skill_data["icon"]):
 		icon_texture.texture = load(skill_data["icon"])
+	else:
+		# 如果没有图标，使用默认图标
+		if ResourceLoader.exists("res://assets/icons/skill_icon.svg"):
+			icon_texture.texture = load("res://assets/icons/skill_icon.svg")
 	header_container.add_child(icon_texture)
 	
 	# 技能名称
@@ -183,24 +207,35 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 	# 升级按钮
 	var upgrade_button = Button.new()
 	var cost = skill_data.get("cost_per_level", 1)
-	upgrade_button.text = "升级 (" + str(cost) + "星)"
-	upgrade_button.custom_minimum_size = Vector2(80, 25)
-	upgrade_button.add_theme_font_size_override("font_size", 10)
+	
+	if current_level >= max_level:
+		upgrade_button.text = "已满级"
+		upgrade_button.disabled = true
+	else:
+		upgrade_button.text = "升级 (" + str(cost) + "⭐)"
+	
+	upgrade_button.custom_minimum_size = Vector2(100, 30)
+	upgrade_button.add_theme_font_size_override("font_size", 12)
 	
 	# 检查是否可以升级
 	var can_upgrade = can_upgrade_skill(skill_name, skill_data)
 	upgrade_button.disabled = not can_upgrade
-	if not can_upgrade:
-		upgrade_button.modulate = Color(0.6, 0.6, 0.6)
+	
+	# 设置按钮样式
+	if can_upgrade and current_level < max_level:
+		upgrade_button.add_theme_color_override("font_color", Color.WHITE)
+		upgrade_button.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
-		upgrade_button.modulate = Color.WHITE
+		upgrade_button.add_theme_color_override("font_color", Color.GRAY)
+		upgrade_button.modulate = Color(0.7, 0.7, 0.7, 0.8)
 	
 	upgrade_button.pressed.connect(_on_skill_upgrade_pressed.bind(skill_name))
 	level_info.add_child(upgrade_button)
 	
-	# 设置面板颜色基于技能等级
-	var color_intensity = 0.3 + (current_level * 0.1)
-	skill_panel.add_theme_color_override("bg_color", Color(0.2, 0.3, 0.4, color_intensity))
+	# 根据技能等级调整面板边框颜色
+	var level_progress = float(current_level) / float(skill_data.get("max_level", 5))
+	var border_color = Color(0.5, 0.7, 0.9, 0.6).lerp(Color(1.0, 0.8, 0.2, 1.0), level_progress)
+	style_box.border_color = border_color
 	
 	parent.add_child(skill_container)
 	
@@ -212,7 +247,7 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 		"panel": skill_panel
 	}
 
-func can_upgrade_skill(skill_name: String, skill_data: Dictionary) -> bool:
+func can_upgrade_skill(_skill_name: String, skill_data: Dictionary) -> bool:
 	var current_level = skill_data.get("level", 0)
 	var max_level = skill_data.get("max_level", 5)
 	var cost = skill_data.get("cost_per_level", 1)
@@ -263,9 +298,13 @@ func update_display():
 				else:
 					skill_ui["button"].modulate = Color(0.6, 0.6, 0.6)
 				
-				# 更新面板颜色
-				var color_intensity = 0.3 + (current_level * 0.1)
-				skill_ui["panel"].add_theme_color_override("bg_color", Color(0.2, 0.3, 0.4, color_intensity))
+				# 更新面板边框颜色
+				var level_progress = float(current_level) / float(max_level)
+				var border_color = Color(0.5, 0.7, 0.9, 0.6).lerp(Color(1.0, 0.8, 0.2, 1.0), level_progress)
+				# 注意：这里需要重新获取StyleBox来更新颜色
+				var panel_style = skill_ui["panel"].get_theme_stylebox("panel")
+				if panel_style is StyleBoxFlat:
+					panel_style.border_color = border_color
 
 func calculate_used_stars() -> int:
 	var total_used_stars = 0

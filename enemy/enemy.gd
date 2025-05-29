@@ -51,7 +51,6 @@ func set_path(curve: Curve2D) -> void:
 
 func _physics_process(delta):
 	if path_follow and path:
-		var current_position = path_follow.position
 		path_follow.progress += speed * speed_multiplier * delta
 		position = path_follow.position
 		
