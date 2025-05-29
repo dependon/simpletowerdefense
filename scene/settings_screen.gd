@@ -2,6 +2,7 @@ extends Control
 
 # 分辨率选项
 var resolution_options = [
+	{"name": "2560x1440", "width": 2560, "height": 1440},
 	{"name": "1920x1080", "width": 1920, "height": 1080},
 	{"name": "1600x900", "width": 1600, "height": 900},
 	{"name": "1366x768", "width": 1366, "height": 768},

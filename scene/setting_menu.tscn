@@ -45,6 +45,11 @@ process_mode = 3
 layout_mode = 2
 text = "重新开始关卡"
 
+[node name="MainMenuSettingsButton" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "主界面菜单"
+
 [node name="LevelSelectButton" type="Button" parent="VBoxContainer"]
 process_mode = 3
 layout_mode = 2
@@ -57,5 +62,6 @@ text = "返回开始菜单"
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/RestartLevelButton" to="." method="_on_restart_level_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuSettingsButton" to="." method="_on_main_menu_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartMenuButton" to="." method="_on_start_menu_button_pressed"]

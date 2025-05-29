@@ -51,6 +51,7 @@ theme_override_font_sizes/font_size = 24
 text = "分辨率设置"
 
 [node name="ResolutionOptionButton" type="OptionButton" parent="MainContainer/ResolutionContainer"]
+process_mode = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 
@@ -64,6 +65,7 @@ theme_override_font_sizes/font_size = 20
 text = "全屏模式"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="MainContainer/FullscreenContainer"]
+process_mode = 3
 layout_mode = 2
 
 [node name="VolumeContainer" type="VBoxContainer" parent="MainContainer"]
@@ -86,6 +88,7 @@ theme_override_font_sizes/font_size = 18
 text = "主音量: 100%"
 
 [node name="MasterVolumeSlider" type="HSlider" parent="MainContainer/VolumeContainer/MasterVolumeContainer"]
+process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
@@ -96,12 +99,14 @@ theme_override_constants/separation = 30
 alignment = 1
 
 [node name="ApplyButton" type="Button" parent="MainContainer/ButtonContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "应用"
 
 [node name="BackButton" type="Button" parent="MainContainer/ButtonContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
