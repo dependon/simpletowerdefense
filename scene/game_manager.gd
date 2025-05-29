@@ -3,10 +3,14 @@ extends Node
 # 存档文件名
 const SAVE_GAME_FILENAME = "user://savegame.dat"
 
-var stars : int = 0 # 玩家星星数量
-
-# 技能系统相关数据
-var tower_skill_effects: Dictionary = {}
+# 数据变量
+var stars: int = 0
+var current_level: int = 1
+var diamonds: int = 0
+var unlocked_levels: Array[int] = [1]  # 默认解锁第一关
+var level_stars: Dictionary = {}  # 存储每个关卡的星级
+var tower_skill_effects: Dictionary = {}  # 存储塔的技能效果
+var skill_data: Dictionary = {}  # 存储技能树数据
 
 func add_stars(amount : int):
 	stars += amount
@@ -14,11 +18,6 @@ func add_stars(amount : int):
 	
 signal next_wave_requested #开启下一波
 signal level_selected(level_number: int)
-
-var current_level: int = 0
-var diamonds: int = 0  # 玩家拥有的钻石数量
-var unlocked_levels: Array = [1]  # 默认只解锁第一关
-var level_stars: Dictionary = {}  # 每个关卡的星级评分，默认为0星
 
 func _ready():
 	load_game()
@@ -37,13 +36,24 @@ func load_game():
 		stars = data.stars
 		current_level = data.current_level
 		diamonds = data.diamonds
-		unlocked_levels = data.unlocked_levels
+		# 确保unlocked_levels是正确的类型
+		if data.unlocked_levels is Array:
+			unlocked_levels.clear()
+			for level in data.unlocked_levels:
+				unlocked_levels.append(int(level))
+		else:
+			unlocked_levels = [1]
 		level_stars = data.level_stars
 		# 加载技能效果数据
 		if data.has("tower_skill_effects"):
 			tower_skill_effects = data.tower_skill_effects
 		else:
 			tower_skill_effects = {}
+		# 加载技能树数据
+		if data.has("skill_data"):
+			skill_data = data.skill_data
+		else:
+			skill_data = {}
 		unlock_next_level()
 		print("游戏存档加载成功！")
 	else:
@@ -58,7 +68,8 @@ func save_game():
 		"diamonds": diamonds,
 		"unlocked_levels": unlocked_levels,
 		"level_stars": level_stars,
-		"tower_skill_effects": tower_skill_effects
+		"tower_skill_effects": tower_skill_effects,
+		"skill_data": skill_data
 	}
 	var file = FileAccess.open(SAVE_GAME_FILENAME, FileAccess.WRITE)
 	if file != null:
@@ -172,3 +183,14 @@ func apply_skill_effects_to_tower_stats(tower_type: String, base_damage: float, 
 		"fire_rate": final_fire_rate,
 		"effects": effects
 	}
+
+# 技能数据管理函数
+
+# 保存技能数据
+func save_skill_data(data: Dictionary):
+	skill_data = data.duplicate(true)
+	print("技能数据已保存到GameManager")
+
+# 获取技能数据
+func get_skill_data() -> Dictionary:
+	return skill_data

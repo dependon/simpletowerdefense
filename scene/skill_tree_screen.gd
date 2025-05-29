@@ -37,20 +37,25 @@ func _ready():
 	update_display()
 
 func load_skill_data():
-	# 加载技能树数据
-	var file = FileAccess.open("res://resources/skill_trees/tower_skills.json", FileAccess.READ)
-	if file:
-		var json_string = file.get_as_text()
-		file.close()
-		var json_data = JSON.parse_string(json_string)
-		if json_data != null:
-			all_towers_data = json_data
+	# 从GameManager加载技能树数据
+	all_towers_data = GameManager.get_skill_data()
+	if all_towers_data.is_empty():
+		# 如果GameManager中没有数据，从JSON文件加载默认数据
+		var file = FileAccess.open("res://resources/skill_trees/tower_skills.json", FileAccess.READ)
+		if file:
+			var json_string = file.get_as_text()
+			file.close()
+			var json_data = JSON.parse_string(json_string)
+			if json_data != null:
+				all_towers_data = json_data
+				# 保存到GameManager
+				GameManager.save_skill_data(all_towers_data)
+			else:
+				print("技能树数据解析失败")
+				all_towers_data = {}
 		else:
-			print("技能树数据解析失败")
+			print("无法打开技能树数据文件")
 			all_towers_data = {}
-	else:
-		print("无法加载技能树数据文件")
-		all_towers_data = {}
 
 func setup_ui():
 	# 设置UI样式和布局
@@ -344,6 +349,12 @@ func _on_skill_upgrade_pressed(skill_name: String):
 		# 应用技能效果到塔属性
 		apply_skill_effect(current_tower_type, skill_name, skill_data)
 		
+		# 保存技能数据到GameManager
+		GameManager.save_skill_data(all_towers_data)
+		
+		# 保存游戏存档
+		GameManager.save_game()
+		
 		# 更新显示
 		update_display()
 		
@@ -379,6 +390,12 @@ func _on_reset_pressed():
 	
 	# 重置塔的技能效果
 	GameManager.reset_all_tower_skills()
+	
+	# 保存技能数据到GameManager
+	GameManager.save_skill_data(all_towers_data)
+	
+	# 保存游戏存档
+	GameManager.save_game()
 	
 	# 更新显示
 	setup_skill_tree()
