@@ -157,33 +157,6 @@ func get_all_tower_skill_effects(tower_type: String) -> Dictionary:
 		return tower_skill_effects[tower_type]
 	return {}
 
-# 应用技能效果到塔的基础属性
-func apply_skill_effects_to_tower_stats(tower_type: String, base_damage: float, base_range: float, base_fire_rate: float) -> Dictionary:
-	var effects = get_all_tower_skill_effects(tower_type)
-	
-	var final_damage = base_damage
-	var final_range = base_range
-	var final_fire_rate = base_fire_rate
-	
-	# 应用伤害倍率
-	if effects.has("damage_multiplier"):
-		final_damage *= (1.0 + effects["damage_multiplier"])
-	
-	# 应用射程倍率
-	if effects.has("range_multiplier"):
-		final_range *= (1.0 + effects["range_multiplier"])
-	
-	# 应用攻速倍率
-	if effects.has("fire_rate_multiplier"):
-		final_fire_rate *= (1.0 + effects["fire_rate_multiplier"])
-	
-	return {
-		"damage": final_damage,
-		"range": final_range,
-		"fire_rate": final_fire_rate,
-		"effects": effects
-	}
-
 # 技能数据管理函数
 
 # 保存技能数据

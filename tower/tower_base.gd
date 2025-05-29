@@ -11,6 +11,11 @@ signal tower_clicked(tower_instance) # 新增：防御塔被点击信号，传�
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var base_cost = 50  # 基础建造成本
 @export var damage = 50  # 伤害值
+@export var deceleration_time = 5.0 #减速时间
+@export var deceleration_ratio = 2 #减速倍率
+@export var crit_chance = 0.01 #暴击概率
+@export var crit_ratio = 1.5 #暴击伤害倍率
+
 var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
 var max_level = 4 # 防御塔最大等级
@@ -102,14 +107,24 @@ func _physics_process(delta):
 		var enemies = tower_area.get_overlapping_areas()
 		for enemy in enemies:
 			if enemy.is_in_group("enemies"):
-				var bullet_scene = preload("res://bullet/bullet.tscn")
-				var bullet = bullet_scene.instantiate()
+				var bullet_scene
+				var bullet
+				if get_tower_type() == "tower_frost":				
+					bullet_scene = preload("res://bullet/bullet_ice.tscn")
+					bullet = bullet_scene.instantiate()
+					bullet.set_meta("type", "frost")
+				else:
+					bullet_scene = preload("res://bullet/bullet.tscn")
+					bullet = bullet_scene.instantiate()
 				bullet.direction = (enemy.global_position - position).normalized()
 				bullet.damage = damage
+				bullet.deceleration_time = deceleration_time #减速时间
+				bullet.deceleration_ratio = deceleration_ratio #减速倍率
+				bullet.crit_chance = crit_chance #暴击概率
+				bullet.crit_ratio = crit_ratio #暴击伤害倍率
+				
 				get_parent().add_child(bullet)
 				bullet.position = position
-				#print(bullet.direction)
-				#print(bullet.position)
 				time_since_last_fire = 0
 				break
 
@@ -235,18 +250,14 @@ func apply_skill_effects():
 	# 获取塔的类型名称
 	var tower_type = get_tower_type()
 	
-	# 从GameManager获取技能效果并应用
-	var skill_stats = GameManager.apply_skill_effects_to_tower_stats(
-		tower_type, 
-		damage, 
-		attack_range, 
-		fire_rate
-	)
+	var effects = GameManager.get_all_tower_skill_effects(tower_type)
+
+	var skill_stats = apply_skill_effects_to_tower_stats(effects)
 	
-	# 更新塔的属性
-	damage = skill_stats["damage"]
-	attack_range = skill_stats["range"]
-	fire_rate = skill_stats["fire_rate"]
+	## 更新塔的属性
+	#damage = skill_stats["damage"]
+	#attack_range = skill_stats["range"]
+	#fire_rate = skill_stats["fire_rate"]
 	
 	# 更新范围显示
 	_update_range_display()
@@ -256,3 +267,27 @@ func apply_skill_effects():
 # 获取塔的类型名称（子类需要重写此方法）
 func get_tower_type() -> String:
 	return "tower_base"
+	
+func apply_skill_effects_to_tower_stats(tower_type: String) -> Dictionary:
+	var effects = GameManager.get_all_tower_skill_effects(tower_type)
+	
+	# 应用伤害倍率
+	if effects.has("damage_multiplier"):
+		damage *= (1.0 + effects["damage_multiplier"])
+	
+	# 应用射程倍率
+	if effects.has("range_multiplier"):
+		attack_range *= (1.0 + effects["range_multiplier"])
+	
+	# 应用攻速倍率
+	if effects.has("fire_rate_multiplier"):
+		fire_rate *= (1.0 + effects["fire_rate_multiplier"])
+		
+	# 
+	
+	return {
+		"damage": damage,
+		"range": attack_range,
+		"fire_rate": fire_rate,
+		"effects": effects
+	}
