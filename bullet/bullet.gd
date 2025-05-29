@@ -22,15 +22,15 @@ func _ready():
 func _physics_process(delta):
 	position += direction * speed * delta
 
-func _on_body_entered(body):
-	if body.is_in_group("enemies"):
-		body.take_damage(damage)
-	queue_free()
-
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
-		area.take_damage(damage)
+		var final_damage = damage
+		# 判断是否暴击
+		if randf() < crit_chance:
+			final_damage *= crit_ratio
+			print("暴击！伤害: ", final_damage) # 打印暴击信息
+		area.take_damage(final_damage)
 		# 如果是冰霜子弹，则减速敌人
 		if has_meta("type") and get_meta("type") == "frost":
 			area.set_speed_multiplier(deceleration_ratio,deceleration_time)

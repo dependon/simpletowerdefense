@@ -250,9 +250,7 @@ func apply_skill_effects():
 	# 获取塔的类型名称
 	var tower_type = get_tower_type()
 	
-	var effects = GameManager.get_all_tower_skill_effects(tower_type)
-
-	var skill_stats = apply_skill_effects_to_tower_stats(effects)
+	var skill_stats = apply_skill_effects_to_tower_stats(tower_type)
 	
 	## 更新塔的属性
 	#damage = skill_stats["damage"]
@@ -283,8 +281,6 @@ func apply_skill_effects_to_tower_stats(tower_type: String) -> Dictionary:
 	if effects.has("fire_rate_multiplier"):
 		fire_rate *= (1.0 + effects["fire_rate_multiplier"])
 		
-	# 
-	
 	return {
 		"damage": damage,
 		"range": attack_range,
