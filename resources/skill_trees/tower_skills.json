@@ -1,23 +1,202 @@
 {
-  "frost": {
-    "skill1": {"name": "冰冻强化", "desc": "增加冰冻时间", "level": 0, "cost": 1},
-    "skill2": {"name": "范围扩大", "desc": "增加冰冻范围", "level": 0, "cost": 2},
-    "skill3": {"name": "减速强化", "desc": "增加减速效果", "level": 0, "cost": 3},
-    "skill4": {"name": "冰霜新星", "desc": "发射冰霜新星", "level": 0, "cost": 4}
+  "tower_base": {
+    "damage_boost": {
+      "name": "伤害强化",
+      "description": "增加基础伤害",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "damage_multiplier",
+      "effect_value": 0.2,
+      "icon": "res://assets/skill_icons/skill_icon_1.png"
+    },
+    "range_boost": {
+      "name": "射程强化",
+      "description": "增加攻击范围",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "range_multiplier",
+      "effect_value": 0.15,
+      "icon": "res://assets/skill_icons/skill_icon_4.png"
+    },
+    "fire_rate_boost": {
+      "name": "攻速强化",
+      "description": "增加攻击速度",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 2,
+      "effect_type": "fire_rate_multiplier",
+      "effect_value": 0.25,
+      "icon": "res://assets/skill_icons/skill_icon_3.png"
+    },
+    "critical_strike": {
+      "name": "暴击强化",
+      "description": "增加暴击几率和伤害",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 3,
+      "effect_type": "critical_chance",
+      "effect_value": 0.1,
+      "icon": "res://assets/skill_icons/skill_icon_5.png"
+    }
   },
-  "area": {
-    "skill1": {"name": "范围强化", "desc": "增加范围", "level": 0, "cost": 1},
-    "skill2": {"name": "伤害强化", "desc": "增加伤害", "level": 0, "cost": 2},
-    "skill3": {"name": "攻速强化", "desc": "增加攻速", "level": 0, "cost": 3},
-    "skill4": {"name": "燃烧", "desc": "攻击附带燃烧效果", "level": 0, "cost": 4}
+  "tower_fast": {
+    "attack_speed": {
+      "name": "极速射击",
+      "description": "大幅增加攻击速度",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "fire_rate_multiplier",
+      "effect_value": 0.4,
+      "icon": "res://assets/skill_icons/skill_icon_11.png"
+    },
+    "penetration": {
+      "name": "穿透射击",
+      "description": "子弹可以穿透多个敌人",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 2,
+      "effect_type": "penetration_count",
+      "effect_value": 1,
+      "icon": "res://assets/skill_icons/skill_icon_15.png"
+    },
+    "multi_shot": {
+      "name": "多重射击",
+      "description": "同时发射多发子弹",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 3,
+      "effect_type": "bullet_count",
+      "effect_value": 1,
+      "icon": "res://assets/skill_icons/skill_icon_17.png"
+    },
+    "precision": {
+      "name": "精准射击",
+      "description": "增加射程和精准度",
+      "level": 0,
+      "max_level": 4,
+      "cost_per_level": 2,
+      "effect_type": "range_multiplier",
+      "effect_value": 0.3,
+      "icon": "res://assets/skill_icons/skill_icon_19.png"
+    }
   },
-  "fast": {
-    "skill1": {"name": "攻速强化", "desc": "增加攻速", "level": 0, "cost": 1},
-    "skill2": {"name": "射程强化", "desc": "增加射程", "level": 0, "cost": 2},
-    "skill3": {"name": "穿透", "desc": "攻击可以穿透敌人", "level": 0, "cost": 3},
-    "skill4": {"name": "多重射击", "desc": "一次发射多个子弹", "level": 0, "cost": 4,
-			"branch1": {"name": "快速射击", "desc": "大幅增加攻速", "cost": 5},
-			"branch2": {"name": "精准射击", "desc": "大幅增加伤害", "cost": 5}
-			}
+  "tower_area": {
+    "explosion_radius": {
+      "name": "爆炸范围",
+      "description": "增加爆炸伤害范围",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "explosion_radius",
+      "effect_value": 20,
+      "icon": "res://assets/skill_icons/skill_icon_24.png"
+    },
+    "splash_damage": {
+      "name": "溅射伤害",
+      "description": "增加溅射伤害倍率",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 2,
+      "effect_type": "damage_multiplier",
+      "effect_value": 0.3,
+      "icon": "res://assets/skill_icons/skill_icon_28.png"
+    },
+    "chain_reaction": {
+      "name": "连锁反应",
+      "description": "爆炸可能引发连锁反应",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 4,
+      "effect_type": "chain_chance",
+      "effect_value": 0.2,
+      "icon": "res://assets/skill_icons/skill_icon_29.png"
+    },
+    "burning_effect": {
+      "name": "燃烧效果",
+      "description": "攻击附带燃烧持续伤害",
+      "level": 0,
+      "max_level": 4,
+      "cost_per_level": 3,
+      "effect_type": "burn_damage",
+      "effect_value": 10,
+      "icon": "res://assets/skill_icons/skill_icon_33.png"
+    }
+  },
+  "tower_frost": {
+    "freeze_duration": {
+      "name": "冰冻时长",
+      "description": "增加冰冻持续时间",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "freeze_duration",
+      "effect_value": 0.5,
+      "icon": "res://assets/skill_icons/skill_icon_39.png"
+    },
+    "slow_effect": {
+      "name": "减速强化",
+      "description": "增加减速效果强度",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "slow_multiplier",
+      "effect_value": 0.1,
+      "icon": "res://assets/skill_icons/skill_icon_44.png"
+    },
+    "ice_nova": {
+      "name": "冰霜新星",
+      "description": "释放冰霜新星冰冻周围敌人",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 4,
+      "effect_type": "nova_chance",
+      "effect_value": 0.15,
+      "icon": "res://assets/skill_icons/skill_icon_43.png"
+    },
+    "frost_armor": {
+      "name": "霜甲护盾",
+      "description": "为附近友军提供护盾",
+      "level": 0,
+      "max_level": 4,
+      "cost_per_level": 3,
+      "effect_type": "shield_strength",
+      "effect_value": 50,
+      "icon": "res://assets/skill_icons/skill_icon_48.png"
+    }
+  },
+  "tower_big_area": {
+    "massive_explosion": {
+      "name": "巨型爆炸",
+      "description": "大幅增加爆炸范围和伤害",
+      "level": 0,
+      "max_level": 4,
+      "cost_per_level": 2,
+      "effect_type": "damage_multiplier",
+      "effect_value": 0.5,
+      "icon": "res://assets/skill_icons/skill_icon_52.png"
+    },
+    "earthquake": {
+      "name": "地震冲击",
+      "description": "攻击造成地震效果",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 4,
+      "effect_type": "earthquake_chance",
+      "effect_value": 0.25,
+      "icon": "res://assets/skill_icons/skill_icon_54.png"
+    },
+    "armor_pierce": {
+      "name": "破甲攻击",
+      "description": "无视敌人部分护甲",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 2,
+      "effect_type": "armor_pierce",
+      "effect_value": 0.2,
+      "icon": "res://assets/skill_icons/skill_icon_59.png"
+    }
   }
 }

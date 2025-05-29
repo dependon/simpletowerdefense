@@ -1,176 +1,358 @@
 extends Control
 
-@onready var skill_tree_container = $Panel/MarginContainer/VBoxContainer/SkillTreeContainer
-@onready var unused_stars_label = $Panel/MarginContainer/VBoxContainer/StarInfoContainer/UnusedStarsLabel
-@onready var used_stars_label = $Panel/MarginContainer/VBoxContainer/StarInfoContainer/UsedStarsLabel
-var tower_data = {}
-var tower_type = ""
+# 技能树界面管理器
+class_name SkillTreeScreen
+
+# UI节点引用
+@onready var background_panel = $BackgroundPanel
+@onready var title_label = $BackgroundPanel/MainContainer/TitleContainer/TitleLabel
+@onready var star_info_container = $BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer
+@onready var unused_stars_label = $BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer/UnusedStarsLabel
+@onready var used_stars_label = $BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer/UsedStarsLabel
+@onready var tower_tabs_container = $BackgroundPanel/MainContainer/TowerTabsContainer
+@onready var skill_tree_container = $BackgroundPanel/MainContainer/SkillTreeContainer
+@onready var button_container = $BackgroundPanel/MainContainer/ButtonContainer
+@onready var main_menu_button = $BackgroundPanel/MainContainer/ButtonContainer/MainMenuButton
+@onready var reset_button = $BackgroundPanel/MainContainer/ButtonContainer/ResetButton
+
+# 数据变量
 var all_towers_data = {}
+var current_tower_type = "tower_base"
+var tower_types = ["tower_base", "tower_fast", "tower_area", "tower_frost", "tower_big_area"]
+var tower_display_names = {
+	"tower_base": "基础塔",
+	"tower_fast": "快速塔", 
+	"tower_area": "范围塔",
+	"tower_frost": "冰霜塔",
+	"tower_big_area": "重炮塔"
+}
 
-func set_tower_type():
-	all_towers_data = load_tower_data()
+# 技能按钮数组，用于管理技能按钮
+var skill_buttons = {}
+var tower_tab_buttons = {}
 
-func load_tower_data():
-	# 从 JSON 文件加载技能树数据
+func _ready():
+	load_skill_data()
+	setup_ui()
+	update_display()
+
+func load_skill_data():
+	# 加载技能树数据
 	var file = FileAccess.open("res://resources/skill_trees/tower_skills.json", FileAccess.READ)
-	var json_string = file.get_as_text()
-	file.close()
-	var json_data = JSON.parse_string(json_string)
-	if json_data != null:
-		return json_data
+	if file:
+		var json_string = file.get_as_text()
+		file.close()
+		var json_data = JSON.parse_string(json_string)
+		if json_data != null:
+			all_towers_data = json_data
+		else:
+			print("技能树数据解析失败")
+			all_towers_data = {}
 	else:
-		return {}
+		print("无法加载技能树数据文件")
+		all_towers_data = {}
 
-func update_skill_tree():
-	# 更新星星数量显示
-	var used_stars = 0
-	for tower_type in all_towers_data:
-		var tower_data = all_towers_data[tower_type]
-		for skill_name in tower_data:
-			var skill = tower_data[skill_name]
-			used_stars += skill["level"]
-	var unused_stars = GameManager.stars
-	unused_stars_label.text = "未使用星星: " + str(unused_stars)
-	used_stars_label.text = "已使用星星: " + str(used_stars)
+func setup_ui():
+	# 设置UI样式和布局
+	setup_tower_tabs()
+	setup_skill_tree()
+	
+	# 连接按钮信号
+	main_menu_button.pressed.connect(_on_main_menu_pressed)
+	reset_button.pressed.connect(_on_reset_pressed)
 
-	# 清空 SkillTreeContainer
+func setup_tower_tabs():
+	# 创建塔类型选择标签页
+	for child in tower_tabs_container.get_children():
+		child.queue_free()
+	
+	for tower_type in tower_types:
+		if tower_type in all_towers_data:
+			var tab_button = Button.new()
+			tab_button.text = tower_display_names.get(tower_type, tower_type)
+			tab_button.custom_minimum_size = Vector2(120, 40)
+			tab_button.add_theme_font_size_override("font_size", 16)
+			
+			# 设置按钮样式
+			if tower_type == current_tower_type:
+				tab_button.add_theme_color_override("font_color", Color.YELLOW)
+				tab_button.disabled = true
+			else:
+				tab_button.add_theme_color_override("font_color", Color.WHITE)
+			
+			tab_button.pressed.connect(_on_tower_tab_pressed.bind(tower_type))
+			tower_tabs_container.add_child(tab_button)
+			tower_tab_buttons[tower_type] = tab_button
+
+func setup_skill_tree():
+	# 清空现有技能树
 	for child in skill_tree_container.get_children():
 		child.queue_free()
+	
+	skill_buttons.clear()
+	
+	if current_tower_type not in all_towers_data:
+		return
+	
+	var tower_data = all_towers_data[current_tower_type]
+	
+	# 创建技能网格容器
+	var grid_container = GridContainer.new()
+	grid_container.columns = 2
+	grid_container.add_theme_constant_override("h_separation", 20)
+	grid_container.add_theme_constant_override("v_separation", 15)
+	skill_tree_container.add_child(grid_container)
+	
+	# 为每个技能创建UI
+	for skill_name in tower_data:
+		var skill_data = tower_data[skill_name]
+		create_skill_node(grid_container, skill_name, skill_data)
 
-	# 动态创建所有塔的技能按钮
+func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary):
+	# 创建技能节点容器
+	var skill_container = VBoxContainer.new()
+	skill_container.custom_minimum_size = Vector2(200, 150)
+	skill_container.add_theme_constant_override("separation", 5)
+	
+	# 创建技能面板
+	var skill_panel = Panel.new()
+	skill_panel.custom_minimum_size = Vector2(200, 150)
+	skill_container.add_child(skill_panel)
+	
+	# 创建技能内容容器
+	var content_container = VBoxContainer.new()
+	content_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	content_container.add_theme_constant_override("separation", 5)
+	skill_panel.add_child(content_container)
+	
+	# 添加边距
+	var margin_container = MarginContainer.new()
+	margin_container.add_theme_constant_override("margin_left", 10)
+	margin_container.add_theme_constant_override("margin_right", 10)
+	margin_container.add_theme_constant_override("margin_top", 10)
+	margin_container.add_theme_constant_override("margin_bottom", 10)
+	content_container.add_child(margin_container)
+	
+	var inner_container = VBoxContainer.new()
+	inner_container.add_theme_constant_override("separation", 5)
+	margin_container.add_child(inner_container)
+	
+	# 技能图标和名称容器
+	var header_container = HBoxContainer.new()
+	header_container.add_theme_constant_override("separation", 8)
+	inner_container.add_child(header_container)
+	
+	# 技能图标
+	var icon_texture = TextureRect.new()
+	icon_texture.custom_minimum_size = Vector2(32, 32)
+	icon_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	icon_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	
+	# 加载技能图标
+	if skill_data.has("icon") and ResourceLoader.exists(skill_data["icon"]):
+		icon_texture.texture = load(skill_data["icon"])
+	header_container.add_child(icon_texture)
+	
+	# 技能名称
+	var name_label = Label.new()
+	name_label.text = skill_data.get("name", skill_name)
+	name_label.add_theme_font_size_override("font_size", 14)
+	name_label.add_theme_color_override("font_color", Color.WHITE)
+	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	header_container.add_child(name_label)
+	
+	# 技能描述
+	var desc_label = Label.new()
+	desc_label.text = skill_data.get("description", "")
+	desc_label.add_theme_font_size_override("font_size", 11)
+	desc_label.add_theme_color_override("font_color", Color.LIGHT_GRAY)
+	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	inner_container.add_child(desc_label)
+	
+	# 技能等级信息
+	var level_info = HBoxContainer.new()
+	inner_container.add_child(level_info)
+	
+	var level_label = Label.new()
+	var current_level = skill_data.get("level", 0)
+	var max_level = skill_data.get("max_level", 5)
+	level_label.text = "等级: %d/%d" % [current_level, max_level]
+	level_label.add_theme_font_size_override("font_size", 12)
+	level_info.add_child(level_label)
+	
+	# 升级按钮
+	var upgrade_button = Button.new()
+	var cost = skill_data.get("cost_per_level", 1)
+	upgrade_button.text = "升级 (" + str(cost) + "星)"
+	upgrade_button.custom_minimum_size = Vector2(80, 25)
+	upgrade_button.add_theme_font_size_override("font_size", 10)
+	
+	# 检查是否可以升级
+	var can_upgrade = can_upgrade_skill(skill_name, skill_data)
+	upgrade_button.disabled = not can_upgrade
+	if not can_upgrade:
+		upgrade_button.modulate = Color(0.6, 0.6, 0.6)
+	else:
+		upgrade_button.modulate = Color.WHITE
+	
+	upgrade_button.pressed.connect(_on_skill_upgrade_pressed.bind(skill_name))
+	level_info.add_child(upgrade_button)
+	
+	# 设置面板颜色基于技能等级
+	var color_intensity = 0.3 + (current_level * 0.1)
+	skill_panel.add_theme_color_override("bg_color", Color(0.2, 0.3, 0.4, color_intensity))
+	
+	parent.add_child(skill_container)
+	
+	# 保存按钮引用
+	skill_buttons[skill_name] = {
+		"container": skill_container,
+		"button": upgrade_button,
+		"level_label": level_label,
+		"panel": skill_panel
+	}
+
+func can_upgrade_skill(skill_name: String, skill_data: Dictionary) -> bool:
+	var current_level = skill_data.get("level", 0)
+	var max_level = skill_data.get("max_level", 5)
+	var cost = skill_data.get("cost_per_level", 1)
+	
+	if current_level >= max_level:
+		return false
+	
+	var available_stars = GameManager.stars
+	if available_stars < cost:
+		return false
+	
+	return true
+
+func update_display():
+	# 更新星星显示
+	var used_stars = calculate_used_stars()
+	unused_stars_label.text = "可用星星: " + str(GameManager.stars)
+	used_stars_label.text = "已用星星: " + str(used_stars)
+	
+	# 更新塔标签页按钮状态
+	for tower_type in tower_tab_buttons:
+		var button = tower_tab_buttons[tower_type]
+		if tower_type == current_tower_type:
+			button.add_theme_color_override("font_color", Color.YELLOW)
+			button.disabled = true
+		else:
+			button.add_theme_color_override("font_color", Color.WHITE)
+			button.disabled = false
+	
+	# 更新技能按钮状态
+	if current_tower_type in all_towers_data:
+		var tower_data = all_towers_data[current_tower_type]
+		for skill_name in skill_buttons:
+			if skill_name in tower_data:
+				var skill_data = tower_data[skill_name]
+				var skill_ui = skill_buttons[skill_name]
+				
+				# 更新等级显示
+				var current_level = skill_data.get("level", 0)
+				var max_level = skill_data.get("max_level", 5)
+				skill_ui["level_label"].text = "等级: %d/%d" % [current_level, max_level]
+				
+				# 更新按钮状态
+				var can_upgrade = can_upgrade_skill(skill_name, skill_data)
+				skill_ui["button"].disabled = not can_upgrade
+				if can_upgrade:
+					skill_ui["button"].modulate = Color.WHITE
+				else:
+					skill_ui["button"].modulate = Color(0.6, 0.6, 0.6)
+				
+				# 更新面板颜色
+				var color_intensity = 0.3 + (current_level * 0.1)
+				skill_ui["panel"].add_theme_color_override("bg_color", Color(0.2, 0.3, 0.4, color_intensity))
+
+func calculate_used_stars() -> int:
+	var total_used_stars = 0
 	for tower_type in all_towers_data:
 		var tower_data = all_towers_data[tower_type]
-
-		# 创建塔的 VBoxContainer
-		var tower_vbox = VBoxContainer.new()
-		tower_vbox.name = tower_type
-		tower_vbox.add_theme_constant_override("separation", 5)
-
-		# 创建包含塔的名字和技能按钮的 VBoxContainer
-		var tower_container = VBoxContainer.new()
-		tower_container.name = tower_type + "_container"
-		tower_container.add_theme_constant_override("separation", 5)
-
-		var tower_label = Label.new()
-		tower_label.text = tower_type
-		tower_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		tower_container.add_child(tower_label)
-
 		for skill_name in tower_data:
-			var skill = tower_data[skill_name]
-			var button = Button.new()
-			button.text = skill["name"] + " Lv." + str(skill["level"])
-			button.size = Vector2(50, 50)
-			button.custom_minimum_size = Vector2(50, 50)
-			var can_upgrade = can_upgrade_skill(tower_type, skill_name)
-			button.disabled = not can_upgrade
-			if not can_upgrade:
-				button.modulate = Color(0.5, 0.5, 0.5)  # 设置为灰色
-			button.connect("pressed", func(): upgrade_skill(tower_type, skill_name))
-			tower_container.add_child(button)
+			var skill_data = tower_data[skill_name]
+			var level = skill_data.get("level", 0)
+			var cost_per_level = skill_data.get("cost_per_level", 1)
+			total_used_stars += level * cost_per_level
+	return total_used_stars
 
-			if skill["level"] == 4 and skill.has("branch1") and skill.has("branch2"):
-				var branch1_button = Button.new()
-				branch1_button.text = skill["branch1"]["name"]
-				var can_upgrade_branch1 = can_upgrade_branch(tower_type, skill_name, "branch1")
-				branch1_button.disabled = not can_upgrade_branch1
-				if not can_upgrade_branch1:
-					branch1_button.modulate = Color(0.5, 0.5, 0.5)  # 设置为灰色
-				branch1_button.connect("pressed", func(): upgrade_branch(tower_type, skill_name, "branch1"))
-				tower_container.add_child(branch1_button)
+func _on_tower_tab_pressed(tower_type: String):
+	current_tower_type = tower_type
+	setup_tower_tabs()
+	setup_skill_tree()
+	update_display()
 
-				var branch2_button = Button.new()
-				branch2_button.text = skill["branch2"]["name"]
-				var can_upgrade_branch2 = can_upgrade_branch(tower_type, skill_name, "branch2")
-				branch2_button.disabled = not can_upgrade_branch2
-				if not can_upgrade_branch2:
-					branch2_button.modulate = Color(0.5, 0.5, 0.5)  # 设置为灰色
-				branch2_button.connect("pressed", func(): upgrade_branch(tower_type, skill_name, "branch2"))
-				tower_container.add_child(branch2_button)
-
-		skill_tree_container.add_child(tower_container)
-
-func can_upgrade_skill(tower_type, skill_name):
-	var tower_data = all_towers_data[tower_type]
-	var skill = tower_data[skill_name]
-	var cost = skill["cost"]
-	var current_stars = GameManager.stars
-	if skill["level"] < 4:
-		if skill["level"] == 0 and current_stars >= 1:
-			return true
-		elif skill["level"] == 1 and current_stars >= 2:
-			return true
-		else:
-			return false
-	else:
-		return false
-
-func can_upgrade_branch(tower_type, skill_name, branch_name):
-	var tower_data = all_towers_data[tower_type]
-	var skill = tower_data[skill_name]
-	var branch = skill[branch_name]
-	var cost = branch["cost"]
-	var current_stars = GameManager.stars
-	return current_stars >= cost
-
-func upgrade_skill(tower_type, skill_name):
-	# 升级技能
-	var tower_data = all_towers_data[tower_type]
-	var skill = tower_data[skill_name]
-	var cost = skill["cost"]
-	var current_stars = GameManager.stars
-	if skill["level"] < 4:
-		if skill["level"] == 0 and current_stars >= 1:
-			GameManager.stars -= 1
-			skill["level"] += 1
-			tower_data[skill_name] = skill
-			update_skill_tree()
-			print("成功升级 " + skill_name)
-		elif skill["level"] == 1 and current_stars >= 2:
-			GameManager.stars -= 2
-			skill["level"] += 1
-			tower_data[skill_name] = skill
-			update_skill_tree()
-			print("成功升级 " + skill_name)
-		else:
-			print("星星数量不足")
-	else:
-		print("技能已满级")
-
-func upgrade_branch(tower_type, skill_name, branch_name):
-	var tower_data = all_towers_data[tower_type]
-	var skill = tower_data[skill_name]
-	var branch = skill[branch_name]
-	var cost = branch["cost"]
-	var current_stars = GameManager.stars
-	if current_stars >= cost:
+func _on_skill_upgrade_pressed(skill_name: String):
+	if current_tower_type not in all_towers_data:
+		return
+	
+	var tower_data = all_towers_data[current_tower_type]
+	if skill_name not in tower_data:
+		return
+	
+	var skill_data = tower_data[skill_name]
+	var cost = skill_data.get("cost_per_level", 1)
+	
+	if can_upgrade_skill(skill_name, skill_data):
+		# 扣除星星
 		GameManager.stars -= cost
-		# 这里应该应用进阶效果，例如修改塔的属性
-		print("成功进阶 " + skill_name + " 的 " + branch_name)
-		# 移除其他分支
-		if branch_name == "branch1":
-			skill.erase("branch2")
-		else:
-			skill.erase("branch1")
-		tower_data[skill_name] = skill
-		update_skill_tree()
-	else:
-		print("星星数量不足")
+		
+		# 升级技能
+		skill_data["level"] = skill_data.get("level", 0) + 1
+		
+		# 应用技能效果到塔属性
+		apply_skill_effect(current_tower_type, skill_name, skill_data)
+		
+		# 更新显示
+		update_display()
+		
+		print("成功升级技能: ", skill_data.get("name", skill_name), " 到等级 ", skill_data["level"])
 
-func _on_main_menu_button_pressed():
+func apply_skill_effect(tower_type: String, _skill_name: String, skill_data: Dictionary):
+	# 这里可以实现技能效果应用到实际塔属性的逻辑
+	# 例如通过信号通知塔管理器更新塔的属性
+	var effect_type = skill_data.get("effect_type", "")
+	var effect_value = skill_data.get("effect_value", 0)
+	var level = skill_data.get("level", 0)
+	
+	# 发送信号给游戏管理器，让其更新对应塔的属性
+	GameManager.update_tower_skill_effect(tower_type, effect_type, effect_value * level)
+
+func _on_main_menu_pressed():
 	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
 
-func reset_skill_tree():
-	# 重置技能树
+func _on_reset_pressed():
+	# 重置所有技能
+	var total_refund = 0
 	for tower_type in all_towers_data:
 		var tower_data = all_towers_data[tower_type]
 		for skill_name in tower_data:
-			var skill = tower_data[skill_name]
-			GameManager.stars += skill["level"]
-			skill["level"] = 0
-			tower_data[skill_name] = skill
-	update_skill_tree()
-	print("技能树已重置")
+			var skill_data = tower_data[skill_name]
+			var level = skill_data.get("level", 0)
+			var cost_per_level = skill_data.get("cost_per_level", 1)
+			total_refund += level * cost_per_level
+			skill_data["level"] = 0
+	
+	# 返还星星
+	GameManager.stars += total_refund
+	
+	# 重置塔的技能效果
+	GameManager.reset_all_tower_skills()
+	
+	# 更新显示
+	setup_skill_tree()
+	update_display()
+	
+	print("技能树已重置，返还 ", total_refund, " 颗星星")
 
-func _on_reset_skill_button_pressed():
-	reset_skill_tree()
+# 设置塔类型（从外部调用）
+func set_tower_type(tower_type: String = ""):
+	if tower_type != "" and tower_type in tower_types:
+		current_tower_type = tower_type
+	load_skill_data()
+
+func update_skill_tree():
+	# 兼容旧接口
+	update_display()

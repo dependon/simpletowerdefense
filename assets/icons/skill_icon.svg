@@ -1,0 +1,10 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆形 -->
+  <circle cx="32" cy="32" r="30" fill="#4a90e2" stroke="#2c5aa0" stroke-width="2"/>
+  
+  <!-- 技能符号 -->
+  <path d="M32 12 L40 28 L56 28 L44 40 L48 56 L32 48 L16 56 L20 40 L8 28 L24 28 Z" fill="#ffffff" stroke="#cccccc" stroke-width="1"/>
+  
+  <!-- 中心点 -->
+  <circle cx="32" cy="32" r="4" fill="#ffd700"/>
+</svg>

@@ -5,6 +5,9 @@ const SAVE_GAME_FILENAME = "user://savegame.dat"
 
 var stars : int = 0 # 玩家星星数量
 
+# 技能系统相关数据
+var tower_skill_effects: Dictionary = {}
+
 func add_stars(amount : int):
 	stars += amount
 	print("获得星星！当前星星数量：" + str(stars))
@@ -36,6 +39,11 @@ func load_game():
 		diamonds = data.diamonds
 		unlocked_levels = data.unlocked_levels
 		level_stars = data.level_stars
+		# 加载技能效果数据
+		if data.has("tower_skill_effects"):
+			tower_skill_effects = data.tower_skill_effects
+		else:
+			tower_skill_effects = {}
 		unlock_next_level()
 		print("游戏存档加载成功！")
 	else:
@@ -49,7 +57,8 @@ func save_game():
 		"current_level": current_level,
 		"diamonds": diamonds,
 		"unlocked_levels": unlocked_levels,
-		"level_stars": level_stars
+		"level_stars": level_stars,
+		"tower_skill_effects": tower_skill_effects
 	}
 	var file = FileAccess.open(SAVE_GAME_FILENAME, FileAccess.WRITE)
 	if file != null:
@@ -109,3 +118,57 @@ func request_next_wave() -> void:
 # 获取当前钻石数量
 func get_diamonds() -> int:
 	return diamonds
+
+# 技能系统相关方法
+
+# 更新塔的技能效果
+func update_tower_skill_effect(tower_type: String, effect_type: String, effect_value: float):
+	if not tower_skill_effects.has(tower_type):
+		tower_skill_effects[tower_type] = {}
+	
+	tower_skill_effects[tower_type][effect_type] = effect_value
+	print("更新塔技能效果: ", tower_type, " - ", effect_type, ": ", effect_value)
+
+# 获取塔的技能效果
+func get_tower_skill_effect(tower_type: String, effect_type: String) -> float:
+	if tower_skill_effects.has(tower_type) and tower_skill_effects[tower_type].has(effect_type):
+		return tower_skill_effects[tower_type][effect_type]
+	return 0.0
+
+# 重置所有塔的技能效果
+func reset_all_tower_skills():
+	tower_skill_effects.clear()
+	print("所有塔的技能效果已重置")
+
+# 获取塔的所有技能效果
+func get_all_tower_skill_effects(tower_type: String) -> Dictionary:
+	if tower_skill_effects.has(tower_type):
+		return tower_skill_effects[tower_type]
+	return {}
+
+# 应用技能效果到塔的基础属性
+func apply_skill_effects_to_tower_stats(tower_type: String, base_damage: float, base_range: float, base_fire_rate: float) -> Dictionary:
+	var effects = get_all_tower_skill_effects(tower_type)
+	
+	var final_damage = base_damage
+	var final_range = base_range
+	var final_fire_rate = base_fire_rate
+	
+	# 应用伤害倍率
+	if effects.has("damage_multiplier"):
+		final_damage *= (1.0 + effects["damage_multiplier"])
+	
+	# 应用射程倍率
+	if effects.has("range_multiplier"):
+		final_range *= (1.0 + effects["range_multiplier"])
+	
+	# 应用攻速倍率
+	if effects.has("fire_rate_multiplier"):
+		final_fire_rate *= (1.0 + effects["fire_rate_multiplier"])
+	
+	return {
+		"damage": final_damage,
+		"range": final_range,
+		"fire_rate": final_fire_rate,
+		"effects": effects
+	}

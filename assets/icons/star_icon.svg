@@ -1,0 +1,7 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- 星星形状 -->
+  <path d="M16 2 L20 12 L30 12 L22 18 L26 28 L16 22 L6 28 L10 18 L2 12 L12 12 Z" fill="#ffd700" stroke="#ffaa00" stroke-width="1"/>
+  
+  <!-- 高光效果 -->
+  <path d="M16 2 L18 8 L24 8 L19 12 L21 18 L16 15 L11 18 L13 12 L8 8 L14 8 Z" fill="#ffee88" opacity="0.7"/>
+</svg>

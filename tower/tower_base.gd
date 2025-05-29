@@ -7,22 +7,21 @@ signal tower_clicked(tower_instance) # 新增：防御塔被点击信号，传�
 @onready var tower_area_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var mouse_detection_area: Area2D = $MouseDetectionArea # 获取鼠标检测区域节点
 @onready var range_display = $RangeDisplay # 获取范围显示节点
-@export var range = 300 # 攻击范围
+@export var attack_range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var base_cost = 50  # 基础建造成本
-@export var base_damage = 50  # 基础伤害值
+@export var damage = 50  # 伤害值
 var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
 var max_level = 4 # 防御塔最大等级
-var current_damage = base_damage # 当前伤害值
 var isMouseOverButtons = false # 鼠标是否在按钮上
 
 @onready var upgrade_button = $upgrade_button
 @onready var destroy_button = $destroy_button
 @onready var level_label = $LevelLabel # 获取等级标签节点
 
-# 定义不同等级对应的素材路径
-var UPGRADE_SPRITES = {
+# 升级素材路径数组
+var upgrade_materials = {
 	1: "res://assets/tower/tower_base/tower_base_1.png", # 假设等级1的素材
 	2: "res://assets/tower/tower_base/tower_base_2.png", # 请替换为实际的等级2素材路径
 	3: "res://assets/tower/tower_base/tower_base_3.png", # 请替换为实际的等级3素材路径
@@ -35,20 +34,20 @@ func get_upgrade_cost() -> int:
 
 # 更新范围显示的辅助函数
 func _update_range_display():
-	tower_area_shape.shape.radius = range
+	tower_area_shape.shape.radius = attack_range
 	# 假设 circle.png 的基础半径是 64 像素
 	var base_radius = 128.0
 	# 因为塔本身有缩放，范围显示节点作为子节点也会继承缩放
 	# 需要反向应用塔的缩放来获得正确的视觉范围
 	# 同时，范围显示节点自身的缩放也需要考虑
-	# range 是世界单位，需要转换到 range_display 的本地缩放
+	# attack_range 是世界单位，需要转换到 range_display 的本地缩放
 	# range_display 的最终世界半径 = range_display.scale.x * base_radius * self.scale.x
-	# 我们希望 最终世界半径 = range
-	# 所以 range_display.scale.x = range / (base_radius * self.scale.x)
+	# 我们希望 最终世界半径 = attack_range
+	# 所以 range_display.scale.x = attack_range / (base_radius * self.scale.x)
 	# 同样适用于 y 轴
 	if self.scale.x != 0 and self.scale.y != 0 and base_radius != 0:
-		var scale_factor_x = range / (base_radius * self.scale.x)
-		var scale_factor_y = range / (base_radius * self.scale.y)
+		var scale_factor_x = attack_range / (base_radius * self.scale.x)
+		var scale_factor_y = attack_range / (base_radius * self.scale.y)
 		range_display.scale = Vector2(scale_factor_x, scale_factor_y)
 	else:
 		# 防止除零错误
@@ -56,6 +55,10 @@ func _update_range_display():
 
 func _ready():
 	z_index = 3
+	
+	# 应用技能效果到塔的属性
+	apply_skill_effects()
+	
 	# 创建升级按钮
 	upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
@@ -102,7 +105,7 @@ func _physics_process(delta):
 				var bullet_scene = preload("res://bullet/bullet.tscn")
 				var bullet = bullet_scene.instantiate()
 				bullet.direction = (enemy.global_position - position).normalized()
-				bullet.damage = current_damage
+				bullet.damage = damage
 				get_parent().add_child(bullet)
 				bullet.position = position
 				#print(bullet.direction)
@@ -174,14 +177,14 @@ func _on_upgrade_pressed():
 		BattleScene.coins -= get_upgrade_cost()
 		level += 1 # 升级防御塔
 		fire_rate *= 1.3  # 提升攻击速度
-		range *= 1.1     # 提升攻击范围
-		current_damage *= 1.3  # 提升伤害值
-		tower_area_shape.shape.radius = range
+		attack_range *= 1.1     # 提升攻击范围
+		damage *= 1.3  # 提升伤害值
+		tower_area_shape.shape.radius = attack_range
 		
-		print("range: %d",range)
+		print("attack_range: %d",attack_range)
 		print("level: %d",level)
 		print("fire_rate: %f",fire_rate)
-		print("current_damage: %f",current_damage)
+		print("damage: %f",damage)
 		
 		BattleScene.update_coins_display()
 		# 更新范围显示
@@ -222,7 +225,34 @@ func _on_upgraded(new_level):
 
 # 更新素材的辅助函数
 func _update_sprite(current_level):
-	if UPGRADE_SPRITES.has(current_level):
-		texture = load(UPGRADE_SPRITES[current_level])
+	if upgrade_materials.has(current_level):
+		texture = load(upgrade_materials[current_level])
 	else:
 		print("警告: 未找到等级 ", current_level, " 的素材")
+
+# 应用技能效果到塔的属性
+func apply_skill_effects():
+	# 获取塔的类型名称
+	var tower_type = get_tower_type()
+	
+	# 从GameManager获取技能效果并应用
+	var skill_stats = GameManager.apply_skill_effects_to_tower_stats(
+		tower_type, 
+		damage, 
+		attack_range, 
+		fire_rate
+	)
+	
+	# 更新塔的属性
+	damage = skill_stats["damage"]
+	attack_range = skill_stats["range"]
+	fire_rate = skill_stats["fire_rate"]
+	
+	# 更新范围显示
+	_update_range_display()
+	
+	print("塔 ", tower_type, " 应用技能效果后的属性: 伤害=", damage, ", 射程=", attack_range, ", 攻速=", fire_rate)
+
+# 获取塔的类型名称（子类需要重写此方法）
+func get_tower_type() -> String:
+	return "tower_base"
