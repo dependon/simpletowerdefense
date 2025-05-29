@@ -55,10 +55,6 @@ func _physics_process(delta):
 		path_follow.progress += speed * speed_multiplier * delta
 		position = path_follow.position
 		
-		print("benci:")
-		print(position)
-		print("shangci:")
-		print(_previous_position)
 		# 获取精灵节点
 		var sprite = get_node("AnimatedSprite2D") as AnimatedSprite2D # 假设精灵节点名为Sprite2D
 		if sprite:
