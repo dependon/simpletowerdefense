@@ -7,7 +7,7 @@
       "max_level": 5,
       "cost_per_level": 1,
       "effect_type": "damage_multiplier",
-      "effect_value": 0.2,
+      "effect_value": 0.05,
       "icon": "res://assets/skill_icons/skill_icon_1.png"
     },
     "range_boost": {
@@ -17,7 +17,7 @@
       "max_level": 5,
       "cost_per_level": 1,
       "effect_type": "range_multiplier",
-      "effect_value": 0.15,
+      "effect_value": 0.05,
       "icon": "res://assets/skill_icons/skill_icon_4.png"
     },
     "fire_rate_boost": {
@@ -27,7 +27,7 @@
       "max_level": 5,
       "cost_per_level": 2,
       "effect_type": "fire_rate_multiplier",
-      "effect_value": 0.25,
+      "effect_value": 0.05,
       "icon": "res://assets/skill_icons/skill_icon_3.png"
     },
     "critical_strike": {
@@ -37,7 +37,7 @@
       "max_level": 3,
       "cost_per_level": 3,
       "effect_type": "critical_chance",
-      "effect_value": 0.1,
+      "effect_value": 0.05,
       "icon": "res://assets/skill_icons/skill_icon_5.png"
     }
   },
@@ -49,7 +49,7 @@
       "max_level": 5,
       "cost_per_level": 1,
       "effect_type": "fire_rate_multiplier",
-      "effect_value": 0.4,
+      "effect_value": 0.1,
       "icon": "res://assets/skill_icons/skill_icon_11.png"
     },
     "penetration": {
