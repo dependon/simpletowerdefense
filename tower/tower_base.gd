@@ -9,12 +9,14 @@ signal tower_clicked(tower_instance) # 新增：防御塔被点击信号，传�
 @onready var range_display = $RangeDisplay # 获取范围显示节点
 @export var attack_range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
+@export var fire_count : int = 1   # 每次发射子弹个数
 @export var base_cost = 50  # 基础建造成本
 @export var damage = 50  # 伤害值
 @export var deceleration_time = 5.0 #减速时间
 @export var deceleration_ratio = 2 #减速倍率
-@export var crit_chance = 0.01 #暴击概率
-@export var crit_ratio = 1.5 #暴击伤害倍率
+@export var critical_chance = 0.01 #暴击概率
+@export var critical_ratio = 1.5 #暴击伤害倍率
+@export var penetration_count = 1 #子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)
 
 var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
@@ -105,6 +107,7 @@ func _physics_process(delta):
 	time_since_last_fire += delta
 	if time_since_last_fire >= 1 / fire_rate:
 		var enemies = tower_area.get_overlapping_areas()
+		var target_count = 0  # 添加目标计数器
 		for enemy in enemies:
 			if enemy.is_in_group("enemies"):
 				var bullet_scene
@@ -113,6 +116,10 @@ func _physics_process(delta):
 					bullet_scene = preload("res://bullet/bullet_ice.tscn")
 					bullet = bullet_scene.instantiate()
 					bullet.set_meta("type", "frost")
+				if get_tower_type() == "tower_area":
+					target_count+=1
+					bullet_scene = preload("res://bullet/bullet.tscn")
+					bullet = bullet_scene.instantiate()
 				else:
 					bullet_scene = preload("res://bullet/bullet.tscn")
 					bullet = bullet_scene.instantiate()
@@ -120,13 +127,17 @@ func _physics_process(delta):
 				bullet.damage = damage
 				bullet.deceleration_time = deceleration_time #减速时间
 				bullet.deceleration_ratio = deceleration_ratio #减速倍率
-				bullet.crit_chance = crit_chance #暴击概率
-				bullet.crit_ratio = crit_ratio #暴击伤害倍率
+				bullet.critical_chance = critical_chance #暴击概率
+				bullet.critical_ratio = critical_ratio #暴击伤害倍率
+				bullet.penetration_count = penetration_count#子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)
 				
 				get_parent().add_child(bullet)
 				bullet.position = position
 				time_since_last_fire = 0
-				break
+				
+				#如果发射子弹数大于或者等于最大子弹数
+				if target_count >= fire_count:	
+					break
 
 func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
 	# 只有在 BattleScene 中没有选中防御塔类型时，才允许选中场上已有的防御塔
@@ -252,11 +263,6 @@ func apply_skill_effects():
 	
 	var skill_stats = apply_skill_effects_to_tower_stats(tower_type)
 	
-	## 更新塔的属性
-	#damage = skill_stats["damage"]
-	#attack_range = skill_stats["range"]
-	#fire_rate = skill_stats["fire_rate"]
-	
 	# 更新范围显示
 	_update_range_display()
 	
@@ -266,7 +272,7 @@ func apply_skill_effects():
 func get_tower_type() -> String:
 	return "tower_base"
 	
-func apply_skill_effects_to_tower_stats(tower_type: String) -> Dictionary:
+func apply_skill_effects_to_tower_stats(tower_type: String):
 	var effects = GameManager.get_all_tower_skill_effects(tower_type)
 	
 	# 应用伤害倍率
@@ -281,9 +287,12 @@ func apply_skill_effects_to_tower_stats(tower_type: String) -> Dictionary:
 	if effects.has("fire_rate_multiplier"):
 		fire_rate *= (1.0 + effects["fire_rate_multiplier"])
 		
-	return {
-		"damage": damage,
-		"range": attack_range,
-		"fire_rate": fire_rate,
-		"effects": effects
-	}
+	# 应用增加暴击几率和伤害
+	if effects.has("critical_chance"):
+		critical_chance +=  effects["critical_chance"]
+		critical_ratio *= (1.0 + effects["critical_chance"])
+		
+	# 应用穿透射击,子弹可以穿透多个敌人
+	if effects.has("penetration_count"):
+		penetration_count += effects["penetration_count"]
+	

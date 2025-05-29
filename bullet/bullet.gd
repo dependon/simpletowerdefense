@@ -7,8 +7,9 @@ var damage = 50  # 默认伤害值
 var initial_position := Vector2.ZERO  # 记录初始位置
 var deceleration_time = 5.0 #减速时间
 var deceleration_ratio = 2 #减速倍率
-var crit_chance = 0.01 #暴击概率
-var crit_ratio = 1.5 #暴击伤害倍率
+var critical_chance = 0.01 #暴击概率
+var critical_ratio = 1.5 #暴击伤害倍率
+var penetration_count = 1 #子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)
 
 @onready var timer: Timer = $Timer # 获取timer节点
 
@@ -27,14 +28,16 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		var final_damage = damage
 		# 判断是否暴击
-		if randf() < crit_chance:
-			final_damage *= crit_ratio
+		if randf() < critical_chance:
+			final_damage *= critical_ratio
 			print("暴击！伤害: ", final_damage) # 打印暴击信息
 		area.take_damage(final_damage)
 		# 如果是冰霜子弹，则减速敌人
 		if has_meta("type") and get_meta("type") == "frost":
 			area.set_speed_multiplier(deceleration_ratio,deceleration_time)
-		queue_free()
+		penetration_count-=1
+		if penetration_count <= 0: 
+			queue_free()
 
 func _on_timer_timeout():
 	queue_free()
