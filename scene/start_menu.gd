@@ -1,19 +1,25 @@
 extends Control
 var skill_tree_screen
+var settings_screen
 
 func _ready() -> void:
-		# 初始化技能树数据
+	# 初始化技能树数据
 	skill_tree_screen = load("res://scene/skill_tree_screen.tscn").instantiate()
 	skill_tree_screen.set_tower_type()
 	skill_tree_screen.hide()
 	add_child(skill_tree_screen)
+	
+	# 初始化设置界面
+	settings_screen = load("res://scene/settings_screen.tscn").instantiate()
+	settings_screen.hide()
+	add_child(settings_screen)
 
 func _on_start_button_pressed():
 	get_tree().change_scene_to_file("res://level/level_select.tscn")
 	
 func _on_settings_button_pressed():
-	# TODO: 实现设置面板
-	pass
+	# 显示设置界面
+	settings_screen.show_settings()
 
 func _on_unlock_levels_button_pressed():
 	print("Unlock Levels button pressed")

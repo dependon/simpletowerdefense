@@ -19,12 +19,15 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scene/game_manager.gd"
 EnemyManager="*res://enemy/enemy_manager.gd"
+SettingsManager="*res://scene/settings_manager.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [importer_defaults]
 

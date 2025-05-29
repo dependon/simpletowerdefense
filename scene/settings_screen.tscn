@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsc6jthjkkdqv"]
+
+[ext_resource type="Script" uid="uid://jb1p8iwmhhpk" path="res://scene/settings_screen.gd" id="1_settings"]
+
+[node name="SettingsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_settings")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8)
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="TitleLabel" type="Label" parent="MainContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "游戏设置"
+horizontal_alignment = 1
+
+[node name="ResolutionContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ResolutionLabel" type="Label" parent="MainContainer/ResolutionContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "分辨率设置"
+
+[node name="ResolutionOptionButton" type="OptionButton" parent="MainContainer/ResolutionContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+
+[node name="FullscreenContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="FullscreenLabel" type="Label" parent="MainContainer/FullscreenContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "全屏模式"
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="MainContainer/FullscreenContainer"]
+layout_mode = 2
+
+[node name="VolumeContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VolumeLabel" type="Label" parent="MainContainer/VolumeContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "音量设置"
+
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="MainContainer/VolumeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MasterVolumeLabel" type="Label" parent="MainContainer/VolumeContainer/MasterVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "主音量: 100%"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MainContainer/VolumeContainer/MasterVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ApplyButton" type="Button" parent="MainContainer/ButtonContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "应用"
+
+[node name="BackButton" type="Button" parent="MainContainer/ButtonContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "返回"
+
+[connection signal="item_selected" from="MainContainer/ResolutionContainer/ResolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
+[connection signal="toggled" from="MainContainer/FullscreenContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="value_changed" from="MainContainer/VolumeContainer/MasterVolumeContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="pressed" from="MainContainer/ButtonContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="MainContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]
