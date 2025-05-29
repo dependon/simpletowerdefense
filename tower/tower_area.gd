@@ -10,7 +10,7 @@ func _ready():
 		3: "res://assets/tower/tower_area/tower_area_3.png", # 请替换为实际的等级3素材路径
 		4: "res://assets/tower/tower_area/tower_area_4.png", # 请替换为实际的等级4素材路径
 	}
-	fire_count = 10
+	bullet_count = 10
 	super._ready()
 
 # 重写获取塔类型方法

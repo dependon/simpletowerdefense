@@ -5,8 +5,8 @@ class_name Bullet
 var direction := Vector2.ZERO
 var damage = 50  # 默认伤害值
 var initial_position := Vector2.ZERO  # 记录初始位置
-var deceleration_time = 5.0 #减速时间
-var deceleration_ratio = 2 #减速倍率
+var freeze_duration = 5.0 #减速时间
+var slow_multiplier = 2 #减速倍率
 var critical_chance = 0.01 #暴击概率
 var critical_ratio = 1.5 #暴击伤害倍率
 var penetration_count = 1 #子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)
@@ -34,7 +34,7 @@ func _on_area_entered(area: Area2D) -> void:
 		area.take_damage(final_damage)
 		# 如果是冰霜子弹，则减速敌人
 		if has_meta("type") and get_meta("type") == "frost":
-			area.set_speed_multiplier(deceleration_ratio,deceleration_time)
+			area.set_speed_multiplier(slow_multiplier,freeze_duration)
 		penetration_count-=1
 		if penetration_count <= 0: 
 			queue_free()

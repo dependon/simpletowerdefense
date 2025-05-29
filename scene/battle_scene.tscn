@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://dp3o0lto78g8n" path="res://scene/battle_scene.gd" id="1_662de"]
 [ext_resource type="Texture2D" uid="uid://bshg0rwtoxmre" path="res://assets/tower/tower_base/tower_base_1.png" id="3_5pnl2"]
 [ext_resource type="Texture2D" uid="uid://cv35xbi4r3452" path="res://assets/tower/tower_fast/tower_fast_1.png" id="4_8oj1d"]
-[ext_resource type="Texture2D" uid="uid://dkidfbhmqmj0v" path="res://assets/tower/tower_area/tower_area_1.png" id="5_5pnl2"]
+[ext_resource type="Texture2D" uid="uid://byy3f86kqav0" path="res://assets/tower/tower_area/tower_area_1.png" id="5_5pnl2"]
 [ext_resource type="PackedScene" uid="uid://ckkdkqr08oy5x" path="res://scene/setting_menu.tscn" id="6_0l81w"]
 [ext_resource type="Texture2D" uid="uid://becjhbcd1p2g8" path="res://assets/tower/tower_ice/tower_ice_1.png" id="6_5pnl2"]
-[ext_resource type="Texture2D" uid="uid://5gpxlqpfvafq" path="res://assets/tower/tower_lei/tower_lei_1.png" id="7_5pnl2"]
+[ext_resource type="Texture2D" uid="uid://36vxxtc6v82i" path="res://assets/tower/tower_lei/tower_lei_1.png" id="7_5pnl2"]
 [ext_resource type="Texture2D" uid="uid://cfjxfqeggorpa" path="res://assets/tower/tower_zi/tower_zi_1.png" id="8_5pnl2"]
 
 [node name="BattleScene" type="Node2D"]

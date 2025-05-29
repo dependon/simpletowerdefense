@@ -47,7 +47,7 @@
       "description": "大幅增加攻击速度",
       "level": 0,
       "max_level": 5,
-      "cost_per_level": 1,
+      "cost_per_level": 2,
       "effect_type": "fire_rate_multiplier",
       "effect_value": 0.1,
       "icon": "res://assets/skill_icons/skill_icon_11.png"
@@ -79,7 +79,7 @@
       "max_level": 4,
       "cost_per_level": 2,
       "effect_type": "range_multiplier",
-      "effect_value": 0.3,
+      "effect_value": 0.1,
       "icon": "res://assets/skill_icons/skill_icon_19.png"
     }
   },
@@ -101,12 +101,12 @@
       "max_level": 5,
       "cost_per_level": 2,
       "effect_type": "damage_multiplier",
-      "effect_value": 0.3,
+      "effect_value": 0.1,
       "icon": "res://assets/skill_icons/skill_icon_28.png"
     },
     "chain_reaction": {
       "name": "连锁反应",
-      "description": "爆炸可能引发连锁反应",
+      "description": "攻击可能连续攻击两次",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 4,
@@ -173,9 +173,9 @@
       "description": "大幅增加爆炸范围和伤害",
       "level": 0,
       "max_level": 4,
-      "cost_per_level": 2,
+      "cost_per_level": 3,
       "effect_type": "damage_multiplier",
-      "effect_value": 0.5,
+      "effect_value": 0.2,
       "icon": "res://assets/skill_icons/skill_icon_52.png"
     },
     "earthquake": {

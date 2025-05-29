@@ -9,14 +9,21 @@ signal tower_clicked(tower_instance) # 新增：防御塔被点击信号，传�
 @onready var range_display = $RangeDisplay # 获取范围显示节点
 @export var attack_range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
-@export var fire_count : int = 1   # 每次发射子弹个数
+@export var bullet_count : int = 1   # 每次发射子弹个数
 @export var base_cost = 50  # 基础建造成本
 @export var damage = 50  # 伤害值
-@export var deceleration_time = 5.0 #减速时间
-@export var deceleration_ratio = 2 #减速倍率
+@export var freeze_duration = 5.0 #减速时间
+@export var slow_multiplier = 2.0 #减速倍率
 @export var critical_chance = 0.01 #暴击概率
 @export var critical_ratio = 1.5 #暴击伤害倍率
 @export var penetration_count = 1 #子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)
+@export var chain_reaction = 0.00 #概率发送两发子弹，连锁反应
+
+@export var burn_damage = 0.0 #燃烧效果，燃烧的伤害(具体逻辑暂时未实现)
+@export var nova_chance = 0.0 #冰霜新星，释放冰霜新星冰冻周围敌人(具体逻辑暂时未实现)
+@export var shield_strength  = 0.0 #霜甲护盾，为附近友军提供护盾(具体逻辑暂时未实现)
+@export var earthquake_chance = 0.0 #地震冲击，攻击造成地震效果(具体逻辑暂时未实现)
+@export var armor_pierce = 0.0 #破甲攻击,无视敌人部分护甲(具体逻辑暂时未实现)
 
 var time_since_last_fire = 0 # 上次发射子弹的时间
 var level = 1 # 防御塔等级
@@ -110,33 +117,37 @@ func _physics_process(delta):
 		var target_count = 0  # 添加目标计数器
 		for enemy in enemies:
 			if enemy.is_in_group("enemies"):
-				var bullet_scene
-				var bullet
-				if get_tower_type() == "tower_frost":				
-					bullet_scene = preload("res://bullet/bullet_ice.tscn")
-					bullet = bullet_scene.instantiate()
-					bullet.set_meta("type", "frost")
-				if get_tower_type() == "tower_area":
-					target_count+=1
-					bullet_scene = preload("res://bullet/bullet.tscn")
-					bullet = bullet_scene.instantiate()
-				else:
-					bullet_scene = preload("res://bullet/bullet.tscn")
-					bullet = bullet_scene.instantiate()
-				bullet.direction = (enemy.global_position - position).normalized()
-				bullet.damage = damage
-				bullet.deceleration_time = deceleration_time #减速时间
-				bullet.deceleration_ratio = deceleration_ratio #减速倍率
-				bullet.critical_chance = critical_chance #暴击概率
-				bullet.critical_ratio = critical_ratio #暴击伤害倍率
-				bullet.penetration_count = penetration_count#子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)
-				
-				get_parent().add_child(bullet)
-				bullet.position = position
-				time_since_last_fire = 0
-				
+				var isChain :int = 1 #是否触发连锁反应
+				# 判断是否暴击
+				if randf() < chain_reaction :
+					isChain = 2
+				target_count+=1
+				for i in range(isChain):  # 循环两次，i的值为0和1
+					print("循环迭代:", i)
+					var bullet_scene
+					var bullet
+					if get_tower_type() == "tower_frost":				
+						bullet_scene = preload("res://bullet/bullet_ice.tscn")
+						bullet = bullet_scene.instantiate()
+						bullet.set_meta("type", "frost")
+					if get_tower_type() == "tower_area":
+						bullet_scene = preload("res://bullet/bullet.tscn")
+						bullet = bullet_scene.instantiate()
+					else:
+						bullet_scene = preload("res://bullet/bullet.tscn")
+						bullet = bullet_scene.instantiate()
+					bullet.direction = (enemy.global_position - position).normalized()
+					bullet.damage = damage
+					bullet.freeze_duration = freeze_duration #减速时间
+					bullet.slow_multiplier = slow_multiplier #减速倍率
+					bullet.critical_chance = critical_chance #暴击概率
+					bullet.critical_ratio = critical_ratio #暴击伤害倍率
+					bullet.penetration_count = penetration_count#子弹碰撞敌人消失次数(用于配置允许穿透敌人个数)						
+					get_parent().add_child(bullet)
+					bullet.position = position
+					time_since_last_fire = 0
 				#如果发射子弹数大于或者等于最大子弹数
-				if target_count >= fire_count:	
+				if target_count >= bullet_count:	
 					break
 
 func _on_mouse_detection_area_input_event(_viewport, event, _shape_idx):
@@ -295,4 +306,43 @@ func apply_skill_effects_to_tower_stats(tower_type: String):
 	# 应用穿透射击,子弹可以穿透多个敌人
 	if effects.has("penetration_count"):
 		penetration_count += effects["penetration_count"]
+		
+	# 多重射击
+	if effects.has("bullet_count"):
+		bullet_count += effects["bullet_count"]
 	
+	# 爆炸范围(因为没有实现范围爆炸，暂时加伤害)
+	if effects.has("explosion_radius"):
+		damage += effects["explosion_radius"]
+	
+	# 连锁反应
+	if effects.has("chain_reaction"):
+		chain_reaction += effects["chain_reaction"]
+		
+	# 燃烧效果(具体功能未实现)
+	if effects.has("burn_damage"):
+		burn_damage += effects["burn_damage"]
+		
+	# 冰冻时长
+	if effects.has("freeze_duration"):
+		freeze_duration += effects["freeze_duration"]
+	
+	# 减速强化
+	if effects.has("slow_multiplier"):
+		freeze_duration += effects["slow_multiplier"]
+		
+	# 冰霜新星
+	if effects.has("nova_chance"):
+		nova_chance += effects["nova_chance"]
+		
+	# 霜甲护盾
+	if effects.has("shield_strength"):
+		shield_strength += effects["shield_strength"]
+	
+	# 地震冲击
+	if effects.has("earthquake_chance"):
+		earthquake_chance += effects["earthquake_chance"]
+		
+	# 破甲攻击
+	if effects.has("armor_pierce"):
+		armor_pierce += effects["armor_pierce"]
