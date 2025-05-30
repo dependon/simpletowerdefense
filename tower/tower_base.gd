@@ -123,7 +123,6 @@ func _physics_process(delta):
 					isChain = 2
 				target_count+=1
 				for i in range(isChain):  # 循环两次，i的值为0和1
-					print("循环迭代:", i)
 					var bullet_scene
 					var bullet
 					if get_tower_type() == "tower_frost":				

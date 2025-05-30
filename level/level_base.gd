@@ -65,6 +65,7 @@ func get_wave_info() -> Dictionary:
 	return {"current": current_wave, "total": total_waves}
 
 func _ready() -> void:
+	current_wave = 0
 	print("关卡加载成功")
 
 func startCurrentGame() -> void:

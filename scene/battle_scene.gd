@@ -1,9 +1,6 @@
 extends Node2D
 
 @onready var setting_menu = $UI/SettingMenu
-@onready var next_wave_timer = $NextWaveTimer # 新增：下一波按钮冷却计时器
-
-var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 
 @onready var wave_label = $UI/WaveLabel # 新增：对波次标签的引用
 @onready var wait_time_label = $UI/WaitTime # 新增：对等待时间标签的引用
@@ -18,6 +15,8 @@ var is_next_wave_button_disabled = false # 新增：下一波按钮是否禁用
 @onready var frost_tower_button = $UI/BoxContainer/FrostTowerButton # 注意这里的名称可能需要根据场景文件确认
 @onready var fast_low_tower_button = $UI/BoxContainer/FastLowTowerButton # 注意这里的名称可能需要根据场景文件确认
 @onready var big_area_tower_button = $UI/BoxContainer/BigAreaTowerButton # 注意这里的名称可能需要根据场景文件确认
+
+var current_wave = 0 #当前波次
 
 var selected_tower: Node = null # 新增：当前选中的防御塔实例
 
@@ -96,6 +95,7 @@ func update_wave_display(current_w = -1, total_w = -1):
 	# 优先使用信号传递过来的值
 	if current_w >= 0 and total_w > 0: # 确保值有效
 		wave_label.text = "波次: %d / %d" % [current_w, total_w]
+		current_wave = current_w
 	# 否则，尝试从当前关卡获取
 	elif current_level and current_level.has_method("get_wave_info"):
 		var wave_info = current_level.get_wave_info()
@@ -214,11 +214,15 @@ func load_level(level_number: int):
 
 func update_wait_time_display(remaining_time: float):
 	wait_time_label.text = "下一波倒计时: %d" % ceil(remaining_time)
+	if remaining_time > 0 and current_wave > 0:
+		next_wave_button.disabled = false
+	else:
+		next_wave_button.disabled = true
 
 # 新增：更新初始等待时间显示
 func update_initial_wait_time_display(remaining_time: float):
-	wait_time_label.text = "初始等待: %d" % ceil(remaining_time)
-
+	wait_time_label.text = "游戏开始倒计时: %d" % ceil(remaining_time)
+	next_wave_button.disabled = true
 
 func _physics_process(delta):
 	update_enemy_count_display()
@@ -502,17 +506,8 @@ func _on_big_area_tower_button_pressed() -> void:
 
 
 func _on_next_wave_pressed() -> void:
-	if not is_next_wave_button_disabled:
-		is_next_wave_button_disabled = true
-		next_wave_button.disabled = true # 禁用按钮
-		next_wave_timer.start()
-		GameManager.request_next_wave()
-	pass
-
-# 新增：下一波按钮冷却计时器超时处理函数
-func _on_next_wave_timer_timeout() -> void:
-	is_next_wave_button_disabled = false
-	next_wave_button.disabled = false # 启用按钮
+	next_wave_button.disabled = true # 禁用按钮
+	GameManager.request_next_wave()
 
 # 新增：更新当前剩余怪物数量显示
 func update_enemy_count_display():
