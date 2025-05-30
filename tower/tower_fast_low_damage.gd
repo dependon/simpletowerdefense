@@ -4,8 +4,8 @@ extends "res://tower/tower_base.gd"
 
 func _ready():
 	fire_rate = 5.0  # 非常快的攻击速度
-	base_cost = 150
-	damage = 8  # 低伤害
+	base_cost = 500
+	damage = 20  # 低伤害
 	upgrade_materials = {
 		1: "res://assets/tower/tower_lei/tower_lei_1.png", # 假设等级1的素材
 		2: "res://assets/tower/tower_lei/tower_lei_2.png", # 请替换为实际的等级2素材路径

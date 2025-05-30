@@ -81,7 +81,7 @@ const NORMAL_TOWER_COST = 50  # 普通塔消耗
 const FAST_TOWER_COST = 100   # 快速塔消耗
 const AREA_TOWER_COST = 150   # 群体塔消耗
 const FROST_TOWER_COST = 100  # 冰霜塔消耗
-const FAST_LOW_DAMAGE_TOWER_COST = 400 # 新增：快速低伤塔消耗 (示例成本)
+const FAST_LOW_DAMAGE_TOWER_COST = 500 # 新增：快速低伤塔消耗 (示例成本)
 const BIG_AREA_TOWER_COST = 200 # 新增：快速低伤塔消耗 (示例成本)
 
 # 金币UI和钻石UI
