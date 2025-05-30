@@ -28,9 +28,10 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		var final_damage = damage
 		# 判断是否暴击
-		if randf() < critical_chance:
-			final_damage *= critical_ratio
-			print("暴击！伤害: ", final_damage) # 打印暴击信息
+		if critical_ratio:	
+			if randf() < critical_chance:
+				final_damage *= critical_ratio
+				print("暴击！伤害: ", final_damage) # 打印暴击信息
 		area.take_damage(final_damage)
 		# 如果是冰霜子弹，则减速敌人
 		if has_meta("type") and get_meta("type") == "frost":

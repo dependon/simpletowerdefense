@@ -13,12 +13,6 @@ position = Vector2(1, -1)
 scale = Vector2(0.5, 0.493)
 texture = ExtResource("1_bqdyb")
 script = ExtResource("2_new_script")
-attack_range = null
-fire_rate = null
-base_cost = null
-damage = null
-critical_chance = null
-critical_ratio = null
 
 [node name="Area2D" type="Area2D" parent="."]
 

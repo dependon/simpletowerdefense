@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct6jtjcgah8gs"]
+
+[ext_resource type="Script" uid="uid://djmfhms45p5q5" path="res://bullet/bullet_red.gd" id="1_red"]
+[ext_resource type="Texture2D" uid="uid://cpo74gf87ds22" path="res://assets/bullet/bullet_red_1.png" id="2_red"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_red"]
+radius = 8.0
+
+[node name="Bullet_Red" type="Area2D"]
+script = ExtResource("1_red")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_red")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_red")

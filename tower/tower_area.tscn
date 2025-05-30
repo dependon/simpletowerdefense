@@ -14,11 +14,8 @@ scale = Vector2(0.5, 0.493)
 texture = ExtResource("1_c6aea")
 script = ExtResource("1_8yvxe")
 attack_range = 400
-fire_rate = null
 base_cost = 150
 damage = 15
-critical_chance = null
-critical_ratio = null
 
 [node name="Area2D" type="Area2D" parent="."]
 

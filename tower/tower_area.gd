@@ -4,13 +4,14 @@ func _ready():
 	fire_rate = 0.8  # 较慢的射击速度
 	base_cost = 120
 	damage = 40
+	bullet_count = 10
 	upgrade_materials = {
 		1: "res://assets/tower/tower_area/tower_area_1.png", # 假设等级1的素材
 		2: "res://assets/tower/tower_area/tower_area_2.png", # 请替换为实际的等级2素材路径
 		3: "res://assets/tower/tower_area/tower_area_3.png", # 请替换为实际的等级3素材路径
 		4: "res://assets/tower/tower_area/tower_area_4.png", # 请替换为实际的等级4素材路径
 	}
-	bullet_count = 10
+	
 	super._ready()
 
 # 重写获取塔类型方法

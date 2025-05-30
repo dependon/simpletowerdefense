@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmik6ji5ke76o"]
+
+[ext_resource type="Script" uid="uid://b0qyp4cdw7d1f" path="res://bullet/bullet_zi.gd" id="1_zi"]
+[ext_resource type="Texture2D" uid="uid://cqs6878oompsn" path="res://assets/bullet/bullet_zi_1.png" id="2_zi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_zi"]
+radius = 8.0
+
+[node name="Bullet_Zi" type="Area2D"]
+script = ExtResource("1_zi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_zi")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_zi")
