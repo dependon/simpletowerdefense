@@ -15,11 +15,13 @@ var resolution_options = [
 @onready var fullscreen_checkbox = $MainContainer/FullscreenContainer/FullscreenCheckBox
 @onready var master_volume_slider = $MainContainer/VolumeContainer/MasterVolumeContainer/MasterVolumeSlider
 @onready var master_volume_label = $MainContainer/VolumeContainer/MasterVolumeContainer/MasterVolumeLabel
+@onready var bgm_checkbox = $MainContainer/VolumeContainer/BGMContainer/BGMCheckBox
 
 # 当前设置
 var current_resolution_index = 0
 var current_fullscreen = false
-var current_volume = 100.0
+var current_volume = 50.0
+var current_bgm_enabled = true
 
 func _ready():
 	# 初始化分辨率选项
@@ -54,12 +56,16 @@ func _load_current_settings():
 	
 	# 获取音量设置
 	current_volume = SettingsManager.get_master_volume()
+	
+	# 获取背景音乐设置
+	current_bgm_enabled = SettingsManager.is_bgm_enabled()
 
 func _update_ui():
 	"""更新UI显示"""
 	resolution_option_button.selected = current_resolution_index
 	fullscreen_checkbox.button_pressed = current_fullscreen
 	master_volume_slider.value = current_volume
+	bgm_checkbox.button_pressed = current_bgm_enabled
 	_update_volume_label(current_volume)
 
 func _update_volume_label(volume: float):
@@ -84,6 +90,10 @@ func _on_master_volume_slider_value_changed(value: float):
 	var volume_db = linear_to_db(value / 100.0)
 	AudioServer.set_bus_volume_db(master_bus_index, volume_db)
 
+func _on_bgm_check_box_toggled(toggled_on: bool):
+	"""背景音乐开关切换"""
+	current_bgm_enabled = toggled_on
+
 func _on_apply_button_pressed():
 	"""应用设置"""
 	var selected_resolution = resolution_options[current_resolution_index]
@@ -91,6 +101,7 @@ func _on_apply_button_pressed():
 	# 通过设置管理器更新设置
 	SettingsManager.update_resolution(selected_resolution.width, selected_resolution.height, current_fullscreen)
 	SettingsManager.update_volume(current_volume)
+	SettingsManager.update_bgm_enabled(current_bgm_enabled)
 	
 	# 显示应用成功提示
 	print("设置已应用")
