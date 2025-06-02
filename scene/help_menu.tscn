@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqxjhqr8kcqhf"]
+
+[ext_resource type="Script" path="res://scene/help_menu.gd" id="1_0v8xk"]
+
+[node name="HelpMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_0v8xk")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.1, 0.9)
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
+
+[node name="TitleLabel" type="Label" parent="MainContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "游戏帮助"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentContainer" type="VBoxContainer" parent="MainContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameplaySection" type="VBoxContainer" parent="MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="GameplayTitle" type="Label" parent="MainContainer/ScrollContainer/ContentContainer/GameplaySection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "游戏玩法"
+
+[node name="GameplayText" type="RichTextLabel" parent="MainContainer/ScrollContainer/ContentContainer/GameplaySection"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]目标：[/b]阻止敌人到达终点\n[b]方法：[/b]在路径旁建造防御塔来攻击敌人\n[b]资源：[/b]击败敌人获得金币，用于建造和升级防御塔\n[b]生命值：[/b]敌人到达终点会扣除生命值，生命值归零游戏失败"
+fit_content = true
+
+[node name="HSeparator2" type="HSeparator" parent="MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="ControlsSection" type="VBoxContainer" parent="MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="ControlsTitle" type="Label" parent="MainContainer/ScrollContainer/ContentContainer/ControlsSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "操作方式"
+
+[node name="ControlsText" type="RichTextLabel" parent="MainContainer/ScrollContainer/ContentContainer/ControlsSection"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]鼠标左键：[/b]选择防御塔类型并放置\n[b]鼠标右键：[/b]取消当前选择\n[b]点击防御塔：[/b]查看属性和升级选项\n[b]拖拽：[/b]移动视角（如果支持）"
+fit_content = true
+
+[node name="HSeparator3" type="HSeparator" parent="MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="TowersSection" type="VBoxContainer" parent="MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+
+[node name="TowersTitle" type="Label" parent="MainContainer/ScrollContainer/ContentContainer/TowersSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "防御塔详情"
+
+[node name="TowersContainer" type="VBoxContainer" parent="MainContainer/ScrollContainer/ContentContainer/TowersSection"]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MainContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="MainContainer/ButtonContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "返回主菜单"
+
+[connection signal="pressed" from="MainContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]

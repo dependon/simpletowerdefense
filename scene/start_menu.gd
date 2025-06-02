@@ -40,5 +40,8 @@ func _on_skill_tree_button_pressed():
 	#get_tree().change_scene_to_file("res://scene/skill_tree_screen.tscn")
 	
 	
+func _on_help_button_pressed():
+	get_tree().change_scene_to_file("res://scene/help_menu.tscn")
+
 func _on_quit_button_pressed():
 	get_tree().quit()
