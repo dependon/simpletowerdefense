@@ -2,23 +2,33 @@ extends Control
 
 # 防御塔信息数据
 var tower_data = {
+	"tower_base": {
+		"name": "基础塔",
+		"description": "射击速度缓慢的防御塔，适合对付大量弱小敌人",
+		"fire_rate": 1.0,
+		"damage": 50,
+		"cost": 50,
+		"range": 200,
+		"icon": "res://assets/tower/tower_base/tower_base_1.png",
+		"special": "低价格,低射速,低伤害"
+	},
 	"tower_fast": {
 		"name": "快速塔",
 		"description": "射击速度极快的防御塔，适合对付大量弱小敌人",
 		"fire_rate": 2.0,
-		"damage": 20,
+		"damage": 50,
 		"cost": 100,
-		"range": 200,
+		"range": 300,
 		"icon": "res://assets/tower/tower_fast/tower_fast_1.png",
-		"special": "高射速，低伤害"
+		"special": "高射速,低伤害"
 	},
 	"tower_frost": {
 		"name": "冰霜塔",
 		"description": "发射冰霜子弹，能够减缓敌人移动速度",
-		"fire_rate": 1.2,
-		"damage": 25,
-		"cost": 150,
-		"range": 250,
+		"fire_rate": 1.0,
+		"damage": 15,
+		"cost": 100,
+		"range": 300,
 		"icon": "res://assets/tower/tower_frost/tower_frost_1.png",
 		"special": "减速效果，冰冻敌人"
 	},
@@ -26,9 +36,9 @@ var tower_data = {
 		"name": "范围塔",
 		"description": "能够同时攻击多个敌人的范围攻击塔",
 		"fire_rate": 0.8,
-		"damage": 40,
-		"cost": 120,
-		"range": 200,
+		"damage": 20,
+		"cost": 200,
+		"range": 300,
 		"icon": "res://assets/tower/tower_area/tower_area_1.png",
 		"special": "范围攻击，最多攻击10个目标"
 	},
@@ -36,7 +46,7 @@ var tower_data = {
 		"name": "大范围塔",
 		"description": "拥有超大攻击范围的强力防御塔",
 		"fire_rate": 1.0,
-		"damage": 45,
+		"damage": 40,
 		"cost": 200,
 		"range": 800,
 		"icon": "res://assets/tower/tower_zi/tower_zi_1.png",

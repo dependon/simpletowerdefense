@@ -2,8 +2,8 @@ extends "res://tower/tower_base.gd"
 
 func _ready():
 	fire_rate = 0.8  # 较慢的射击速度
-	base_cost = 120
-	damage = 40
+	base_cost = 200
+	damage = 20
 	bullet_count = 10
 	upgrade_materials = {
 		1: "res://assets/tower/tower_area/tower_area_1.png", # 假设等级1的素材
