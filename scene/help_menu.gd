@@ -33,14 +33,14 @@ var tower_data = {
 		"special": "减速效果，冰冻敌人"
 	},
 	"tower_area": {
-		"name": "范围塔",
-		"description": "能够同时攻击多个敌人的范围攻击塔",
+		"name": "群攻塔",
+		"description": "能够同时攻击多个敌人的攻击塔",
 		"fire_rate": 0.8,
 		"damage": 20,
 		"cost": 200,
 		"range": 300,
 		"icon": "res://assets/tower/tower_area/tower_area_1.png",
-		"special": "范围攻击，最多攻击10个目标"
+		"special": "群体攻击，最多攻击10个目标"
 	},
 	"tower_big_area": {
 		"name": "大范围塔",

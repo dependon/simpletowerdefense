@@ -22,9 +22,9 @@ var tower_types = ["tower_base", "tower_fast", "tower_area", "tower_frost", "tow
 var tower_display_names = {
 	"tower_base": "基础塔",
 	"tower_fast": "快速塔", 
-	"tower_area": "范围塔",
+	"tower_area": "群攻塔",
 	"tower_frost": "冰霜塔",
-	"tower_big_area": "重炮塔"
+	"tower_big_area": "超大范围塔"
 }
 
 # 技能按钮数组，用于管理技能按钮

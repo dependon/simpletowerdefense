@@ -56,7 +56,7 @@ simpletowerdefense/
 │   ├── tower_base.gd         # 基础防御塔脚本
 │   ├── tower_fast.gd         # 快速攻击塔
 │   ├── tower_frost.gd        # 冰霜塔
-│   └── tower_area.gd         # 范围攻击塔
+│   └── tower_area.gd         # 群攻击塔
 ├── resources/                # 游戏资源配置
 │   └── skill_trees/          # 技能树配置文件
 ├── music/                    # 音乐文件
