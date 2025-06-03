@@ -44,14 +44,25 @@ var tower_data = {
 	},
 	"tower_big_area": {
 		"name": "大范围塔",
-		"description": "拥有超大攻击范围的强力防御塔",
+		"description": "拥有超大攻击范围的防御塔",
 		"fire_rate": 1.0,
 		"damage": 40,
 		"cost": 200,
 		"range": 800,
 		"icon": "res://assets/tower/tower_zi/tower_zi_1.png",
 		"special": "超大攻击范围"
-	}
+	},
+	"tower_fast_low_damage": {
+		"name": "超快速伤害塔",
+		"description": "拥有急速的射击速度和略低伤害的防御塔，造价高昂",
+		"fire_rate": 5.0,
+		"damage": 20,
+		"cost": 500,
+		"range": 300,
+		"icon": "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_1.png",
+		"special": "超快攻击速度,低伤害,高造价"
+	},
+	
 }
 
 func _ready():
