@@ -61,7 +61,7 @@ var tower_data = {
 		"range": 300,
 		"icon": "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_1.png",
 		"special": "超快攻击速度,低伤害,高造价"
-	},
+	}
 	
 }
 
