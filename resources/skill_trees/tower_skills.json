@@ -110,7 +110,7 @@
       "level": 0,
       "max_level": 3,
       "cost_per_level": 4,
-      "effect_type": "chain_chance",
+      "effect_type": "chain_reaction",
       "effect_value": 0.2,
       "icon": "res://assets/skill_icons/skill_icon_29.png"
     },
@@ -197,6 +197,48 @@
       "effect_type": "armor_pierce",
       "effect_value": 0.2,
       "icon": "res://assets/skill_icons/skill_icon_59.png"
+    }
+  },
+  "tower_fast_low_damage": {
+    "ultra_speed": {
+      "name": "极速射击",
+      "description": "极大幅度增加攻击速度",
+      "level": 0,
+      "max_level": 5,
+      "cost_per_level": 1,
+      "effect_type": "fire_rate_multiplier",
+      "effect_value": 0.15,
+      "icon": "res://assets/skill_icons/skill_icon_11.png"
+    },
+    "rapid_fire": {
+      "name": "连发射击",
+      "description": "每次攻击发射更多子弹",
+      "level": 0,
+      "max_level": 4,
+      "cost_per_level": 2,
+      "effect_type": "bullet_count",
+      "effect_value": 1,
+      "icon": "res://assets/skill_icons/skill_icon_17.png"
+    },
+    "chain_lightning": {
+      "name": "连锁闪电",
+      "description": "攻击有概率触发连锁反应",
+      "level": 0,
+      "max_level": 3,
+      "cost_per_level": 3,
+      "effect_type": "chain_reaction",
+      "effect_value": 0.1,
+      "icon": "res://assets/skill_icons/skill_icon_29.png"
+    },
+    "penetrating_shot": {
+      "name": "穿透射击",
+      "description": "子弹可以穿透多个敌人",
+      "level": 0,
+      "max_level": 4,
+      "cost_per_level": 2,
+      "effect_type": "penetration_count",
+      "effect_value": 1,
+      "icon": "res://assets/skill_icons/skill_icon_15.png"
     }
   }
 }
