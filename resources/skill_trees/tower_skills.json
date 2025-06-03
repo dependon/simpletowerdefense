@@ -215,7 +215,7 @@
       "description": "每次攻击发射更多子弹",
       "level": 0,
       "max_level": 4,
-      "cost_per_level": 2,
+      "cost_per_level": 6,
       "effect_type": "bullet_count",
       "effect_value": 1,
       "icon": "res://assets/skill_icons/skill_icon_17.png"
@@ -235,7 +235,7 @@
       "description": "子弹可以穿透多个敌人",
       "level": 0,
       "max_level": 4,
-      "cost_per_level": 2,
+      "cost_per_level": 6,
       "effect_type": "penetration_count",
       "effect_value": 1,
       "icon": "res://assets/skill_icons/skill_icon_15.png"

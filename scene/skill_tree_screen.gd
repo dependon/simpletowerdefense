@@ -38,25 +38,42 @@ func _ready():
 	update_display()
 
 func load_skill_data():
-	# 从GameManager加载技能树数据
-	all_towers_data = GameManager.get_skill_data()
-	if all_towers_data.is_empty():
-		# 如果GameManager中没有数据，从JSON文件加载默认数据
-		var file = FileAccess.open("res://resources/skill_trees/tower_skills.json", FileAccess.READ)
-		if file:
-			var json_string = file.get_as_text()
-			file.close()
-			var json_data = JSON.parse_string(json_string)
-			if json_data != null:
-				all_towers_data = json_data
-				# 保存到GameManager
-				GameManager.save_skill_data(all_towers_data)
-			else:
-				print("技能树数据解析失败")
-				all_towers_data = {}
+	# 首先从JSON文件加载最新的技能树数据
+	var file = FileAccess.open("res://resources/skill_trees/tower_skills.json", FileAccess.READ)
+	var json_data = {}
+	if file:
+		var json_string = file.get_as_text()
+		file.close()
+		var parsed_data = JSON.parse_string(json_string)
+		if parsed_data != null:
+			json_data = parsed_data
 		else:
-			print("无法打开技能树数据文件")
-			all_towers_data = {}
+			print("技能树数据解析失败")
+	else:
+		print("无法打开技能树数据文件")
+	
+	# 从GameManager获取已保存的技能数据
+	var saved_data = GameManager.get_skill_data()
+	
+	# 合并数据：保留已升级的技能等级，添加新的技能
+	all_towers_data = merge_skill_data(json_data, saved_data)
+	
+	# 保存合并后的数据到GameManager
+	GameManager.save_skill_data(all_towers_data)
+
+func merge_skill_data(json_data: Dictionary, saved_data: Dictionary) -> Dictionary:
+	# 以JSON数据为基础，合并保存的技能等级
+	var merged_data = json_data.duplicate(true)
+	
+	for tower_type in merged_data.keys():
+		if saved_data.has(tower_type):
+			for skill_name in merged_data[tower_type].keys():
+				if saved_data[tower_type].has(skill_name):
+					# 保留已升级的技能等级
+					if saved_data[tower_type][skill_name].has("level"):
+						merged_data[tower_type][skill_name]["level"] = saved_data[tower_type][skill_name]["level"]
+	
+	return merged_data
 
 func setup_ui():
 	# 设置UI样式和布局

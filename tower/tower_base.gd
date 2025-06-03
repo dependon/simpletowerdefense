@@ -328,7 +328,7 @@ func apply_skill_effects_to_tower_stats(tower_type: String):
 	
 	# 减速强化
 	if effects.has("slow_multiplier"):
-		freeze_duration += effects["slow_multiplier"]
+		slow_multiplier += effects["slow_multiplier"]
 		
 	# 冰霜新星
 	if effects.has("nova_chance"):
