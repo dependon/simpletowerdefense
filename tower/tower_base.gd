@@ -271,7 +271,7 @@ func apply_skill_effects():
 	# 获取塔的类型名称
 	var tower_type = get_tower_type()
 	
-	var skill_stats = apply_skill_effects_to_tower_stats(tower_type)
+	apply_skill_effects_to_tower_stats(tower_type)
 	
 	# 更新范围显示
 	_update_range_display()
