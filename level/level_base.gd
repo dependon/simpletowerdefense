@@ -13,6 +13,8 @@ signal wave_updated(current_wave, total_waves)
 # 新增：定义等待时间更新信号
 signal wait_time_updated(remaining_time)
 
+# 新增：定义初始等待时间更新信号
+signal initial_wait_time_updated(remaining_time)
 
 #超过最大数量怪物失败
 var MAX_ENEMIES_ON_FIELD = 1000
