@@ -8,10 +8,10 @@ func _ready():
 	damage = 15
 	attack_range = 300
 	upgrade_materials = {
-		1: "res://assets/tower/tower_ice/tower_ice_1.png", # 假设等级1的素材
-		2: "res://assets/tower/tower_ice/tower_ice_2.png", # 请替换为实际的等级2素材路径
-		3: "res://assets/tower/tower_ice/tower_ice_3.png", # 请替换为实际的等级3素材路径
-		4: "res://assets/tower/tower_ice/tower_ice_4.png", # 请替换为实际的等级4素材路径
+		1: "res://assets/tower/tower_frost/tower_frost_1.png", # 假设等级1的素材
+		2: "res://assets/tower/tower_frost/tower_frost_2.png", # 请替换为实际的等级2素材路径
+		3: "res://assets/tower/tower_frost/tower_frost_3.png", # 请替换为实际的等级3素材路径
+		4: "res://assets/tower/tower_frost/tower_frost_4.png", # 请替换为实际的等级4素材路径
 	}
 	super._ready()
 

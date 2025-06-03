@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://becjhbcd1p2g8"
-path="res://.godot/imported/tower_ice_1.png-8438f03d264c4dec0c973b8a8dbde572.ctex"
+uid="uid://dlfyfwelars88"
+path="res://.godot/imported/tower_frost_2.png-29cad1c80cc86a53cc9d21d43f00fd2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tower/tower_ice/tower_ice_1.png"
-dest_files=["res://.godot/imported/tower_ice_1.png-8438f03d264c4dec0c973b8a8dbde572.ctex"]
+source_file="res://assets/tower/tower_frost/tower_frost_2.png"
+dest_files=["res://.godot/imported/tower_frost_2.png-29cad1c80cc86a53cc9d21d43f00fd2c.ctex"]
 
 [params]
 
