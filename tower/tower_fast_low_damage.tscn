@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://10ktsv5vkc50"]
 
-[ext_resource type="Texture2D" path="res://assets/tower/tower_lei/tower_lei_1.png" id="1_bqdyb"]
+[ext_resource type="Texture2D" path="res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_1.png" id="1_bqdyb"]
 [ext_resource type="Script" uid="uid://dq3iackp72isb" path="res://tower/tower_fast_low_damage.gd" id="2_new_script"]
 [ext_resource type="Texture2D" uid="uid://crvej47h0lccb" path="res://assets/yuan.svg" id="3_mnu4m"]
 
