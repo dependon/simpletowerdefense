@@ -7,10 +7,10 @@ func _ready():
 	base_cost = 500
 	damage = 20  # 低伤害
 	upgrade_materials = {
-		1: "res://assets/tower/tower_lei/tower_lei_1.png", # 假设等级1的素材
-		2: "res://assets/tower/tower_lei/tower_lei_2.png", # 请替换为实际的等级2素材路径
-		3: "res://assets/tower/tower_lei/tower_lei_3.png", # 请替换为实际的等级3素材路径
-		4: "res://assets/tower/tower_lei/tower_lei_4.png", # 请替换为实际的等级4素材路径
+		1: "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_1.png", # 假设等级1的素材
+		2: "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_2.png", # 请替换为实际的等级2素材路径
+		3: "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_3.png", # 请替换为实际的等级3素材路径
+		4: "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_4.png", # 请替换为实际的等级4素材路径
 }
 	super._ready()
 
