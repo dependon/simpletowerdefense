@@ -70,15 +70,7 @@ func _ready() -> void:
 	print("关卡加载成功")
 
 func startCurrentGame() -> void:
-	# 设置敌人生成点位置
-	var spawn_point1 = $SpawnPoint
-	var spawn_point2 = $SpawnPoint2
-		
-	if spawn_point1 and spawn_point2:
-			# 确保生成点在路径开始位置
-		spawn_point1.position = path1.curve.get_point_position(0)
-		spawn_point2.position = path2.curve.get_point_position(0)
-		
+
 		# 游戏开始时，立即开始第一波
 	is_between_waves = false # 不处于间隔状态
 		# 连接 GameManager 的下一波请求信号
