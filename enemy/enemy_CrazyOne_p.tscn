@@ -56,7 +56,7 @@ metadata/_custom_type_script = "uid://bc7csuhep7oqd"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_22tub")
 autoplay = "default"
-frame_progress = 0.519399
+frame_progress = 0.460541
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 3)
