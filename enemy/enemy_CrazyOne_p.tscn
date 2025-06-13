@@ -70,8 +70,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crazyone_collision"]
 size = Vector2(95, 124)
 
-[node name="CrazyOne_p" type="CharacterBody2D"]
+[node name="CrazyOne_p" type="Area2D"]
 script = ExtResource("1_crazyone_gd")
+metadata/_custom_type_script = "uid://bc7csuhep7oqd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_22tub")

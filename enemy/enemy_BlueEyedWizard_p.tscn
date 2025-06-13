@@ -203,8 +203,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_default"]
 size = Vector2(64, 132)
 
-[node name="EnemyBlueEyedWizardP" type="CharacterBody2D"]
+[node name="EnemyBlueEyedWizardP" type="Area2D"]
 script = ExtResource("1_script")
+metadata/_custom_type_script = "uid://bc7csuhep7oqd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_placeholder")

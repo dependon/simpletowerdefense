@@ -217,8 +217,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Cowboy_p" type="CharacterBody2D"]
+[node name="Cowboy_p" type="Area2D"]
 script = ExtResource("1_cowboy_gd")
+metadata/_custom_type_script = "uid://bc7csuhep7oqd"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, -1)
