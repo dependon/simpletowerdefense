@@ -76,8 +76,8 @@ func _physics_process(delta):
 func set_speed_multiplier(multiplier: float, duration: float = 5.0) -> void:
 	if !is_slowed:
 		original_speed_multiplier = speed_multiplier # 记录减速前的速度
-	speed_multiplier = speed_multiplier / multiplier 
-	is_slowed = true # 设置减速状态
+		speed_multiplier = speed_multiplier / multiplier 
+		is_slowed = true # 设置减速状态
 	
 	# 复用计时器，更新时间并启动
 	slow_timer.wait_time = max(slow_timer.time_left, duration) # 取剩余时间和新持续时间的最大值

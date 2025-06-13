@@ -1,43 +1,34 @@
-[gd_scene load_steps=13 format=3 uid="uid://x34oo563jjsc"]
+[gd_scene load_steps=10 format=3 uid="uid://x34oo563jjsc"]
 
 [ext_resource type="Script" uid="uid://cfhua6btw411h" path="res://enemy/enemy_CrazyOne_p.gd" id="1_crazyone_gd"]
 [ext_resource type="Texture2D" uid="uid://dwybbowa8n1or" path="res://assets/player/CrazyOne_p.png" id="2_au3n1"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_au3n1"]
+atlas = ExtResource("2_au3n1")
+region = Rect2(0, 384, 96, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_duj64"]
 atlas = ExtResource("2_au3n1")
-region = Rect2(384, 384, 96, 128)
+region = Rect2(96, 384, 96, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gehfk"]
 atlas = ExtResource("2_au3n1")
-region = Rect2(0, 512, 96, 128)
+region = Rect2(384, 384, 96, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e15c4"]
 atlas = ExtResource("2_au3n1")
-region = Rect2(96, 512, 96, 128)
+region = Rect2(0, 512, 96, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rjij"]
 atlas = ExtResource("2_au3n1")
-region = Rect2(192, 512, 96, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fc8bl"]
-atlas = ExtResource("2_au3n1")
-region = Rect2(384, 512, 96, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4gqp4"]
-atlas = ExtResource("2_au3n1")
-region = Rect2(0, 640, 96, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fyumf"]
-atlas = ExtResource("2_au3n1")
-region = Rect2(96, 640, 96, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2ouj"]
-atlas = ExtResource("2_au3n1")
-region = Rect2(192, 640, 96, 128)
+region = Rect2(288, 512, 96, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_22tub"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au3n1")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_duj64")
 }, {
@@ -49,18 +40,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5rjij")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fc8bl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4gqp4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fyumf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g2ouj")
 }],
 "loop": true,
 "name": &"default",
@@ -76,7 +55,8 @@ metadata/_custom_type_script = "uid://bc7csuhep7oqd"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_22tub")
-frame_progress = 0.615365
+autoplay = "default"
+frame_progress = 0.63052
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 3)
