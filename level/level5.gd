@@ -23,15 +23,15 @@ func _ready():
 		12: {"count": 40, "health_multiplier": 4.8, "speed_multiplier": 1.65, "path_type": PathType.PATH_2, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		13: {"count": 42, "health_multiplier": 5.1, "speed_multiplier": 1.7, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		14: {"count": 45, "health_multiplier": 5.4, "speed_multiplier": 1.75, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
-		15: {"count": 1, "health_multiplier": 5.7, "speed_multiplier": 1.8, "path_type": PathType.PATH_2, "enemy_mix": {EnemyManager.EnemyType.ORC: 1.0}},
+		15: {"count": 1, "health_multiplier": 15.0, "speed_multiplier": 1.8, "path_type": PathType.PATH_2, "enemy_mix": {EnemyManager.EnemyType.ORC: 1.0}},
 		16: {"count": 50, "health_multiplier": 6.0, "speed_multiplier": 1.85, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		17: {"count": 52, "health_multiplier": 6.5, "speed_multiplier": 1.9, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		18: {"count": 55, "health_multiplier": 7.0, "speed_multiplier": 1.95, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		19: {"count": 60, "health_multiplier": 7.5, "speed_multiplier": 2.0, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
-		20: {"count": 1, "health_multiplier": 8.0, "speed_multiplier": 2.1, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.CRAZYONE: 1.0}},
+		20: {"count": 1, "health_multiplier": 30.0, "speed_multiplier": 2.1, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.CRAZYONE: 1.0}},
 		21: {"count": 70, "health_multiplier": 8.5, "speed_multiplier": 2.2, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		22: {"count": 75, "health_multiplier": 9.0, "speed_multiplier": 2.3, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		23: {"count": 80, "health_multiplier": 9.5, "speed_multiplier": 2.4, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		24: {"count": 85, "health_multiplier": 10.0, "speed_multiplier": 2.5, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
-		25: {"count": 1, "health_multiplier": 12.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.ORC: 1.0}}
+		25: {"count": 1, "health_multiplier": 50.0, "speed_multiplier": 2.6, "path_type": PathType.BOTH_PATHS, "enemy_mix": {EnemyManager.EnemyType.ORC: 1.0}}
 	}

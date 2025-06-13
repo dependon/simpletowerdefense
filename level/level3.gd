@@ -19,10 +19,10 @@ func _ready():
 		7: {"count": 25, "health_multiplier": 2.2, "speed_multiplier": 1.35, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		8: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.4, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		9: {"count": 32, "health_multiplier": 2.6, "speed_multiplier": 1.45, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
-		10: {"count": 1, "health_multiplier": 2.8, "speed_multiplier": 1.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.CRAZYONE: 1.0}},
+		10: {"count": 1, "health_multiplier": 4.8, "speed_multiplier": 1.5, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.CRAZYONE: 1.0}},
 		11: {"count": 38, "health_multiplier": 3.0, "speed_multiplier": 1.55, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		12: {"count": 40, "health_multiplier": 3.2, "speed_multiplier": 1.6, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		13: {"count": 42, "health_multiplier": 3.4, "speed_multiplier": 1.65, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		14: {"count": 45, "health_multiplier": 3.6, "speed_multiplier": 1.7, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
-		15: {"count": 1, "health_multiplier": 4.0, "speed_multiplier": 1.8, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.ORC: 1.0}}
+		15: {"count": 1, "health_multiplier": 10.0, "speed_multiplier": 1.8, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.ORC: 1.0}}
 	}

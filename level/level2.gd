@@ -20,5 +20,5 @@ func _ready():
 		9: {"count": 28, "health_multiplier": 2.4, "speed_multiplier": 1.2, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
 		10: {"count": 1, "health_multiplier": 5.6, "speed_multiplier": 1.4, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.CRAZYONE: 1.0}},
 		11: {"count": 35, "health_multiplier": 7.8, "speed_multiplier": 1.6, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}},
-		12: {"count": 40, "health_multiplier": 10.0, "speed_multiplier": 1.8, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.NORMAL: 1.0}}
+		12: {"count": 1, "health_multiplier": 10.0, "speed_multiplier": 1.8, "path_type": PathType.PATH_1, "enemy_mix": {EnemyManager.EnemyType.CRAZYONE: 1.0}}
 	}
