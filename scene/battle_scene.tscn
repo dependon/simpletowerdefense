@@ -20,38 +20,44 @@ top_level = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -88.0
-offset_bottom = 31.0
+offset_left = -189.0
+offset_bottom = 88.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
 text = "设置"
 
 [node name="Coins" type="Label" parent="UI"]
-offset_left = 30.0
-offset_top = 15.0
-offset_right = 105.0
-offset_bottom = 66.0
+offset_left = 5.0
+offset_top = -1.0
+offset_right = 131.0
+offset_bottom = 93.0
+theme_override_font_sizes/font_size = 25
 text = "Coins:0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Diamonds" type="Label" parent="UI"]
-offset_left = 139.0
-offset_top = 29.0
-offset_right = 258.0
-offset_bottom = 67.0
+offset_left = 134.0
+offset_top = -1.0
+offset_right = 307.0
+offset_bottom = 91.0
+theme_override_font_sizes/font_size = 25
 text = "Diamonds : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="WaveLabel" type="Label" parent="UI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -18.0
-offset_top = 30.0
-offset_right = 82.0
-offset_bottom = 53.0
+offset_left = -6.0
+offset_right = 179.0
+offset_bottom = 90.0
 grow_horizontal = 2
+theme_override_font_sizes/font_size = 25
 text = "波次: 0 / 0"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SettingMenu" parent="UI" instance=ExtResource("6_0l81w")]
 visible = false
@@ -213,27 +219,33 @@ grow_vertical = 0
 text = "0"
 
 [node name="WaitTime" type="Label" parent="UI"]
-offset_left = 370.0
-offset_top = 26.0
-offset_right = 489.0
-offset_bottom = 64.0
+offset_left = 311.0
+offset_right = 506.0
+offset_bottom = 93.0
+theme_override_font_sizes/font_size = 25
 text = "下一波倒计时:30"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NextWave" type="Button" parent="UI"]
-offset_left = 759.0
-offset_top = 24.0
-offset_right = 879.0
-offset_bottom = 56.0
+offset_left = 763.0
+offset_top = 1.0
+offset_right = 938.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 25
 text = "立即开启下一波"
 
 [node name="CurrentEnemyNum" type="Label" parent="UI"]
 anchors_preset = -1
 anchor_bottom = 0.011
-offset_left = 543.0
-offset_top = 27.0
-offset_right = 685.0
-offset_bottom = 38.12
+offset_left = 513.0
+offset_top = 4.0
+offset_right = 759.0
+offset_bottom = 76.12
+theme_override_font_sizes/font_size = 25
 text = "当前存在怪物数量:0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NextWaveTimer" type="Timer" parent="."]
 wait_time = 5.0
