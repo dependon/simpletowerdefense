@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvqxr8y7n5k8p"]
+
+[ext_resource type="Script" uid="uid://cjk8m9x2p4q7r" path="res://scene/about_menu.gd" id="1_about"]
+
+[node name="AboutMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_about")
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainContainer" type="VBoxContainer" parent="BackgroundPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="BackgroundPanel/MainContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "关于游戏"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="BackgroundPanel/MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentContainer" type="VBoxContainer" parent="BackgroundPanel/MainContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+
+[node name="AuthorLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[b]本项目作者:[/b] depend(依赖)"
+fit_content = true
+
+[node name="GithubLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]GitHub主页:[/b] [url=https://github.com/dependon/simpletowerdefense]https://github.com/dependon/simpletowerdefense[/url]"
+fit_content = true
+
+[node name="BilibiliLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]Bilibili地址:[/b] [url=https://space.bilibili.com/144159485]https://space.bilibili.com/144159485[/url]"
+fit_content = true
+
+[node name="DouyinLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]抖音号:[/b] 87034208133"
+fit_content = true
+
+[node name="EmailLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[b]邮箱:[/b] [url=mailto:liuminghang0821@gmail.com]liuminghang0821@gmail.com[/url]"
+fit_content = true
+
+[node name="ProjectInfoLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "本项目本身是学习项目，采用MIT协议，你可以拿取和改变任何代码和通过各种渠道给我提各种意见，非常感谢你的交流与关注。"
+fit_content = true
+
+[node name="ThanksLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "谢谢你玩我的做游戏，虽然它现在不好玩，哈哈，总之，非常感谢!!!"
+fit_content = true
+
+[node name="BackButton" type="Button" parent="BackgroundPanel/MainContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "返回主菜单"
+
+[connection signal="meta_clicked" from="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/GithubLabel" to="." method="_on_link_clicked"]
+[connection signal="meta_clicked" from="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/BilibiliLabel" to="." method="_on_link_clicked"]
+[connection signal="meta_clicked" from="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/EmailLabel" to="." method="_on_link_clicked"]
+[connection signal="pressed" from="BackgroundPanel/MainContainer/BackButton" to="." method="_on_back_button_pressed"]

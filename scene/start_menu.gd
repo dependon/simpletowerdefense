@@ -43,5 +43,9 @@ func _on_skill_tree_button_pressed():
 func _on_help_button_pressed():
 	get_tree().change_scene_to_file("res://scene/help_menu.tscn")
 
+func _on_about_button_pressed():
+	# 跳转到关于界面
+	get_tree().change_scene_to_file("res://scene/about_menu.tscn")
+
 func _on_quit_button_pressed():
 	get_tree().quit()
