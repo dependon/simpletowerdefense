@@ -5,6 +5,20 @@ func _ready():
 	update_level_buttons()
 	update_stars_display()
 
+	# 确保背景在其他UI元素后面
+	var background_node = $"Background"
+	var title_node = $"Title"
+	var hbox_container = $"HBoxContainer"
+	if background_node:
+		background_node.set_as_top_level(false)
+		background_node.z_index = -1
+	if title_node:
+		title_node.set_as_top_level(false)
+		title_node.z_index = 0
+	if hbox_container:
+		hbox_container.set_as_top_level(false)
+		hbox_container.z_index = 0
+
 # 更新关卡按钮状态
 func update_level_buttons():
 	# 关卡1始终可用
