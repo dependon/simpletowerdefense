@@ -3,3 +3,4 @@
 /android/
 *.log
 *.dat
+export_presets.cfg
