@@ -46,7 +46,7 @@ alignment = 1
 
 [node name="UnusedStarsLabel" type="Label" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 34
 text = "可用星星: 0"
 
 [node name="StarIcon1" type="TextureRect" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
@@ -58,7 +58,7 @@ stretch_mode = 5
 
 [node name="UsedStarsLabel" type="Label" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 34
 text = "已用星星: 0"
 
 [node name="StarIcon2" type="TextureRect" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
@@ -87,11 +87,11 @@ alignment = 1
 [node name="MainMenuButton" type="Button" parent="BackgroundPanel/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 34
 text = "返回主菜单"
 
 [node name="ResetButton" type="Button" parent="BackgroundPanel/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 34
 text = "重置技能树"
