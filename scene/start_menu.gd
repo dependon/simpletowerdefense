@@ -13,6 +13,16 @@ func _ready() -> void:
 	settings_screen = load("res://scene/settings_screen.tscn").instantiate()
 	settings_screen.hide()
 	add_child(settings_screen)
+	
+	# 确保背景在VBoxContainer后面
+	var background_node = $"Background"
+	var vbox_container = $"VBoxContainer"
+	if background_node and vbox_container:
+		background_node.set_as_top_level(false)
+		vbox_container.set_as_top_level(false)
+		background_node.z_index = -1
+		vbox_container.z_index = 0
+
 
 func _on_start_button_pressed():
 	get_tree().change_scene_to_file("res://level/level_select.tscn")
