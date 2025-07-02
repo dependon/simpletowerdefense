@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://randomuid"]
+[gd_scene load_steps=5 format=3 uid="uid://randomuid"]
 
 [ext_resource type="Script" uid="uid://dyk5jepj7kgw5" path="res://level/level_select.gd" id="1_levelselect"]
 [ext_resource type="Texture2D" uid="uid://dqknp3pp23f8n" path="res://assets/icon/star.png" id="2_star"]
 [ext_resource type="Texture2D" uid="uid://buppc7v6t26x2" path="res://assets/backgroud/backgroud.jpeg" id="2_uv041"]
-[ext_resource type="Theme" uid="uid://c2000000000000000000000000000000" path="res://resources/default_button_theme.tres" id="3_theme"]
+[ext_resource type="Theme" uid="uid://r2ty6ekpfn7c" path="res://resources/default_button_theme.tres" id="3_theme"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
