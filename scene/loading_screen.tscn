@@ -67,21 +67,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBoxContainer" type="Control" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "简易塔防"
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 162
 
 [node name="LoadingIcon" type="ColorRect" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(50, 50)
 size_flags_horizontal = 4
 color = Color(0, 0, 0, 0)
 
@@ -98,9 +101,17 @@ polygon = PackedVector2Array(0, -25, 22, -12, 22, 12, 0, 25, -22, 12, -22, -12)
 [node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
+offset_left = -201.0
+offset_top = 66.0
+offset_right = 199.0
+offset_bottom = 87.0
 
 [node name="LoadingText" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+offset_left = -201.0
+offset_top = 107.0
+offset_right = 199.0
+offset_bottom = 124.0
 text = "加载中..."
 horizontal_alignment = 1
 

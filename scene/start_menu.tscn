@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7gnwcdi0r5fy"]
+[gd_scene load_steps=4 format=3 uid="uid://b7gnwcdi0r5fy"]
 
 [ext_resource type="Script" uid="uid://be58bj8udbqam" path="res://scene/start_menu.gd" id="1_8484bqstart"]
 [ext_resource type="Texture2D" uid="uid://buppc7v6t26x2" path="res://assets/backgroud/backgroud.jpeg" id="2_e43t8"]
-[ext_resource type="Theme" path="res://resources/default_button_theme.tres" id="3_theme"]
+[ext_resource type="Theme" uid="uid://r2ty6ekpfn7c" path="res://resources/default_button_theme.tres" id="3_theme"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -32,9 +32,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -100.0
+offset_top = -210.0
 offset_right = 100.0
-offset_bottom = 100.0
+offset_bottom = 211.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_theme")

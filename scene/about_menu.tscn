@@ -107,9 +107,14 @@ text = "谢谢你玩我的做游戏，虽然它现在不好玩，哈哈，总之
 fit_content = true
 
 [node name="BackButton" type="Button" parent="BackgroundPanel/MainContainer"]
+custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "返回主菜单"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer"]
+layout_mode = 2
+text = "     "
 
 [connection signal="meta_clicked" from="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/GithubLabel" to="." method="_on_link_clicked"]
 [connection signal="meta_clicked" from="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/BilibiliLabel" to="." method="_on_link_clicked"]

@@ -85,13 +85,19 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="BackgroundPanel/MainContainer/ButtonContainer"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 34
 text = "返回主菜单"
 
 [node name="ResetButton" type="Button" parent="BackgroundPanel/MainContainer/ButtonContainer"]
-custom_minimum_size = Vector2(150, 50)
+custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "重置技能树"
+
+[node name="Label" type="Label" parent="BackgroundPanel/MainContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
