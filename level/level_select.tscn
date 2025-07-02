@@ -63,6 +63,7 @@ alignment = 1
 
 [node name="Level1Button" type="Button" parent="HBoxContainer/Level1Container"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "关卡1"
 
 [node name="Level1Stars" type="HBoxContainer" parent="HBoxContainer/Level1Container"]
@@ -98,6 +99,7 @@ alignment = 1
 
 [node name="Level2Button" type="Button" parent="HBoxContainer/Level2Container"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "关卡2"
 
 [node name="Level2Stars" type="HBoxContainer" parent="HBoxContainer/Level2Container"]
@@ -133,6 +135,7 @@ alignment = 1
 
 [node name="Level3Button" type="Button" parent="HBoxContainer/Level3Container"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "关卡3"
 
 [node name="Level3Stars" type="HBoxContainer" parent="HBoxContainer/Level3Container"]
@@ -168,6 +171,7 @@ alignment = 1
 
 [node name="Level4Button" type="Button" parent="HBoxContainer/Level4Container"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "关卡4"
 
 [node name="Level4Stars" type="HBoxContainer" parent="HBoxContainer/Level4Container"]
