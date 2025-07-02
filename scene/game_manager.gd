@@ -174,7 +174,6 @@ func change_scene_with_loading(target_scene_path: String) -> void:
 	# 使用加载屏幕切换到目标场景
 	var loading_screen = load("res://scene/loading_screen.tscn").instantiate()
 	loading_screen.set_target_scene(target_scene_path)
-	
 	# 添加到场景树
 	var root = get_tree().root
 	root.add_child(loading_screen)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c8yvt5xnq6yjr"]
 
-[ext_resource type="Script" path="res://scene/loading_screen.gd" id="1_loading"]
+[ext_resource type="Script" uid="uid://dv884b41dhy5l" path="res://scene/loading_screen.gd" id="1_loading"]
 [ext_resource type="Texture2D" uid="uid://buppc7v6t26x2" path="res://assets/backgroud/backgroud.jpeg" id="2_background"]
 
 [sub_resource type="Animation" id="Animation_loading1"]
@@ -36,8 +36,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_loading"]
 _data = {
-"RESET": SubResource("Animation_loading1"),
-"loading_animation": SubResource("Animation_loading2")
+&"RESET": SubResource("Animation_loading1"),
+&"loading_animation": SubResource("Animation_loading2")
 }
 
 [node name="LoadingScreen" type="CanvasLayer"]
@@ -76,6 +76,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "简易塔防"
 horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
 
 [node name="LoadingIcon" type="ColorRect" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -104,5 +106,5 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_loading")
+&"": SubResource("AnimationLibrary_loading")
 }
