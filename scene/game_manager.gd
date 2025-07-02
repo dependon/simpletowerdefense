@@ -25,11 +25,6 @@ func _ready():
 	# 添加调试信息
 	print("GameManager初始化完成")
 	
-	# 测试异步加载功能
-	# 注释掉下面这行代码以禁用自动测试
-	await get_tree().create_timer(2.0).timeout
-	test_async_loading()
-
 # 初始化关卡星级
 func initialize_level_stars() -> void:
 	for level in unlocked_levels:
