@@ -21,6 +21,14 @@ signal level_selected(level_number: int)
 
 func _ready():
 	load_game()
+	
+	# 添加调试信息
+	print("GameManager初始化完成")
+	
+	# 测试异步加载功能
+	# 注释掉下面这行代码以禁用自动测试
+	await get_tree().create_timer(2.0).timeout
+	test_async_loading()
 
 # 初始化关卡星级
 func initialize_level_stars() -> void:
@@ -169,11 +177,18 @@ func save_skill_data(data: Dictionary):
 func get_skill_data() -> Dictionary:
 	return skill_data
 
-# 通用场景切换方法，使用加载屏幕
+# 通用场景切换方法，使用异步加载屏幕
 func change_scene_with_loading(target_scene_path: String) -> void:
+	print("GameManager: 开始切换场景到 %s" % target_scene_path)
 	# 使用加载屏幕切换到目标场景
 	var loading_screen = load("res://scene/loading_screen.tscn").instantiate()
-	loading_screen.set_target_scene(target_scene_path)
 	# 添加到场景树
 	var root = get_tree().root
 	root.add_child(loading_screen)
+	# 设置目标场景并开始异步加载
+	loading_screen.set_target_scene(target_scene_path)
+
+# 测试异步加载功能
+func test_async_loading() -> void:
+	print("开始测试异步加载功能")
+	change_scene_with_loading("res://scene/start_menu.tscn")
