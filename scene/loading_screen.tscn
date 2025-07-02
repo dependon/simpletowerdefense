@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8yvt5xnq6yjr"]
+
+[ext_resource type="Script" path="res://scene/loading_screen.gd" id="1_loading"]
+[ext_resource type="Texture2D" uid="uid://buppc7v6t26x2" path="res://assets/backgroud/backgroud.jpeg" id="2_background"]
+
+[sub_resource type="Animation" id="Animation_loading1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/VBoxContainer/LoadingIcon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_loading2"]
+resource_name = "loading_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer/VBoxContainer/LoadingIcon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_loading"]
+_data = {
+"RESET": SubResource("Animation_loading1"),
+"loading_animation": SubResource("Animation_loading2")
+}
+
+[node name="LoadingScreen" type="CanvasLayer"]
+script = ExtResource("1_loading")
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+
+[node name="ColorOverlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "简易塔防"
+horizontal_alignment = 1
+
+[node name="LoadingIcon" type="ColorRect" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 0)
+
+[node name="Icon" type="Polygon2D" parent="CenterContainer/VBoxContainer/LoadingIcon"]
+position = Vector2(50, 50)
+color = Color(0.8, 0.2, 0.2, 1)
+polygon = PackedVector2Array(0, -40, 35, -20, 35, 20, 0, 40, -35, 20, -35, -20)
+
+[node name="InnerIcon" type="Polygon2D" parent="CenterContainer/VBoxContainer/LoadingIcon"]
+position = Vector2(50, 50)
+color = Color(0.2, 0.6, 1, 1)
+polygon = PackedVector2Array(0, -25, 22, -12, 22, 12, 0, 25, -22, 12, -22, -12)
+
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 2
+
+[node name="LoadingText" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "加载中..."
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_loading")
+}

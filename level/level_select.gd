@@ -145,4 +145,5 @@ func _on_level11_button_pressed():
 	GameManager.select_level(11)
 
 func _on_main_menu_button_pressed():
-	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
+	# 使用GameManager的通用加载屏幕方法切换到主菜单
+	GameManager.change_scene_with_loading("res://scene/start_menu.tscn")

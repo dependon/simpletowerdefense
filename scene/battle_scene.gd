@@ -35,12 +35,16 @@ func resume_game():
 func return_to_level_select():
 	setting_menu.hide()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://level/level_select.tscn")
+	
+	# 使用GameManager的通用加载屏幕方法切换到关卡选择界面
+	GameManager.change_scene_with_loading("res://level/level_select.tscn")
 
 func return_to_start_menu():
 	setting_menu.hide()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scene/start_menu.tscn")
+	
+	# 使用GameManager的通用加载屏幕方法切换到主菜单
+	GameManager.change_scene_with_loading("res://scene/start_menu.tscn")
 
 @onready var enemy_scene: PackedScene = preload("res://enemy/enemy.tscn")
 @onready var tower_scene: PackedScene = preload("res://tower/tower_base.tscn")

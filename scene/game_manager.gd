@@ -84,7 +84,8 @@ func select_level(level: int) -> void:
 	if level in unlocked_levels:
 		current_level = level
 		level_selected.emit(level)
-		get_tree().change_scene_to_file("res://scene/battle_scene.tscn")
+		# 使用通用加载屏幕方法切换到战斗场景
+		change_scene_with_loading("res://scene/battle_scene.tscn")
 
 # 解锁下一关卡
 func unlock_next_level() -> void:
@@ -167,3 +168,13 @@ func save_skill_data(data: Dictionary):
 # 获取技能数据
 func get_skill_data() -> Dictionary:
 	return skill_data
+
+# 通用场景切换方法，使用加载屏幕
+func change_scene_with_loading(target_scene_path: String) -> void:
+	# 使用加载屏幕切换到目标场景
+	var loading_screen = load("res://scene/loading_screen.tscn").instantiate()
+	loading_screen.set_target_scene(target_scene_path)
+	
+	# 添加到场景树
+	var root = get_tree().root
+	root.add_child(loading_screen)

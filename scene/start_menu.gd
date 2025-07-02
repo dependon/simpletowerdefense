@@ -51,11 +51,12 @@ func _on_skill_tree_button_pressed():
 	
 	
 func _on_help_button_pressed():
-	get_tree().change_scene_to_file("res://scene/help_menu.tscn")
+	# 使用GameManager的通用加载屏幕方法切换到帮助界面
+	GameManager.change_scene_with_loading("res://scene/help_menu.tscn")
 
 func _on_about_button_pressed():
-	# 跳转到关于界面
-	get_tree().change_scene_to_file("res://scene/about_menu.tscn")
+	# 使用GameManager的通用加载屏幕方法切换到关于界面
+	GameManager.change_scene_with_loading("res://scene/about_menu.tscn")
 
 func _on_quit_button_pressed():
 	get_tree().quit()
