@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://be58bj8udbqam" path="res://scene/start_menu.gd" id="1_8484bqstart"]
 [ext_resource type="Texture2D" uid="uid://buppc7v6t26x2" path="res://assets/backgroud/backgroud.jpeg" id="2_e43t8"]
+[ext_resource type="Theme" path="res://resources/default_button_theme.tres" id="3_theme"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -36,41 +37,35 @@ offset_right = 100.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 theme_override_constants/separation = 20
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "开始游戏"
 
 [node name="SkillTreeButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "技能树"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "设置"
 
 [node name="UnlockLevelsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "解锁全部关卡"
 
 [node name="HelpButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "游戏帮助"
 
 [node name="AboutButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "关于"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "退出"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

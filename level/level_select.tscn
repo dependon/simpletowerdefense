@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dyk5jepj7kgw5" path="res://level/level_select.gd" id="1_levelselect"]
 [ext_resource type="Texture2D" uid="uid://dqknp3pp23f8n" path="res://assets/icon/star.png" id="2_star"]
 [ext_resource type="Texture2D" uid="uid://buppc7v6t26x2" path="res://assets/backgroud/backgroud.jpeg" id="2_uv041"]
+[ext_resource type="Theme" uid="uid://c2000000000000000000000000000000" path="res://resources/default_button_theme.tres" id="3_theme"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -51,6 +52,7 @@ offset_right = 550.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 theme_override_constants/separation = 50
 alignment = 1
 
@@ -61,7 +63,6 @@ alignment = 1
 
 [node name="Level1Button" type="Button" parent="HBoxContainer/Level1Container"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "关卡1"
 
 [node name="Level1Stars" type="HBoxContainer" parent="HBoxContainer/Level1Container"]
@@ -97,7 +98,6 @@ alignment = 1
 
 [node name="Level2Button" type="Button" parent="HBoxContainer/Level2Container"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "关卡2"
 
 [node name="Level2Stars" type="HBoxContainer" parent="HBoxContainer/Level2Container"]
@@ -133,7 +133,6 @@ alignment = 1
 
 [node name="Level3Button" type="Button" parent="HBoxContainer/Level3Container"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "关卡3"
 
 [node name="Level3Stars" type="HBoxContainer" parent="HBoxContainer/Level3Container"]
@@ -169,7 +168,6 @@ alignment = 1
 
 [node name="Level4Button" type="Button" parent="HBoxContainer/Level4Container"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "关卡4"
 
 [node name="Level4Stars" type="HBoxContainer" parent="HBoxContainer/Level4Container"]
