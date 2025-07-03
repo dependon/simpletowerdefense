@@ -7,6 +7,7 @@ signal tower_clicked(tower_instance) # 新增：防御塔被点击信号，传�
 @onready var tower_area_shape: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var mouse_detection_area: Area2D = $MouseDetectionArea # 获取鼠标检测区域节点
 @onready var range_display = $RangeDisplay # 获取范围显示节点
+@onready var attack_audio: AudioStreamPlayer2D = $AttackAudio # 攻击音效播放器
 @export var attack_range = 300 # 攻击范围
 @export var fire_rate : float = 1   # 每秒发射子弹数量
 @export var bullet_count : int = 1   # 每次发射子弹个数
@@ -70,6 +71,14 @@ func _update_range_display():
 func _ready():
 	z_index = 3
 	
+	# 初始化攻击音效
+	if not attack_audio:
+		attack_audio = AudioStreamPlayer2D.new()
+		add_child(attack_audio)
+	attack_audio.stream = preload("res://assets/music/attack.wav")
+	attack_audio.volume_db = -10.0  # 降低音量避免太突兀
+	attack_audio.pitch_scale = 1.0
+	
 	# 应用技能效果到塔的属性
 	apply_skill_effects()
 	
@@ -115,8 +124,18 @@ func _physics_process(delta):
 	if time_since_last_fire >= 1 / fire_rate:
 		var enemies = tower_area.get_overlapping_areas()
 		var target_count = 0  # 添加目标计数器
+		var has_fired = false  # 标记是否已经发射过子弹
 		for enemy in enemies:
 			if enemy.is_in_group("enemies"):
+				# 第一次发射时播放攻击音效
+				if not has_fired and attack_audio:
+					# 添加轻微的音调随机化，避免音效太单调
+					attack_audio.pitch_scale = randf_range(0.9, 1.1)
+					# 添加轻微的音量随机化
+					attack_audio.volume_db = randf_range(-12.0, -8.0)
+					attack_audio.play()
+					has_fired = true
+				
 				var isChain :int = 1 #是否触发连锁反应
 				# 判断是否暴击
 				if randf() < chain_reaction :

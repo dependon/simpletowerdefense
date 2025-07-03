@@ -52,3 +52,6 @@ texture = ExtResource("3_tui53")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MouseDetectionArea"]
 polygon = PackedVector2Array(60, 44.6247, 56, -38.5396, 44, -93.3063, -46, -93.3063, -52, -34.4828, -56, 46.6531, -52, 83.1643, 58, 85.1927)
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
