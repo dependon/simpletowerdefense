@@ -43,7 +43,7 @@ animation_library={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://localization/translations.csv")
+locale/translations=PackedStringArray("res://localization/translations.zh_CN.translation", "res://localization/translations.en_US.translation")
 
 [rendering]
 

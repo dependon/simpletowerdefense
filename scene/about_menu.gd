@@ -4,6 +4,13 @@ extends Control
 
 func _ready() -> void:
 	# 设置UI元素国际化文本
+	_update_ui_texts()
+	
+	# 连接语言改变信号
+	SettingsManager.language_changed.connect(_on_language_changed)
+
+func _update_ui_texts():
+	"""更新UI文本"""
 	$BackgroundPanel/MainContainer/TitleLabel.text = tr("ABOUT_GAME")
 	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/AuthorLabel.text = tr("AUTHOR")
 	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/GithubLabel.text = tr("GITHUB_PAGE") + ":[url=https://github.com/dependon/simpletowerdefense]https://github.com/dependon/simpletowerdefense[/url]"
@@ -13,6 +20,10 @@ func _ready() -> void:
 	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/ProjectInfoLabel.text = tr("PROJECT_INFO")
 	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/ThanksLabel.text = tr("THANKS_MESSAGE")
 	$BackgroundPanel/MainContainer/BackButton.text = tr("BACK_TO_MAIN_MENU")
+
+func _on_language_changed(_new_language: String):
+	"""语言改变时更新UI文本"""
+	_update_ui_texts()
 
 func _on_back_button_pressed() -> void:
 	# 返回主菜单

@@ -2,6 +2,9 @@ extends Node
 
 # 设置管理器 - 处理游戏设置的加载、保存和应用
 
+# 语言改变信号
+signal language_changed(new_language: String)
+
 # 背景音乐播放器
 @onready var bgm_player: AudioStreamPlayer = null
 
@@ -209,8 +212,13 @@ func apply_language_settings():
 		language = _detect_system_language()
 		current_settings.localization.language = language
 		save_settings()
+	
+	# 设置语言
 	TranslationServer.set_locale(language)
 	print("应用语言设置: ", language)
+	
+	# 发出语言改变信号
+	language_changed.emit(language)
 
 func update_language(language: String):
 	"""更新语言设置"""

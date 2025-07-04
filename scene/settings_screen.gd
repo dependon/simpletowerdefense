@@ -29,6 +29,9 @@ func _ready():
 	# 设置UI元素国际化文本
 	_update_ui_texts()
 	
+	# 连接语言改变信号
+	SettingsManager.language_changed.connect(_on_language_changed)
+	
 	# 初始化选项
 	_setup_resolution_options()
 	_setup_language_options()
@@ -165,3 +168,8 @@ func show_settings():
 	_update_ui()
 	_update_ui_texts()  # 确保文本是最新的
 	show()
+
+func _on_language_changed(_new_language: String):
+	"""语言改变时更新UI文本"""
+	_update_ui_texts()
+	_update_volume_label(current_volume)

@@ -34,9 +34,10 @@ var tower_tab_buttons = {}
 
 func _ready():
 	# 设置UI元素国际化文本
-	$BackgroundPanel/MainContainer/TitleContainer/TitleLabel.text = tr("SKILL_TREE_SYSTEM")
-	$BackgroundPanel/MainContainer/ButtonContainer/MainMenuButton.text = tr("BACK_TO_MAIN_MENU")
-	$BackgroundPanel/MainContainer/ButtonContainer/ResetButton.text = tr("RESET_SKILL_TREE")
+	_update_ui_texts()
+	
+	# 连接语言改变信号
+	SettingsManager.language_changed.connect(_on_language_changed)
 	
 	load_skill_data()
 	setup_ui()
@@ -431,6 +432,17 @@ func set_tower_type(tower_type: String = ""):
 	if tower_type != "" and tower_type in tower_types:
 		current_tower_type = tower_type
 	load_skill_data()
+
+func _update_ui_texts():
+	"""更新UI文本"""
+	$BackgroundPanel/MainContainer/TitleContainer/TitleLabel.text = tr("SKILL_TREE_SYSTEM")
+	$BackgroundPanel/MainContainer/ButtonContainer/MainMenuButton.text = tr("BACK_TO_MAIN_MENU")
+	$BackgroundPanel/MainContainer/ButtonContainer/ResetButton.text = tr("RESET_SKILL_TREE")
+
+func _on_language_changed(_new_language: String):
+	"""语言改变时更新UI文本"""
+	_update_ui_texts()
+	update_display()  # 重新更新显示，因为可能包含翻译文本
 
 func update_skill_tree():
 	# 兼容旧接口
