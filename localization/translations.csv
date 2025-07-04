@@ -1,5 +1,4 @@
 keys,zh_CN,en_US
-# 主菜单
 START_GAME,开始游戏,Start Game
 SKILL_TREE,技能树,Skill Tree
 SETTINGS,设置,Settings
@@ -7,25 +6,19 @@ UNLOCK_ALL_LEVELS,解锁全部关卡,Unlock All Levels
 GAME_HELP,游戏帮助,Game Help
 ABOUT,关于,About
 EXIT,退出,Exit
-
-# 战斗界面
 COINS,金币,Coins
 DIAMONDS,钻石,Diamonds
 WAVE,波次,Wave
-CLEAR,Clear,Clear
+CLEAR,清除,Clear
 NEXT_WAVE_COUNTDOWN,下一波倒计时,Next Wave Countdown
 START_NEXT_WAVE,立即开启下一波,Start Next Wave
 REMAINING_ENEMIES,剩余怪物,Remaining Enemies
 GAME_START_COUNTDOWN,游戏开始倒计时,Game Start Countdown
-
-# 设置菜单
 CONTINUE_GAME,继续游戏,Continue Game
 RESTART_LEVEL,重新开始当前关卡,Restart Current Level
 MAIN_MENU,主界面菜单,Main Menu
 BACK_TO_LEVEL_SELECT,返回关卡选择,Back to Level Select
 BACK_TO_START_MENU,返回开始菜单,Back to Start Menu
-
-# 设置界面
 GAME_SETTINGS,游戏设置,Game Settings
 RESOLUTION_SETTINGS,分辨率设置,Resolution Settings
 FULLSCREEN_MODE,全屏模式,Fullscreen Mode
@@ -35,13 +28,9 @@ MASTER_VOLUME,主音量,Master Volume
 BACKGROUND_MUSIC,背景音乐,Background Music
 APPLY,应用,Apply
 BACK,返回,Back
-
-# 关卡选择
 SELECT_LEVEL,选择关卡,Select Level
 LEVEL,关卡,Level
 BACK_TO_MAIN_MENU,返回主菜单,Back to Main Menu
-
-# 技能树
 SKILL_TREE_SYSTEM,技能树系统,Skill Tree System
 AVAILABLE_STARS,可用星星,Available Stars
 USED_STARS,已用星星,Used Stars
@@ -50,8 +39,6 @@ NO_SKILL_DATA,该塔类型暂无技能数据,No skill data for this tower type
 LEVEL_FORMAT,等级,Level
 MAX_LEVEL,已满级,Max Level
 UPGRADE_COST,升级,Upgrade
-
-# 防御塔
 TOWER_LEVEL,Lv.,Lv.
 UPGRADE,升级,Upgrade
 DESTROY,销毁,Destroy
@@ -59,40 +46,34 @@ ATTRIBUTES,属性,Attributes
 ICON_MISSING,图标\n缺失,Icon\nMissing
 BASIC_TOWER,基础塔,Basic Tower
 BASIC_TOWER_DESC,射击速度缓慢的防御塔，适合对付大量弱小敌人,Slow firing tower suitable for dealing with many weak enemies
-BASIC_TOWER_SPECIAL,低价格,低射速,低伤害,Low cost low fire rate low damage
+BASIC_TOWER_SPECIAL,低价格 低射速 低伤害,Low cost low fire rate low damage
 FAST_TOWER,快速塔,Fast Tower
 FAST_TOWER_DESC,射击速度极快的防御塔，适合对付大量弱小敌人,Very fast firing tower suitable for dealing with many weak enemies
-FAST_TOWER_SPECIAL,高射速,低伤害,High fire rate low damage
+FAST_TOWER_SPECIAL,高射速低伤害,High fire rate low damage
 FROST_TOWER,冰霜塔,Frost Tower
-FROST_TOWER_DESC,发射冰霜子弹，能够减缓敌人移动速度,Fires frost bullets that slow down enemy movement
+FROST_TOWER_DESC,发射冰霜子弹能够减缓敌人移动速度,Fires frost bullets that slow down enemy movement
 FROST_TOWER_SPECIAL,减速效果，冰冻敌人,Slow effect freeze enemies
 AREA_TOWER,群攻塔,Area Tower
 AREA_TOWER_DESC,能够同时攻击多个敌人的攻击塔,Attack tower that can attack multiple enemies simultaneously
-AREA_TOWER_SPECIAL,群体攻击，最多攻击10个目标,Area attack up to 10 targets
+AREA_TOWER_SPECIAL,群体攻击最多攻击10个目标,Area attack up to 10 targets
 BIG_AREA_TOWER,大范围塔,Big Area Tower
 BIG_AREA_TOWER_DESC,拥有超大攻击范围的防御塔,Defense tower with super large attack range
 BIG_AREA_TOWER_SPECIAL,超大攻击范围,Super large attack range
 FAST_LOW_DAMAGE_TOWER,超快速伤害塔,Fast Low Damage Tower
-FAST_LOW_DAMAGE_TOWER_DESC,拥有急速的射击速度和略低伤害的防御塔，造价高昂,Defense tower with rapid fire rate and low damage expensive cost
-FAST_LOW_DAMAGE_TOWER_SPECIAL,超快攻击速度,低伤害,高造价,Super fast attack speed low damage high cost
+FAST_LOW_DAMAGE_TOWER_DESC,拥有急速的射击速度和略低伤害的防御塔 造价高昂,Defense tower with rapid fire rate and low damage expensive cost
+FAST_LOW_DAMAGE_TOWER_SPECIAL,超快攻击速度 低伤害 高造价,Super fast attack speed low damage high cost
 DAMAGE,伤害,Damage
 FIRE_RATE,射速,Fire Rate
 SECOND,秒,Second
 COST,造价,Cost
 RANGE,射程,Range
 SPECIAL,特殊,Special
-
-# 游戏结果
 VICTORY,胜利！,Victory!
 DEFEAT,失败！,Defeat!
 CONFIRM,确定,Confirm
-
-# 帮助界面
 GAMEPLAY,游戏玩法,Gameplay
 CONTROLS,操作方式,Controls
 TOWER_DETAILS,防御塔详情,Tower Details
-
-# 关于界面
 ABOUT_GAME,关于游戏,About Game
 AUTHOR,本项目作者:depend(依赖),Project Author: depend
 GITHUB_PAGE,GitHub主页,GitHub Page
@@ -101,6 +82,4 @@ DOUYIN_ID,抖音号:87034208133,Douyin ID: 87034208133
 EMAIL,邮箱,Email
 PROJECT_INFO,本项目本身是学习项目，采用MIT协议，你可以拿取和改变任何代码和通过各种渠道给我提各种意见，非常感谢你的交流与关注。,This project is a learning project under MIT license. You can take and modify any code and provide feedback through various channels. Thank you for your communication and attention.
 THANKS_MESSAGE,谢谢你玩我的做游戏，虽然它现在不好玩，哈哈，总之，非常感谢!!!,Thank you for playing my game. Although it's not fun now haha anyway thank you very much!!!
-
-# 加载界面
 LOADING,加载中,Loading
