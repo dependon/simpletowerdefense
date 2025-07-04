@@ -37,10 +37,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Diamonds" type="Label" parent="UI"]
-offset_left = 134.0
-offset_top = -1.0
-offset_right = 307.0
-offset_bottom = 91.0
+offset_left = 184.0
+offset_top = -2.0
+offset_right = 357.0
+offset_bottom = 90.0
 theme_override_font_sizes/font_size = 25
 text = "DIAMONDS"
 horizontal_alignment = 1
@@ -50,9 +50,10 @@ vertical_alignment = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -6.0
-offset_right = 179.0
-offset_bottom = 90.0
+offset_left = 88.0
+offset_top = -1.0
+offset_right = 273.0
+offset_bottom = 89.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 25
 text = "WAVE"
@@ -219,9 +220,10 @@ grow_vertical = 0
 text = "0"
 
 [node name="WaitTime" type="Label" parent="UI"]
-offset_left = 311.0
-offset_right = 506.0
-offset_bottom = 93.0
+offset_left = 23.0
+offset_top = 61.0
+offset_right = 358.0
+offset_bottom = 154.0
 theme_override_font_sizes/font_size = 25
 text = "NEXT_WAVE_COUNTDOWN"
 horizontal_alignment = 1
@@ -238,9 +240,9 @@ text = "START_NEXT_WAVE"
 [node name="CurrentEnemyNum" type="Label" parent="UI"]
 anchors_preset = -1
 anchor_bottom = 0.011
-offset_left = 513.0
+offset_left = 423.0
 offset_top = 4.0
-offset_right = 759.0
+offset_right = 701.0
 offset_bottom = 76.12
 theme_override_font_sizes/font_size = 25
 text = "REMAINING_ENEMIES"
