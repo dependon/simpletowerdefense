@@ -24,6 +24,15 @@ var current_volume = 50.0
 var current_bgm_enabled = true
 
 func _ready():
+	# 设置UI元素国际化文本
+	$MainContainer/TitleLabel.text = tr("GAME_SETTINGS")
+	$MainContainer/ResolutionContainer/ResolutionLabel.text = tr("RESOLUTION_SETTINGS")
+	$MainContainer/FullscreenContainer/FullscreenLabel.text = tr("FULLSCREEN_MODE")
+	$MainContainer/VolumeContainer/VolumeLabel.text = tr("VOLUME_SETTINGS")
+	$MainContainer/VolumeContainer/BGMContainer/BGMLabel.text = tr("BACKGROUND_MUSIC")
+	$MainContainer/ButtonContainer/ApplyButton.text = tr("APPLY")
+	$MainContainer/ButtonContainer/BackButton.text = tr("BACK")
+	
 	# 初始化分辨率选项
 	_setup_resolution_options()
 	
@@ -70,7 +79,7 @@ func _update_ui():
 
 func _update_volume_label(volume: float):
 	"""更新音量标签显示"""
-	master_volume_label.text = "主音量: %d%%" % int(volume)
+	master_volume_label.text = tr("MASTER_VOLUME") + ": %d%%" % int(volume)
 
 func _on_resolution_option_button_item_selected(index: int):
 	"""分辨率选项改变"""

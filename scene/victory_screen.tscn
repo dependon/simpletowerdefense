@@ -26,12 +26,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "胜利！"
+text = "VICTORY"
 horizontal_alignment = 1
 
 [node name="ConfirmButton" type="Button" parent="CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
-text = "确定"
+text = "CONFIRM"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]

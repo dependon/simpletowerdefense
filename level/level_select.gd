@@ -2,6 +2,21 @@ extends Control
 
 # 在准备好时调用，初始化UI状态
 func _ready():
+	# 设置UI元素国际化文本
+	$Title.text = tr("SELECT_LEVEL")
+	$HBoxContainer/Level1Container/Level1Button.text = tr("LEVEL_1")
+	$HBoxContainer/Level2Container/Level2Button.text = tr("LEVEL_2")
+	$HBoxContainer/Level3Container/Level3Button.text = tr("LEVEL_3")
+	$HBoxContainer/Level4Container/Level4Button.text = tr("LEVEL_4")
+	$HBoxContainer/Level5Container/Level5Button.text = tr("LEVEL_5")
+	$HBoxContainer/Level6Container/Level6Button.text = tr("LEVEL_6")
+	$HBoxContainer/Level7Container/Level7Button.text = tr("LEVEL_7")
+	$HBoxContainer/Level8Container/Level8Button.text = tr("LEVEL_8")
+	$HBoxContainer/Level9Container/Level9Button.text = tr("LEVEL_9")
+	$HBoxContainer/Level10Container/Level10Button.text = tr("LEVEL_10")
+	$HBoxContainer/Level11Container/Level11Button.text = tr("LEVEL_11")
+	$MainMenuButton.text = tr("BACK_TO_MAIN_MENU")
+	
 	update_level_buttons()
 	update_stars_display()
 

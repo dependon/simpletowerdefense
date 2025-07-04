@@ -3,69 +3,76 @@ extends Control
 # 防御塔信息数据
 var tower_data = {
 	"tower_base": {
-		"name": "基础塔",
-		"description": "射击速度缓慢的防御塔，适合对付大量弱小敌人",
+		"name": tr("BASIC_TOWER"),
+		"description": tr("BASIC_TOWER_DESC"),
 		"fire_rate": 1.0,
 		"damage": 50,
 		"cost": 50,
 		"range": 200,
 		"icon": "res://assets/tower/tower_base/tower_base_1.png",
-		"special": "低价格,低射速,低伤害"
+		"special": tr("BASIC_TOWER_SPECIAL")
 	},
 	"tower_fast": {
-		"name": "快速塔",
-		"description": "射击速度极快的防御塔，适合对付大量弱小敌人",
+		"name": tr("FAST_TOWER"),
+		"description": tr("FAST_TOWER_DESC"),
 		"fire_rate": 2.0,
 		"damage": 50,
 		"cost": 100,
 		"range": 300,
 		"icon": "res://assets/tower/tower_fast/tower_fast_1.png",
-		"special": "高射速,低伤害"
+		"special": tr("FAST_TOWER_SPECIAL")
 	},
 	"tower_frost": {
-		"name": "冰霜塔",
-		"description": "发射冰霜子弹，能够减缓敌人移动速度",
+		"name": tr("FROST_TOWER"),
+		"description": tr("FROST_TOWER_DESC"),
 		"fire_rate": 1.0,
 		"damage": 15,
 		"cost": 100,
 		"range": 300,
 		"icon": "res://assets/tower/tower_frost/tower_frost_1.png",
-		"special": "减速效果，冰冻敌人"
+		"special": tr("FROST_TOWER_SPECIAL")
 	},
 	"tower_area": {
-		"name": "群攻塔",
-		"description": "能够同时攻击多个敌人的攻击塔",
+		"name": tr("AREA_TOWER"),
+		"description": tr("AREA_TOWER_DESC"),
 		"fire_rate": 0.8,
 		"damage": 20,
 		"cost": 200,
 		"range": 300,
 		"icon": "res://assets/tower/tower_area/tower_area_1.png",
-		"special": "群体攻击，最多攻击10个目标"
+		"special": tr("AREA_TOWER_SPECIAL")
 	},
 	"tower_big_area": {
-		"name": "大范围塔",
-		"description": "拥有超大攻击范围的防御塔",
+		"name": tr("BIG_AREA_TOWER"),
+		"description": tr("BIG_AREA_TOWER_DESC"),
 		"fire_rate": 1.0,
 		"damage": 40,
 		"cost": 200,
 		"range": 800,
 		"icon": "res://assets/tower/tower_zi/tower_zi_1.png",
-		"special": "超大攻击范围"
+		"special": tr("BIG_AREA_TOWER_SPECIAL")
 	},
 	"tower_fast_low_damage": {
-		"name": "超快速伤害塔",
-		"description": "拥有急速的射击速度和略低伤害的防御塔，造价高昂",
+		"name": tr("FAST_LOW_DAMAGE_TOWER"),
+		"description": tr("FAST_LOW_DAMAGE_TOWER_DESC"),
 		"fire_rate": 5.0,
 		"damage": 20,
 		"cost": 500,
 		"range": 300,
 		"icon": "res://assets/tower/tower_fast_low_damage/tower_fast_low_damage_1.png",
-		"special": "超快攻击速度,低伤害,高造价"
+		"special": tr("FAST_LOW_DAMAGE_TOWER_SPECIAL")
 	}
 	
 }
 
 func _ready():
+	# 设置UI元素国际化文本
+	$MainContainer/TitleLabel.text = tr("GAME_HELP")
+	$MainContainer/ScrollContainer/ContentContainer/GameplaySection/GameplayTitle.text = tr("GAMEPLAY")
+	$MainContainer/ScrollContainer/ContentContainer/ControlsSection/ControlsTitle.text = tr("CONTROLS")
+	$MainContainer/ScrollContainer/ContentContainer/TowersSection/TowersTitle.text = tr("TOWER_DETAILS")
+	$MainContainer/ButtonContainer/BackButton.text = tr("BACK_TO_MAIN_MENU")
+	
 	create_tower_info_cards()
 
 # 创建防御塔信息卡片
@@ -103,7 +110,7 @@ func create_tower_info_cards():
 			placeholder.custom_minimum_size = Vector2(80, 80)
 			icon_container.add_child(placeholder)
 			var placeholder_label = Label.new()
-			placeholder_label.text = "图标\n缺失"
+			placeholder_label.text = tr("ICON_MISSING")
 			placeholder_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			placeholder_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			placeholder.add_child(placeholder_label)
@@ -135,10 +142,10 @@ func create_tower_info_cards():
 		var stats_label = RichTextLabel.new()
 		stats_label.custom_minimum_size = Vector2(0, 60)
 		stats_label.bbcode_enabled = true
-		stats_label.text = "[b]属性：[/b]\n" + \
-			"• 伤害：%d  • 射速：%.1f/秒\n" % [tower_info.damage, tower_info.fire_rate] + \
-			"• 造价：%d  • 射程：%d\n" % [tower_info.cost, tower_info.range] + \
-			"• 特殊：%s" % tower_info.special
+		stats_label.text = "[b]" + tr("ATTRIBUTES") + "：[/b]\n" + \
+			"• " + tr("DAMAGE") + "：%d  • " + tr("FIRE_RATE") + "：%.1f/" + tr("SECOND") + "\n" % [tower_info.damage, tower_info.fire_rate] + \
+		"• " + tr("COST") + "：%d  • " + tr("RANGE") + "：%d\n" % [tower_info.cost, tower_info.range] + \
+		"• " + tr("SPECIAL") + "：%s" % tower_info.special
 		stats_label.fit_content = true
 		info_container.add_child(stats_label)
 		

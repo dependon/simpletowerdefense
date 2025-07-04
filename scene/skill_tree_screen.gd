@@ -20,12 +20,12 @@ var all_towers_data = {}
 var current_tower_type = "tower_base"
 var tower_types = ["tower_base", "tower_fast", "tower_area", "tower_frost", "tower_big_area", "tower_fast_low_damage"]
 var tower_display_names = {
-	"tower_base": "基础塔",
-	"tower_fast": "快速塔", 
-	"tower_area": "群攻塔",
-	"tower_frost": "冰霜塔",
-	"tower_big_area": "超大范围塔",
-	"tower_fast_low_damage": "超快速伤害塔"
+	"tower_base": tr("BASIC_TOWER"),
+	"tower_fast": tr("FAST_TOWER"),
+	"tower_area": tr("AREA_TOWER"),
+	"tower_frost": tr("FROST_TOWER"),
+	"tower_big_area": tr("BIG_AREA_TOWER"),
+	"tower_fast_low_damage": tr("FAST_LOW_DAMAGE_TOWER")
 }
 
 # 技能按钮数组，用于管理技能按钮
@@ -33,6 +33,11 @@ var skill_buttons = {}
 var tower_tab_buttons = {}
 
 func _ready():
+	# 设置UI元素国际化文本
+	$BackgroundPanel/MainContainer/TitleContainer/TitleLabel.text = tr("SKILL_TREE_SYSTEM")
+	$BackgroundPanel/MainContainer/ButtonContainer/MainMenuButton.text = tr("BACK_TO_MAIN_MENU")
+	$BackgroundPanel/MainContainer/ButtonContainer/ResetButton.text = tr("RESET_SKILL_TREE")
+	
 	load_skill_data()
 	setup_ui()
 	update_display()
@@ -117,7 +122,7 @@ func setup_skill_tree():
 	if current_tower_type not in all_towers_data:
 		# 显示无技能数据的提示
 		var no_data_label = Label.new()
-		no_data_label.text = "该塔类型暂无技能数据"
+		no_data_label.text = tr("NO_SKILL_DATA")
 		no_data_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		no_data_label.add_theme_font_size_override("font_size", 18)
 		no_data_label.add_theme_color_override("font_color", Color.YELLOW)
@@ -223,7 +228,7 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 	var level_label = Label.new()
 	var current_level = skill_data.get("level", 0)
 	var max_level = skill_data.get("max_level", 5)
-	level_label.text = "等级: %d/%d" % [current_level, max_level]
+	level_label.text = tr("LEVEL_FORMAT") + ": %d/%d" % [current_level, max_level]
 	level_label.add_theme_font_size_override("font_size", 12)
 	level_info.add_child(level_label)
 	
@@ -232,10 +237,10 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 	var cost = skill_data.get("cost_per_level", 1)
 	
 	if current_level >= max_level:
-		upgrade_button.text = "已满级"
+		upgrade_button.text = tr("MAX_LEVEL")
 		upgrade_button.disabled = true
 	else:
-		upgrade_button.text = "升级 (" + str(cost) + "⭐)"
+		upgrade_button.text = tr("UPGRADE_COST") + " (" + str(cost) + "⭐)"
 	
 	upgrade_button.custom_minimum_size = Vector2(100, 30)
 	upgrade_button.add_theme_font_size_override("font_size", 12)
@@ -287,8 +292,8 @@ func can_upgrade_skill(_skill_name: String, skill_data: Dictionary) -> bool:
 func update_display():
 	# 更新星星显示
 	var used_stars = calculate_used_stars()
-	unused_stars_label.text = "可用星星: " + str(GameManager.stars)
-	used_stars_label.text = "已用星星: " + str(used_stars)
+	unused_stars_label.text = tr("AVAILABLE_STARS") + ": " + str(GameManager.stars)
+	used_stars_label.text = tr("USED_STARS") + ": " + str(used_stars)
 	
 	# 更新塔标签页按钮状态
 	for tower_type in tower_tab_buttons:
@@ -311,7 +316,7 @@ func update_display():
 				# 更新等级显示
 				var current_level = skill_data.get("level", 0)
 				var max_level = skill_data.get("max_level", 5)
-				skill_ui["level_label"].text = "等级: %d/%d" % [current_level, max_level]
+				skill_ui["level_label"].text = tr("LEVEL_FORMAT") + ": %d/%d" % [current_level, max_level]
 				
 				# 更新按钮状态
 				var can_upgrade = can_upgrade_skill(skill_name, skill_data)

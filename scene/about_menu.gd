@@ -3,8 +3,16 @@ extends Control
 # 关于界面脚本
 
 func _ready() -> void:
-	# 初始化界面
-	pass
+	# 设置UI元素国际化文本
+	$BackgroundPanel/MainContainer/TitleLabel.text = tr("ABOUT_GAME")
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/AuthorLabel.text = tr("AUTHOR")
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/GithubLabel.text = tr("GITHUB_PAGE") + ":[url=https://github.com/dependon/simpletowerdefense]https://github.com/dependon/simpletowerdefense[/url]"
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/BilibiliLabel.text = tr("BILIBILI_ADDRESS") + ": [url=https://space.bilibili.com/144159485]https://space.bilibili.com/144159485[/url]"
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/DouyinLabel.text = tr("DOUYIN_ID")
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/EmailLabel.text = tr("EMAIL") + ":[url=mailto:liuminghang0821@gmail.com]liuminghang0821@gmail.com[/url]"
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/ProjectInfoLabel.text = tr("PROJECT_INFO")
+	$BackgroundPanel/MainContainer/ScrollContainer/ContentContainer/ThanksLabel.text = tr("THANKS_MESSAGE")
+	$BackgroundPanel/MainContainer/BackButton.text = tr("BACK_TO_MAIN_MENU")
 
 func _on_back_button_pressed() -> void:
 	# 返回主菜单

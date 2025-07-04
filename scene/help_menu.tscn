@@ -35,7 +35,7 @@ grow_vertical = 2
 [node name="TitleLabel" type="Label" parent="MainContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "游戏帮助"
+text = "GAME_HELP"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="MainContainer"]
@@ -56,7 +56,7 @@ layout_mode = 2
 [node name="GameplayTitle" type="Label" parent="MainContainer/ScrollContainer/ContentContainer/GameplaySection"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "游戏玩法"
+text = "GAMEPLAY"
 
 [node name="GameplayText" type="RichTextLabel" parent="MainContainer/ScrollContainer/ContentContainer/GameplaySection"]
 custom_minimum_size = Vector2(0, 120)
@@ -78,7 +78,7 @@ layout_mode = 2
 [node name="ControlsTitle" type="Label" parent="MainContainer/ScrollContainer/ContentContainer/ControlsSection"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "操作方式"
+text = "CONTROLS"
 
 [node name="ControlsText" type="RichTextLabel" parent="MainContainer/ScrollContainer/ContentContainer/ControlsSection"]
 custom_minimum_size = Vector2(0, 100)
@@ -100,7 +100,7 @@ layout_mode = 2
 [node name="TowersTitle" type="Label" parent="MainContainer/ScrollContainer/ContentContainer/TowersSection"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "防御塔详情"
+text = "TOWER_DETAILS"
 
 [node name="TowersContainer" type="VBoxContainer" parent="MainContainer/ScrollContainer/ContentContainer/TowersSection"]
 layout_mode = 2
@@ -115,6 +115,6 @@ size_flags_horizontal = 3
 [node name="BackButton" type="Button" parent="MainContainer/ButtonContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "返回主菜单"
+text = "BACK_TO_MAIN_MENU"
 
 [connection signal="pressed" from="MainContainer/ButtonContainer/BackButton" to="." method="_on_back_button_pressed"]

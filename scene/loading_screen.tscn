@@ -112,7 +112,7 @@ offset_left = -201.0
 offset_top = 107.0
 offset_right = 199.0
 offset_bottom = 124.0
-text = "加载中..."
+text = "LOADING"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

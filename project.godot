@@ -27,13 +27,18 @@ SettingsManager="*res://scene/settings_manager.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=4
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [gui]
 
 theme/custom="uid://r2ty6ekpfn7c"
 theme/custom_font="uid://chft6armvhllk"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://localization/translations.csv")
+locale/translations_pot_files=PackedStringArray()
 
 [importer_defaults]
 

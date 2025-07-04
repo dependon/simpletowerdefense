@@ -36,7 +36,7 @@ theme_override_constants/separation = 10
 [node name="TitleLabel" type="Label" parent="BackgroundPanel/MainContainer/TitleContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "技能树系统"
+text = "SKILL_TREE_SYSTEM"
 horizontal_alignment = 1
 
 [node name="StarInfoContainer" type="HBoxContainer" parent="BackgroundPanel/MainContainer/TitleContainer"]
@@ -47,7 +47,7 @@ alignment = 1
 [node name="UnusedStarsLabel" type="Label" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "可用星星: 0"
+text = "AVAILABLE_STARS"
 
 [node name="StarIcon1" type="TextureRect" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
 custom_minimum_size = Vector2(24, 24)
@@ -59,7 +59,7 @@ stretch_mode = 5
 [node name="UsedStarsLabel" type="Label" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "已用星星: 0"
+text = "USED_STARS"
 
 [node name="StarIcon2" type="TextureRect" parent="BackgroundPanel/MainContainer/TitleContainer/StarInfoContainer"]
 custom_minimum_size = Vector2(24, 24)
@@ -90,13 +90,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 34
-text = "返回主菜单"
+text = "BACK_TO_MAIN_MENU"
 
 [node name="ResetButton" type="Button" parent="BackgroundPanel/MainContainer/ButtonContainer"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "重置技能树"
+text = "RESET_SKILL_TREE"
 
 [node name="Label" type="Label" parent="BackgroundPanel/MainContainer"]
 custom_minimum_size = Vector2(0, 50)

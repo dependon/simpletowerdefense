@@ -3,6 +3,15 @@ var skill_tree_screen
 var settings_screen
 
 func _ready() -> void:
+	# 设置按钮国际化文本
+	$VBoxContainer/StartButton.text = tr("START_GAME")
+	$VBoxContainer/SkillTreeButton.text = tr("SKILL_TREE")
+	$VBoxContainer/SettingsButton.text = tr("SETTINGS")
+	$VBoxContainer/UnlockLevelsButton.text = tr("UNLOCK_ALL_LEVELS")
+	$VBoxContainer/HelpButton.text = tr("GAME_HELP")
+	$VBoxContainer/AboutButton.text = tr("ABOUT")
+	$VBoxContainer/QuitButton.text = tr("EXIT")
+	
 	# 初始化技能树数据
 	skill_tree_screen = load("res://scene/skill_tree_screen.tscn").instantiate()
 	skill_tree_screen.set_tower_type()

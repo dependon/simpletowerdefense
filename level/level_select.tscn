@@ -36,7 +36,7 @@ offset_right = 100.0
 offset_bottom = 90.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 28
-text = "选择关卡"
+text = "SELECT_LEVEL"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -64,7 +64,7 @@ alignment = 1
 [node name="Level1Button" type="Button" parent="HBoxContainer/Level1Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡1"
+text = "LEVEL_1"
 
 [node name="Level1Stars" type="HBoxContainer" parent="HBoxContainer/Level1Container"]
 layout_mode = 2
@@ -100,7 +100,7 @@ alignment = 1
 [node name="Level2Button" type="Button" parent="HBoxContainer/Level2Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡2"
+text = "LEVEL_2"
 
 [node name="Level2Stars" type="HBoxContainer" parent="HBoxContainer/Level2Container"]
 layout_mode = 2
@@ -136,7 +136,7 @@ alignment = 1
 [node name="Level3Button" type="Button" parent="HBoxContainer/Level3Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡3"
+text = "LEVEL_3"
 
 [node name="Level3Stars" type="HBoxContainer" parent="HBoxContainer/Level3Container"]
 layout_mode = 2
@@ -172,7 +172,7 @@ alignment = 1
 [node name="Level4Button" type="Button" parent="HBoxContainer/Level4Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡4"
+text = "LEVEL_4"
 
 [node name="Level4Stars" type="HBoxContainer" parent="HBoxContainer/Level4Container"]
 layout_mode = 2
@@ -208,7 +208,7 @@ alignment = 1
 [node name="Level5Button" type="Button" parent="HBoxContainer/Level5Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡5"
+text = "LEVEL_5"
 
 [node name="Level5Stars" type="HBoxContainer" parent="HBoxContainer/Level5Container"]
 layout_mode = 2
@@ -244,7 +244,7 @@ alignment = 1
 [node name="Level6Button" type="Button" parent="HBoxContainer/Level6Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡6"
+text = "LEVEL_6"
 
 [node name="Level6Stars" type="HBoxContainer" parent="HBoxContainer/Level6Container"]
 layout_mode = 2
@@ -280,7 +280,7 @@ alignment = 1
 [node name="Level7Button" type="Button" parent="HBoxContainer/Level7Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡7"
+text = "LEVEL_7"
 
 [node name="Level7Stars" type="HBoxContainer" parent="HBoxContainer/Level7Container"]
 layout_mode = 2
@@ -316,7 +316,7 @@ alignment = 1
 [node name="Level8Button" type="Button" parent="HBoxContainer/Level8Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡8"
+text = "LEVEL_8"
 
 [node name="Level8Stars" type="HBoxContainer" parent="HBoxContainer/Level8Container"]
 layout_mode = 2
@@ -352,7 +352,7 @@ alignment = 1
 [node name="Level9Button" type="Button" parent="HBoxContainer/Level9Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡9"
+text = "LEVEL_9"
 
 [node name="Level9Stars" type="HBoxContainer" parent="HBoxContainer/Level9Container"]
 layout_mode = 2
@@ -388,7 +388,7 @@ alignment = 1
 [node name="Level10Button" type="Button" parent="HBoxContainer/Level10Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡10"
+text = "LEVEL_10"
 
 [node name="Level10Stars" type="HBoxContainer" parent="HBoxContainer/Level10Container"]
 layout_mode = 2
@@ -424,7 +424,7 @@ alignment = 1
 [node name="Level11Button" type="Button" parent="HBoxContainer/Level11Container"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "关卡11"
+text = "LEVEL_11"
 
 [node name="Level11Stars" type="HBoxContainer" parent="HBoxContainer/Level11Container"]
 layout_mode = 2
@@ -466,7 +466,7 @@ offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 24
-text = "返回主菜单"
+text = "BACK_TO_MAIN_MENU"
 
 [connection signal="pressed" from="HBoxContainer/Level1Container/Level1Button" to="." method="_on_level1_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Level2Container/Level2Button" to="." method="_on_level2_button_pressed"]

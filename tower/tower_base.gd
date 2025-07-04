@@ -83,12 +83,12 @@ func _ready():
 	apply_skill_effects()
 	
 	# 创建升级按钮
-	upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
+	upgrade_button.text = tr("UPGRADE") + " (" + str(get_upgrade_cost()) + " " + tr("COINS") + ")"
 	upgrade_button.pressed.connect(_on_upgrade_pressed)
 	upgrade_button.hide()
 	
 	# 创建销毁按钮
-	destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
+	destroy_button.text = tr("DESTROY") + " (+" + str(int(base_cost * level * 0.7)) + " " + tr("COINS") + ")"
 	destroy_button.pressed.connect(_on_destroy_pressed)
 	destroy_button.hide()
 	
@@ -208,13 +208,13 @@ func set_selected(is_selected: bool):
 func _show_buttons():
 	# 更新按钮文本和状态
 	if level < max_level:
-		upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
+		upgrade_button.text = tr("UPGRADE") + " (" + str(get_upgrade_cost()) + " " + tr("COINS") + ")"
 		upgrade_button.disabled = false
 	else:
-		upgrade_button.text = "已满级"
+		upgrade_button.text = tr("MAX_LEVEL")
 		upgrade_button.disabled = true
 	
-	destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
+	destroy_button.text = tr("DESTROY") + " (+" + str(int(base_cost * level * 0.7)) + " " + tr("COINS") + ")"
 	
 	# 显示按钮
 	upgrade_button.show()
@@ -246,11 +246,11 @@ func _on_upgrade_pressed():
 		_update_range_display()
 		# 更新按钮文本和状态
 		if level < max_level:
-			upgrade_button.text = "升级 (" + str(get_upgrade_cost()) + " 金币)"
+			upgrade_button.text = tr("UPGRADE") + " (" + str(get_upgrade_cost()) + " " + tr("COINS") + ")"
 		else:
-			upgrade_button.text = "已满级"
+			upgrade_button.text = tr("MAX_LEVEL")
 			upgrade_button.disabled = true
-		destroy_button.text = "销毁 (+" + str(int(base_cost * level * 0.7)) + " 金币)"
+		destroy_button.text = tr("DESTROY") + " (+" + str(int(base_cost * level * 0.7)) + " " + tr("COINS") + ")"
 		# 更新等级标签
 		level_label.text = "Lv. " + str(level)
 		

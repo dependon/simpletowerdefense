@@ -8,7 +8,14 @@ signal restart_level
 var settings_screen 
 
 func _ready() -> void:
-			# 初始化设置界面
+	# 设置按钮国际化文本
+	$VBoxContainer/ResumeButton.text = tr("CONTINUE_GAME")
+	$VBoxContainer/RestartLevelButton.text = tr("RESTART_LEVEL")
+	$VBoxContainer/MainMenuSettingsButton.text = tr("MAIN_MENU")
+	$VBoxContainer/LevelSelectButton.text = tr("BACK_TO_LEVEL_SELECT")
+	$VBoxContainer/StartMenuButton.text = tr("BACK_TO_START_MENU")
+	
+	# 初始化设置界面
 	settings_screen = load("res://scene/settings_screen.tscn").instantiate()
 	settings_screen.hide()
 	add_child(settings_screen)
