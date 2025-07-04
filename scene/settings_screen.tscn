@@ -68,6 +68,20 @@ text = "FULLSCREEN_MODE"
 process_mode = 3
 layout_mode = 2
 
+[node name="LanguageContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LanguageLabel" type="Label" parent="MainContainer/LanguageContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "LANGUAGE_SETTINGS"
+
+[node name="LanguageOptionButton" type="OptionButton" parent="MainContainer/LanguageContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+
 [node name="VolumeContainer" type="VBoxContainer" parent="MainContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -129,6 +143,7 @@ text = "BACK"
 
 [connection signal="item_selected" from="MainContainer/ResolutionContainer/ResolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
 [connection signal="toggled" from="MainContainer/FullscreenContainer/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
+[connection signal="item_selected" from="MainContainer/LanguageContainer/LanguageOptionButton" to="." method="_on_language_option_button_item_selected"]
 [connection signal="value_changed" from="MainContainer/VolumeContainer/MasterVolumeContainer/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="toggled" from="MainContainer/VolumeContainer/BGMContainer/BGMCheckBox" to="." method="_on_bgm_check_box_toggled"]
 [connection signal="pressed" from="MainContainer/ButtonContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
