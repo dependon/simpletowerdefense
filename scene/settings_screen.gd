@@ -21,7 +21,7 @@ var resolution_options = [
 # 当前设置
 var current_resolution_index = 0
 var current_fullscreen = false
-var current_language = "zh_CN"
+var current_language = "zh"
 var current_volume = 50.0
 var current_bgm_enabled = true
 

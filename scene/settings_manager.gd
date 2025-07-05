@@ -10,8 +10,34 @@ signal language_changed(new_language: String)
 
 # 支持的语言列表
 var supported_languages = {
-	"zh_CN": "中文",
-	"en_US": "English"
+	"zh": "中文 (zh)",
+	"en": "English (en)",
+	"cht": "繁體中文 (cht)",
+	"yue": "粵語 (yue)",
+	"wyw": "文言文 (wyw)",
+	"jp": "日本語 (jp)",
+	"kor": "한국어 (kor)",
+	"spa": "Español (spa)",
+	"fra": "Français (fra)",
+	"th": "ไทย (th)",
+	"ara": "العربية (ara)",
+	"ru": "Русский (ru)",
+	"pt": "Português (pt)",
+	"de": "Deutsch (de)",
+	"it": "Italiano (it)",
+	"el": "Ελληνικά (el)",
+	"nl": "Nederlands (nl)",
+	"pl": "Polski (pl)",
+	"bul": "Български (bul)",
+	"est": "Eesti (est)",
+	"dan": "Dansk (dan)",
+	"fin": "Suomi (fin)",
+	"cs": "Čeština (cs)",
+	"rom": "Română (rom)",
+	"slo": "Slovenščina (slo)",
+	"swe": "Svenska (swe)",
+	"hu": "Magyar (hu)",
+	"vie": "Tiếng Việt (vie)"
 }
 
 # 默认设置
@@ -202,7 +228,7 @@ func _detect_system_language() -> String:
 			return locale
 	
 	# 默认返回中文
-	return "zh_CN"
+	return "zh"
 
 func apply_language_settings():
 	"""应用语言设置"""
