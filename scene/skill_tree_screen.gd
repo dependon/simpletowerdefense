@@ -19,14 +19,6 @@ class_name SkillTreeScreen
 var all_towers_data = {}
 var current_tower_type = "tower_base"
 var tower_types = ["tower_base", "tower_fast", "tower_area", "tower_frost", "tower_big_area", "tower_fast_low_damage"]
-var tower_display_names = {
-	"tower_base": tr("BASIC_TOWER"),
-	"tower_fast": tr("FAST_TOWER"),
-	"tower_area": tr("AREA_TOWER"),
-	"tower_frost": tr("FROST_TOWER"),
-	"tower_big_area": tr("BIG_AREA_TOWER"),
-	"tower_fast_low_damage": tr("FAST_LOW_DAMAGE_TOWER")
-}
 
 # 技能按钮数组，用于管理技能按钮
 var skill_buttons = {}
@@ -91,10 +83,23 @@ func setup_ui():
 	reset_button.pressed.connect(_on_reset_pressed)
 
 func setup_tower_tabs():
-	# 创建塔类型选择标签页
+	# 清空现有标签页 - 立即删除而不是延迟删除
 	for child in tower_tabs_container.get_children():
+		tower_tabs_container.remove_child(child)
 		child.queue_free()
 	
+	# 清空标签页按钮字典
+	tower_tab_buttons.clear()
+	
+	var tower_display_names = {
+		"tower_base": tr("BASIC_TOWER"),
+		"tower_fast": tr("FAST_TOWER"),
+		"tower_area": tr("AREA_TOWER"),
+		"tower_frost": tr("FROST_TOWER"),
+		"tower_big_area": tr("BIG_AREA_TOWER"),
+		"tower_fast_low_damage": tr("FAST_LOW_DAMAGE_TOWER")
+	}
+
 	for tower_type in tower_types:
 		if tower_type in all_towers_data:
 			var tab_button = Button.new()
