@@ -208,7 +208,8 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 	
 	# 技能名称
 	var name_label = Label.new()
-	name_label.text = skill_data.get("name", skill_name)
+	var skill_name_key = skill_data.get("name", skill_name)
+	name_label.text = tr(skill_name_key) if skill_name_key.begins_with("SKILL_") else skill_name_key
 	name_label.add_theme_font_size_override("font_size", 14)
 	name_label.add_theme_color_override("font_color", Color.WHITE)
 	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -216,7 +217,8 @@ func create_skill_node(parent: Node, skill_name: String, skill_data: Dictionary)
 	
 	# 技能描述
 	var desc_label = Label.new()
-	desc_label.text = skill_data.get("description", "")
+	var skill_desc_key = skill_data.get("description", "")
+	desc_label.text = tr(skill_desc_key) if skill_desc_key.begins_with("SKILL_") else skill_desc_key
 	desc_label.add_theme_font_size_override("font_size", 11)
 	desc_label.add_theme_color_override("font_color", Color.LIGHT_GRAY)
 	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -382,7 +384,9 @@ func _on_skill_upgrade_pressed(skill_name: String):
 		# 更新显示
 		update_display()
 		
-		print("成功升级技能: ", skill_data.get("name", skill_name), " 到等级 ", skill_data["level"])
+		var skill_name_key = skill_data.get("name", skill_name)
+		var display_name = tr(skill_name_key) if skill_name_key.begins_with("SKILL_") else skill_name_key
+		print("成功升级技能: ", display_name, " 到等级 ", skill_data["level"])
 
 func apply_skill_effect(tower_type: String, _skill_name: String, skill_data: Dictionary):
 	# 这里可以实现技能效果应用到实际塔属性的逻辑

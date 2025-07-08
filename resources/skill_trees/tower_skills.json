@@ -1,8 +1,8 @@
 {
   "tower_base": {
     "damage_boost": {
-      "name": "伤害强化",
-      "description": "增加基础伤害",
+      "name": "SKILL_BASE_DAMAGE_BOOST_NAME",
+      "description": "SKILL_BASE_DAMAGE_BOOST_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 1,
@@ -11,8 +11,8 @@
       "icon": "res://assets/skill_icons/skill_icon_1.png"
     },
     "range_boost": {
-      "name": "射程强化",
-      "description": "增加攻击范围",
+      "name": "SKILL_BASE_RANGE_BOOST_NAME",
+      "description": "SKILL_BASE_RANGE_BOOST_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 1,
@@ -21,8 +21,8 @@
       "icon": "res://assets/skill_icons/skill_icon_4.png"
     },
     "fire_rate_boost": {
-      "name": "攻速强化",
-      "description": "增加攻击速度",
+      "name": "SKILL_BASE_FIRE_RATE_BOOST_NAME",
+      "description": "SKILL_BASE_FIRE_RATE_BOOST_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 2,
@@ -31,8 +31,8 @@
       "icon": "res://assets/skill_icons/skill_icon_3.png"
     },
     "critical_strike": {
-      "name": "暴击强化",
-      "description": "增加暴击几率和伤害",
+      "name": "SKILL_BASE_CRITICAL_STRIKE_NAME",
+      "description": "SKILL_BASE_CRITICAL_STRIKE_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 3,
@@ -43,8 +43,8 @@
   },
   "tower_fast": {
     "attack_speed": {
-      "name": "极速射击",
-      "description": "大幅增加攻击速度",
+      "name": "SKILL_FAST_ATTACK_SPEED_NAME",
+      "description": "SKILL_FAST_ATTACK_SPEED_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 2,
@@ -53,8 +53,8 @@
       "icon": "res://assets/skill_icons/skill_icon_11.png"
     },
     "penetration": {
-      "name": "穿透射击",
-      "description": "子弹可以穿透多个敌人",
+      "name": "SKILL_FAST_PENETRATION_NAME",
+      "description": "SKILL_FAST_PENETRATION_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 2,
@@ -63,8 +63,8 @@
       "icon": "res://assets/skill_icons/skill_icon_15.png"
     },
     "multi_shot": {
-      "name": "多重射击",
-      "description": "同时发射多发子弹",
+      "name": "SKILL_FAST_MULTI_SHOT_NAME",
+      "description": "SKILL_FAST_MULTI_SHOT_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 3,
@@ -73,8 +73,8 @@
       "icon": "res://assets/skill_icons/skill_icon_17.png"
     },
     "precision": {
-      "name": "精准射击",
-      "description": "增加射程和精准度",
+      "name": "SKILL_FAST_PRECISION_NAME",
+      "description": "SKILL_FAST_PRECISION_DESC",
       "level": 0,
       "max_level": 4,
       "cost_per_level": 2,
@@ -85,8 +85,8 @@
   },
   "tower_area": {
     "explosion_radius": {
-      "name": "爆炸范围",
-      "description": "增加爆炸伤害范围",
+      "name": "SKILL_AREA_EXPLOSION_RADIUS_NAME",
+      "description": "SKILL_AREA_EXPLOSION_RADIUS_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 1,
@@ -95,8 +95,8 @@
       "icon": "res://assets/skill_icons/skill_icon_24.png"
     },
     "splash_damage": {
-      "name": "溅射伤害",
-      "description": "增加溅射伤害倍率",
+      "name": "SKILL_AREA_SPLASH_DAMAGE_NAME",
+      "description": "SKILL_AREA_SPLASH_DAMAGE_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 2,
@@ -105,8 +105,8 @@
       "icon": "res://assets/skill_icons/skill_icon_28.png"
     },
     "chain_reaction": {
-      "name": "连锁反应",
-      "description": "攻击可能连续攻击两次",
+      "name": "SKILL_AREA_CHAIN_REACTION_NAME",
+      "description": "SKILL_AREA_CHAIN_REACTION_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 4,
@@ -115,8 +115,8 @@
       "icon": "res://assets/skill_icons/skill_icon_29.png"
     },
     "burning_effect": {
-      "name": "燃烧效果",
-      "description": "攻击附带燃烧持续伤害",
+      "name": "SKILL_AREA_BURNING_EFFECT_NAME",
+      "description": "SKILL_AREA_BURNING_EFFECT_DESC",
       "level": 0,
       "max_level": 4,
       "cost_per_level": 3,
@@ -127,8 +127,8 @@
   },
   "tower_frost": {
     "freeze_duration": {
-      "name": "冰冻时长",
-      "description": "增加冰冻持续时间",
+      "name": "SKILL_FROST_FREEZE_DURATION_NAME",
+      "description": "SKILL_FROST_FREEZE_DURATION_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 1,
@@ -137,8 +137,8 @@
       "icon": "res://assets/skill_icons/skill_icon_39.png"
     },
     "slow_effect": {
-      "name": "减速强化",
-      "description": "增加减速效果强度",
+      "name": "SKILL_FROST_SLOW_EFFECT_NAME",
+      "description": "SKILL_FROST_SLOW_EFFECT_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 1,
@@ -147,8 +147,8 @@
       "icon": "res://assets/skill_icons/skill_icon_44.png"
     },
     "ice_nova": {
-      "name": "冰霜新星",
-      "description": "释放冰霜新星冰冻周围敌人",
+      "name": "SKILL_FROST_ICE_NOVA_NAME",
+      "description": "SKILL_FROST_ICE_NOVA_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 4,
@@ -157,8 +157,8 @@
       "icon": "res://assets/skill_icons/skill_icon_43.png"
     },
     "frost_armor": {
-      "name": "霜甲护盾",
-      "description": "为附近友军提供护盾",
+      "name": "SKILL_FROST_FROST_ARMOR_NAME",
+      "description": "SKILL_FROST_FROST_ARMOR_DESC",
       "level": 0,
       "max_level": 4,
       "cost_per_level": 3,
@@ -169,8 +169,8 @@
   },
   "tower_big_area": {
     "massive_explosion": {
-      "name": "巨型爆炸",
-      "description": "大幅增加爆炸范围和伤害",
+      "name": "SKILL_BIG_AREA_MASSIVE_EXPLOSION_NAME",
+      "description": "SKILL_BIG_AREA_MASSIVE_EXPLOSION_DESC",
       "level": 0,
       "max_level": 4,
       "cost_per_level": 3,
@@ -179,8 +179,8 @@
       "icon": "res://assets/skill_icons/skill_icon_52.png"
     },
     "earthquake": {
-      "name": "地震冲击",
-      "description": "攻击造成地震效果",
+      "name": "SKILL_BIG_AREA_EARTHQUAKE_NAME",
+      "description": "SKILL_BIG_AREA_EARTHQUAKE_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 4,
@@ -189,8 +189,8 @@
       "icon": "res://assets/skill_icons/skill_icon_54.png"
     },
     "armor_pierce": {
-      "name": "破甲攻击",
-      "description": "无视敌人部分护甲",
+      "name": "SKILL_BIG_AREA_ARMOR_PIERCE_NAME",
+      "description": "SKILL_BIG_AREA_ARMOR_PIERCE_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 2,
@@ -201,8 +201,8 @@
   },
   "tower_fast_low_damage": {
     "ultra_speed": {
-      "name": "极速射击",
-      "description": "极大幅度增加攻击速度",
+      "name": "SKILL_FAST_LOW_DAMAGE_ULTRA_SPEED_NAME",
+      "description": "SKILL_FAST_LOW_DAMAGE_ULTRA_SPEED_DESC",
       "level": 0,
       "max_level": 5,
       "cost_per_level": 1,
@@ -211,8 +211,8 @@
       "icon": "res://assets/skill_icons/skill_icon_11.png"
     },
     "rapid_fire": {
-      "name": "连发射击",
-      "description": "每次攻击发射更多子弹",
+      "name": "SKILL_FAST_LOW_DAMAGE_RAPID_FIRE_NAME",
+      "description": "SKILL_FAST_LOW_DAMAGE_RAPID_FIRE_DESC",
       "level": 0,
       "max_level": 4,
       "cost_per_level": 6,
@@ -221,8 +221,8 @@
       "icon": "res://assets/skill_icons/skill_icon_17.png"
     },
     "chain_lightning": {
-      "name": "连锁闪电",
-      "description": "攻击有概率触发连锁反应",
+      "name": "SKILL_FAST_LOW_DAMAGE_CHAIN_LIGHTNING_NAME",
+      "description": "SKILL_FAST_LOW_DAMAGE_CHAIN_LIGHTNING_DESC",
       "level": 0,
       "max_level": 3,
       "cost_per_level": 3,
@@ -231,8 +231,8 @@
       "icon": "res://assets/skill_icons/skill_icon_29.png"
     },
     "penetrating_shot": {
-      "name": "穿透射击",
-      "description": "子弹可以穿透多个敌人",
+      "name": "SKILL_FAST_LOW_DAMAGE_PENETRATING_SHOT_NAME",
+      "description": "SKILL_FAST_LOW_DAMAGE_PENETRATING_SHOT_DESC",
       "level": 0,
       "max_level": 4,
       "cost_per_level": 6,
