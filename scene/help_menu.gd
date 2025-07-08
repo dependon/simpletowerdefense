@@ -143,9 +143,9 @@ func create_tower_info_cards():
 		stats_label.custom_minimum_size = Vector2(0, 60)
 		stats_label.bbcode_enabled = true
 		stats_label.text = "[b]" + tr("ATTRIBUTES") + "：[/b]\n" + \
-			"• " + tr("DAMAGE") + "：%d  • " + tr("FIRE_RATE") + "：%.1f/" + tr("SECOND") + "\n" % [tower_info.damage, tower_info.fire_rate] + \
-		"• " + tr("COST") + "：%d  • " + tr("RANGE") + "：%d\n" % [tower_info.cost, tower_info.range] + \
-		"• " + tr("SPECIAL") + "：%s" % tower_info.special
+			("• " + tr("DAMAGE") + "：%d  • " + tr("FIRE_RATE") + "：%.1f/" + tr("SECOND") + "\n") % [tower_info.damage, tower_info.fire_rate] + \
+			("• " + tr("COST") + "：%d  • " + tr("RANGE") + "：%d\n") % [tower_info.cost, tower_info.range] + \
+			("• " + tr("SPECIAL") + "：%s") % tower_info.special
 		stats_label.fit_content = true
 		info_container.add_child(stats_label)
 		
