@@ -2,8 +2,43 @@ extends Node
 
 # 设置管理器 - 处理游戏设置的加载、保存和应用
 
+# 语言改变信号
+signal language_changed(new_language: String)
+
 # 背景音乐播放器
 @onready var bgm_player: AudioStreamPlayer = null
+
+# 支持的语言列表
+var supported_languages = {
+	"zh": "中文 (zh)",
+	"en": "English (en)",
+	"cht": "繁體中文 (cht)",
+	"yue": "粵語 (yue)",
+	"wyw": "文言文 (wyw)",
+	"jp": "日本語 (jp)",
+	"kor": "한국어 (kor)",
+	"spa": "Español (spa)",
+	"fra": "Français (fra)",
+	"th": "ไทย (th)",
+	"ara": "العربية (ara)",
+	"ru": "Русский (ru)",
+	"pt": "Português (pt)",
+	"de": "Deutsch (de)",
+	"it": "Italiano (it)",
+	"el": "Ελληνικά (el)",
+	"nl": "Nederlands (nl)",
+	"pl": "Polski (pl)",
+	"bul": "Български (bul)",
+	"est": "Eesti (est)",
+	"dan": "Dansk (dan)",
+	"fin": "Suomi (fin)",
+	"cs": "Čeština (cs)",
+	"rom": "Română (rom)",
+	"slo": "Slovenščina (slo)",
+	"swe": "Svenska (swe)",
+	"hu": "Magyar (hu)",
+	"vie": "Tiếng Việt (vie)"
+}
 
 # 默认设置
 var default_settings = {
@@ -15,6 +50,9 @@ var default_settings = {
 	"audio": {
 		"master_volume": 50.0,
 		"bgm_enabled": true
+	},
+	"localization": {
+		"language": "auto"
 	}
 }
 
@@ -53,9 +91,17 @@ func load_settings():
 			"master_volume": config.get_value("audio", "master_volume", default_settings.audio.master_volume),
 			"bgm_enabled": config.get_value("audio", "bgm_enabled", default_settings.audio.bgm_enabled)
 		}
+		
+		# 加载本地化设置
+		current_settings["localization"] = {
+			"language": config.get_value("localization", "language", default_settings.localization.language)
+		}
 	else:
 		# 如果没有配置文件，使用默认设置
 		current_settings = default_settings.duplicate(true)
+		# 首次启动时根据系统语言自动选择
+		if current_settings.localization.language == "auto":
+			current_settings.localization.language = _detect_system_language()
 		save_settings()
 
 func save_settings():
@@ -71,6 +117,9 @@ func save_settings():
 	config.set_value("audio", "master_volume", current_settings.audio.master_volume)
 	config.set_value("audio", "bgm_enabled", current_settings.audio.bgm_enabled)
 	
+	# 保存本地化设置
+	config.set_value("localization", "language", current_settings.localization.language)
+	
 	# 保存到文件
 	config.save("user://settings.cfg")
 
@@ -78,6 +127,7 @@ func apply_settings():
 	"""应用当前设置"""
 	apply_display_settings()
 	apply_audio_settings()
+	apply_language_settings()
 
 func apply_display_settings():
 	"""应用显示设置"""
@@ -161,3 +211,51 @@ func update_bgm_enabled(enabled: bool):
 func is_bgm_enabled() -> bool:
 	"""获取当前背景音乐开关状态"""
 	return current_settings.audio.bgm_enabled
+
+func _detect_system_language() -> String:
+	"""检测系统语言"""
+	var system_locale = OS.get_locale()
+	print("检测到系统语言: ", system_locale)
+	
+	# 检查是否支持系统语言
+	if system_locale in supported_languages:
+		return system_locale
+	
+	# 检查语言代码的前两位（如zh_TW -> zh_CN）
+	var language_code = system_locale.split("_")[0]
+	for locale in supported_languages.keys():
+		if locale.split("_")[0] == language_code:
+			return locale
+	
+	# 默认返回中文
+	return "zh"
+
+func apply_language_settings():
+	"""应用语言设置"""
+	var language = current_settings.localization.language
+	# 如果语言设置为auto，则检测系统语言
+	if language == "auto":
+		language = _detect_system_language()
+		current_settings.localization.language = language
+		save_settings()
+	
+	# 设置语言
+	TranslationServer.set_locale(language)
+	print("应用语言设置: ", language)
+	
+	# 发出语言改变信号
+	language_changed.emit(language)
+
+func update_language(language: String):
+	"""更新语言设置"""
+	current_settings.localization.language = language
+	apply_language_settings()
+	save_settings()
+
+func get_current_language() -> String:
+	"""获取当前语言设置"""
+	return current_settings.localization.language
+
+func get_supported_languages() -> Dictionary:
+	"""获取支持的语言列表"""
+	return supported_languages

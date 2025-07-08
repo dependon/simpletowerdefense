@@ -89,30 +89,37 @@ const BIG_AREA_TOWER_COST = 200 # 新增：快速低伤塔消耗 (示例成本)
 
 # 金币UI和钻石UI
 func update_coins_display():
-	$UI/Coins.text = "金币: " + str(coins)
+	$UI/Coins.text = tr("COINS") + ": " + str(coins)
 
 func update_diamonds_display():
-	$UI/Diamonds.text = "钻石: " + str(GameManager.get_diamonds())
+	$UI/Diamonds.text = tr("DIAMONDS") + ": " + str(GameManager.get_diamonds())
 
 # 新增：更新波次显示
 func update_wave_display(current_w = -1, total_w = -1):
 	# 优先使用信号传递过来的值
 	if current_w >= 0 and total_w > 0: # 确保值有效
-		wave_label.text = "波次: %d / %d" % [current_w, total_w]
+		wave_label.text = tr("WAVE") + ": %d / %d" % [current_w, total_w]
 		current_wave = current_w
 	# 否则，尝试从当前关卡获取
 	elif current_level and current_level.has_method("get_wave_info"):
 		var wave_info = current_level.get_wave_info()
 		if wave_info and wave_info.has("current") and wave_info.has("total"):
-			wave_label.text = "波次: %d / %d" % [wave_info.current, wave_info.total]
+			wave_label.text = tr("WAVE") + ": %d / %d" % [wave_info.current, wave_info.total]
 		else:
 			# 如果 get_wave_info 返回无效，显示默认值
-			wave_label.text = "波次: 0 / -"
+			wave_label.text = tr("WAVE") + ": 0 / -"
 	else:
 		# 如果无法获取信息，显示默认值
-		wave_label.text = "波次: 0 / -"
+		wave_label.text = tr("WAVE") + ": 0 / -"
 
 func _ready():
+	# 设置UI元素国际化文本
+	$UI/SettingButton.text = tr("SETTINGS")
+	$UI/BoxContainer/ClearTowerButton.text = tr("CLEAR")
+	$UI/NextWave.text = tr("START_NEXT_WAVE")
+	$UI/WaitTime.text = tr("NEXT_WAVE_COUNTDOWN")
+	$UI/CurrentEnemyNum.text = tr("REMAINING_ENEMIES")
+	
 	# 设置金币和钻石显示
 	update_coins_display()
 	update_diamonds_display()
@@ -217,7 +224,7 @@ func load_level(level_number: int):
 
 
 func update_wait_time_display(remaining_time: float):
-	wait_time_label.text = "下一波倒计时: %d" % ceil(remaining_time)
+	wait_time_label.text = tr("NEXT_WAVE_COUNTDOWN") + ": %d" % ceil(remaining_time)
 	if remaining_time > 0 and current_wave > 0:
 		next_wave_button.disabled = false
 	else:
@@ -225,7 +232,7 @@ func update_wait_time_display(remaining_time: float):
 
 # 新增：更新初始等待时间显示
 func update_initial_wait_time_display(remaining_time: float):
-	wait_time_label.text = "游戏开始倒计时: %d" % ceil(remaining_time)
+	wait_time_label.text = tr("GAME_START_COUNTDOWN") + ": %d" % ceil(remaining_time)
 	next_wave_button.disabled = true
 
 func _physics_process(delta):
@@ -518,7 +525,7 @@ func update_enemy_count_display():
 	var enemy_count = get_tree().get_nodes_in_group("enemies").size()
 	if last_enemy_count != enemy_count :
 		last_enemy_count = enemy_count
-		current_enemy_num_label.text = "剩余怪物: " + str(enemy_count)
+		current_enemy_num_label.text = tr("REMAINING_ENEMIES") + ": " + str(enemy_count)
 
 
 func _on_clear_tower_button_pressed() -> void:

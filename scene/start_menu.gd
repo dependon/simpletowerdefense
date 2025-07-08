@@ -3,6 +3,12 @@ var skill_tree_screen
 var settings_screen
 
 func _ready() -> void:
+	# 设置按钮国际化文本
+	_update_ui_texts()
+	
+	# 连接语言改变信号
+	SettingsManager.language_changed.connect(_on_language_changed)
+	
 	# 初始化技能树数据
 	skill_tree_screen = load("res://scene/skill_tree_screen.tscn").instantiate()
 	skill_tree_screen.set_tower_type()
@@ -22,6 +28,20 @@ func _ready() -> void:
 		vbox_container.set_as_top_level(false)
 		background_node.z_index = -1
 		vbox_container.z_index = 0
+
+func _update_ui_texts():
+	"""更新UI文本"""
+	$VBoxContainer/StartButton.text = tr("START_GAME")
+	$VBoxContainer/SkillTreeButton.text = tr("SKILL_TREE")
+	$VBoxContainer/SettingsButton.text = tr("SETTINGS")
+	$VBoxContainer/UnlockLevelsButton.text = tr("UNLOCK_ALL_LEVELS")
+	$VBoxContainer/HelpButton.text = tr("GAME_HELP")
+	$VBoxContainer/AboutButton.text = tr("ABOUT")
+	$VBoxContainer/QuitButton.text = tr("EXIT")
+
+func _on_language_changed(_new_language: String):
+	"""语言改变时更新UI文本"""
+	_update_ui_texts()
 
 
 func _on_start_button_pressed():

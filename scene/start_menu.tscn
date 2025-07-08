@@ -47,37 +47,37 @@ theme_override_constants/separation = 20
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "开始游戏"
+text = "START_GAME"
 
 [node name="SkillTreeButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "技能树"
+text = "SKILL_TREE"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "设置"
+text = "SETTINGS"
 
 [node name="UnlockLevelsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "解锁全部关卡"
+text = "UNLOCK_ALL_LEVELS"
 
 [node name="HelpButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "游戏帮助"
+text = "GAME_HELP"
 
 [node name="AboutButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "关于"
+text = "ABOUT"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "退出"
+text = "EXIT"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/SkillTreeButton" to="." method="_on_skill_tree_button_pressed"]

@@ -41,33 +41,33 @@ alignment = 1
 process_mode = 3
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "继续游戏"
+text = "CONTINUE_GAME"
 
 [node name="RestartLevelButton" type="Button" parent="VBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(0, 80)
 layout_direction = 1
 layout_mode = 2
-text = "重新开始当前关卡"
+text = "RESTART_LEVEL"
 
 [node name="MainMenuSettingsButton" type="Button" parent="VBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(0, 80)
 layout_direction = 1
 layout_mode = 2
-text = "主界面菜单"
+text = "MAIN_MENU"
 
 [node name="LevelSelectButton" type="Button" parent="VBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "返回关卡选择"
+text = "BACK_TO_LEVEL_SELECT"
 
 [node name="StartMenuButton" type="Button" parent="VBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-text = "返回开始菜单"
+text = "BACK_TO_START_MENU"
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/RestartLevelButton" to="." method="_on_restart_level_button_pressed"]

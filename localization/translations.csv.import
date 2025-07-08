@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bodewxpao14fv"
+
+[deps]
+
+files=["res://localization/translations.zh.translation", "res://localization/translations.en.translation", "res://localization/translations.cht.translation", "res://localization/translations.yue.translation", "res://localization/translations.wyw.translation", "res://localization/translations.jp.translation", "res://localization/translations.kor.translation", "res://localization/translations.spa.translation", "res://localization/translations.fra.translation", "res://localization/translations.th.translation", "res://localization/translations.ara.translation", "res://localization/translations.ru.translation", "res://localization/translations.pt.translation", "res://localization/translations.de.translation", "res://localization/translations.it.translation", "res://localization/translations.el.translation", "res://localization/translations.nl.translation", "res://localization/translations.pl.translation", "res://localization/translations.bul.translation", "res://localization/translations.est.translation", "res://localization/translations.dan.translation", "res://localization/translations.fin.translation", "res://localization/translations.cs.translation", "res://localization/translations.rom.translation", "res://localization/translations.slo.translation", "res://localization/translations.swe.translation", "res://localization/translations.hu.translation", "res://localization/translations.vie.translation"]
+
+source_file="res://localization/translations.csv"
+dest_files=["res://localization/translations.zh.translation", "res://localization/translations.en.translation", "res://localization/translations.cht.translation", "res://localization/translations.yue.translation", "res://localization/translations.wyw.translation", "res://localization/translations.jp.translation", "res://localization/translations.kor.translation", "res://localization/translations.spa.translation", "res://localization/translations.fra.translation", "res://localization/translations.th.translation", "res://localization/translations.ara.translation", "res://localization/translations.ru.translation", "res://localization/translations.pt.translation", "res://localization/translations.de.translation", "res://localization/translations.it.translation", "res://localization/translations.el.translation", "res://localization/translations.nl.translation", "res://localization/translations.pl.translation", "res://localization/translations.bul.translation", "res://localization/translations.est.translation", "res://localization/translations.dan.translation", "res://localization/translations.fin.translation", "res://localization/translations.cs.translation", "res://localization/translations.rom.translation", "res://localization/translations.slo.translation", "res://localization/translations.swe.translation", "res://localization/translations.hu.translation", "res://localization/translations.vie.translation"]
+
+[params]
+
+compress=true
+delimiter=0

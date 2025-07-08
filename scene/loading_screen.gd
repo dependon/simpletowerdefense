@@ -53,7 +53,7 @@ func _process(delta):
 			var dots = ""
 			for i in range(dots_count):
 				dots += "."
-			loading_text.text = "加载中" + dots
+			loading_text.text = tr("LOADING") + dots
 		
 		# 处理异步加载
 		if loader != null:

@@ -37,7 +37,7 @@ theme_override_constants/separation = 20
 [node name="TitleLabel" type="Label" parent="BackgroundPanel/MainContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
-text = "关于游戏"
+text = "ABOUT_GAME"
 horizontal_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="BackgroundPanel/MainContainer"]
@@ -55,7 +55,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 34
 bbcode_enabled = true
-text = "本项目作者:depend(依赖)"
+text = "AUTHOR"
 fit_content = true
 
 [node name="GithubLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
@@ -63,7 +63,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "GitHub主页:[url=https://github.com/dependon/simpletowerdefense]https://github.com/dependon/simpletowerdefense[/url]"
+text = "GITHUB_PAGE"
 fit_content = true
 
 [node name="BilibiliLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
@@ -71,7 +71,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "Bilibili地址: [url=https://space.bilibili.com/144159485]https://space.bilibili.com/144159485[/url]"
+text = "BILIBILI_ADDRESS"
 fit_content = true
 
 [node name="DouyinLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
@@ -79,7 +79,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "抖音号:87034208133"
+text = "DOUYIN_ID"
 fit_content = true
 
 [node name="EmailLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
@@ -87,7 +87,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "邮箱:[url=mailto:liuminghang0821@gmail.com]liuminghang0821@gmail.com[/url]"
+text = "EMAIL"
 fit_content = true
 
 [node name="ProjectInfoLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
@@ -95,7 +95,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "本项目本身是学习项目，采用MIT协议，你可以拿取和改变任何代码和通过各种渠道给我提各种意见，非常感谢你的交流与关注。"
+text = "PROJECT_INFO"
 fit_content = true
 
 [node name="ThanksLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer/ScrollContainer/ContentContainer"]
@@ -103,14 +103,14 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "谢谢你玩我的做游戏，虽然它现在不好玩，哈哈，总之，非常感谢!!!"
+text = "THANKS_MESSAGE"
 fit_content = true
 
 [node name="BackButton" type="Button" parent="BackgroundPanel/MainContainer"]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "返回主菜单"
+text = "BACK_TO_MAIN_MENU"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="BackgroundPanel/MainContainer"]
 layout_mode = 2

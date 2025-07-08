@@ -13,6 +13,7 @@ var resolution_options = [
 # UI节点引用
 @onready var resolution_option_button = $MainContainer/ResolutionContainer/ResolutionOptionButton
 @onready var fullscreen_checkbox = $MainContainer/FullscreenContainer/FullscreenCheckBox
+@onready var language_option_button = $MainContainer/LanguageContainer/LanguageOptionButton
 @onready var master_volume_slider = $MainContainer/VolumeContainer/MasterVolumeContainer/MasterVolumeSlider
 @onready var master_volume_label = $MainContainer/VolumeContainer/MasterVolumeContainer/MasterVolumeLabel
 @onready var bgm_checkbox = $MainContainer/VolumeContainer/BGMContainer/BGMCheckBox
@@ -20,12 +21,20 @@ var resolution_options = [
 # 当前设置
 var current_resolution_index = 0
 var current_fullscreen = false
+var current_language = "zh"
 var current_volume = 50.0
 var current_bgm_enabled = true
 
 func _ready():
-	# 初始化分辨率选项
+	# 设置UI元素国际化文本
+	_update_ui_texts()
+	
+	# 连接语言改变信号
+	SettingsManager.language_changed.connect(_on_language_changed)
+	
+	# 初始化选项
 	_setup_resolution_options()
+	_setup_language_options()
 	
 	# 加载当前设置
 	_load_current_settings()
@@ -33,11 +42,29 @@ func _ready():
 	# 更新UI显示
 	_update_ui()
 
+func _update_ui_texts():
+	"""更新UI文本"""
+	$MainContainer/TitleLabel.text = tr("GAME_SETTINGS")
+	$MainContainer/ResolutionContainer/ResolutionLabel.text = tr("RESOLUTION_SETTINGS")
+	$MainContainer/FullscreenContainer/FullscreenLabel.text = tr("FULLSCREEN_MODE")
+	$MainContainer/LanguageContainer/LanguageLabel.text = tr("LANGUAGE_SETTINGS")
+	$MainContainer/VolumeContainer/VolumeLabel.text = tr("VOLUME_SETTINGS")
+	$MainContainer/VolumeContainer/BGMContainer/BGMLabel.text = tr("BACKGROUND_MUSIC")
+	$MainContainer/ButtonContainer/ApplyButton.text = tr("APPLY")
+	$MainContainer/ButtonContainer/BackButton.text = tr("BACK")
+
 func _setup_resolution_options():
 	"""设置分辨率选项"""
 	resolution_option_button.clear()
 	for option in resolution_options:
 		resolution_option_button.add_item(option.name)
+
+func _setup_language_options():
+	"""设置语言选项"""
+	language_option_button.clear()
+	var supported_languages = SettingsManager.get_supported_languages()
+	for locale in supported_languages.keys():
+		language_option_button.add_item(supported_languages[locale])
 
 func _load_current_settings():
 	"""加载当前设置"""
@@ -54,6 +81,9 @@ func _load_current_settings():
 	# 获取全屏状态
 	current_fullscreen = SettingsManager.is_fullscreen()
 	
+	# 获取语言设置
+	current_language = SettingsManager.get_current_language()
+	
 	# 获取音量设置
 	current_volume = SettingsManager.get_master_volume()
 	
@@ -64,13 +94,22 @@ func _update_ui():
 	"""更新UI显示"""
 	resolution_option_button.selected = current_resolution_index
 	fullscreen_checkbox.button_pressed = current_fullscreen
+	
+	# 设置语言选择
+	var supported_languages = SettingsManager.get_supported_languages()
+	var language_keys = supported_languages.keys()
+	for i in range(language_keys.size()):
+		if language_keys[i] == current_language:
+			language_option_button.selected = i
+			break
+	
 	master_volume_slider.value = current_volume
 	bgm_checkbox.button_pressed = current_bgm_enabled
 	_update_volume_label(current_volume)
 
 func _update_volume_label(volume: float):
 	"""更新音量标签显示"""
-	master_volume_label.text = "主音量: %d%%" % int(volume)
+	master_volume_label.text = tr("MASTER_VOLUME") + ": %d%%" % int(volume)
 
 func _on_resolution_option_button_item_selected(index: int):
 	"""分辨率选项改变"""
@@ -79,6 +118,12 @@ func _on_resolution_option_button_item_selected(index: int):
 func _on_fullscreen_check_box_toggled(toggled_on: bool):
 	"""全屏模式切换"""
 	current_fullscreen = toggled_on
+
+func _on_language_option_button_item_selected(index: int):
+	"""语言选项改变"""
+	var supported_languages = SettingsManager.get_supported_languages()
+	var language_keys = supported_languages.keys()
+	current_language = language_keys[index]
 
 func _on_master_volume_slider_value_changed(value: float):
 	"""音量滑块改变"""
@@ -100,8 +145,13 @@ func _on_apply_button_pressed():
 	
 	# 通过设置管理器更新设置
 	SettingsManager.update_resolution(selected_resolution.width, selected_resolution.height, current_fullscreen)
+	SettingsManager.update_language(current_language)
 	SettingsManager.update_volume(current_volume)
 	SettingsManager.update_bgm_enabled(current_bgm_enabled)
+	
+	# 更新UI文本（语言可能已改变）
+	_update_ui_texts()
+	_update_volume_label(current_volume)
 	
 	# 显示应用成功提示
 	print("设置已应用")
@@ -116,4 +166,10 @@ func show_settings():
 	"""显示设置界面"""
 	_load_current_settings()
 	_update_ui()
+	_update_ui_texts()  # 确保文本是最新的
 	show()
+
+func _on_language_changed(_new_language: String):
+	"""语言改变时更新UI文本"""
+	_update_ui_texts()
+	_update_volume_label(current_volume)

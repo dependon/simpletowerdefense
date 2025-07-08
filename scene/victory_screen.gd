@@ -1,6 +1,10 @@
 extends CanvasLayer
 
 func _ready():
+	# 设置UI元素国际化文本
+	$CenterContainer/VBoxContainer/Label.text = tr("VICTORY")
+	$CenterContainer/VBoxContainer/ConfirmButton.text = tr("CONFIRM")
+	
 	# 获取当前关卡和基地血量
 	var current_level = GameManager.current_level
 	var base = get_tree().get_nodes_in_group("base")[0]
