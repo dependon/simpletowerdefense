@@ -385,7 +385,7 @@ func _on_skill_upgrade_pressed(skill_name: String):
 		update_display()
 		
 		var skill_name_key = skill_data.get("name", skill_name)
-		var display_name = tr(skill_name_key) if skill_name_key.begins_with("SKILL_") else skill_name_key
+		var display_name = tr(skill_name_key)
 		print("成功升级技能: ", display_name, " 到等级 ", skill_data["level"])
 
 func apply_skill_effect(tower_type: String, _skill_name: String, skill_data: Dictionary):
@@ -446,7 +446,9 @@ func _update_ui_texts():
 func _on_language_changed(_new_language: String):
 	"""语言改变时更新UI文本"""
 	_update_ui_texts()
-	update_display()  # 重新更新显示，因为可能包含翻译文本
+	# 重新设置技能树以应用新的翻译
+	setup_skill_tree()
+	update_display()
 
 func update_skill_tree():
 	# 兼容旧接口
